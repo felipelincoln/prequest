@@ -11,6 +11,9 @@ RUN mix do \
 local.hex --force, \
 local.rebar --force
 
+# set build-time variable
+ARG MIX_ENV
+
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
