@@ -35,7 +35,7 @@ config :prequest, PrequestWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :prequest, PrequestWeb.Endpoint, server: true
+config :prequest, PrequestWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
