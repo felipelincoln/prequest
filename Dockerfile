@@ -12,7 +12,7 @@ local.hex --force, \
 local.rebar --force
 
 # set build-time variable
-ARG MIX_ENV
+ENV MIX_ENV=prod
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -21,7 +21,7 @@ RUN mix do deps.get, deps.compile
 
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
-RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+RUN npm ci --prefix ./assets --progress=false --no-audit --loglevel=error
 
 COPY priv priv
 COPY assets assets
@@ -37,6 +37,7 @@ RUN mix do compile, release
 
 # prepare release image
 FROM alpine:3.11 AS app
+
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
