@@ -34,6 +34,9 @@ COPY lib lib
 # COPY rel rel
 RUN mix do compile, release
 
+# build database
+RUN mix do ecto.create, ecto.migrate
+
 
 # prepare release image
 FROM alpine:3.11 AS app
