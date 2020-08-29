@@ -1,4 +1,4 @@
-FROM elixir:1.10.4-alpine AS build
+FROM elixir:1.10.4-alpine
 
 # install build dependencies
 RUN apk add --no-cache build-base npm git python
@@ -28,23 +28,9 @@ COPY assets assets
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
-# compile and build release
+# compile app
 COPY lib lib
-# uncomment COPY if rel/ exists
-# COPY rel rel
-RUN mix do compile, release
+RUN mix compile
 
-# build database
-RUN mix do ecto.create, ecto.migrate
-
-
-# prepare release image
-FROM alpine:3.11 AS app
-
-RUN apk add --no-cache openssl ncurses-libs
-
-WORKDIR /app
-
-COPY --from=build /app/_build/prod/rel/prequest ./
-
-CMD ["bin/prequest", "start"]
+# run server
+CMD ["mix", "phx.server"]

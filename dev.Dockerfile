@@ -16,13 +16,13 @@ COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
 
-# compile app
-COPY lib lib
-RUN mix compile
-
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm install --prefix ./assets --progress=false --no-audit --loglevel=error
 
+# compile app
+COPY lib lib
+RUN mix compile
+
 # run server
-CMD ["mix", "phx.server", "--no-compile"]
+CMD ["mix", "phx.server"]
