@@ -4,7 +4,10 @@ services:
   web:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      target: build
+      args:
+        - MIX_ENV=dev
+    command: mix phx.server
     volumes:
       - .:/app
       - /app/_build

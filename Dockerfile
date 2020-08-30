@@ -3,16 +3,17 @@ FROM elixir:1.10.4-alpine AS build
 # install build dependencies
 RUN apk add --no-cache build-base npm git python
 
+# install dev dependencies
+RUN apk add --no-cache inotify-tools
+
 # prepare build dir
 WORKDIR /app
 
 # install hex and rebar
-RUN mix do \
-local.hex --force, \
-local.rebar --force
+RUN mix do local.hex --force, local.rebar --force
 
-# set build-time variable
-ENV MIX_ENV=prod
+# set build-time env variable
+ARG MIX_ENV
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -35,8 +36,8 @@ COPY lib lib
 RUN mix do compile, release
 
 
-# prepare release image
-FROM alpine:3.11 AS app
+# production stage
+FROM alpine:3.11 AS production
 
 RUN apk add --no-cache openssl ncurses-libs
 
