@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: build docker image
-        run: docker build .
+        run: docker build --target build .
 
       - name: run mix test
         run: docker-compose run -T web mix test
