@@ -20,5 +20,5 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: mix test
-        run: docker-compose run -T mix test
+        run: docker-compose run -T web mix test
         
