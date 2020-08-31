@@ -25,7 +25,7 @@ This will run:
 
 `mix format --check-formatted --dry-run `  
 `mix credo --strict`  
-`mix sobelow`  
+`mix sobelow -v`  
 `mix test`  
 
 ## Building documentation

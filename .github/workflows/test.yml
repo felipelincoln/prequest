@@ -15,7 +15,7 @@ jobs:
         run: docker-compose run -T web mix credo --strict
 
       - name: check security
-        run: docker-compose run -T web mix sobelow
+        run: docker-compose run -T web mix sobelow -v
 
       - name: run tests
         run: docker-compose run -T web mix test

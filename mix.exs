@@ -75,7 +75,7 @@ defmodule Prequest.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      ci: ["format --check-formatted --dry-run", "credo --strict", "sobelow", "test"]
+      ci: ["format --check-formatted --dry-run", "credo --strict", "sobelow -v", "test"]
     ]
   end
 end
