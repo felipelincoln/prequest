@@ -12,6 +12,7 @@ database_url =
     """
 
 config :prequest, Prequest.Repo,
+  start_apps_before_migration: [:ssl],
   ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
