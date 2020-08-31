@@ -8,9 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: build docker image
-        run: docker build --target build .
+      - name: check format
+        run: docker-compose run -T web mix format --check-formatted --dry-run
 
-      - name: run mix test
+      - name: check consistency
+        run: docker-compose run -T web mix credo --strict
+
+      - name: check security
+        run: docker-compose run -T web mix sobelow
+
+      - name: run tests
         run: docker-compose run -T web mix test
         
