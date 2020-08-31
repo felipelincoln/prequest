@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: build docker-compose services
+        run: docker-compose build
+      
       - name: check format
         run: docker-compose run -T web mix format --check-formatted --dry-run
 
