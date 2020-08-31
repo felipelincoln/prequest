@@ -10,6 +10,7 @@ defmodule Prequest.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
+      preferred_cli_env: [ci: :test],
       deps: deps(),
 
       # Docs
@@ -59,7 +60,7 @@ defmodule Prequest.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ex_doc, "~>0.22", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.8", only: :dev}
+      {:sobelow, "~> 0.8", only: [:dev, :test]}
     ]
   end
 
