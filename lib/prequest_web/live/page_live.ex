@@ -1,4 +1,8 @@
 defmodule PrequestWeb.PageLive do
+  @moduledoc """
+  Starting page generated with `mix phx.new <project_name> --live`
+  """
+
   use PrequestWeb, :live_view
 
   @impl true

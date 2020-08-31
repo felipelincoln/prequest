@@ -8,6 +8,7 @@ services:
       args:
         - MIX_ENV=dev
     command: mix phx.server
+    restart: on-failure
     volumes:
       - .:/app
       - /app/_build

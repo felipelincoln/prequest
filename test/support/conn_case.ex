@@ -15,6 +15,8 @@ defmodule PrequestWeb.ConnCase do
   this option is not recommended for other databases.
   """
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   use ExUnit.CaseTemplate
 
   using do
@@ -32,10 +34,10 @@ defmodule PrequestWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Prequest.Repo)
+    :ok = Sandbox.checkout(Prequest.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Prequest.Repo, {:shared, self()})
+      Sandbox.mode(Prequest.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

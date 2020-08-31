@@ -1,4 +1,11 @@
 defmodule Prequest.Release do
+  @moduledoc """
+  Repo commands to run with the `bin/prequest` executable
+
+  Example:
+  `bin/prequest eval "Prequest.Release.migrate"` to make repo migrations
+  """
+
   @app :prequest
 
   def migrate do

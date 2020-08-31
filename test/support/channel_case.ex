@@ -15,6 +15,8 @@ defmodule PrequestWeb.ChannelCase do
   this option is not recommended for other databases.
   """
 
+  alias Ecto.Adapters.SQL.Adapters
+
   use ExUnit.CaseTemplate
 
   using do
@@ -29,10 +31,10 @@ defmodule PrequestWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Prequest.Repo)
+    :ok = Sandbox.checkout(Prequest.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Prequest.Repo, {:shared, self()})
+      Sandbox.mode(Prequest.Repo, {:shared, self()})
     end
 
     :ok
