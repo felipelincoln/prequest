@@ -15,7 +15,7 @@ defmodule PrequestWeb.ChannelCase do
   this option is not recommended for other databases.
   """
 
-  alias Ecto.Adapters.SQL.Adapters
+  alias Ecto.Adapters.SQL.Sandbox
 
   use ExUnit.CaseTemplate
 
