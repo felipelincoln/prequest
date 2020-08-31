@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.22.2">
+    <meta name="project" content="Prequest v0.1.0">
+    <title>Contributing to Prequest — Prequest v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
+    <script src="dist/sidebar_items-f87477c861.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-0103364119015b97e56c.js"></script>
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://prequest.herokuapp.com/" class="sidebar-projectName">
+Prequest      </a>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>Contributing to Prequest</h1><h2 id="running-the-application-locally" class="section-heading">
+  <a href="#running-the-application-locally" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Running the application locally
+</h2>
+<p>Make sure to have <a href="https://docs.docker.com/compose/">docker-compose</a> installed.</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">db</span><span class="w">
+</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">ecto</span><span class="o">.</span><span class="n">create</span><span class="w">
+</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span></code></pre><p>Next time running this application you will only need to:</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span></code></pre><h2 id="test-pipeline" class="section-heading">
+  <a href="#test-pipeline" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Test pipeline
+</h2>
+<p>Good practice to run before making commits. It will mirror our <a href="https://github.com/felipelincoln/prequest/blob/master/.github/workflows/test.yml">GitHub action</a>.</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">ci</span></code></pre><p>This will run:  </p><p><code class="inline">mix format --check-formatted --dry-run</code><br></br><code class="inline">mix credo --strict</code><br></br><a href="https://hexdocs.pm/sobelow/Mix.Tasks.Sobelow.html"><code class="inline">mix sobelow</code></a><br></br><a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a>  </p><h2 id="building-documentation" class="section-heading">
+  <a href="#building-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Building documentation
+</h2>
+<p>Run whenever your changes may cause <a href="https://felipelincoln.github.io/prequest/readme.html">documentation</a> changes.</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">docs</span></code></pre>      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>

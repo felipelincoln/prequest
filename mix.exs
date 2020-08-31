@@ -19,7 +19,7 @@ defmodule Prequest.MixProject do
       docs: [
         output: "docs",
         main: "Prequest",
-        extras: ["README.md"]
+        extras: ["README.md", ".github/CONTRIBUTING.md"]
       ]
     ]
   end
