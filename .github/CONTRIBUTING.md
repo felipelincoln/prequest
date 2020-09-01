@@ -4,6 +4,8 @@
 Make sure to have [docker-compose](https://docs.docker.com/compose/) installed.
 
 ```
+git clone https://github.com/felipelincoln/prequest.git
+cd prequest/
 docker-compose up -d db
 docker-compose run web mix ecto.create
 docker-compose up
