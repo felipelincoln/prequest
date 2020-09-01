@@ -20,7 +20,13 @@ defmodule Prequest.MixProject do
       docs: [
         output: "docs",
         main: "Prequest",
-        extras: ["README.md", ".github/CONTRIBUTING.md"]
+        extras: ["README.md", ".github/CONTRIBUTING.md", "docs/guides/boilerplate.md"],
+        groups_for_extras: [guides: [".github/CONTRIBUTING.md", "docs/guides/boilerplate.md"]],
+        groups_for_modules: [
+          channels: [PrequestWeb.UserSocket],
+          live: [PrequestWeb.PageLive],
+          views: [PrequestWeb.ErrorHelpers, PrequestWeb.ErrorView, PrequestWeb.LayoutView]
+        ]
       ]
     ]
   end
