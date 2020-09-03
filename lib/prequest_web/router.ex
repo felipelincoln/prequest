@@ -7,7 +7,12 @@ defmodule PrequestWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, {PrequestWeb.LayoutView, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers, %{"content-security-policy" => "default-src 'self'"}
+    plug :put_secure_browser_headers
+    #if Mix.env() == :prod do
+    #  plug :put_secure_browser_headers, %{"content-security-policy" => "default-src 'self'"}
+    #else
+    #  plug :put_secure_browser_headers
+    #end
   end
 
   pipeline :api do
