@@ -7,7 +7,7 @@ services:
       target: build
       args:
         - MIX_ENV=dev
-    command: mix phx.server
+    command: /bin/sh
     volumes:
       - .:/app
       - /app/_build
