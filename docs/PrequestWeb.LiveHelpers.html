@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.2">
     <meta name="project" content="Prequest v0.1.0">
-    <title>PrequestWeb.LayoutView — Prequest v0.1.0</title>
+    <title>PrequestWeb.LiveHelpers — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
     <script src="dist/sidebar_items-ab573fcd3b.js"></script>
       <script src="docs_config.js"></script>
@@ -64,7 +64,7 @@ Prequest      </a>
 
       <h1>
         <small class="app-vsn">Prequest v0.1.0</small>
-PrequestWeb.LayoutView          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L1" title="View Source" class="view-source" rel="help">
+PrequestWeb.LiveHelpers          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/live_helpers.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -86,23 +86,9 @@ PrequestWeb.LayoutView          <a href="https://github.com/felipelincoln/preque
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#__resource__/0">__resource__()</a>
+    <a href="#live_modal/3">live_modal(socket, component, opts)</a>
   </div>
-    <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#render/2">render(template, assigns \\ %{})</a>
-  </div>
-    <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#template_not_found/2">template_not_found(template, assigns)</a>
-  </div>
-    <div class="summary-synopsis"><p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p></div>
+    <div class="summary-synopsis"><p>Renders a component inside the <a href="PrequestWeb.ModalComponent.html"><code class="inline">PrequestWeb.ModalComponent</code></a> component.</p></div>
 </div>
   </div>
         </section>
@@ -115,14 +101,14 @@ to render a particular template.</p></div>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="__resource__/0">
+<section class="detail" id="live_modal/3">
   <div class="detail-header">
-    <a href="#__resource__/0" class="detail-link" title="Link to this function">
+    <a href="#live_modal/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">__resource__()</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">live_modal(socket, component, opts)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/live_helpers.ex#L18" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -130,48 +116,16 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>The resource name, as an atom, for this view</p>  </section>
-</section>
-<section class="detail" id="render/2">
-    <span id="render/1"></span>
-  <div class="detail-header">
-    <a href="#render/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">render(template, assigns \\ %{})</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-
-<p>Renders the given template locally.</p>  </section>
-</section>
-<section class="detail" id="template_not_found/2">
-  <div class="detail-header">
-    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">template_not_found(template, assigns)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>template_not_found(<a href="https://hexdocs.pm/phoenix/Phoenix.Template.html#t:name/0">Phoenix.Template.name</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
-      </div>
-
-<p>Callback invoked when no template is found.
-By default it raises but can be customized
-to render a particular template.</p>  </section>
+<p>Renders a component inside the <a href="PrequestWeb.ModalComponent.html"><code class="inline">PrequestWeb.ModalComponent</code></a> component.</p><p>The rendered modal receives a <code class="inline">:return_to</code> option to properly update
+the URL when the modal is closed.</p><h2 id="live_modal/3-examples" class="section-heading">
+  <a href="#live_modal/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">live_modal</span><span class="w"> </span><span class="na">@socket</span><span class="p">,</span><span class="w"> </span><span class="nc">PrequestWeb.UserLive.FormComponent</span><span class="p">,</span><span class="w">
+  </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="na">@user</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="ss">:new</span><span class="p">,</span><span class="w">
+  </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="na">@live_action</span><span class="p">,</span><span class="w">
+  </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="na">@user</span><span class="p">,</span><span class="w">
+  </span><span class="ss">return_to</span><span class="p">:</span><span class="w"> </span><span class="nc">Routes</span><span class="o">.</span><span class="n">user_index_path</span><span class="p" data-group-id="2296535015-1">(</span><span class="na">@socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:index</span><span class="p" data-group-id="2296535015-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre>  </section>
 </section>
           </div>
         </section>

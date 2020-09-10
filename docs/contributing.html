@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Contributing to Prequest — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-e997b7ece6.js"></script>
+    <script src="dist/sidebar_items-ab573fcd3b.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -62,23 +62,26 @@ Prequest      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Contributing to Prequest</h1><h2 id="running-the-application-locally" class="section-heading">
+<h1>Contributing to Prequest</h1><p>Make sure to have <a href="https://docs.docker.com/compose/">docker-compose</a> installed.  </p><h2 id="running-the-application-locally" class="section-heading">
   <a href="#running-the-application-locally" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Running the application locally
 </h2>
-<p>Make sure to have <a href="https://docs.docker.com/compose/">docker-compose</a> installed.</p><pre><code class="nohighlight makeup elixir"><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">felipelincoln</span><span class="o">/</span><span class="n">prequest</span><span class="o">.</span><span class="n">git</span><span class="w">
-</span><span class="n">cd</span><span class="w"> </span><span class="n">prequest</span><span class="o">/</span><span class="w">
-</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">db</span><span class="w">
-</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">ecto</span><span class="o">.</span><span class="n">create</span><span class="w">
-</span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span></code></pre><p>Next time running this application you will only need to:</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">up</span></code></pre><h2 id="test-pipeline" class="section-heading">
+<p>Enter the development container:</p><pre><code class="shell">git clone https://github.com/felipelincoln/prequest.git
+cd prequest/
+docker-compose run --name prequest_web --service-ports web /bin/sh</code></pre><p>Create the database, run migrations and start the server:</p><pre><code class="shell">mix ecto.setup
+mix phx.server</code></pre><p>After exiting the container (with the <code class="inline">exit</code> command) you can get back to it:</p><pre><code class="shell">docker start -a -i prequest_web
+</code></pre><p>Alternatively, you can fast start the services:</p><pre><code class="shell">docker-compose up</code></pre><h2 id="test-pipeline" class="section-heading">
   <a href="#test-pipeline" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Test pipeline
 </h2>
-<p>Good practice to run before making commits. It will mirror our <a href="https://github.com/felipelincoln/prequest/blob/master/.github/workflows/test.yml">GitHub action</a>.</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">ci</span></code></pre><p>This will run:  </p><p><code class="inline">mix format --check-formatted --dry-run</code><br></br><code class="inline">mix credo --strict</code><br></br><code class="inline">mix sobelow -v</code><br></br><a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a>  </p><h2 id="building-documentation" class="section-heading">
+<p>Good practice to run before making commits. It will mirror our <a href="https://github.com/felipelincoln/prequest/blob/master/.github/workflows/test.yml">GitHub action</a>.<br></br>Run the following inside the container:</p><pre><code class="shell">mix ci</code></pre><p>This will run:  </p><pre><code class="shell">mix format --check-formatted --dry-run
+mix credo --strict
+mix sobelow -v
+mix test</code></pre><h2 id="building-documentation" class="section-heading">
   <a href="#building-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Building documentation
 </h2>
-<p>Run whenever your changes may cause <a href="https://felipelincoln.github.io/prequest/readme.html">documentation</a> changes.</p><pre><code class="nohighlight makeup elixir"><span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">docs</span></code></pre>      <footer class="footer">
+<p>Run whenever your changes may cause <a href="https://felipelincoln.github.io/prequest/readme.html">documentation</a> changes.<br></br>Run the following inside the container:</p><pre><code class="shell">mix docs</code></pre>      <footer class="footer">
         <p>
           <span class="line">
             Built using
