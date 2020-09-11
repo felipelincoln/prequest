@@ -8,7 +8,7 @@ Enter the development container:
 ```shell
 git clone https://github.com/felipelincoln/prequest.git
 cd prequest/
-docker-compose run --name prequest_web --service-ports web /bin/sh
+docker-compose run --service-ports web /bin/sh
 ```
 
 Create the database, run migrations and start the server:
@@ -21,7 +21,7 @@ mix phx.server
 After exiting the container (with the `exit` command) you can get back to it:
 
 ```shell
-docker start -a -i prequest_web
+docker start -a -i prequest_web_run_<hash>
 
 ```
 Alternatively, you can fast start the services:
