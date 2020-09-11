@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Contributing to Prequest — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-ab573fcd3b.js"></script>
+    <script src="dist/sidebar_items-64231bef46.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -68,8 +68,8 @@ Prequest      </a>
 </h2>
 <p>Enter the development container:</p><pre><code class="shell">git clone https://github.com/felipelincoln/prequest.git
 cd prequest/
-docker-compose run --name prequest_web --service-ports web /bin/sh</code></pre><p>Create the database, run migrations and start the server:</p><pre><code class="shell">mix ecto.setup
-mix phx.server</code></pre><p>After exiting the container (with the <code class="inline">exit</code> command) you can get back to it:</p><pre><code class="shell">docker start -a -i prequest_web
+docker-compose run --service-ports web /bin/sh</code></pre><p>Create the database, run migrations and start the server:</p><pre><code class="shell">mix ecto.setup
+mix phx.server</code></pre><p>After exiting the container (with the <code class="inline">exit</code> command) you can get back to it:</p><pre><code class="shell">docker start -a -i prequest_web_run_&lt;hash&gt;
 </code></pre><p>Alternatively, you can fast start the services:</p><pre><code class="shell">docker-compose up</code></pre><h2 id="test-pipeline" class="section-heading">
   <a href="#test-pipeline" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Test pipeline

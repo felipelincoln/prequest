@@ -23,6 +23,8 @@ defmodule Prequest.MixProject do
         extras: ["README.md", ".github/CONTRIBUTING.md"],
         groups_for_extras: [guides: [".github/CONTRIBUTING.md"]],
         groups_for_modules: [
+          contexts: [Prequest.Accounts],
+          schemas: [Prequest.Accounts.User],
           channels: [PrequestWeb.UserSocket],
           live: [PrequestWeb.PageLive],
           views: [PrequestWeb.ErrorHelpers, PrequestWeb.ErrorView, PrequestWeb.LayoutView]
