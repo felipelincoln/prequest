@@ -25,20 +25,7 @@ defmodule Prequest.Accounts.User do
     timestamps()
   end
 
-  @doc """
-  Returns an `Ecto.Changeset` for the `%Prequest.Accounts.User{}` struct, given the attrs `%{...}`
-
-  ## Examples
-
-      iex> changeset(%User{}, %{username: "felipelincoln"})
-      #Ecto.Changeset<
-        action: nil,
-        changes: %{username: "felipelincoln"},
-        errors: [],
-        data: #Prequest.Accounts.User<>,
-        valid?: true
-      >
-  """
+  @doc false
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :name, :bio])
