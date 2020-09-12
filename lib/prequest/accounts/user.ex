@@ -16,6 +16,7 @@ defmodule Prequest.Accounts.User do
 
   use Ecto.Schema
   import Ecto.Changeset
+  alias Prequest.Accounts.User
 
   schema "users" do
     field :bio, :string
@@ -26,9 +27,10 @@ defmodule Prequest.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :name, :bio])
     |> validate_required([:username])
+    |> unique_constraint(:username)
   end
 end
