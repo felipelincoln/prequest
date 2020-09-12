@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.2">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Contributing to Prequest — Prequest v0.1.0</title>
+    <title>Prequest.CMS.Article — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
     <script src="dist/sidebar_items-b831cdeb7b.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
 <div class="main">
 
@@ -62,26 +62,28 @@ Prequest      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Contributing to Prequest</h1><p>Make sure to have <a href="https://docs.docker.com/compose/">docker-compose</a> installed.  </p><h2 id="running-the-application-locally" class="section-heading">
-  <a href="#running-the-application-locally" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Running the application locally
-</h2>
-<p>Enter the development container:</p><pre><code class="shell">git clone https://github.com/felipelincoln/prequest.git
-cd prequest/
-docker-compose run --service-ports web /bin/sh</code></pre><p>Create the database, run migrations and start the server:</p><pre><code class="shell">mix ecto.setup
-mix phx.server</code></pre><p>After exiting the container (with the <code class="inline">exit</code> command) you can get back to it:</p><pre><code class="shell">docker start -a -i prequest_web_run_&lt;hash&gt;
-</code></pre><p>Alternatively, you can fast start the services:</p><pre><code class="shell">docker-compose up</code></pre><h2 id="test-pipeline" class="section-heading">
-  <a href="#test-pipeline" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Test pipeline
-</h2>
-<p>Good practice to run before making commits. It will mirror our <a href="https://github.com/felipelincoln/prequest/blob/master/.github/workflows/test.yml">GitHub action</a>.<br></br>Run the following inside the container:</p><pre><code class="shell">mix ci</code></pre><p>This will run:  </p><pre><code class="shell">mix format --check-formatted --dry-run
-mix credo --strict
-mix sobelow -v
-mix test</code></pre><h2 id="building-documentation" class="section-heading">
-  <a href="#building-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Building documentation
-</h2>
-<p>Run whenever your changes may cause <a href="https://felipelincoln.github.io/prequest/readme.html">documentation</a> changes.<br></br>Run the following inside the container:</p><pre><code class="shell">mix docs</code></pre>      <footer class="footer">
+      <h1>
+        <small class="app-vsn">Prequest v0.1.0</small>
+Prequest.CMS.Article          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+      </h1>
+
+
+        <section id="moduledoc">
+<p><code class="inline">Article</code> is the schema in the <code class="inline">CMS</code> context that model the articles.  </p><p>It consists of a <code class="inline">:title</code>, <code class="inline">:cover</code>, <code class="inline">:source</code> field and <code class="inline">belongs_to :user</code> plus the <code class="inline">timestamps()</code>.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="5889774462-1">do</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:cover</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:source</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+
+  </span><span class="n">timestamps</span><span class="p" data-group-id="5889774462-2">(</span><span class="p" data-group-id="5889774462-2">)</span><span class="w">
+
+  </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">User</span><span class="w">
+</span><span class="k" data-group-id="5889774462-1">end</span></code></pre>        </section>
+
+
+      <footer class="footer">
         <p>
           <span class="line">
             Built using
