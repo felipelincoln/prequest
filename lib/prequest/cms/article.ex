@@ -2,7 +2,6 @@ defmodule Prequest.CMS.Article do
   @moduledoc """
   `Article` is the schema in the `CMS` context that model the articles.  
 
-  It consists of a `:title`, `:cover`, `:source` field and `belongs_to :user` plus the `timestamps()`.
       schema "articles" do
         field :cover, :string
         field :source, :string
