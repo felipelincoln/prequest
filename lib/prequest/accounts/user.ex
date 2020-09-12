@@ -3,20 +3,19 @@ defmodule Prequest.Accounts.User do
   `User` is the schema in the `Accounts` context that model the users.  
 
   It consists of a `:bio`, `:name` and `:username` field plus the `timestamps()`.
-  ```elixir
-  schema "users" do
-    field :bio, :string
-    field :name, :string
-    field :username, :string
+      schema "users" do
+        field :bio, :string
+        field :name, :string
+        field :username, :string
 
-    timestamps()
-  end
-  ```
+        timestamps()
+      end
   """
 
   use Ecto.Schema
   import Ecto.Changeset
   alias Prequest.Accounts.User
+  alias Prequest.CMS.Article
 
   schema "users" do
     field :bio, :string
@@ -24,6 +23,8 @@ defmodule Prequest.Accounts.User do
     field :username, :string
 
     timestamps()
+
+    has_many :articles, Article
   end
 
   @doc false
