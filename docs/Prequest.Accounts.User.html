@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.Accounts.User — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-b831cdeb7b.js"></script>
+    <script src="dist/sidebar_items-8497a9ee50.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -72,17 +72,67 @@ Prequest.Accounts.User          <a href="https://github.com/felipelincoln/preque
 
 
         <section id="moduledoc">
-<p><code class="inline">User</code> is the schema in the <code class="inline">Accounts</code> context that model the users.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="0507045015-1">do</span><span class="w">
+<p><code class="inline">User</code> is the schema in the <code class="inline">Accounts</code> context that model the users.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="4712391149-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:bio</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:username</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="0507045015-2">(</span><span class="p" data-group-id="0507045015-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="4712391149-2">(</span><span class="p" data-group-id="4712391149-2">)</span><span class="w">
 
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="w">
-</span><span class="k" data-group-id="0507045015-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="4712391149-1">end</span></code></pre>        </section>
 
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#changeset/2">changeset(user, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>User's changeset.</p></div>
+</div>
+  </div>
+        </section>
 
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="changeset/2">
+  <div class="detail-header">
+    <a href="#changeset/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">changeset(user, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/accounts/user.ex#L46" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>User's changeset.</p><h1>Validation</h1><p>Required: <code class="inline">username</code>.<br></br>Unique: <code class="inline">username</code>.</p><h1>Examples</h1><p>New user:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0228712961-1">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="0228712961-1">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="0228712961-2">(</span><span class="p" data-group-id="0228712961-3">%</span><span class="nc" data-group-id="0228712961-3">User</span><span class="p" data-group-id="0228712961-3">{</span><span class="p" data-group-id="0228712961-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_user</span><span class="p" data-group-id="0228712961-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="0228712961-4">(</span><span class="n">changeset</span><span class="p" data-group-id="0228712961-4">)</span><span class="w">
+</span><span class="p" data-group-id="0228712961-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0228712961-6">%</span><span class="nc" data-group-id="0228712961-6">User</span><span class="p" data-group-id="0228712961-6">{</span><span class="p" data-group-id="0228712961-6">}</span><span class="p" data-group-id="0228712961-5">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
       <footer class="footer">
         <p>
           <span class="line">

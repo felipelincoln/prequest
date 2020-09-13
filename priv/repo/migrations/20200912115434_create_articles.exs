@@ -3,10 +3,10 @@ defmodule Prequest.Repo.Migrations.CreateArticles do
 
   def change do
     create table(:articles) do
-      add :title, :string
-      add :cover, :string
-      add :source, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :title, :string, null: false
+      add :cover, :string, null: false
+      add :source, :string, null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end

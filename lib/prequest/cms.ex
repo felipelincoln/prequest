@@ -6,7 +6,6 @@ defmodule Prequest.CMS do
   import Ecto.Query, warn: false
   alias Prequest.Repo
 
-  alias Prequest.Accounts.User
   alias Prequest.CMS.Article
 
   @doc """
@@ -38,7 +37,6 @@ defmodule Prequest.CMS do
   """
   def get_article!(id) do
     Repo.get!(Article, id)
-    |> Repo.preload(:user)
   end
 
   @doc """
@@ -53,8 +51,8 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_article(attrs \\ %{}, %User{} = user) do
-    %Article{user: user}
+  def create_article(attrs \\ %{}) do
+    %Article{}
     |> Article.changeset(attrs)
     |> Repo.insert()
   end

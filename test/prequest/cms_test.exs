@@ -1,32 +1,38 @@
 defmodule Prequest.CMSTest do
   use Prequest.DataCase
 
+  alias Prequest.Accounts
   alias Prequest.CMS
 
   describe "articles" do
-    alias Prequest.Accounts.User
     alias Prequest.CMS.Article
 
-    @valid_attrs %{source: "some source", title: "some title"}
-    @update_attrs %{source: "some updated source", title: "some updated title"}
-    @invalid_attrs %{source: nil, title: nil}
-    @valid_user %User{username: "felipelincoln"}
+    @valid_attrs %{source: "some source", title: "some title", cover: "some cover"}
+    @update_attrs %{
+      source: "some updated source",
+      title: "some updated title",
+      cover: "some updated cover"
+    }
+    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil}
+
+    def user_id do
+      {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
+      user.id
+    end
 
     def article_fixture(attrs \\ %{}) do
       {:ok, article} =
         attrs
+        |> Map.merge(%{user_id: user_id()})
         |> Enum.into(@valid_attrs)
-        |> CMS.create_article(@valid_user)
+        |> CMS.create_article()
 
       article
     end
 
     test "list_articles/0 returns all articles" do
       article = article_fixture()
-
-      articles =
-        CMS.list_articles()
-        |> Enum.map(fn x -> x |> Repo.preload(:user) end)
+      articles = CMS.list_articles()
 
       assert articles == [article]
     end
@@ -37,13 +43,15 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_article/1 with valid data creates a article" do
-      assert {:ok, %Article{} = article} = CMS.create_article(@valid_attrs, @valid_user)
+      attrs = Map.merge(@valid_attrs, %{user_id: user_id()})
+      assert {:ok, %Article{} = article} = CMS.create_article(attrs)
       assert article.source == "some source"
       assert article.title == "some title"
+      assert article.cover == "some cover"
     end
 
     test "create_article/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs, @valid_user)
+      assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
     end
 
     test "update_article/2 with valid data updates the article" do
@@ -51,6 +59,7 @@ defmodule Prequest.CMSTest do
       assert {:ok, %Article{} = article} = CMS.update_article(article, @update_attrs)
       assert article.source == "some updated source"
       assert article.title == "some updated title"
+      assert article.cover == "some updated cover"
     end
 
     test "update_article/2 with invalid data returns error changeset" do

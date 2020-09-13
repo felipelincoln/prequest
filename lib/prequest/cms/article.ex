@@ -27,12 +27,31 @@ defmodule Prequest.CMS.Article do
     belongs_to :user, User
   end
 
-  @doc false
+  @doc """
+  Article's changeset.
+
+  # Validation
+  Required: `:title`, `:cover`, `:source` and `user_id`.  
+  Unique: `:source`.  
+
+  # Examples
+  New article:
+
+      iex> new_article = %{
+      ...>   title: "Another title",
+      ...>   source: "some_github_url",
+      ...>   cover: "some_img_url",
+      ...>   user_id: 1
+      ...> }
+      iex> changeset = Article.changeset(%Article{}, new_article)
+      iex> Repo.insert(changeset)
+      {:ok, %Article{}}
+  """
   def changeset(%Article{} = article, attrs) do
     article
-    |> cast(attrs, [:title, :source])
-    |> cast_assoc(:user)
-    |> validate_required([:title, :source])
+    |> cast(attrs, [:cover, :title, :source, :user_id])
+    |> validate_required([:cover, :title, :source, :user_id])
     |> unique_constraint(:source)
+    |> assoc_constraint(:user)
   end
 end

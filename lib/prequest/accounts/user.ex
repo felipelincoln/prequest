@@ -28,7 +28,21 @@ defmodule Prequest.Accounts.User do
     has_many :articles, Article
   end
 
-  @doc false
+  @doc """
+  User's changeset.
+
+  # Validation
+  Required: `username`.  
+  Unique: `username`.
+
+  # Examples
+  New user:
+      iex> new_user = %{username: "felipelincoln"}
+      iex> changeset = User.changeset(%User{}, new_user)
+      iex> Repo.insert(changeset)
+      {:ok, %User{}}
+
+  """
   def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :name, :bio])
