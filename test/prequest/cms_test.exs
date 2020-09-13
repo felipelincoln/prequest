@@ -85,11 +85,21 @@ defmodule Prequest.CMSTest do
 
     @valid_attrs %{message: "some message"}
     @update_attrs %{message: "some updated message"}
-    @invalid_attrs %{message: nil}
+    @invalid_attrs %{article_id: nil}
+
+    def article_id do
+      {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
+
+      {:ok, article} =
+        CMS.create_article(%{title: "a", cover: "a", source: "a", user_id: user.id})
+
+      article.id
+    end
 
     def report_fixture(attrs \\ %{}) do
       {:ok, report} =
         attrs
+        |> Map.merge(%{article_id: article_id()})
         |> Enum.into(@valid_attrs)
         |> CMS.create_report()
 
@@ -107,7 +117,8 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_report/1 with valid data creates a report" do
-      assert {:ok, %Report{} = report} = CMS.create_report(@valid_attrs)
+      attrs = Map.merge(@valid_attrs, %{article_id: article_id()})
+      assert {:ok, %Report{} = report} = CMS.create_report(attrs)
       assert report.message == "some message"
     end
 

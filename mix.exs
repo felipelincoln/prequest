@@ -24,7 +24,11 @@ defmodule Prequest.MixProject do
         groups_for_extras: [guides: [".github/CONTRIBUTING.md"]],
         groups_for_modules: [
           "accounts context": [Prequest.Accounts, Prequest.Accounts.User],
-          "cms context": [Prequest.CMS, Prequest.CMS.Article],
+          "cms context": [
+            Prequest.CMS,
+            Prequest.CMS.Article,
+            Prequest.CMS.Report
+          ],
           channels: [PrequestWeb.UserSocket],
           live: [PrequestWeb.PageLive],
           views: [PrequestWeb.ErrorHelpers, PrequestWeb.ErrorView, PrequestWeb.LayoutView]

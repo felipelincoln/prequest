@@ -4,8 +4,8 @@ defmodule Prequest.Repo.Migrations.CreateReports do
   def change do
     create table(:reports) do
       add :message, :string
-      add :user_id, references(:users, on_delete: :nothing)
-      add :article_id, references(:articles, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :delete_all)
+      add :article_id, references(:articles, on_delete: :delete_all), null: false
 
       timestamps()
     end

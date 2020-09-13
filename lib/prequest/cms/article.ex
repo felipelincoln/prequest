@@ -10,11 +10,13 @@ defmodule Prequest.CMS.Article do
         timestamps()
 
         belongs_to :user, User
+        has_many :reports, CMS.Report
       end
   """
   use Ecto.Schema
   import Ecto.Changeset
   alias Prequest.Accounts.User
+  alias Prequest.CMS
   alias Prequest.CMS.Article
 
   schema "articles" do
@@ -25,6 +27,7 @@ defmodule Prequest.CMS.Article do
     timestamps()
 
     belongs_to :user, User
+    has_many :reports, CMS.Report
   end
 
   @doc """
