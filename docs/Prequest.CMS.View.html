@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.CMS.View — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-c652d660c3.js"></script>
+    <script src="dist/sidebar_items-1df716aa6a.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -72,14 +72,14 @@ Prequest.CMS.View          <a href="https://github.com/felipelincoln/prequest/bl
 
 
         <section id="moduledoc">
-<p><code class="inline">View</code> is the schema in the <code class="inline">CMS</code> context that model the views.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="w"> </span><span class="k" data-group-id="8766098126-1">do</span><span class="w">
+<p><code class="inline">View</code> is the schema in the <code class="inline">CMS</code> context that model the views.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="w"> </span><span class="k" data-group-id="2849047214-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:liked</span><span class="sc">?,</span><span class="w"> </span><span class="ss">:boolean</span><span class="p">,</span><span class="w"> </span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="8766098126-2">(</span><span class="p" data-group-id="8766098126-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="2849047214-2">(</span><span class="p" data-group-id="2849047214-2">)</span><span class="w">
 
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">User</span><span class="w">
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:article</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="w">
-</span><span class="k" data-group-id="8766098126-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="2849047214-1">end</span></code></pre>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -125,14 +125,14 @@ Functions          </h1>
 
   <section class="docstring">
 
-<h1>Validation</h1><p>Required: <code class="inline">article_id</code>, <code class="inline">user_id</code></p><h1>Examples</h1><h1>New view:</h1><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9190373899-1">%{</span><span class="w">
+<h1>Validation</h1><p>Required: <code class="inline">article_id</code>, <code class="inline">user_id</code></p><h1>Examples</h1><h1>New view:</h1><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5084064368-1">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">liked</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="9190373899-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">View</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="9190373899-2">(</span><span class="p" data-group-id="9190373899-3">%</span><span class="nc" data-group-id="9190373899-3">View</span><span class="p" data-group-id="9190373899-3">{</span><span class="p" data-group-id="9190373899-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_view</span><span class="p" data-group-id="9190373899-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="9190373899-4">(</span><span class="n">changeset</span><span class="p" data-group-id="9190373899-4">)</span><span class="w">
-</span><span class="p" data-group-id="9190373899-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9190373899-6">%</span><span class="nc" data-group-id="9190373899-6">View</span><span class="p" data-group-id="9190373899-6">{</span><span class="p" data-group-id="9190373899-6">}</span><span class="p" data-group-id="9190373899-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="5084064368-1">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">View</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="5084064368-2">(</span><span class="p" data-group-id="5084064368-3">%</span><span class="nc" data-group-id="5084064368-3">View</span><span class="p" data-group-id="5084064368-3">{</span><span class="p" data-group-id="5084064368-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_view</span><span class="p" data-group-id="5084064368-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="5084064368-4">(</span><span class="n">changeset</span><span class="p" data-group-id="5084064368-4">)</span><span class="w">
+</span><span class="p" data-group-id="5084064368-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5084064368-6">%</span><span class="nc" data-group-id="5084064368-6">View</span><span class="p" data-group-id="5084064368-6">{</span><span class="p" data-group-id="5084064368-6">}</span><span class="p" data-group-id="5084064368-5">}</span></code></pre>  </section>
 </section>
           </div>
         </section>

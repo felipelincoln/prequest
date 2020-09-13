@@ -28,7 +28,8 @@ defmodule Prequest.MixProject do
             Prequest.CMS,
             Prequest.CMS.Article,
             Prequest.CMS.Report,
-            Prequest.CMS.View
+            Prequest.CMS.View,
+            Prequest.CMS.Topic
           ],
           channels: [PrequestWeb.UserSocket],
           live: [PrequestWeb.PageLive],

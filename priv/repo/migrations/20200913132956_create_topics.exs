@@ -3,7 +3,7 @@ defmodule Prequest.Repo.Migrations.CreateTopics do
 
   def change do
     create table(:topics) do
-      add :name, :string
+      add :name, :string, null: false
 
       timestamps()
     end

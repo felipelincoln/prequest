@@ -342,7 +342,7 @@ defmodule Prequest.CMS do
   def create_topic(attrs \\ %{}) do
     %Topic{}
     |> Topic.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: [set: [name: attrs.name]], conflict_target: :name)
   end
 
   @doc """

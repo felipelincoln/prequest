@@ -12,6 +12,7 @@ defmodule Prequest.CMS.Article do
         belongs_to :user, User
         has_many :reports, CMS.Report
         has_many :views, CMS.View
+        many_to_many :topics, CMS.Topic, join_through: "articles_topics"
       end
   """
   use Ecto.Schema
@@ -30,6 +31,7 @@ defmodule Prequest.CMS.Article do
     belongs_to :user, User
     has_many :reports, CMS.Report
     has_many :views, CMS.View
+    many_to_many :topics, CMS.Topic, join_through: "articles_topics"
   end
 
   @doc """
@@ -38,6 +40,7 @@ defmodule Prequest.CMS.Article do
   # Validation
   Required: `:title`, `:cover`, `:source` and `user_id`.  
   Unique: `:source`.  
+  Builds: `:topics`.  
 
   # Examples
   New article:

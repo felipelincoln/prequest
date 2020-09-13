@@ -1,11 +1,15 @@
 defmodule Prequest.CMS.Topic do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias Prequest.CMS
 
   schema "topics" do
     field :name, :string
 
     timestamps()
+
+    many_to_many :articles, CMS.Article, join_through: "articles_topics"
   end
 
   @doc false
