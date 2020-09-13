@@ -11,6 +11,7 @@ defmodule Prequest.Accounts.User do
 
         has_many :articles, Article
         has_many :reports, CMS.Report
+        has_many :views, CMS.View
       end
   """
 
@@ -28,6 +29,7 @@ defmodule Prequest.Accounts.User do
 
     has_many :articles, CMS.Article
     has_many :reports, CMS.Report
+    has_many :views, CMS.View
   end
 
   @doc """

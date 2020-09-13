@@ -27,7 +27,8 @@ defmodule Prequest.MixProject do
           "cms context": [
             Prequest.CMS,
             Prequest.CMS.Article,
-            Prequest.CMS.Report
+            Prequest.CMS.Report,
+            Prequest.CMS.View
           ],
           channels: [PrequestWeb.UserSocket],
           live: [PrequestWeb.PageLive],

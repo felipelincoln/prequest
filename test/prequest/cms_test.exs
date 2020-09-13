@@ -153,13 +153,23 @@ defmodule Prequest.CMSTest do
   describe "view" do
     alias Prequest.CMS.View
 
-    @valid_attrs %{liked: true}
-    @update_attrs %{liked: false}
-    @invalid_attrs %{liked: nil}
+    @valid_attrs %{liked?: true}
+    @update_attrs %{liked?: false}
+    @invalid_attrs %{article_id: nil, user_id: nil}
+
+    def id_map do
+      {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
+
+      {:ok, article} =
+        CMS.create_article(%{title: "a", cover: "a", source: "a", user_id: user.id})
+
+      %{user_id: user.id, article_id: article.id}
+    end
 
     def view_fixture(attrs \\ %{}) do
       {:ok, view} =
         attrs
+        |> Map.merge(id_map())
         |> Enum.into(@valid_attrs)
         |> CMS.create_view()
 
@@ -177,8 +187,9 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_view/1 with valid data creates a view" do
-      assert {:ok, %View{} = view} = CMS.create_view(@valid_attrs)
-      assert view.liked == true
+      attrs = Map.merge(@valid_attrs, id_map())
+      assert {:ok, %View{} = view} = CMS.create_view(attrs)
+      assert view.liked? == true
     end
 
     test "create_view/1 with invalid data returns error changeset" do
@@ -188,7 +199,7 @@ defmodule Prequest.CMSTest do
     test "update_view/2 with valid data updates the view" do
       view = view_fixture()
       assert {:ok, %View{} = view} = CMS.update_view(view, @update_attrs)
-      assert view.liked == false
+      assert view.liked? == false
     end
 
     test "update_view/2 with invalid data returns error changeset" do

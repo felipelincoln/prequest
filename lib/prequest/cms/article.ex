@@ -11,6 +11,7 @@ defmodule Prequest.CMS.Article do
 
         belongs_to :user, User
         has_many :reports, CMS.Report
+        has_many :views, CMS.View
       end
   """
   use Ecto.Schema
@@ -28,6 +29,7 @@ defmodule Prequest.CMS.Article do
 
     belongs_to :user, User
     has_many :reports, CMS.Report
+    has_many :views, CMS.View
   end
 
   @doc """
