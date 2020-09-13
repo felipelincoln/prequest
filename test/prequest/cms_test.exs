@@ -79,4 +79,63 @@ defmodule Prequest.CMSTest do
       assert %Ecto.Changeset{} = CMS.change_article(article)
     end
   end
+
+  describe "reports" do
+    alias Prequest.CMS.Report
+
+    @valid_attrs %{message: "some message"}
+    @update_attrs %{message: "some updated message"}
+    @invalid_attrs %{message: nil}
+
+    def report_fixture(attrs \\ %{}) do
+      {:ok, report} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> CMS.create_report()
+
+      report
+    end
+
+    test "list_reports/0 returns all reports" do
+      report = report_fixture()
+      assert CMS.list_reports() == [report]
+    end
+
+    test "get_report!/1 returns the report with given id" do
+      report = report_fixture()
+      assert CMS.get_report!(report.id) == report
+    end
+
+    test "create_report/1 with valid data creates a report" do
+      assert {:ok, %Report{} = report} = CMS.create_report(@valid_attrs)
+      assert report.message == "some message"
+    end
+
+    test "create_report/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_report(@invalid_attrs)
+    end
+
+    test "update_report/2 with valid data updates the report" do
+      report = report_fixture()
+      assert {:ok, %Report{} = report} = CMS.update_report(report, @update_attrs)
+      assert report.message == "some updated message"
+    end
+
+    test "update_report/2 with invalid data returns error changeset" do
+      report = report_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_report(report, @invalid_attrs)
+      assert report == CMS.get_report!(report.id)
+    end
+
+    test "delete_report/1 deletes the report" do
+      report = report_fixture()
+      assert {:ok, %Report{}} = CMS.delete_report(report)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
+    end
+
+    test "change_report/1 returns a report changeset" do
+      report = report_fixture()
+      assert %Ecto.Changeset{} = CMS.change_report(report)
+    end
+  end
 end
