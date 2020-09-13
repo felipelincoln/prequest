@@ -32,7 +32,7 @@ defmodule Prequest.CMS.Report do
   # Examples
   # New report:
       iex> new_report = %{
-      ...>   title: "I found a typo here",
+      ...>   message: "I found a typo here",
       ...>   article_id: 1
       ...> }
       iex> changeset = Report.changeset(%Report{}, new_report)
