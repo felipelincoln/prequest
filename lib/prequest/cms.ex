@@ -199,4 +199,100 @@ defmodule Prequest.CMS do
   def change_report(%Report{} = report, attrs \\ %{}) do
     Report.changeset(report, attrs)
   end
+
+  alias Prequest.CMS.View
+
+  @doc """
+  Returns the list of view.
+
+  ## Examples
+
+      iex> list_view()
+      [%View{}, ...]
+
+  """
+  def list_view do
+    Repo.all(View)
+  end
+
+  @doc """
+  Gets a single view.
+
+  Raises `Ecto.NoResultsError` if the View does not exist.
+
+  ## Examples
+
+      iex> get_view!(123)
+      %View{}
+
+      iex> get_view!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_view!(id), do: Repo.get!(View, id)
+
+  @doc """
+  Creates a view.
+
+  ## Examples
+
+      iex> create_view(%{field: value})
+      {:ok, %View{}}
+
+      iex> create_view(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_view(attrs \\ %{}) do
+    %View{}
+    |> View.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a view.
+
+  ## Examples
+
+      iex> update_view(view, %{field: new_value})
+      {:ok, %View{}}
+
+      iex> update_view(view, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_view(%View{} = view, attrs) do
+    view
+    |> View.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a view.
+
+  ## Examples
+
+      iex> delete_view(view)
+      {:ok, %View{}}
+
+      iex> delete_view(view)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_view(%View{} = view) do
+    Repo.delete(view)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking view changes.
+
+  ## Examples
+
+      iex> change_view(view)
+      %Ecto.Changeset{data: %View{}}
+
+  """
+  def change_view(%View{} = view, attrs \\ %{}) do
+    View.changeset(view, attrs)
+  end
 end

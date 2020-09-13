@@ -149,4 +149,63 @@ defmodule Prequest.CMSTest do
       assert %Ecto.Changeset{} = CMS.change_report(report)
     end
   end
+
+  describe "view" do
+    alias Prequest.CMS.View
+
+    @valid_attrs %{liked: true}
+    @update_attrs %{liked: false}
+    @invalid_attrs %{liked: nil}
+
+    def view_fixture(attrs \\ %{}) do
+      {:ok, view} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> CMS.create_view()
+
+      view
+    end
+
+    test "list_view/0 returns all view" do
+      view = view_fixture()
+      assert CMS.list_view() == [view]
+    end
+
+    test "get_view!/1 returns the view with given id" do
+      view = view_fixture()
+      assert CMS.get_view!(view.id) == view
+    end
+
+    test "create_view/1 with valid data creates a view" do
+      assert {:ok, %View{} = view} = CMS.create_view(@valid_attrs)
+      assert view.liked == true
+    end
+
+    test "create_view/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_view(@invalid_attrs)
+    end
+
+    test "update_view/2 with valid data updates the view" do
+      view = view_fixture()
+      assert {:ok, %View{} = view} = CMS.update_view(view, @update_attrs)
+      assert view.liked == false
+    end
+
+    test "update_view/2 with invalid data returns error changeset" do
+      view = view_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_view(view, @invalid_attrs)
+      assert view == CMS.get_view!(view.id)
+    end
+
+    test "delete_view/1 deletes the view" do
+      view = view_fixture()
+      assert {:ok, %View{}} = CMS.delete_view(view)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_view!(view.id) end
+    end
+
+    test "change_view/1 returns a view changeset" do
+      view = view_fixture()
+      assert %Ecto.Changeset{} = CMS.change_view(view)
+    end
+  end
 end
