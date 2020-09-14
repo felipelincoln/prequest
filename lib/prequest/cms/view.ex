@@ -32,7 +32,7 @@ defmodule Prequest.CMS.View do
   # Examples
   # New view:
       iex> new_view = %{
-      ...>   liked: true,
+      ...>   liked?: true,
       ...>   article_id: 1
       ...>   user_id: 1
       ...> }
