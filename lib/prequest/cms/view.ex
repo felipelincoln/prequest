@@ -7,30 +7,30 @@ defmodule Prequest.CMS.View do
 
         timestamps()
 
-        belongs_to :user, User
+        belongs_to :user, Accounts.User
         belongs_to :article, Article
       end
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts.User
-  alias Prequest.CMS.Article
+  alias Prequest.Accounts
+  alias Prequest.CMS.{Article, View}
 
   schema "view" do
     field :liked?, :boolean, default: false
 
     timestamps()
 
-    belongs_to :user, User
+    belongs_to :user, Accounts.User
     belongs_to :article, Article
   end
 
   @doc """
-  # Validation
+  ## Validation
   Required: `article_id`, `user_id`
 
-  # Examples
-  # New view:
+  ## Examples
+  New view:
       iex> new_view = %{
       ...>   liked?: true,
       ...>   article_id: 1
@@ -40,7 +40,7 @@ defmodule Prequest.CMS.View do
       iex> Repo.insert(changeset)
       {:ok, %View{}}
   """
-  def changeset(view, attrs) do
+  def changeset(%View{} = view, attrs) do
     view
     |> cast(attrs, [:liked?, :user_id, :article_id])
     |> validate_required([:article_id, :user_id])

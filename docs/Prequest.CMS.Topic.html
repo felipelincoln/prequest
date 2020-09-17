@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.2">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Prequest.CMS.View — Prequest v0.1.0</title>
+    <title>Prequest.CMS.Topic — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
     <script src="dist/sidebar_items-42c3a6c5ac.js"></script>
       <script src="docs_config.js"></script>
@@ -64,7 +64,7 @@ Prequest      </a>
 
       <h1>
         <small class="app-vsn">Prequest v0.1.0</small>
-Prequest.CMS.View          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view.ex#L1" title="View Source" class="view-source" rel="help">
+Prequest.CMS.Topic          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,14 +72,13 @@ Prequest.CMS.View          <a href="https://github.com/felipelincoln/prequest/bl
 
 
         <section id="moduledoc">
-<p><code class="inline">View</code> is the schema in the <code class="inline">CMS</code> context that model the views.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="w"> </span><span class="k" data-group-id="0117981443-1">do</span><span class="w">
-  </span><span class="n">field</span><span class="w"> </span><span class="ss">:liked</span><span class="sc">?,</span><span class="w"> </span><span class="ss">:boolean</span><span class="p">,</span><span class="w"> </span><span class="ss">default</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
+<p><code class="inline">Topic</code> is the schema in the <code class="inline">CMS</code> context that model the topics.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;topics&quot;</span><span class="w"> </span><span class="k" data-group-id="2006692017-1">do</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="0117981443-2">(</span><span class="p" data-group-id="0117981443-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="2006692017-2">(</span><span class="p" data-group-id="2006692017-2">)</span><span class="w">
 
-  </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">Accounts.User</span><span class="w">
-  </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:article</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="w">
-</span><span class="k" data-group-id="0117981443-1">end</span></code></pre>        </section>
+  </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="w">
+</span><span class="k" data-group-id="2006692017-1">end</span></code></pre>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -95,9 +94,9 @@ Prequest.CMS.View          <a href="https://github.com/felipelincoln/prequest/bl
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#changeset/2">changeset(view, attrs)</a>
+    <a href="#changeset/2">changeset(topic, attrs)</a>
   </div>
-    <div class="summary-synopsis"><h2>Validation</h2><p>Required: <code class="inline">article_id</code>, <code class="inline">user_id</code></p></div>
+    <div class="summary-synopsis"><p>Topic's changeset.</p></div>
 </div>
   </div>
         </section>
@@ -116,8 +115,8 @@ Functions          </h1>
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(view, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view.ex#L43" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">changeset(topic, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L40" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -125,22 +124,18 @@ Functions          </h1>
 
   <section class="docstring">
 
-<h2 id="changeset/2-validation" class="section-heading">
+<p>Topic's changeset.</p><h2 id="changeset/2-validation" class="section-heading">
   <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Validation
 </h2>
-<p>Required: <code class="inline">article_id</code>, <code class="inline">user_id</code></p><h2 id="changeset/2-examples" class="section-heading">
+<p>Required: <code class="inline">name</code>.<br></br>Unique: <code class="inline">name</code>.</p><h2 id="changeset/2-examples" class="section-heading">
   <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<p>New view:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="7858969564-1">%{</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="7858969564-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">View</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="7858969564-2">(</span><span class="p" data-group-id="7858969564-3">%</span><span class="nc" data-group-id="7858969564-3">View</span><span class="p" data-group-id="7858969564-3">{</span><span class="p" data-group-id="7858969564-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_view</span><span class="p" data-group-id="7858969564-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="7858969564-4">(</span><span class="n">changeset</span><span class="p" data-group-id="7858969564-4">)</span><span class="w">
-</span><span class="p" data-group-id="7858969564-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7858969564-6">%</span><span class="nc" data-group-id="7858969564-6">View</span><span class="p" data-group-id="7858969564-6">{</span><span class="p" data-group-id="7858969564-6">}</span><span class="p" data-group-id="7858969564-5">}</span></code></pre>  </section>
+<p>New topic:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="6053010820-1">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="6053010820-1">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Topic</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="6053010820-2">(</span><span class="p" data-group-id="6053010820-3">%</span><span class="nc" data-group-id="6053010820-3">Topic</span><span class="p" data-group-id="6053010820-3">{</span><span class="p" data-group-id="6053010820-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_topic</span><span class="p" data-group-id="6053010820-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="6053010820-4">(</span><span class="n">changeset</span><span class="p" data-group-id="6053010820-4">)</span><span class="w">
+</span><span class="p" data-group-id="6053010820-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6053010820-6">%</span><span class="nc" data-group-id="6053010820-6">Topic</span><span class="p" data-group-id="6053010820-6">{</span><span class="p" data-group-id="6053010820-6">}</span><span class="p" data-group-id="6053010820-5">}</span></code></pre>  </section>
 </section>
           </div>
         </section>

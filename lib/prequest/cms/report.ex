@@ -7,30 +7,32 @@ defmodule Prequest.CMS.Report do
 
         timestamps()
 
-        belongs_to :user, User
+        belongs_to :user, Accounts.User
         belongs_to :article, Article
       end
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts.User
-  alias Prequest.CMS.Article
+  alias Prequest.Accounts
+  alias Prequest.CMS.{Article, Report}
 
   schema "reports" do
     field :message, :string
 
     timestamps()
 
-    belongs_to :user, User
+    belongs_to :user, Accounts.User
     belongs_to :article, Article
   end
 
   @doc """
-  # Validation
+  Report's changeset
+
+  ## Validation
   Required: `article_id`
 
-  # Examples
-  # New report:
+  ## Examples
+  New report:
       iex> new_report = %{
       ...>   message: "I found a typo here",
       ...>   article_id: 1
@@ -39,7 +41,7 @@ defmodule Prequest.CMS.Report do
       iex> Repo.insert(changeset)
       {:ok, %Report{}}
   """
-  def changeset(report, attrs) do
+  def changeset(%Report{} = report, attrs) do
     report
     |> cast(attrs, [:message, :user_id, :article_id])
     |> validate_required([:article_id])

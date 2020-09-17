@@ -9,7 +9,7 @@ defmodule Prequest.Accounts.User do
 
         timestamps()
 
-        has_many :articles, Article
+        has_many :articles, CMS.Article
         has_many :reports, CMS.Report
         has_many :views, CMS.View
       end
@@ -35,11 +35,11 @@ defmodule Prequest.Accounts.User do
   @doc """
   User's changeset.
 
-  # Validation
+  ## Validation
   Required: `username`.  
   Unique: `username`.
 
-  # Examples
+  ## Examples
   New user:
       iex> new_user = %{username: "felipelincoln"}
       iex> changeset = User.changeset(%User{}, new_user)

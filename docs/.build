@@ -1,11 +1,11 @@
-dist/search_items-afa4bea5b3.js
+dist/search_items-12d3f0c3a0.js
 dist/app-0103364119015b97e56c.js
 dist/elixir-d678dad126d82ddc061f.css
 dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/sidebar_items-1df716aa6a.js
+dist/sidebar_items-42c3a6c5ac.js
 api-reference.html
 readme.html
 contributing.html
@@ -24,6 +24,7 @@ Prequest.Accounts.User.html
 Prequest.CMS.html
 Prequest.CMS.Article.html
 Prequest.CMS.Report.html
+Prequest.CMS.Topic.html
 Prequest.CMS.View.html
 PrequestWeb.UserSocket.html
 PrequestWeb.PageLive.html

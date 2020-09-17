@@ -9,17 +9,16 @@ defmodule Prequest.CMS.Article do
 
         timestamps()
 
-        belongs_to :user, User
-        has_many :reports, CMS.Report
-        has_many :views, CMS.View
-        many_to_many :topics, CMS.Topic, join_through: "articles_topics"
+        belongs_to :user, Accounts.User
+        has_many :reports, Report
+        has_many :views, View
+        many_to_many :topics, Topic, join_through: "articles_topics"
       end
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts.User
-  alias Prequest.CMS
-  alias Prequest.CMS.Article
+  alias Prequest.Accounts
+  alias Prequest.CMS.{Article, Report, Topic, View}
 
   schema "articles" do
     field :cover, :string
@@ -28,21 +27,20 @@ defmodule Prequest.CMS.Article do
 
     timestamps()
 
-    belongs_to :user, User
-    has_many :reports, CMS.Report
-    has_many :views, CMS.View
-    many_to_many :topics, CMS.Topic, join_through: "articles_topics"
+    belongs_to :user, Accounts.User
+    has_many :reports, Report
+    has_many :views, View
+    many_to_many :topics, Topic, join_through: "articles_topics"
   end
 
   @doc """
   Article's changeset.
 
-  # Validation
+  ## Validation
   Required: `:title`, `:cover`, `:source` and `user_id`.  
   Unique: `:source`.  
-  Builds: `:topics`.  
 
-  # Examples
+  ## Examples
   New article:
 
       iex> new_article = %{
