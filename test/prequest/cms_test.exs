@@ -1,81 +1,100 @@
 defmodule Prequest.CMSTest do
-  use Prequest.DataCase
+  use Prequest.DataCase, async: true
 
   alias Prequest.Accounts
   alias Prequest.CMS
 
-  describe "articles" do
-    alias Prequest.CMS.Article
+  setup_all do
+    {:ok, user} = Accounts.create_user(%{username: "felipelincoln2"})
+    on_exit(fn -> Accounts.delete_user(user) end)
 
-    @valid_attrs %{source: "some source", title: "some title", cover: "some cover"}
+    %{user: user}
+  end
+
+  describe "articles" do
+    @valid_attrs %{
+      source: "some source",
+      title: "some title",
+      cover: "some cover",
+      topics: ["topic1", "topic2", "topic3"]
+    }
     @update_attrs %{
       source: "some updated source",
       title: "some updated title",
-      cover: "some updated cover"
+      cover: "some updated cover",
+      topics: ["topic1.1", "topic2"]
     }
     @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil}
 
-    def user_id do
-      {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
-      user.id
-    end
-
-    def article_fixture(attrs \\ %{}) do
+    def article_fixture(%{user_id: _} = attrs) do
       {:ok, article} =
         attrs
-        |> Map.merge(%{user_id: user_id()})
         |> Enum.into(@valid_attrs)
         |> CMS.create_article()
 
       article
     end
 
-    test "list_articles/0 returns all articles" do
-      article = article_fixture()
-      articles = CMS.list_articles()
-
-      assert articles == [article]
-    end
-
-    test "get_article!/1 returns the article with given id" do
-      article = article_fixture()
+    test "get_article!/1 returns the article with given id", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
       assert CMS.get_article!(article.id) == article
     end
 
-    test "create_article/1 with valid data creates a article" do
-      attrs = Map.merge(@valid_attrs, %{user_id: user_id()})
-      assert {:ok, %Article{} = article} = CMS.create_article(attrs)
-      assert article.source == "some source"
-      assert article.title == "some title"
-      assert article.cover == "some cover"
+    ## FAILING
+
+    test "preload_article!/2 returns the article with preloaded field", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      fields = [:user, :reports, :views, :topics]
+
+      assert (%CMS.Article{} = preloaded_article) = CMS.preload_article!(article, fields)
+      assert preloaded_article.user == user
+      assert preloaded_article.reports == []
+      assert preloaded_article.views == []
+      refute preloaded_article.topics == []
     end
+
+    test "create_article/1 with valid data creates an article", %{user: user} do
+      assert {:ok, %CMS.Article{} = article} =
+               %{user_id: user.id}
+               |> Enum.into(@valid_attrs)
+               |> CMS.create_article()
+               |> CMS.preload_article(:topics)
+
+      assert article.source == @valid_attrs.source
+      assert article.title == @valid_attrs.title
+      assert article.cover == @valid_attrs.cover
+      assert article.user_id == user.id
+      refute article.topics == []
+    end
+
+    ##############
 
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
     end
 
-    test "update_article/2 with valid data updates the article" do
-      article = article_fixture()
-      assert {:ok, %Article{} = article} = CMS.update_article(article, @update_attrs)
+    test "update_article/2 with valid data updates the article", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      assert {:ok, %CMS.Article{} = article} = CMS.update_article(article, @update_attrs)
       assert article.source == "some updated source"
       assert article.title == "some updated title"
       assert article.cover == "some updated cover"
     end
 
-    test "update_article/2 with invalid data returns error changeset" do
-      article = article_fixture()
+    test "update_article/2 with invalid data returns error changeset", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
       assert {:error, %Ecto.Changeset{}} = CMS.update_article(article, @invalid_attrs)
       assert article == CMS.get_article!(article.id)
     end
 
-    test "delete_article/1 deletes the article" do
-      article = article_fixture()
-      assert {:ok, %Article{}} = CMS.delete_article(article)
+    test "delete_article/1 deletes the article", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      assert {:ok, %CMS.Article{}} = CMS.delete_article(article)
       assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
     end
 
-    test "change_article/1 returns a article changeset" do
-      article = article_fixture()
+    test "change_article/1 returns a article changeset", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
       assert %Ecto.Changeset{} = CMS.change_article(article)
     end
   end

@@ -92,15 +92,7 @@ defmodule Prequest.CMS do
 
   alias Prequest.CMS.Article
 
-  @doc """
-  Returns the list of articles.
-
-  ## Examples
-
-      iex> list_articles()
-      [%Article{}, ...]
-
-  """
+  @doc false
   def list_articles do
     Repo.all(Article)
   end
@@ -124,6 +116,20 @@ defmodule Prequest.CMS do
   end
 
   @doc """
+  Preload fields from an article
+  """
+  def preload_article!(%Article{} = article, fields) do
+    Repo.preload(article, fields)
+  end
+
+  @doc """
+  Preload article's fields in a tuple pipeline
+  """
+  def preload_article({:ok, %Article{} = article}, fields) do
+    {:ok, Repo.preload(article, fields)}
+  end
+
+  @doc """
   Creates a article.
 
   ## Examples
@@ -136,10 +142,41 @@ defmodule Prequest.CMS do
 
   """
   def create_article(attrs \\ %{}) do
-    %Article{}
-    |> Article.changeset(attrs)
-    |> Repo.insert()
+    Ecto.Multi.new()
+    |> Ecto.Multi.insert(:articles, Article.changeset(%Article{}, attrs))
+    |> Ecto.Multi.insert(:topics, Topic.changeset(%Topic{}, ))
+    |> Repo.transaction()
   end
+
+
+  alias Prequest.CMS.Topic
+
+  @doc """
+  """
+  def get_or_create_topic(name) when is_binary(name) do
+    case Repo.get_by Topic, name: name do
+      %Topic{} = topic -> topic
+      nil -> 
+        %Topic{}
+        |> Topic.changeset(%{name: name})
+        |> Repo.insert()
+    end
+  end
+
+  def get_or_create_topic(names) when is_list(names) do
+    Enum.map(names, &get_or_create_topic/1)
+  end
+
+
+
+
+
+
+
+
+
+
+  ######################
 
   @doc """
   Updates a article.
