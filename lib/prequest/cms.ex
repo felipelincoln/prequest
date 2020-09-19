@@ -91,59 +91,102 @@ defmodule Prequest.CMS do
   alias Prequest.Repo
   alias Prequest.CMS.{Article, Report, Topic, View}
 
-  @type content :: %Article{} | %Report{} | %Topic{} | %View{}
   @type article :: %Article{}
+  @type report :: %Report{}
   @type topic :: %Topic{}
+  @type view :: %View{}
   @type changeset :: %Ecto.Changeset{}
 
   @doc """
-  Preload fields from a content.
+  Preload fields from a schema's struct.
 
-  Raises `ArgumentError` if `fields` does not exist in the content.
+  Raises `ArgumentError` if the fields does not exist in the struct.
 
   ## Examples
 
+      iex> user
+      %User{} #=> articles: #Ecto.Association.NotLoaded<association :articles is not loaded>
       iex> preload!(user, :articles)
-      %User{}
+      %User{
+        articles: [%Article{}, ...],
+        ...
+      }
 
-      iex> preload!(topic, :user)
-      %Topic{}
-
-      iex> preload!(report, :article)
-      %Report{}
-
-      iex> preload!(view, :article)
-      %View{}
-
-      iex> preload!(article, :reports)
-      %Article{}
-
+      iex> article
+      %Article{
+        #=> reports: #Ecto.Association.NotLoaded<association :reports is not loaded>
+        #=> views: #Ecto.Association.NotLoaded<association :views is not loaded>
+      }
       iex> preload!(article, [:views, :reports])
-      %Article{}
+      %Article{
+        views: [%View{}, ...],
+        reports: [%Report{}, ...],
+        ...
+      }
 
       iex> preload!(article, :field)
       ** (ArgumentError)
   """
-  @spec preload!(content, atom | [atom]) :: content
+  @spec preload!(struct, atom | [atom]) :: struct
   def preload!(content, fields) do
     Repo.preload(content, fields)
   end
 
   @doc """
-  Preload all fields from a content inside a pipeline.
+  Preload all fields from a schema's struct inside a pipeline.
 
   ## Examples
 
-      iex> create_article(%{...}) |> preload()
-      {:ok, %Article{}}
+  It can be used for `create_*` pipelines,
 
-      iex> create_topic() |> preload()
+      iex> create_article(%{...})
+      {:ok,
+        %Article{
+          #=> reports: #Ecto.Association.NotLoaded<association :reports is not loaded>
+          #=> user: #Ecto.Association.NotLoaded<association :user is not loaded>
+          #=> views: #Ecto.Association.NotLoaded<association :views is not loaded>
+          ...
+        }
+      }
+
+      iex> create_article(%{...}) |> preload()
+      {:ok,
+        %Article{
+          reports: [%Report{}, ...],
+          topics: [%Topic{}, ...],
+          user: %User{},
+          views: [%View{}, ...],
+          ...
+        }
+      }
+
+  and also `update_*` pipelines.
+
+      iex> update_report(%{...})
+      {:ok,
+        %Report{
+          #=> user: #Ecto.Association.NotLoaded<association :user is not loaded>
+          #=> article: #Ecto.Association.NotLoaded<association :article is not loaded>
+          ...
+        }
+      }
+
+      iex> update_report(%{...}) |> preload()
+      {:ok,
+        %Report{
+          user: %User{},
+          article: %Article{},
+          ...
+        }
+      }
+
+  If the preceding changeset contain errors it does not do anything.
+
+      iex> create_topic(%{name: nil}) |> preload()
       {:error, %Ecto.Changeset{}}
 
-      iex> update_user(%{...}) |> preload()
-      {:ok, %User{}}
   """
-  @spec preload({:ok, content}) :: {:ok, content}
+  @spec preload({:ok, struct}) :: {:ok, struct}
   @spec preload({:error, changeset}) :: {:error, changeset}
   def preload({:ok, content}) do
     assoc = content.__struct__.__schema__(:associations)
