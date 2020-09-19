@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.CMS.Article — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-42c3a6c5ac.js"></script>
+    <script src="dist/sidebar_items-e69db4633c.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -72,18 +72,18 @@ Prequest.CMS.Article          <a href="https://github.com/felipelincoln/prequest
 
 
         <section id="moduledoc">
-<p><code class="inline">Article</code> is the schema in the <code class="inline">CMS</code> context that model the articles.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="3396138207-1">do</span><span class="w">
+<p><code class="inline">Article</code> is the schema in the <code class="inline">CMS</code> context that model the articles.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="9911962499-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:cover</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:source</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="3396138207-2">(</span><span class="p" data-group-id="3396138207-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="9911962499-2">(</span><span class="p" data-group-id="9911962499-2">)</span><span class="w">
 
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">Accounts.User</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">View</span><span class="w">
   </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="nc">Topic</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="w">
-</span><span class="k" data-group-id="3396138207-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="9911962499-1">end</span></code></pre>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -137,15 +137,15 @@ Functions          </h1>
   <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<p>New article:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_article</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="6892326295-1">%{</span><span class="w">
+<p>New article:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_article</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="2470423010-1">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Another title&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some_github_url&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some_img_url&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="6892326295-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Article</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="6892326295-2">(</span><span class="p" data-group-id="6892326295-3">%</span><span class="nc" data-group-id="6892326295-3">Article</span><span class="p" data-group-id="6892326295-3">{</span><span class="p" data-group-id="6892326295-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_article</span><span class="p" data-group-id="6892326295-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="6892326295-4">(</span><span class="n">changeset</span><span class="p" data-group-id="6892326295-4">)</span><span class="w">
-</span><span class="p" data-group-id="6892326295-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6892326295-6">%</span><span class="nc" data-group-id="6892326295-6">Article</span><span class="p" data-group-id="6892326295-6">{</span><span class="p" data-group-id="6892326295-6">}</span><span class="p" data-group-id="6892326295-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="2470423010-1">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Article</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="2470423010-2">(</span><span class="p" data-group-id="2470423010-3">%</span><span class="nc" data-group-id="2470423010-3">Article</span><span class="p" data-group-id="2470423010-3">{</span><span class="p" data-group-id="2470423010-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_article</span><span class="p" data-group-id="2470423010-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="2470423010-4">(</span><span class="n">changeset</span><span class="p" data-group-id="2470423010-4">)</span><span class="w">
+</span><span class="p" data-group-id="2470423010-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2470423010-6">%</span><span class="nc" data-group-id="2470423010-6">Article</span><span class="p" data-group-id="2470423010-6">{</span><span class="p" data-group-id="2470423010-6">}</span><span class="p" data-group-id="2470423010-5">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
