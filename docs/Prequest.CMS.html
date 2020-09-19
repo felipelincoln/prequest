@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.CMS — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-41c696c589.js"></script>
+    <script src="dist/sidebar_items-ea7d85c3a9.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -72,69 +72,69 @@ Prequest.CMS          <a href="https://github.com/felipelincoln/prequest/blob/ma
 
 
         <section id="moduledoc">
-<p>The <code class="inline">CMS</code> context is the interface between user calls and the <code class="inline">Repo</code>.</p><h1>Use cases</h1><p>We are to create two users, one will post an article and the other will interact with this article.<br></br>Let's start by creating the users using the <a href="Prequest.Accounts.html"><code class="inline">Prequest.Accounts</code></a> context real quick.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="4978331655-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">felipe</span><span class="p" data-group-id="4978331655-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accounts</span><span class="o">.</span><span class="n">create_user</span><span class="w"> </span><span class="p" data-group-id="4978331655-2">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipe&quot;</span><span class="p" data-group-id="4978331655-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="4978331655-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">lincoln</span><span class="p" data-group-id="4978331655-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accounts</span><span class="o">.</span><span class="n">create_user</span><span class="w"> </span><span class="p" data-group-id="4978331655-4">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lincoln&quot;</span><span class="p" data-group-id="4978331655-4">}</span></code></pre><p>Back to our <code class="inline">CMS</code> context. Let's create an article and associate it to <code class="inline">felipe</code></p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="2956805072-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="p" data-group-id="2956805072-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_article</span><span class="w"> </span><span class="p" data-group-id="2956805072-2">%{</span><span class="w">
+<p>The <code class="inline">CMS</code> context is the interface between user calls and the <code class="inline">Repo</code>.</p><h1>Use cases</h1><p>We are to create two users, one will post an article and the other will interact with this article.<br></br>Let's start by creating the users using the <a href="Prequest.Accounts.html"><code class="inline">Prequest.Accounts</code></a> context real quick.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="4862889848-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">felipe</span><span class="p" data-group-id="4862889848-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accounts</span><span class="o">.</span><span class="n">create_user</span><span class="w"> </span><span class="p" data-group-id="4862889848-2">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipe&quot;</span><span class="p" data-group-id="4862889848-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="4862889848-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">lincoln</span><span class="p" data-group-id="4862889848-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accounts</span><span class="o">.</span><span class="n">create_user</span><span class="w"> </span><span class="p" data-group-id="4862889848-4">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lincoln&quot;</span><span class="p" data-group-id="4862889848-4">}</span></code></pre><p>Back to our <code class="inline">CMS</code> context. Let's create an article and associate it to <code class="inline">felipe</code></p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="0049239598-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="p" data-group-id="0049239598-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_article</span><span class="w"> </span><span class="p" data-group-id="0049239598-2">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title&quot;</span><span class="p">,</span><span class="w"> 
 </span><span class="n">...</span><span class="o">&gt;</span><span class="w">   </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some cover&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="n">felipe</span><span class="o">.</span><span class="n">id</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="2956805072-2">}</span></code></pre><p>Now let's make <code class="inline">lincoln</code> read and like this article</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_view</span><span class="w"> </span><span class="p" data-group-id="6978287964-1">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="0049239598-2">}</span></code></pre><p>Now let's make <code class="inline">lincoln</code> read and like this article</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_view</span><span class="w"> </span><span class="p" data-group-id="6009775973-1">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="n">lincoln</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="6978287964-1">}</span></code></pre><p>An annonymous user reads this article and finds a typo, let's report that</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_report</span><span class="w"> </span><span class="p" data-group-id="0557762933-1">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="6009775973-1">}</span></code></pre><p>An annonymous user reads this article and finds a typo, let's report that</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">create_report</span><span class="w"> </span><span class="p" data-group-id="6223908698-1">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;There is some typo&quot;</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="0557762933-1">}</span></code></pre><p>Let's take a look at this article now</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">get_article!</span><span class="p" data-group-id="4802480456-1">(</span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p" data-group-id="4802480456-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="4802480456-2">(</span><span class="p" data-group-id="4802480456-3">[</span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="4802480456-3">]</span><span class="p" data-group-id="4802480456-2">)</span><span class="w">
-</span><span class="p" data-group-id="4802480456-4">%</span><span class="nc" data-group-id="4802480456-4">Prequest.CMS.Article</span><span class="p" data-group-id="4802480456-4">{</span><span class="w">
-  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-5">#</span><span class="nc" data-group-id="4802480456-5">Ecto.Schema.Metadata</span><span class="p" data-group-id="4802480456-5">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="p" data-group-id="4802480456-5">&gt;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="6223908698-1">}</span></code></pre><p>Let's take a look at this article now</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">CMS</span><span class="o">.</span><span class="n">get_article!</span><span class="p" data-group-id="1948839059-1">(</span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p" data-group-id="1948839059-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">preload</span><span class="p" data-group-id="1948839059-2">(</span><span class="p" data-group-id="1948839059-3">[</span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="1948839059-3">]</span><span class="p" data-group-id="1948839059-2">)</span><span class="w">
+</span><span class="p" data-group-id="1948839059-4">%</span><span class="nc" data-group-id="1948839059-4">Prequest.CMS.Article</span><span class="p" data-group-id="1948839059-4">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-5">#</span><span class="nc" data-group-id="1948839059-5">Ecto.Schema.Metadata</span><span class="p" data-group-id="1948839059-5">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="p" data-group-id="1948839059-5">&gt;</span><span class="p">,</span><span class="w">
   </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some cover&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:19:05]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-6">[</span><span class="w">
-    </span><span class="p" data-group-id="4802480456-7">%</span><span class="nc" data-group-id="4802480456-7">Prequest.CMS.Report</span><span class="p" data-group-id="4802480456-7">{</span><span class="w">
-      </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-8">#</span><span class="nc" data-group-id="4802480456-8">Ecto.Schema.Metadata</span><span class="p" data-group-id="4802480456-8">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reports&quot;</span><span class="p" data-group-id="4802480456-8">&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="ss">article</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-9">#</span><span class="nc" data-group-id="4802480456-9">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-9">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:article</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-9">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-6">[</span><span class="w">
+    </span><span class="p" data-group-id="1948839059-7">%</span><span class="nc" data-group-id="1948839059-7">Prequest.CMS.Report</span><span class="p" data-group-id="1948839059-7">{</span><span class="w">
+      </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-8">#</span><span class="nc" data-group-id="1948839059-8">Ecto.Schema.Metadata</span><span class="p" data-group-id="1948839059-8">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reports&quot;</span><span class="p" data-group-id="1948839059-8">&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="ss">article</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-9">#</span><span class="nc" data-group-id="1948839059-9">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-9">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:article</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-9">&gt;</span><span class="p">,</span><span class="w">
       </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:21:59]</span><span class="p">,</span><span class="w">
       </span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;There is some typo&quot;</span><span class="p">,</span><span class="w">
       </span><span class="ss">updated_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:21:59]</span><span class="p">,</span><span class="w">
-      </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-10">#</span><span class="nc" data-group-id="4802480456-10">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-10">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:user</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-10">&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-10">#</span><span class="nc" data-group-id="1948839059-10">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-10">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:user</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-10">&gt;</span><span class="p">,</span><span class="w">
       </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="w">
-    </span><span class="p" data-group-id="4802480456-7">}</span><span class="w">
-  </span><span class="p" data-group-id="4802480456-6">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1948839059-7">}</span><span class="w">
+  </span><span class="p" data-group-id="1948839059-6">]</span><span class="p">,</span><span class="w">
   </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-11">#</span><span class="nc" data-group-id="4802480456-11">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-11">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:topics</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-11">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-11">#</span><span class="nc" data-group-id="1948839059-11">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-11">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:topics</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-11">&gt;</span><span class="p">,</span><span class="w">
   </span><span class="ss">updated_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:19:05]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-12">%</span><span class="nc" data-group-id="4802480456-12">Prequest.Accounts.User</span><span class="p" data-group-id="4802480456-12">{</span><span class="w">
-    </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-13">#</span><span class="nc" data-group-id="4802480456-13">Ecto.Schema.Metadata</span><span class="p" data-group-id="4802480456-13">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p" data-group-id="4802480456-13">&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-14">#</span><span class="nc" data-group-id="4802480456-14">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-14">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:articles</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-14">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-12">%</span><span class="nc" data-group-id="1948839059-12">Prequest.Accounts.User</span><span class="p" data-group-id="1948839059-12">{</span><span class="w">
+    </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-13">#</span><span class="nc" data-group-id="1948839059-13">Ecto.Schema.Metadata</span><span class="p" data-group-id="1948839059-13">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p" data-group-id="1948839059-13">&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-14">#</span><span class="nc" data-group-id="1948839059-14">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-14">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:articles</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-14">&gt;</span><span class="p">,</span><span class="w">
     </span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w">
     </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
     </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:16:44]</span><span class="p">,</span><span class="w">
     </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w">
-    </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-15">#</span><span class="nc" data-group-id="4802480456-15">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-15">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:reports</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-15">&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-15">#</span><span class="nc" data-group-id="1948839059-15">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-15">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:reports</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-15">&gt;</span><span class="p">,</span><span class="w">
     </span><span class="ss">updated_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:16:44]</span><span class="p">,</span><span class="w">
     </span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipe&quot;</span><span class="p">,</span><span class="w">
-    </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-16">#</span><span class="nc" data-group-id="4802480456-16">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-16">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:views</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-16">&gt;</span><span class="w">
-  </span><span class="p" data-group-id="4802480456-12">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-16">#</span><span class="nc" data-group-id="1948839059-16">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-16">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:views</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-16">&gt;</span><span class="w">
+  </span><span class="p" data-group-id="1948839059-12">}</span><span class="p">,</span><span class="w">
   </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-17">[</span><span class="w">
-    </span><span class="p" data-group-id="4802480456-18">%</span><span class="nc" data-group-id="4802480456-18">Prequest.CMS.View</span><span class="p" data-group-id="4802480456-18">{</span><span class="w">
-      </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-19">#</span><span class="nc" data-group-id="4802480456-19">Ecto.Schema.Metadata</span><span class="p" data-group-id="4802480456-19">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="p" data-group-id="4802480456-19">&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="ss">article</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-20">#</span><span class="nc" data-group-id="4802480456-20">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-20">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:article</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-20">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-17">[</span><span class="w">
+    </span><span class="p" data-group-id="1948839059-18">%</span><span class="nc" data-group-id="1948839059-18">Prequest.CMS.View</span><span class="p" data-group-id="1948839059-18">{</span><span class="w">
+      </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-19">#</span><span class="nc" data-group-id="1948839059-19">Ecto.Schema.Metadata</span><span class="p" data-group-id="1948839059-19">&lt;</span><span class="ss">:loaded</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="p" data-group-id="1948839059-19">&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="ss">article</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-20">#</span><span class="nc" data-group-id="1948839059-20">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-20">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:article</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-20">&gt;</span><span class="p">,</span><span class="w">
       </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
       </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:20:43]</span><span class="p">,</span><span class="w">
       </span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
       </span><span class="ss">updated_at</span><span class="p">:</span><span class="w"> </span><span class="ld">~N[2020-09-17 11:20:43]</span><span class="p">,</span><span class="w">
-      </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4802480456-21">#</span><span class="nc" data-group-id="4802480456-21">Ecto.Association.NotLoaded</span><span class="p" data-group-id="4802480456-21">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:user</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="4802480456-21">&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1948839059-21">#</span><span class="nc" data-group-id="1948839059-21">Ecto.Association.NotLoaded</span><span class="p" data-group-id="1948839059-21">&lt;</span><span class="n">association</span><span class="w"> </span><span class="ss">:user</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">loaded</span><span class="p" data-group-id="1948839059-21">&gt;</span><span class="p">,</span><span class="w">
       </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
-    </span><span class="p" data-group-id="4802480456-18">}</span><span class="w">
-  </span><span class="p" data-group-id="4802480456-17">]</span><span class="w">
-</span><span class="p" data-group-id="4802480456-4">}</span></code></pre>        </section>
+    </span><span class="p" data-group-id="1948839059-18">}</span><span class="w">
+  </span><span class="p" data-group-id="1948839059-17">]</span><span class="w">
+</span><span class="p" data-group-id="1948839059-4">}</span></code></pre>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -151,6 +151,21 @@ Prequest.CMS          <a href="https://github.com/felipelincoln/prequest/blob/ma
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#t:article/0">article()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:changeset/0">changeset()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:content/0">content()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:topic/0">topic()</a>
   </div>
 </div>
   </div>
@@ -172,9 +187,21 @@ Prequest.CMS          <a href="https://github.com/felipelincoln/prequest/blob/ma
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#preload_article!/2">preload_article!(article, fields)</a>
+    <a href="#get_topic/1">get_topic(name)</a>
   </div>
-    <div class="summary-synopsis"><p>Preload fields from an article.</p></div>
+    <div class="summary-synopsis"><p>Gets a single topic by its name.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload/1">preload(arg)</a>
+  </div>
+    <div class="summary-synopsis"><p>Preload all fields from a content inside a pipeline.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload!/2">preload!(content, fields)</a>
+  </div>
+    <div class="summary-synopsis"><p>Preload fields from a content.</p></div>
 </div>
   </div>
         </section>
@@ -194,7 +221,7 @@ Types          </h1>
       <span class="sr-only">Link to this type</span>
     </a>
     <h1 class="signature">article()</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L94" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L95" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -221,6 +248,137 @@ Types          </h1>
 
   </section>
 </section>
+<section class="detail" id="t:changeset/0">
+  <div class="detail-header">
+    <a href="#t:changeset/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">changeset()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L97" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>changeset() :: %Ecto.Changeset{
+  action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  constraints: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  empty_values: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  errors: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  filters: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  params: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  prepare: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_opts: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  required: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  valid?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  validations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:content/0">
+  <div class="detail-header">
+    <a href="#t:content/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">content()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L94" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>content() ::
+  %Prequest.CMS.Article{
+    __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    cover: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    reports: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    source: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    title: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    topics: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+    views: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+  }
+  | %Prequest.CMS.Report{
+      __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      article: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      article_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      message: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+    }
+  | %Prequest.CMS.Topic{
+      __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      articles: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+    }
+  | %Prequest.CMS.View{
+      __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      article: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      article_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      liked?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+      user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+    }</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:topic/0">
+  <div class="detail-header">
+    <a href="#t:topic/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">topic()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L96" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>topic() :: %Prequest.CMS.Topic{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  articles: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
           </div>
         </section>
         <section id="functions" class="details-list">
@@ -239,7 +397,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_article(attrs \\ %{})</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L154" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L196" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -255,11 +413,11 @@ Functions          </h1>
   <a href="#create_article/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="2733297657-1">(</span><span class="p" data-group-id="2733297657-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="2733297657-2">}</span><span class="p" data-group-id="2733297657-1">)</span><span class="w">
-</span><span class="p" data-group-id="2733297657-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2733297657-4">%</span><span class="nc" data-group-id="2733297657-4">Article</span><span class="p" data-group-id="2733297657-4">{</span><span class="p" data-group-id="2733297657-4">}</span><span class="p" data-group-id="2733297657-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="8231538429-1">(</span><span class="p" data-group-id="8231538429-2">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="8231538429-2">}</span><span class="p" data-group-id="8231538429-1">)</span><span class="w">
+</span><span class="p" data-group-id="8231538429-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8231538429-4">%</span><span class="nc" data-group-id="8231538429-4">Article</span><span class="p" data-group-id="8231538429-4">{</span><span class="p" data-group-id="8231538429-4">}</span><span class="p" data-group-id="8231538429-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="2733297657-5">(</span><span class="p" data-group-id="2733297657-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="2733297657-6">}</span><span class="p" data-group-id="2733297657-5">)</span><span class="w">
-</span><span class="p" data-group-id="2733297657-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2733297657-8">%</span><span class="nc" data-group-id="2733297657-8">Ecto.Changeset</span><span class="p" data-group-id="2733297657-8">{</span><span class="p" data-group-id="2733297657-8">}</span><span class="p" data-group-id="2733297657-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="8231538429-5">(</span><span class="p" data-group-id="8231538429-6">%{</span><span class="ss">field</span><span class="p">:</span><span class="w"> </span><span class="n">bad_value</span><span class="p" data-group-id="8231538429-6">}</span><span class="p" data-group-id="8231538429-5">)</span><span class="w">
+</span><span class="p" data-group-id="8231538429-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8231538429-8">%</span><span class="nc" data-group-id="8231538429-8">Ecto.Changeset</span><span class="p" data-group-id="8231538429-8">{</span><span class="p" data-group-id="8231538429-8">}</span><span class="p" data-group-id="8231538429-7">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_article!/1">
   <div class="detail-header">
@@ -268,7 +426,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_article!(id)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L116" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L179" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -284,20 +442,20 @@ Functions          </h1>
   <a href="#get_article!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="9141426925-1">(</span><span class="mi">123</span><span class="p" data-group-id="9141426925-1">)</span><span class="w">
-</span><span class="p" data-group-id="9141426925-2">%</span><span class="nc" data-group-id="9141426925-2">Article</span><span class="p" data-group-id="9141426925-2">{</span><span class="p" data-group-id="9141426925-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="7377427145-1">(</span><span class="mi">123</span><span class="p" data-group-id="7377427145-1">)</span><span class="w">
+</span><span class="p" data-group-id="7377427145-2">%</span><span class="nc" data-group-id="7377427145-2">Article</span><span class="p" data-group-id="7377427145-2">{</span><span class="p" data-group-id="7377427145-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="9141426925-3">(</span><span class="mi">456</span><span class="p" data-group-id="9141426925-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="7377427145-3">(</span><span class="mi">456</span><span class="p" data-group-id="7377427145-3">)</span><span class="w">
 </span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
 </section>
-<section class="detail" id="preload_article!/2">
+<section class="detail" id="get_topic/1">
   <div class="detail-header">
-    <a href="#preload_article!/2" class="detail-link" title="Link to this function">
+    <a href="#get_topic/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">preload_article!(article, fields)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L137" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">get_topic(name)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L216" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -306,20 +464,94 @@ Functions          </h1>
   <section class="docstring">
       <h2>Specs</h2>
       <div class="specs">
-          <pre>preload_article!(<a href="#t:article/0">article</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]) :: <a href="#t:article/0">article</a>()</pre>
+          <pre>get_topic(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="#t:topic/0">topic</a>() | nil</pre>
       </div>
 
-<p>Preload fields from an article.</p><p>Raises <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if <code class="inline">fields</code> does not exist in <code class="inline">%Article{}</code>.</p><h2 id="preload_article!/2-examples" class="section-heading">
-  <a href="#preload_article!/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<p>Gets a single topic by its name.</p><h2 id="get_topic/1-examples" class="section-heading">
+  <a href="#get_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">preload_article!</span><span class="p" data-group-id="7031084670-1">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="ss">:topics</span><span class="p" data-group-id="7031084670-1">)</span><span class="w">
-</span><span class="p" data-group-id="7031084670-2">%</span><span class="nc" data-group-id="7031084670-2">Article</span><span class="p" data-group-id="7031084670-2">{</span><span class="p" data-group-id="7031084670-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="3247153340-1">(</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="3247153340-1">)</span><span class="w">
+</span><span class="p" data-group-id="3247153340-2">%</span><span class="nc" data-group-id="3247153340-2">Topic</span><span class="p" data-group-id="3247153340-2">{</span><span class="p" data-group-id="3247153340-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">preload_article!</span><span class="p" data-group-id="7031084670-3">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7031084670-4">[</span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p" data-group-id="7031084670-4">]</span><span class="p" data-group-id="7031084670-3">)</span><span class="w">
-</span><span class="p" data-group-id="7031084670-5">%</span><span class="nc" data-group-id="7031084670-5">Article</span><span class="p" data-group-id="7031084670-5">{</span><span class="p" data-group-id="7031084670-5">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="3247153340-3">(</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="3247153340-3">)</span><span class="w">
+</span><span class="no">nil</span></code></pre>  </section>
+</section>
+<section class="detail" id="preload/1">
+  <div class="detail-header">
+    <a href="#preload/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload(arg)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L148" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">preload_article!</span><span class="p" data-group-id="7031084670-6">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="ss">:field</span><span class="p" data-group-id="7031084670-6">)</span><span class="w">
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preload({:ok, <a href="#t:content/0">content</a>()}) :: {:ok, <a href="#t:content/0">content</a>()}</pre>
+          <pre>preload({:error, <a href="#t:changeset/0">changeset</a>()}) :: {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Preload all fields from a content inside a pipeline.</p><h2 id="preload/1-examples" class="section-heading">
+  <a href="#preload/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="6549198210-1">(</span><span class="p" data-group-id="6549198210-2">%{</span><span class="n">...</span><span class="p" data-group-id="6549198210-2">}</span><span class="p" data-group-id="6549198210-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="6549198210-3">(</span><span class="p" data-group-id="6549198210-3">)</span><span class="w">
+</span><span class="p" data-group-id="6549198210-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6549198210-5">%</span><span class="nc" data-group-id="6549198210-5">Article</span><span class="p" data-group-id="6549198210-5">{</span><span class="p" data-group-id="6549198210-5">}</span><span class="p" data-group-id="6549198210-4">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="6549198210-6">(</span><span class="p" data-group-id="6549198210-6">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="6549198210-7">(</span><span class="p" data-group-id="6549198210-7">)</span><span class="w">
+</span><span class="p" data-group-id="6549198210-8">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6549198210-9">%</span><span class="nc" data-group-id="6549198210-9">Ecto.Changeset</span><span class="p" data-group-id="6549198210-9">{</span><span class="p" data-group-id="6549198210-9">}</span><span class="p" data-group-id="6549198210-8">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="6549198210-10">(</span><span class="p" data-group-id="6549198210-11">%{</span><span class="n">...</span><span class="p" data-group-id="6549198210-11">}</span><span class="p" data-group-id="6549198210-10">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="6549198210-12">(</span><span class="p" data-group-id="6549198210-12">)</span><span class="w">
+</span><span class="p" data-group-id="6549198210-13">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6549198210-14">%</span><span class="nc" data-group-id="6549198210-14">User</span><span class="p" data-group-id="6549198210-14">{</span><span class="p" data-group-id="6549198210-14">}</span><span class="p" data-group-id="6549198210-13">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="preload!/2">
+  <div class="detail-header">
+    <a href="#preload!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload!(content, fields)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms.ex#L128" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preload!(<a href="#t:content/0">content</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]) :: <a href="#t:content/0">content</a>()</pre>
+      </div>
+
+<p>Preload fields from a content.</p><p>Raises <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if <code class="inline">fields</code> does not exist in the content.</p><h2 id="preload!/2-examples" class="section-heading">
+  <a href="#preload!/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-1">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="ss">:articles</span><span class="p" data-group-id="6756813610-1">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-2">%</span><span class="nc" data-group-id="6756813610-2">User</span><span class="p" data-group-id="6756813610-2">{</span><span class="p" data-group-id="6756813610-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-3">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="ss">:user</span><span class="p" data-group-id="6756813610-3">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-4">%</span><span class="nc" data-group-id="6756813610-4">Topic</span><span class="p" data-group-id="6756813610-4">{</span><span class="p" data-group-id="6756813610-4">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-5">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="ss">:article</span><span class="p" data-group-id="6756813610-5">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-6">%</span><span class="nc" data-group-id="6756813610-6">Report</span><span class="p" data-group-id="6756813610-6">{</span><span class="p" data-group-id="6756813610-6">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-7">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="ss">:article</span><span class="p" data-group-id="6756813610-7">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-8">%</span><span class="nc" data-group-id="6756813610-8">View</span><span class="p" data-group-id="6756813610-8">{</span><span class="p" data-group-id="6756813610-8">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-9">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p" data-group-id="6756813610-9">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-10">%</span><span class="nc" data-group-id="6756813610-10">Article</span><span class="p" data-group-id="6756813610-10">{</span><span class="p" data-group-id="6756813610-10">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-11">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6756813610-12">[</span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p" data-group-id="6756813610-12">]</span><span class="p" data-group-id="6756813610-11">)</span><span class="w">
+</span><span class="p" data-group-id="6756813610-13">%</span><span class="nc" data-group-id="6756813610-13">Article</span><span class="p" data-group-id="6756813610-13">{</span><span class="p" data-group-id="6756813610-13">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6756813610-14">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="ss">:field</span><span class="p" data-group-id="6756813610-14">)</span><span class="w">
 </span><span class="gt">** (ArgumentError)</span></code></pre>  </section>
 </section>
           </div>

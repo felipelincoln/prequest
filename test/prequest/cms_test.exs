@@ -3,7 +3,7 @@ defmodule Prequest.CMSTest do
 
   alias Prequest.Accounts
   alias Prequest.CMS
-  alias Prequest.CMS.{Article, Topic}
+  alias Prequest.CMS.Article
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -17,14 +17,14 @@ defmodule Prequest.CMSTest do
       source: "some source",
       title: "some title",
       cover: "some cover",
-      topics: ["topic1", "topic2", "topic3"]
+      topics: ["topic1", "topic2"]
     }
 
     @update_attrs %{
       source: "some updated source",
       title: "some updated title",
       cover: "some updated cover",
-      topics: ["topic1.1", "topic2"]
+      topics: ["topic2", "topic3"]
     }
     @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil}
 
@@ -39,35 +39,61 @@ defmodule Prequest.CMSTest do
 
     test "get_article!/1 returns the article with given id", %{user: user} do
       article = article_fixture(%{user_id: user.id})
-      assert CMS.get_article!(article.id) |> CMS.preload_article!(:topics) == article
+      assert CMS.get_article!(article.id) |> CMS.preload!(:topics) == article
     end
 
-    test "preload_article!/2 returns the article with preloaded field", %{user: user} do
-      article = article_fixture(%{user_id: user.id})
-      fields = [:user, :reports, :views, :topics]
-
-      assert (%Article{} = preloaded_article) = CMS.preload_article!(article, fields)
-      assert preloaded_article.user == user
-      assert preloaded_article.reports == []
-      assert preloaded_article.views == []
-      refute preloaded_article.topics == []
-    end
+    #    test "preload!/2 returns the article with preloaded field", %{user: user} do
+    #      article = article_fixture(%{user_id: user.id})
+    #      fields = [:reports, :topics, :user, :views]
+    #
+    #      assert (%Article{} = preloaded_article) = CMS.preload!(article, fields)
+    #      assert preloaded_article.user == user
+    #      assert preloaded_article.reports == []
+    #      assert preloaded_article.views == []
+    #      refute preloaded_article.topics == []
+    #    end
 
     test "create_article/1 with valid data creates an article", %{user: user} do
       assert {:ok, %Article{} = article} =
                %{user_id: user.id}
                |> Enum.into(@valid_attrs)
                |> CMS.create_article()
+               |> CMS.preload()
 
       assert article.source == @valid_attrs.source
       assert article.title == @valid_attrs.title
       assert article.cover == @valid_attrs.cover
       assert article.user_id == user.id
-      refute CMS.preload_article!(article, :topics).topics == []
+      refute article.topics == []
     end
 
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
     end
+
+    #    test "update_article/2 with valid data updates the article", %{user: user} do
+    #      assert {:ok, %Article{} = updated_article} =
+    #               article_fixture(%{user_id: user.id})
+    #               |> CMS.update_article(@update_attrs)
+    #               |> CMS.preload()
+    #
+    #      assert updated_article.source == @update_attrs.source
+    #      assert updated_article.title == @update_attrs.title
+    #      assert updated_article.cover == @update_attrs.cover
+    #      assert updated_article.user_id == user.id
+    #
+    #      assert MapSet.new(@update_attrs.topics) ==
+    #               updated_article.topics
+    #               |> Enum.map(fn topic -> topic.name end)
+    #               |> MapSet.new()
+    #
+    #      removed_topic =
+    #        (@valid_attrs.topics -- @update_attrs.topics)
+    #        |> hd
+    #        |> CMS.get_topic()
+    #        |> CMS.preload!(:articles)
+    #
+    #      assert removed_topic.articles == []
+    #    end
   end
 end

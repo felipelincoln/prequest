@@ -88,10 +88,73 @@ defmodule Prequest.CMS do
   """
 
   import Ecto.Query, warn: false
-  alias Prequest.CMS.Article
   alias Prequest.Repo
+  alias Prequest.CMS.{Article, Report, Topic, View}
 
+  @type content :: %Article{} | %Report{} | %Topic{} | %View{}
   @type article :: %Article{}
+  @type topic :: %Topic{}
+  @type changeset :: %Ecto.Changeset{}
+
+  @doc """
+  Preload fields from a content.
+
+  Raises `ArgumentError` if `fields` does not exist in the content.
+
+  ## Examples
+
+      iex> preload!(user, :articles)
+      %User{}
+
+      iex> preload!(topic, :user)
+      %Topic{}
+
+      iex> preload!(report, :article)
+      %Report{}
+
+      iex> preload!(view, :article)
+      %View{}
+
+      iex> preload!(article, :reports)
+      %Article{}
+
+      iex> preload!(article, [:views, :reports])
+      %Article{}
+
+      iex> preload!(article, :field)
+      ** (ArgumentError)
+  """
+  @spec preload!(content, atom | [atom]) :: content
+  def preload!(content, fields) do
+    Repo.preload(content, fields)
+  end
+
+  @doc """
+  Preload all fields from a content inside a pipeline.
+
+  ## Examples
+
+      iex> create_article(%{...}) |> preload()
+      {:ok, %Article{}}
+
+      iex> create_topic() |> preload()
+      {:error, %Ecto.Changeset{}}
+
+      iex> update_user(%{...}) |> preload()
+      {:ok, %User{}}
+  """
+  @spec preload({:ok, content}) :: {:ok, content}
+  @spec preload({:error, changeset}) :: {:error, changeset}
+  def preload({:ok, content}) do
+    assoc = content.__struct__.__schema__(:associations)
+    {:ok, preload!(content, assoc)}
+  end
+
+  def preload({:error, changeset}), do: {:error, changeset}
+
+  #
+  # articles
+  #
 
   @doc false
   def list_articles do
@@ -118,27 +181,6 @@ defmodule Prequest.CMS do
   end
 
   @doc """
-  Preload fields from an article.
-
-  Raises `ArgumentError` if `fields` does not exist in `%Article{}`.
-
-  ## Examples
-
-      iex> preload_article!(article, :topics)
-      %Article{}
-
-      iex> preload_article!(article, [:views, :reports])
-      %Article{}
-
-      iex> preload_article!(article, :field)
-      ** (ArgumentError)
-  """
-  @spec preload_article!(article, atom | [atom]) :: article
-  def preload_article!(%Article{} = article, fields) do
-    Repo.preload(article, fields)
-  end
-
-  @doc """
   Creates an article.
 
   ## Examples
@@ -158,7 +200,22 @@ defmodule Prequest.CMS do
     |> Repo.insert()
   end
 
-  alias Prequest.CMS.Topic
+  @doc """
+  Gets a single topic by its name.
+
+  ## Examples
+
+      iex> get_topic(name: "elixir")
+      %Topic{}
+
+      iex> get_topic(name: "")
+      nil
+
+  """
+  @spec get_topic(String.t()) :: topic | nil
+  def get_topic(name) do
+    Repo.get_by(Topic, name: name)
+  end
 
   # Retrieve a topic struct from database if it exists, or a map otherwise.
   defp build_topics(%{topics: names} = _attrs) do
