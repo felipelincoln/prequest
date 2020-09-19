@@ -226,16 +226,30 @@ defmodule Prequest.CMS do
   @doc """
   Creates an article.
 
+  It inserts into the database a `Prequest.CMS.Article` struct with data populated through its changeset.
+
   ## Examples
 
-      iex> create_article(%{field: value})
+      iex> create_article(%{
+      ...>   title: "some title",
+      ...>   source: "some github url",
+      ...>   cover: "some image url",
+      ...>   user_id: 10,
+      ...>   topics: ["elixir", "phoenix"]
+      ...> }
       {:ok, %Article{}}
 
-      iex> create_article(%{field: bad_value})
+      iex> create_article(%{})
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_article(map) :: {:ok, article} | {:error, changeset}
+  @spec create_article(%{
+          title: String.t(),
+          source: String.t(),
+          cover: String.t(),
+          user_id: integer,
+          topics: [String.t()] | nil
+        }) :: {:ok, article} | {:error, changeset}
   def create_article(attrs \\ %{}) do
     %Article{}
     |> Article.changeset(attrs)
