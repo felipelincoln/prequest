@@ -26,7 +26,7 @@ defmodule Prequest.CMSTest do
       cover: "some updated cover",
       topics: ["topic2", "topic3"]
     }
-    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil}
+    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [""]}
 
     def article_fixture(%{user_id: _} = attrs) do
       {:ok, article} =
@@ -83,6 +83,23 @@ defmodule Prequest.CMSTest do
         |> CMS.preload!(:articles)
 
       assert removed_topic.articles == []
+    end
+
+    test "update_article/2 with invalid data returns error changeset", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+
+      assert {:error, %Ecto.Changeset{}} =
+               article
+               |> CMS.update_article(@invalid_attrs)
+               |> CMS.preload()
+
+      assert article == CMS.get_article!(article.id) |> CMS.preload!(:topics)
+    end
+
+    test "delete_article/1 deletes the article", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      assert {:ok, %Article{}} = CMS.delete_article(article)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
     end
   end
 end

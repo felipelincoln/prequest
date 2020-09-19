@@ -220,6 +220,21 @@ defmodule Prequest.CMS do
     |> Repo.update()
   end
 
+  @doc """
+  Deletes an article.
+
+  ## Examples
+
+      iex> delete_article(article)
+      {:ok, %Article{}}
+      iex> delete_article(article)
+      {:error, %Ecto.Changeset{}}
+  """
+  @spec delete_article(article) :: {:ok, article} | {:error, changeset}
+  def delete_article(%Article{} = article) do
+    Repo.delete(article)
+  end
+
   #
   # topic
   #
