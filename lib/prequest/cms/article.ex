@@ -30,7 +30,7 @@ defmodule Prequest.CMS.Article do
     belongs_to :user, Accounts.User
     has_many :reports, Report
     has_many :views, View
-    many_to_many :topics, Topic, join_through: "articles_topics"
+    many_to_many :topics, Topic, join_through: "articles_topics", on_replace: :delete
   end
 
   @doc """

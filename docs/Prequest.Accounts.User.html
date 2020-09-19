@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.Accounts.User — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-ea7d85c3a9.js"></script>
+    <script src="dist/sidebar_items-a8674b92e5.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-0103364119015b97e56c.js"></script>
   </head>
@@ -72,17 +72,17 @@ Prequest.Accounts.User          <a href="https://github.com/felipelincoln/preque
 
 
         <section id="moduledoc">
-<p><code class="inline">User</code> is the schema in the <code class="inline">Accounts</code> context that model the users.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="1415579946-1">do</span><span class="w">
+<p><code class="inline">User</code> is the schema in the <code class="inline">Accounts</code> context that model the users.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="0179632320-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:bio</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:username</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="1415579946-2">(</span><span class="p" data-group-id="1415579946-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="0179632320-2">(</span><span class="p" data-group-id="0179632320-2">)</span><span class="w">
 
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Article</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.View</span><span class="w">
-</span><span class="k" data-group-id="1415579946-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="0179632320-1">end</span></code></pre>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -136,10 +136,10 @@ Functions          </h1>
   <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<p>New user:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1081867216-1">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="1081867216-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="1081867216-2">(</span><span class="p" data-group-id="1081867216-3">%</span><span class="nc" data-group-id="1081867216-3">User</span><span class="p" data-group-id="1081867216-3">{</span><span class="p" data-group-id="1081867216-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_user</span><span class="p" data-group-id="1081867216-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="1081867216-4">(</span><span class="n">changeset</span><span class="p" data-group-id="1081867216-4">)</span><span class="w">
-</span><span class="p" data-group-id="1081867216-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1081867216-6">%</span><span class="nc" data-group-id="1081867216-6">User</span><span class="p" data-group-id="1081867216-6">{</span><span class="p" data-group-id="1081867216-6">}</span><span class="p" data-group-id="1081867216-5">}</span></code></pre>  </section>
+<p>New user:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="7318740347-1">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="7318740347-1">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="7318740347-2">(</span><span class="p" data-group-id="7318740347-3">%</span><span class="nc" data-group-id="7318740347-3">User</span><span class="p" data-group-id="7318740347-3">{</span><span class="p" data-group-id="7318740347-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_user</span><span class="p" data-group-id="7318740347-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="7318740347-4">(</span><span class="n">changeset</span><span class="p" data-group-id="7318740347-4">)</span><span class="w">
+</span><span class="p" data-group-id="7318740347-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7318740347-6">%</span><span class="nc" data-group-id="7318740347-6">User</span><span class="p" data-group-id="7318740347-6">{</span><span class="p" data-group-id="7318740347-6">}</span><span class="p" data-group-id="7318740347-5">}</span></code></pre>  </section>
 </section>
           </div>
         </section>

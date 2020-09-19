@@ -42,17 +42,6 @@ defmodule Prequest.CMSTest do
       assert CMS.get_article!(article.id) |> CMS.preload!(:topics) == article
     end
 
-    #    test "preload!/2 returns the article with preloaded field", %{user: user} do
-    #      article = article_fixture(%{user_id: user.id})
-    #      fields = [:reports, :topics, :user, :views]
-    #
-    #      assert (%Article{} = preloaded_article) = CMS.preload!(article, fields)
-    #      assert preloaded_article.user == user
-    #      assert preloaded_article.reports == []
-    #      assert preloaded_article.views == []
-    #      refute preloaded_article.topics == []
-    #    end
-
     test "create_article/1 with valid data creates an article", %{user: user} do
       assert {:ok, %Article{} = article} =
                %{user_id: user.id}
@@ -71,29 +60,29 @@ defmodule Prequest.CMSTest do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
     end
 
-    #    test "update_article/2 with valid data updates the article", %{user: user} do
-    #      assert {:ok, %Article{} = updated_article} =
-    #               article_fixture(%{user_id: user.id})
-    #               |> CMS.update_article(@update_attrs)
-    #               |> CMS.preload()
-    #
-    #      assert updated_article.source == @update_attrs.source
-    #      assert updated_article.title == @update_attrs.title
-    #      assert updated_article.cover == @update_attrs.cover
-    #      assert updated_article.user_id == user.id
-    #
-    #      assert MapSet.new(@update_attrs.topics) ==
-    #               updated_article.topics
-    #               |> Enum.map(fn topic -> topic.name end)
-    #               |> MapSet.new()
-    #
-    #      removed_topic =
-    #        (@valid_attrs.topics -- @update_attrs.topics)
-    #        |> hd
-    #        |> CMS.get_topic()
-    #        |> CMS.preload!(:articles)
-    #
-    #      assert removed_topic.articles == []
-    #    end
+    test "update_article/2 with valid data updates the article", %{user: user} do
+      assert {:ok, %Article{} = updated_article} =
+               article_fixture(%{user_id: user.id})
+               |> CMS.update_article(@update_attrs)
+               |> CMS.preload()
+
+      assert updated_article.source == @update_attrs.source
+      assert updated_article.title == @update_attrs.title
+      assert updated_article.cover == @update_attrs.cover
+      assert updated_article.user_id == user.id
+
+      assert MapSet.new(@update_attrs.topics) ==
+               updated_article.topics
+               |> Enum.map(fn topic -> topic.name end)
+               |> MapSet.new()
+
+      removed_topic =
+        (@valid_attrs.topics -- @update_attrs.topics)
+        |> hd
+        |> CMS.get_topic()
+        |> CMS.preload!(:articles)
+
+      assert removed_topic.articles == []
+    end
   end
 end

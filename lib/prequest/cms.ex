@@ -192,13 +192,37 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_article(map) :: {:ok, article}
+  @spec create_article(map) :: {:ok, article} | {:error, changeset}
   def create_article(attrs \\ %{}) do
     %Article{}
     |> Article.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:topics, build_topics(attrs))
     |> Repo.insert()
   end
+
+  @doc """
+  Updates an article.
+
+  ## Examples
+
+      iex> update_article(article, %{field: value})
+      {:ok, %Article{}}
+
+      iex> update_article(article, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @spec update_article(article, map) :: {:ok, article} | {:error, changeset}
+  def update_article(%Article{} = article, attrs) do
+    article
+    |> Article.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:topics, build_topics(attrs))
+    |> Repo.update()
+  end
+
+  #
+  # topic
+  #
 
   @doc """
   Gets a single topic by its name.
