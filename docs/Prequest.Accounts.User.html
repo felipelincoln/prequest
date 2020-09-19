@@ -72,17 +72,17 @@ Prequest.Accounts.User          <a href="https://github.com/felipelincoln/preque
 
 
         <section id="moduledoc">
-<p><code class="inline">User</code> is the schema in the <code class="inline">Accounts</code> context that model the users.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="4113401559-1">do</span><span class="w">
+<p>The schema that models the user.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="0672608175-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:bio</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:username</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="4113401559-2">(</span><span class="p" data-group-id="4113401559-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="0672608175-2">(</span><span class="p" data-group-id="0672608175-2">)</span><span class="w">
 
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Article</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.View</span><span class="w">
-</span><span class="k" data-group-id="4113401559-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="0672608175-1">end</span></code></pre><p>Users are the one that create content to the platform.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -120,7 +120,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">changeset(user, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/accounts/user.ex#L50" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/accounts/user.ex#L46" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -132,14 +132,7 @@ Functions          </h1>
   <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Validation
 </h2>
-<p>Required: <code class="inline">username</code>.<br></br>Unique: <code class="inline">username</code>.</p><h2 id="changeset/2-examples" class="section-heading">
-  <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<p>New user:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0813384525-1">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="0813384525-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">User</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="0813384525-2">(</span><span class="p" data-group-id="0813384525-3">%</span><span class="nc" data-group-id="0813384525-3">User</span><span class="p" data-group-id="0813384525-3">{</span><span class="p" data-group-id="0813384525-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_user</span><span class="p" data-group-id="0813384525-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="0813384525-4">(</span><span class="n">changeset</span><span class="p" data-group-id="0813384525-4">)</span><span class="w">
-</span><span class="p" data-group-id="0813384525-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0813384525-6">%</span><span class="nc" data-group-id="0813384525-6">User</span><span class="p" data-group-id="0813384525-6">{</span><span class="p" data-group-id="0813384525-6">}</span><span class="p" data-group-id="0813384525-5">}</span></code></pre>  </section>
+<ul><li>Required: <code class="inline">username</code>.  </li><li>Unique: <code class="inline">username</code>.</li></ul>  </section>
 </section>
           </div>
         </section>

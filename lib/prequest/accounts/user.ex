@@ -1,6 +1,6 @@
 defmodule Prequest.Accounts.User do
   @moduledoc """
-  `User` is the schema in the `Accounts` context that model the users.  
+  The schema that models the user.
 
       schema "users" do
         field :bio, :string
@@ -13,6 +13,9 @@ defmodule Prequest.Accounts.User do
         has_many :reports, CMS.Report
         has_many :views, CMS.View
       end
+
+  Users are the one that create content to the platform.
+
   """
 
   use Ecto.Schema
@@ -36,15 +39,8 @@ defmodule Prequest.Accounts.User do
   User's changeset.
 
   ## Validation
-  Required: `username`.  
-  Unique: `username`.
-
-  ## Examples
-  New user:
-      iex> new_user = %{username: "felipelincoln"}
-      iex> changeset = User.changeset(%User{}, new_user)
-      iex> Repo.insert(changeset)
-      {:ok, %User{}}
+  * Required: `username`.  
+  * Unique: `username`.
 
   """
   def changeset(%User{} = user, attrs) do

@@ -1,6 +1,6 @@
 defmodule Prequest.CMS.Report do
   @moduledoc """
-  `Report` is the schema in the `CMS` context that model the reports.  
+  The schema that models the report.
 
       schema "reports" do
         field :message, :string
@@ -10,6 +10,11 @@ defmodule Prequest.CMS.Report do
         belongs_to :user, Accounts.User
         belongs_to :article, Article
       end
+
+  Report is a type of interaction one can make with an article, whether a registered user or not.
+  This should point out problems in the article's content. Once spotted, it is easier for
+  other (or even the author) to find it in order to fix it.
+
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -29,17 +34,8 @@ defmodule Prequest.CMS.Report do
   Report's changeset
 
   ## Validation
-  Required: `article_id`
+  * Required: `article_id`.
 
-  ## Examples
-  New report:
-      iex> new_report = %{
-      ...>   message: "I found a typo here",
-      ...>   article_id: 1
-      ...> }
-      iex> changeset = Report.changeset(%Report{}, new_report)
-      iex> Repo.insert(changeset)
-      {:ok, %Report{}}
   """
   def changeset(%Report{} = report, attrs) do
     report

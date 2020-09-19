@@ -1,6 +1,6 @@
 defmodule Prequest.CMS.Topic do
   @moduledoc """
-  `Topic` is the schema in the `CMS` context that model the topics.  
+  The schema that models the topic.
 
       schema "topics" do
         field :name, :string
@@ -9,6 +9,9 @@ defmodule Prequest.CMS.Topic do
 
         many_to_many :articles, Article, join_through: "articles_topics"
       end
+
+  Topic is a category in which an article can be inserted.
+
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -26,15 +29,8 @@ defmodule Prequest.CMS.Topic do
   Topic's changeset.
 
   ## Validation
-  Required: `name`.  
-  Unique: `name`.
-
-  ## Examples
-  New topic:
-      iex> new_topic = %{name: "elixir"}
-      iex> changeset = Topic.changeset(%Topic{}, new_topic)
-      iex> Repo.insert(changeset)
-      {:ok, %Topic{}}
+  * Required: `name`.  
+  * Unique: `name`.
 
   """
   def changeset(%Topic{} = topic, attrs) do

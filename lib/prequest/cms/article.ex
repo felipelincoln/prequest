@@ -1,6 +1,6 @@
 defmodule Prequest.CMS.Article do
   @moduledoc """
-  `Article` is the schema in the `CMS` context that model the articles.  
+  The schema that models the article.
 
       schema "articles" do
         field :cover, :string
@@ -12,8 +12,11 @@ defmodule Prequest.CMS.Article do
         belongs_to :user, Accounts.User
         has_many :reports, Report
         has_many :views, View
-        many_to_many :topics, Topic, join_through: "articles_topics"
+        many_to_many :topics, Topic, join_through: "articles_topics", on_replace: :delete
       end
+
+  Article is a content created by a user. 
+
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -37,21 +40,9 @@ defmodule Prequest.CMS.Article do
   Article's changeset.
 
   ## Validation
-  Required: `:title`, `:cover`, `:source` and `user_id`.  
-  Unique: `:source`.  
+  * Required: `:title`, `:cover`, `:source` and `user_id`.  
+  * Unique: `:source`.  
 
-  ## Examples
-  New article:
-
-      iex> new_article = %{
-      ...>   title: "Another title",
-      ...>   source: "some_github_url",
-      ...>   cover: "some_img_url",
-      ...>   user_id: 1
-      ...> }
-      iex> changeset = Article.changeset(%Article{}, new_article)
-      iex> Repo.insert(changeset)
-      {:ok, %Article{}}
   """
   def changeset(%Article{} = article, attrs) do
     article

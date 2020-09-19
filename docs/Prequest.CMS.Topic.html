@@ -72,13 +72,13 @@ Prequest.CMS.Topic          <a href="https://github.com/felipelincoln/prequest/b
 
 
         <section id="moduledoc">
-<p><code class="inline">Topic</code> is the schema in the <code class="inline">CMS</code> context that model the topics.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;topics&quot;</span><span class="w"> </span><span class="k" data-group-id="1741050554-1">do</span><span class="w">
+<p>The schema that models the topic.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;topics&quot;</span><span class="w"> </span><span class="k" data-group-id="8899942377-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="1741050554-2">(</span><span class="p" data-group-id="1741050554-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="8899942377-2">(</span><span class="p" data-group-id="8899942377-2">)</span><span class="w">
 
   </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="w">
-</span><span class="k" data-group-id="1741050554-1">end</span></code></pre>        </section>
+</span><span class="k" data-group-id="8899942377-1">end</span></code></pre><p>Topic is a category in which an article can be inserted.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -116,7 +116,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">changeset(topic, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L36" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -128,14 +128,7 @@ Functions          </h1>
   <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Validation
 </h2>
-<p>Required: <code class="inline">name</code>.<br></br>Unique: <code class="inline">name</code>.</p><h2 id="changeset/2-examples" class="section-heading">
-  <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<p>New topic:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5727708161-1">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="5727708161-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Topic</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="5727708161-2">(</span><span class="p" data-group-id="5727708161-3">%</span><span class="nc" data-group-id="5727708161-3">Topic</span><span class="p" data-group-id="5727708161-3">{</span><span class="p" data-group-id="5727708161-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_topic</span><span class="p" data-group-id="5727708161-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="5727708161-4">(</span><span class="n">changeset</span><span class="p" data-group-id="5727708161-4">)</span><span class="w">
-</span><span class="p" data-group-id="5727708161-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5727708161-6">%</span><span class="nc" data-group-id="5727708161-6">Topic</span><span class="p" data-group-id="5727708161-6">{</span><span class="p" data-group-id="5727708161-6">}</span><span class="p" data-group-id="5727708161-5">}</span></code></pre>  </section>
+<ul><li>Required: <code class="inline">name</code>.  </li><li>Unique: <code class="inline">name</code>.</li></ul>  </section>
 </section>
           </div>
         </section>

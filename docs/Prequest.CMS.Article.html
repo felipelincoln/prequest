@@ -72,18 +72,18 @@ Prequest.CMS.Article          <a href="https://github.com/felipelincoln/prequest
 
 
         <section id="moduledoc">
-<p><code class="inline">Article</code> is the schema in the <code class="inline">CMS</code> context that model the articles.  </p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="3757571781-1">do</span><span class="w">
+<p>The schema that models the article.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="7475819477-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:cover</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:source</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="3757571781-2">(</span><span class="p" data-group-id="3757571781-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="7475819477-2">(</span><span class="p" data-group-id="7475819477-2">)</span><span class="w">
 
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">Accounts.User</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">View</span><span class="w">
-  </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="nc">Topic</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="w">
-</span><span class="k" data-group-id="3757571781-1">end</span></code></pre>        </section>
+  </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="nc">Topic</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on_replace</span><span class="p">:</span><span class="w"> </span><span class="ss">:delete</span><span class="w">
+</span><span class="k" data-group-id="7475819477-1">end</span></code></pre><p>Article is a content created by a user. </p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -121,7 +121,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">changeset(article, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L47" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -133,19 +133,7 @@ Functions          </h1>
   <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Validation
 </h2>
-<p>Required: <code class="inline">:title</code>, <code class="inline">:cover</code>, <code class="inline">:source</code> and <code class="inline">user_id</code>.<br></br>Unique: <code class="inline">:source</code>.  </p><h2 id="changeset/2-examples" class="section-heading">
-  <a href="#changeset/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<p>New article:</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">new_article</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1584621063-1">%{</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Another title&quot;</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some_github_url&quot;</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some_img_url&quot;</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1584621063-1">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">changeset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Article</span><span class="o">.</span><span class="n">changeset</span><span class="p" data-group-id="1584621063-2">(</span><span class="p" data-group-id="1584621063-3">%</span><span class="nc" data-group-id="1584621063-3">Article</span><span class="p" data-group-id="1584621063-3">{</span><span class="p" data-group-id="1584621063-3">}</span><span class="p">,</span><span class="w"> </span><span class="n">new_article</span><span class="p" data-group-id="1584621063-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Repo</span><span class="o">.</span><span class="n">insert</span><span class="p" data-group-id="1584621063-4">(</span><span class="n">changeset</span><span class="p" data-group-id="1584621063-4">)</span><span class="w">
-</span><span class="p" data-group-id="1584621063-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1584621063-6">%</span><span class="nc" data-group-id="1584621063-6">Article</span><span class="p" data-group-id="1584621063-6">{</span><span class="p" data-group-id="1584621063-6">}</span><span class="p" data-group-id="1584621063-5">}</span></code></pre>  </section>
+<ul><li>Required: <code class="inline">:title</code>, <code class="inline">:cover</code>, <code class="inline">:source</code> and <code class="inline">user_id</code>.  </li><li>Unique: <code class="inline">:source</code>.  </li></ul>  </section>
 </section>
           </div>
         </section>

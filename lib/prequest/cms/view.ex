@@ -1,6 +1,6 @@
 defmodule Prequest.CMS.View do
   @moduledoc """
-  `View` is the schema in the `CMS` context that model the views.  
+  The schema that models the view.
 
       schema "view" do
         field :liked?, :boolean, default: false
@@ -10,6 +10,9 @@ defmodule Prequest.CMS.View do
         belongs_to :user, Accounts.User
         belongs_to :article, Article
       end
+
+  View is the interaction between a user and an article. It shows when the article
+  was viewed and liked by the user.
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -26,19 +29,11 @@ defmodule Prequest.CMS.View do
   end
 
   @doc """
-  ## Validation
-  Required: `article_id`, `user_id`
+  View's changeset.
 
-  ## Examples
-  New view:
-      iex> new_view = %{
-      ...>   liked?: true,
-      ...>   article_id: 1
-      ...>   user_id: 1
-      ...> }
-      iex> changeset = View.changeset(%View{}, new_view)
-      iex> Repo.insert(changeset)
-      {:ok, %View{}}
+  ## Validation
+  * Required: `article_id`, `user_id`.
+
   """
   def changeset(%View{} = view, attrs) do
     view
