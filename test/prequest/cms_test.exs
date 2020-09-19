@@ -3,7 +3,7 @@ defmodule Prequest.CMSTest do
 
   alias Prequest.Accounts
   alias Prequest.CMS
-  alias Prequest.CMS.Article
+  alias Prequest.CMS.{Article, Topic}
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -54,10 +54,18 @@ defmodule Prequest.CMSTest do
       assert article.cover == @valid_attrs.cover
       assert article.user_id == user.id
       refute article.topics == []
+
+      for name <- @valid_attrs.topics do
+        assert %Topic{} = CMS.get_topic(name)
+      end
     end
 
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
+
+      for name <- @invalid_attrs.topics do
+        assert CMS.get_topic(name) == nil
+      end
     end
 
     test "update_article/2 with valid data updates the article", %{user: user} do
@@ -75,6 +83,10 @@ defmodule Prequest.CMSTest do
                updated_article.topics
                |> Enum.map(fn topic -> topic.name end)
                |> MapSet.new()
+
+      for name <- @valid_attrs.topics ++ @update_attrs.topics do
+        assert %Topic{} = CMS.get_topic(name)
+      end
 
       removed_topic =
         (@valid_attrs.topics -- @update_attrs.topics)
@@ -94,12 +106,20 @@ defmodule Prequest.CMSTest do
                |> CMS.preload()
 
       assert article == CMS.get_article!(article.id) |> CMS.preload!(:topics)
+
+      for name <- @invalid_attrs.topics do
+        assert CMS.get_topic(name) == nil
+      end
     end
 
     test "delete_article/1 deletes the article", %{user: user} do
       article = article_fixture(%{user_id: user.id})
       assert {:ok, %Article{}} = CMS.delete_article(article)
       assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
+
+      for name <- @valid_attrs.topics do
+        assert %Topic{} = CMS.get_topic(name)
+      end
     end
   end
 end
