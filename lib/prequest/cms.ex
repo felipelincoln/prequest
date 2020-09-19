@@ -88,9 +88,10 @@ defmodule Prequest.CMS do
   """
 
   import Ecto.Query, warn: false
+  alias Prequest.CMS.Article
   alias Prequest.Repo
 
-  alias Prequest.CMS.Article
+  @type article :: %Article{}
 
   @doc false
   def list_articles do
@@ -111,6 +112,7 @@ defmodule Prequest.CMS do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_article!(integer) :: article
   def get_article!(id) do
     Repo.get!(Article, id)
   end
@@ -131,6 +133,7 @@ defmodule Prequest.CMS do
       iex> preload_article!(article, :field)
       ** (ArgumentError)
   """
+  @spec preload_article!(article, atom | [atom]) :: article
   def preload_article!(%Article{} = article, fields) do
     Repo.preload(article, fields)
   end
@@ -147,6 +150,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_article(map) :: {:ok, article}
   def create_article(attrs \\ %{}) do
     %Article{}
     |> Article.changeset(attrs)
