@@ -199,11 +199,6 @@ defmodule Prequest.CMS do
   # articles
   #
 
-  @doc false
-  def list_articles do
-    Repo.all(Article)
-  end
-
   @doc """
   Gets a single article.
 
@@ -250,7 +245,7 @@ defmodule Prequest.CMS do
           user_id: integer,
           topics: [%{name: String.t()} | topic] | nil
         }) :: {:ok, article} | {:error, changeset}
-  def create_article(attrs \\ %{}) do
+  def create_article(attrs) do
     %Article{}
     |> Article.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:topics, build_topics(attrs))
@@ -317,6 +312,7 @@ defmodule Prequest.CMS do
 
   # Retrieve a topic struct from database if it exists, or a map otherwise.
   defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
+  defp build_topics(_), do: []
 
   defp build_topic(%{name: name}) do
     case Repo.get_by(Topic, name: name) do
