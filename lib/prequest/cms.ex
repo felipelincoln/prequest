@@ -416,4 +416,46 @@ defmodule Prequest.CMS do
   def delete_topic(%Topic{} = topic) do
     Repo.delete(topic)
   end
+
+  #
+  # report
+  #
+
+  @doc """
+  Gets a single report.
+
+  Raises `Ecto.NoResultsError` if the Report does not exist.
+
+  ## Examples
+
+      iex> get_report!(123)
+      %Report{}
+
+      iex> get_report!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  @spec get_report!(integer) :: report
+  def get_report!(id) do
+    Repo.get!(Report, id)
+  end
+
+  @doc """
+  Creates a report.
+
+  ## Examples
+
+      iex> create_report(%{user_id: user.id, article_id: article.id})
+      {:ok, %Report{}}
+
+      iex> create_report(%{})
+      {:error, %Ecto.Changeset{}}
+  """
+  @spec create_report(%{user_id: integer, article_id: integer}) ::
+          {:ok, report} | {:error, changeset}
+  def create_report(attrs) do
+    %Report{}
+    |> Report.changeset(attrs)
+    |> Repo.insert()
+  end
 end

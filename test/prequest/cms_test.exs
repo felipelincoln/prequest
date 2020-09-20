@@ -7,9 +7,16 @@ defmodule Prequest.CMSTest do
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
-    on_exit(fn -> Accounts.delete_user(user) end)
 
-    %{user: user}
+    {:ok, article} =
+      %{title: "title", cover: "cover image", source: "github url", user_id: user.id}
+      |> CMS.create_article()
+
+    on_exit(fn ->
+      Accounts.delete_user(user)
+    end)
+
+    %{user: user, article: article}
   end
 
   describe "articles" do
@@ -154,6 +161,19 @@ defmodule Prequest.CMSTest do
       topic = topic_fixture()
       assert {:ok, %Topic{}} = CMS.delete_topic(topic)
       assert nil == CMS.get_topic(topic.name)
+    end
+  end
+
+  describe "reports" do
+    def report_fixture(%{user_id: _, article_id: _} = attrs) do
+      {:ok, report} = CMS.create_report(attrs)
+
+      report
+    end
+
+    test "get_report!/1 returns the report with given id", %{user: user, article: article} do
+      report = report_fixture(%{user_id: user.id, article_id: article.id})
+      assert CMS.get_report!(report.id) == report
     end
   end
 end
