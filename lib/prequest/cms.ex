@@ -265,18 +265,53 @@ defmodule Prequest.CMS do
 
   ## Examples
 
-      iex> update_article(article, %{field: value})
+      iex> update_article(article, %{title: "updated title"})
       {:ok, %Article{}}
 
-      iex> update_article(article, %{field: bad_value})
+      iex> update_article(article, %{source: nil})
       {:error, %Ecto.Changeset{}}
+
+  When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
+  be replaced.
+
+      iex> article |> CMS.preload!(:topics)
+      %Article{
+        topics: [
+          %Topic{name: "elixir"},
+          %Topic{name: "ecto"}
+        ],
+        ...
+      }
+      iex> {:ok, article} = update_article(article, %{topics: [%{name: "phoenix"}]})
+      {:ok,
+        %Article{
+          topics: [%Topic{name: "phoenix"}],
+          ...
+        }
+      }
+      iex> update_article(article, %{topics: article.topics ++ [%{name: "elixir"}, %{name: "ecto"}]})
+      %Article{
+        topics: [
+          %Topic{name: "elixir"},
+          %Topic{name: "ecto"},
+          %Topic{name: "phoenix"}
+        ],
+        ...
+      }
 
   """
   @spec update_article(article, map) :: {:ok, article} | {:error, changeset}
+  def update_article(%Article{} = article, %{topics: _} = attrs) do
+    article
+    |> preload!(:topics)
+    |> Article.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:topics, build_topics(attrs))
+    |> Repo.update()
+  end
+
   def update_article(%Article{} = article, attrs) do
     article
     |> Article.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(:topics, build_topics(attrs))
     |> Repo.update()
   end
 
@@ -287,8 +322,10 @@ defmodule Prequest.CMS do
 
       iex> delete_article(article)
       {:ok, %Article{}}
+
       iex> delete_article(article)
       {:error, %Ecto.Changeset{}}
+
   """
   @spec delete_article(article) :: {:ok, article} | {:error, changeset}
   def delete_article(%Article{} = article) do
@@ -318,7 +355,6 @@ defmodule Prequest.CMS do
 
   # Retrieve a topic struct from database if it exists, or a map otherwise.
   defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
-  defp build_topics(_attrs), do: []
 
   defp build_topic(%{name: name}) do
     case Repo.get_by(Topic, name: name) do

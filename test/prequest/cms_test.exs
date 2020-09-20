@@ -60,8 +60,6 @@ defmodule Prequest.CMSTest do
       end
     end
 
-    test "create_article/1 using existing topic associates the topic to article"
-
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
 
@@ -99,8 +97,6 @@ defmodule Prequest.CMSTest do
         assert removed_topic.articles == []
       end
     end
-
-    test "update_article/2 using existing topic associates the topic to article"
 
     test "update_article/2 with invalid data returns error changeset", %{user: user} do
       article = article_fixture(%{user_id: user.id})
