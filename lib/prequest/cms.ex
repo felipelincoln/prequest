@@ -221,30 +221,53 @@ defmodule Prequest.CMS do
   @doc """
   Creates an article.
 
-  It inserts into the database a `Prequest.CMS.Article` struct with data populated through its changeset.
-
+  It inserts into the database a `Prequest.CMS.Article` struct with data populated through its changeset.  
   ## Examples
-
+  
       iex> create_article(%{
       ...>   title: "some title",
       ...>   source: "some github url",
       ...>   cover: "some image url",
-      ...>   user_id: 10,
-      ...>   topics: [%{name: "elixir"}, %{name: "phoenix"}]
-      ...> }
+      ...>   user_id: 10
+      ...> })
       {:ok, %Article{}}
 
       iex> create_article(%{})
       {:error, %Ecto.Changeset{}}
 
+  A `topics` key can be passed in the map input to associate topics with the article, whether it already
+  exists or not.
+
+      iex> create_article(%{
+      ...>   title: "some title2",
+      ...>   source: "some github url2",
+      ...>   cover: "some image url2",
+      ...>   user_id: 10,
+      ...>   topics: [%{name: "elixir"}, %{name: "phoenix"}]
+      ...> })
+      {:ok, %Article{}}
+
+  Once the topics named "elixir" and "phoenix" was created in the previous example, we can associate them again
+  with a new article. We can proceed in two manners:
+
+  * Get its struct from database and insert it into the topics list.
+  * Pass the same map we used to create it.
+
+  Let's use the "phoenix" topic in the former way and "elixir" in the latter.
+
+      iex> topic
+      %Topic{name: "phoenix"}
+      iex> create_article(%{
+      ...>   title: "some title3",
+      ...>   source: "some github url3",
+      ...>   cover: "some image url3",
+      ...>   user_id: 10,
+      ...>   topics: [%{name: "elixir"}, topic]
+      ...> })
+      {:ok, %Article{}}
+
   """
-  @spec create_article(%{
-          title: String.t(),
-          source: String.t(),
-          cover: String.t(),
-          user_id: integer,
-          topics: [%{name: String.t()} | topic] | nil
-        }) :: {:ok, article} | {:error, changeset}
+  @spec create_article(map) :: {:ok, article} | {:error, changeset}
   def create_article(attrs) do
     %Article{}
     |> Article.changeset(attrs)
@@ -255,7 +278,7 @@ defmodule Prequest.CMS do
   @doc """
   Updates an article.
 
-  It updates an entry in the database for the `Prequest.CMS.Article` struct. The input data is validated
+  It updates an entry in the database for the `Prequest.CMS.Article` struct validating the input data
   through its changeset.
 
   ## Examples
@@ -268,6 +291,8 @@ defmodule Prequest.CMS do
 
   When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
   be replaced.
+
+  > To see how the `topics` fields works take a look at `create_article/1`
 
       iex> article |> CMS.preload!(:topics)
       %Article{
@@ -285,13 +310,15 @@ defmodule Prequest.CMS do
         }
       }
       iex> update_article(article, %{topics: article.topics ++ [%{name: "elixir"}, %{name: "ecto"}]})
-      %Article{
-        topics: [
-          %Topic{name: "elixir"},
-          %Topic{name: "ecto"},
-          %Topic{name: "phoenix"}
-        ],
-        ...
+      {:ok,
+        %Article{
+          topics: [
+            %Topic{name: "elixir"},
+            %Topic{name: "ecto"},
+            %Topic{name: "phoenix"}
+          ],
+          ...
+        }
       }
 
   """
@@ -326,6 +353,8 @@ defmodule Prequest.CMS do
 
   @doc """
   Deletes an article.
+
+
 
   ## Examples
 
@@ -421,13 +450,14 @@ defmodule Prequest.CMS do
   # report
   #
 
+
   @doc """
   Gets a single report.
 
   Raises `Ecto.NoResultsError` if the Report does not exist.
 
   ## Examples
-
+  
       iex> get_report!(123)
       %Report{}
 
@@ -444,18 +474,18 @@ defmodule Prequest.CMS do
   Creates a report.
 
   ## Examples
-
+  
       iex> create_report(%{user_id: user.id, article_id: article.id})
       {:ok, %Report{}}
 
       iex> create_report(%{})
       {:error, %Ecto.Changeset{}}
   """
-  @spec create_report(%{user_id: integer, article_id: integer}) ::
-          {:ok, report} | {:error, changeset}
+  @spec create_report(%{user_id: integer, article_id: integer}) :: {:ok, report} | {:error, changeset}
   def create_report(attrs) do
     %Report{}
     |> Report.changeset(attrs)
     |> Repo.insert()
   end
+
 end
