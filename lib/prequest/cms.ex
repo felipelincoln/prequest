@@ -375,7 +375,7 @@ defmodule Prequest.CMS do
 
   """
   @spec create_topic(%{name: String.t()}) :: {:ok, topic} | {:error, changeset}
-  def create_topic(attrs \\ %{}) do
+  def create_topic(attrs) do
     %Topic{}
     |> Topic.changeset(attrs)
     |> Repo.insert()
