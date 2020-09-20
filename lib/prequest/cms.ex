@@ -341,10 +341,10 @@ defmodule Prequest.CMS do
 
   ## Examples
 
-      iex> get_topic(name: "elixir")
+      iex> get_topic("elixir")
       %Topic{}
 
-      iex> get_topic(name: "")
+      iex> get_topic("")
       nil
 
   """

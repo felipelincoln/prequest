@@ -47,7 +47,6 @@ defmodule Prequest.CMSTest do
                %{user_id: user.id}
                |> Enum.into(@valid_attrs)
                |> CMS.create_article()
-               |> CMS.preload()
 
       assert article.source == @valid_attrs.source
       assert article.title == @valid_attrs.title
@@ -71,7 +70,6 @@ defmodule Prequest.CMSTest do
       assert {:ok, %Article{} = updated_article} =
                article_fixture(%{user_id: user.id})
                |> CMS.update_article(@update_attrs)
-               |> CMS.preload()
 
       assert updated_article.source == @update_attrs.source
       assert updated_article.title == @update_attrs.title
@@ -91,10 +89,7 @@ defmodule Prequest.CMSTest do
     test "update_article/2 with invalid data returns error changeset", %{user: user} do
       article = article_fixture(%{user_id: user.id})
 
-      assert {:error, %Ecto.Changeset{}} =
-               article
-               |> CMS.update_article(@invalid_attrs)
-               |> CMS.preload()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_article(article, @invalid_attrs)
 
       # check if article is still in sync with database.
       assert article == CMS.get_article!(article.id) |> CMS.preload!(:topics)
