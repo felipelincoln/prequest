@@ -26,7 +26,7 @@ defmodule Prequest.CMSTest do
       cover: "some updated cover",
       topics: [%{name: "topic2"}, %{name: "topic3"}]
     }
-    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [""]}
+    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [%{name: ""}]}
 
     def article_fixture(%{user_id: _} = attrs) do
       {:ok, article} =
@@ -53,17 +53,16 @@ defmodule Prequest.CMSTest do
       assert article.title == @valid_attrs.title
       assert article.cover == @valid_attrs.cover
       assert article.user_id == user.id
-      refute article.topics == []
 
-      for %{name: name} <- @valid_attrs.topics do
-        assert %Topic{} = CMS.get_topic(name)
-      end
+      assert article.topics ==
+               Enum.map(@valid_attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
     end
 
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
 
-      for name <- @invalid_attrs.topics do
+      # check if topics were not created.
+      for %{name: name} <- @invalid_attrs.topics do
         assert CMS.get_topic(name) == nil
       end
     end
@@ -79,22 +78,13 @@ defmodule Prequest.CMSTest do
       assert updated_article.cover == @update_attrs.cover
       assert updated_article.user_id == user.id
 
-      assert MapSet.new(@update_attrs.topics) ==
-               updated_article.topics
-               |> Enum.map(fn topic -> %{name: topic.name} end)
-               |> MapSet.new()
+      assert updated_article.topics ==
+               Enum.map(@update_attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
 
-      for %{name: name} <- @valid_attrs.topics ++ @update_attrs.topics do
-        assert %Topic{} = CMS.get_topic(name)
-      end
-
+      # check if replaced topics are not associated anymore.
       for %{name: name} <- @valid_attrs.topics -- @update_attrs.topics do
-        removed_topic =
-          name
-          |> CMS.get_topic()
-          |> CMS.preload!(:articles)
-
-        assert removed_topic.articles == []
+        assert %Topic{articles: topic_articles} = CMS.get_topic(name) |> CMS.preload!(:articles)
+        assert updated_article not in topic_articles
       end
     end
 
@@ -106,9 +96,11 @@ defmodule Prequest.CMSTest do
                |> CMS.update_article(@invalid_attrs)
                |> CMS.preload()
 
+      # check if article is still in sync with database.
       assert article == CMS.get_article!(article.id) |> CMS.preload!(:topics)
 
-      for name <- @invalid_attrs.topics do
+      # check if topics were not created.
+      for %{name: name} <- @invalid_attrs.topics do
         assert CMS.get_topic(name) == nil
       end
     end
@@ -118,8 +110,10 @@ defmodule Prequest.CMSTest do
       assert {:ok, %Article{}} = CMS.delete_article(article)
       assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
 
+      # check if replaced topics are not associated anymore.
       for %{name: name} <- @valid_attrs.topics do
-        assert %Topic{} = CMS.get_topic(name)
+        assert %Topic{articles: topic_articles} = CMS.get_topic(name) |> CMS.preload!(:articles)
+        assert article not in topic_articles
       end
     end
   end

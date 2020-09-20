@@ -348,7 +348,7 @@ defmodule Prequest.CMS do
       nil
 
   """
-  @spec get_topic(name: String.t()) :: topic | nil
+  @spec get_topic(String.t()) :: topic | nil
   def get_topic(name) do
     Repo.get_by(Topic, name: name)
   end
