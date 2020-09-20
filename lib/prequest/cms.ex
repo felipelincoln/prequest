@@ -260,6 +260,9 @@ defmodule Prequest.CMS do
   @doc """
   Updates an article.
 
+  It updates an entry in the database for the `Prequest.CMS.Article` struct. The input data is validated
+  through its changeset.
+
   ## Examples
 
       iex> update_article(article, %{field: value})
@@ -314,14 +317,16 @@ defmodule Prequest.CMS do
   end
 
   # Retrieve a topic struct from database if it exists, or a map otherwise.
-  defp build_topics(%{topics: names} = _attrs) do
-    Enum.map(names, fn name ->
-      case Repo.get_by(Topic, name: name) do
-        %Topic{} = topic -> topic
-        nil -> %{name: name}
-      end
-    end)
+  defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
+  defp build_topics(_attrs), do: []
+
+  defp build_topic(%{name: name}) do
+    case Repo.get_by(Topic, name: name) do
+      %Topic{} = topic -> topic
+      nil -> %{name: name}
+    end
   end
 
-  defp build_topics(_attrs), do: []
+  defp build_topic(%Topic{} = topic), do: topic
+  defp build_topic(_), do: %{}
 end

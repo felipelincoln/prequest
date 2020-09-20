@@ -17,14 +17,14 @@ defmodule Prequest.CMSTest do
       source: "some source",
       title: "some title",
       cover: "some cover",
-      topics: ["topic1", "topic2"]
+      topics: [%{name: "topic1"}, %{name: "topic2"}]
     }
 
     @update_attrs %{
       source: "some updated source",
       title: "some updated title",
       cover: "some updated cover",
-      topics: ["topic2", "topic3"]
+      topics: [%{name: "topic2"}, %{name: "topic3"}]
     }
     @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [""]}
 
@@ -55,10 +55,12 @@ defmodule Prequest.CMSTest do
       assert article.user_id == user.id
       refute article.topics == []
 
-      for name <- @valid_attrs.topics do
+      for %{name: name} <- @valid_attrs.topics do
         assert %Topic{} = CMS.get_topic(name)
       end
     end
+
+    test "create_article/1 using existing topic associates the topic to article"
 
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
@@ -81,21 +83,24 @@ defmodule Prequest.CMSTest do
 
       assert MapSet.new(@update_attrs.topics) ==
                updated_article.topics
-               |> Enum.map(fn topic -> topic.name end)
+               |> Enum.map(fn topic -> %{name: topic.name} end)
                |> MapSet.new()
 
-      for name <- @valid_attrs.topics ++ @update_attrs.topics do
+      for %{name: name} <- @valid_attrs.topics ++ @update_attrs.topics do
         assert %Topic{} = CMS.get_topic(name)
       end
 
-      removed_topic =
-        (@valid_attrs.topics -- @update_attrs.topics)
-        |> hd
-        |> CMS.get_topic()
-        |> CMS.preload!(:articles)
+      for %{name: name} <- @valid_attrs.topics -- @update_attrs.topics do
+        removed_topic =
+          name
+          |> CMS.get_topic()
+          |> CMS.preload!(:articles)
 
-      assert removed_topic.articles == []
+        assert removed_topic.articles == []
+      end
     end
+
+    test "update_article/2 using existing topic associates the topic to article"
 
     test "update_article/2 with invalid data returns error changeset", %{user: user} do
       article = article_fixture(%{user_id: user.id})
@@ -117,7 +122,7 @@ defmodule Prequest.CMSTest do
       assert {:ok, %Article{}} = CMS.delete_article(article)
       assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
 
-      for name <- @valid_attrs.topics do
+      for %{name: name} <- @valid_attrs.topics do
         assert %Topic{} = CMS.get_topic(name)
       end
     end
