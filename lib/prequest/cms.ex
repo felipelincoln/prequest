@@ -235,7 +235,7 @@ defmodule Prequest.CMS do
       ...>   source: "some github url",
       ...>   cover: "some image url",
       ...>   user_id: 10,
-      ...>   topics: ["elixir", "phoenix"]
+      ...>   topics: [%{name: "elixir"}, %{name: "phoenix"}]
       ...> }
       {:ok, %Article{}}
 
@@ -248,7 +248,7 @@ defmodule Prequest.CMS do
           source: String.t(),
           cover: String.t(),
           user_id: integer,
-          topics: [String.t()] | nil
+          topics: [%{name: String.t()} | topic] | nil
         }) :: {:ok, article} | {:error, changeset}
   def create_article(attrs \\ %{}) do
     %Article{}
@@ -348,7 +348,7 @@ defmodule Prequest.CMS do
       nil
 
   """
-  @spec get_topic(String.t()) :: topic | nil
+  @spec get_topic(name: String.t()) :: topic | nil
   def get_topic(name) do
     Repo.get_by(Topic, name: name)
   end
