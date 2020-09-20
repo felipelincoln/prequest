@@ -315,6 +315,19 @@ defmodule Prequest.CMS do
     |> Repo.update()
   end
 
+  # Retrieve a topic struct from database if it exists, or a map otherwise.
+  defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
+
+  defp build_topic(%{name: name}) do
+    case Repo.get_by(Topic, name: name) do
+      %Topic{} = topic -> topic
+      nil -> %{name: name}
+    end
+  end
+
+  defp build_topic(%Topic{} = topic), do: topic
+  defp build_topic(_), do: %{}
+
   @doc """
   Deletes an article.
 
@@ -353,16 +366,58 @@ defmodule Prequest.CMS do
     Repo.get_by(Topic, name: name)
   end
 
-  # Retrieve a topic struct from database if it exists, or a map otherwise.
-  defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
+  @doc """
+  Creates a topic.
 
-  defp build_topic(%{name: name}) do
-    case Repo.get_by(Topic, name: name) do
-      %Topic{} = topic -> topic
-      nil -> %{name: name}
-    end
+  ## Examples
+
+      iex> create_topic(%{name: "new topic"})
+      {:ok, %Topic{}}
+
+      iex> create_topic(%{name: ""})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @spec create_topic(%{name: String.t()}) :: {:ok, topic} | {:error, changeset}
+  def create_topic(attrs \\ %{}) do
+    %Topic{}
+    |> Topic.changeset(attrs)
+    |> Repo.insert()
   end
 
-  defp build_topic(%Topic{} = topic), do: topic
-  defp build_topic(_), do: %{}
+  @doc """
+  Updates a topic.
+
+  ## Examples
+
+      iex> update_topic(topic, %{name: "updated name"})
+      {:ok, %Topic{}}
+
+      iex> update_topic(topic, %{name: ""})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @spec update_topic(topic, map) :: {:ok, topic} | {:error, changeset}
+  def update_topic(%Topic{} = topic, attrs) do
+    topic
+    |> Topic.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a topic.
+
+  ## Examples
+
+      iex> delete_topic(topic)
+      {:ok, %Topic{}}
+
+      iex> delete_topic(topic)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @spec delete_topic(topic) :: {:ok, topic} | {:error, changeset}
+  def delete_topic(%Topic{} = topic) do
+    Repo.delete(topic)
+  end
 end

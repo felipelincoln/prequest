@@ -112,4 +112,48 @@ defmodule Prequest.CMSTest do
       end
     end
   end
+
+  describe "topics" do
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def topic_fixture do
+      {:ok, topic} = CMS.create_topic(@valid_attrs)
+
+      topic
+    end
+
+    test "get_topic/1 returns the topic with given name" do
+      topic = topic_fixture()
+      assert CMS.get_topic(topic.name) == topic
+    end
+
+    test "create_topic/1 with valid data creates a topic" do
+      assert {:ok, %Topic{} = topic} = CMS.create_topic(@valid_attrs)
+      assert topic.name == @valid_attrs.name
+    end
+
+    test "create_topic/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_topic(@invalid_attrs)
+    end
+
+    test "update_topic/2 with valid data updates the topic" do
+      topic = topic_fixture()
+      assert {:ok, %Topic{} = topic} = CMS.update_topic(topic, @update_attrs)
+      assert topic.name == @update_attrs.name
+    end
+
+    test "update_topic/2 with invalid data returns error changeset" do
+      topic = topic_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_topic(topic, @invalid_attrs)
+      assert topic == CMS.get_topic(topic.name)
+    end
+
+    test "delete_topic/1 deletes the topic" do
+      topic = topic_fixture()
+      assert {:ok, %Topic{}} = CMS.delete_topic(topic)
+      assert nil == CMS.get_topic(topic.name)
+    end
+  end
 end
