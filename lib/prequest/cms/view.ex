@@ -19,7 +19,7 @@ defmodule Prequest.CMS.View do
   alias Prequest.Accounts
   alias Prequest.CMS.{Article, View}
 
-  schema "view" do
+  schema "views" do
     field :liked?, :boolean, default: false
 
     timestamps()

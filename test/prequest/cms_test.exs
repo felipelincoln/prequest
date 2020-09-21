@@ -183,7 +183,7 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_topic/1 using existing name returns error changeset" do
-      assert {:ok, %Topic{} = topic} = CMS.create_topic(@valid_attrs)
+      assert {:ok, %Topic{}} = CMS.create_topic(@valid_attrs)
       assert {:error, %Ecto.Changeset{}} = CMS.create_topic(@valid_attrs)
     end
 
@@ -289,6 +289,15 @@ defmodule Prequest.CMSTest do
       assert {:error, %Ecto.Changeset{}} = CMS.create_view(%{})
     end
 
+    test "create_view/1 using existing user/article pair returns error changeset", %{
+      user: user,
+      article: article
+    } do
+      attrs = %{user_id: user.id, article_id: article.id}
+      assert {:ok, %View{}} = CMS.create_view(attrs)
+      assert {:error, %Ecto.Changeset{}} = CMS.create_view(attrs)
+    end
+
     test "update_view/2 with valid data updates the view", %{user: user, article: article} do
       view = view_fixture(%{article_id: article.id, user_id: user.id, liked?: false})
 
@@ -304,6 +313,18 @@ defmodule Prequest.CMSTest do
       view = view_fixture(%{user_id: user.id, article_id: article.id})
       assert {:error, %Ecto.Changeset{}} = CMS.update_view(view, %{article_id: nil})
       assert view == CMS.get_view(user.id, article.id)
+    end
+
+    test "update_view/2 using existing user/article pair returns error changeset", %{
+      user: user,
+      article: article
+    } do
+      {:ok, new_user} = Accounts.create_user(%{username: "benicio"})
+      _view = view_fixture(%{user_id: user.id, article_id: article.id})
+      view = view_fixture(%{user_id: new_user.id, article_id: article.id})
+
+      # `view` will be updated to have the same pair user/article as `_view`
+      assert {:error, %Ecto.Changeset{}} = CMS.update_view(view, %{user_id: user.id})
     end
 
     test "delete_view/1 deletes the view", %{user: user, article: article} do
