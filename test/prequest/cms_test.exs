@@ -17,11 +17,14 @@ defmodule Prequest.CMSTest do
       %{title: "title", cover: "cover image", source: "github url", user_id: user.id}
       |> CMS.create_article()
 
+    {:ok, topic} = CMS.create_topic(%{name: "prequest"})
+
     on_exit(fn ->
       Accounts.delete_user(user)
+      CMS.delete_topic(topic)
     end)
 
-    %{user: user, article: article}
+    %{user: user, article: article, topic: topic}
   end
 
   describe "articles" do
@@ -159,8 +162,8 @@ defmodule Prequest.CMSTest do
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
 
-    def topic_fixture do
-      {:ok, topic} = CMS.create_topic(@valid_attrs)
+    def topic_fixture(attrs \\ @valid_attrs) do
+      {:ok, topic} = CMS.create_topic(attrs)
 
       topic
     end
@@ -179,6 +182,11 @@ defmodule Prequest.CMSTest do
       assert {:error, %Ecto.Changeset{}} = CMS.create_topic(@invalid_attrs)
     end
 
+    test "create_topic/1 using existing name returns error changeset" do
+      assert {:ok, %Topic{} = topic} = CMS.create_topic(@valid_attrs)
+      assert {:error, %Ecto.Changeset{}} = CMS.create_topic(@valid_attrs)
+    end
+
     test "update_topic/2 with valid data updates the topic" do
       topic = topic_fixture()
       assert {:ok, %Topic{} = topic} = CMS.update_topic(topic, @update_attrs)
@@ -191,10 +199,24 @@ defmodule Prequest.CMSTest do
       assert topic == CMS.get_topic(topic.name)
     end
 
+    test "update_topic/1 using existing name returns error changeset", %{topic: topic} do
+      new_topic = topic_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_topic(new_topic, %{name: topic.name})
+    end
+
     test "delete_topic/1 deletes the topic" do
       topic = topic_fixture()
       assert {:ok, %Topic{}} = CMS.delete_topic(topic)
       assert CMS.get_topic(topic.name) == nil
+    end
+
+    test "delete_topic/1 releases name for a new use" do
+      assert {:ok, %Topic{} = topic} =
+               %{name: "testing name"}
+               |> topic_fixture()
+               |> CMS.delete_topic()
+
+      assert %Topic{} = topic_fixture(%{name: topic.name})
     end
   end
 
