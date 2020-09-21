@@ -41,5 +41,6 @@ defmodule Prequest.CMS.View do
     |> validate_required([:article_id, :user_id])
     |> assoc_constraint(:user)
     |> assoc_constraint(:article)
+    |> unique_constraint([:user, :article], name: :user_article_view_constraint)
   end
 end
