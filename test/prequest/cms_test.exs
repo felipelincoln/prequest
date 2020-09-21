@@ -3,7 +3,7 @@ defmodule Prequest.CMSTest do
 
   alias Prequest.Accounts
   alias Prequest.CMS
-  alias Prequest.CMS.{Article, Topic}
+  alias Prequest.CMS.{Article, Report, Topic}
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -174,6 +174,40 @@ defmodule Prequest.CMSTest do
     test "get_report!/1 returns the report with given id", %{user: user, article: article} do
       report = report_fixture(%{user_id: user.id, article_id: article.id})
       assert CMS.get_report!(report.id) == report
+    end
+
+    test "create_report/1 with valid data creates a report", %{user: user, article: article} do
+      attrs = %{user_id: user.id, article_id: article.id, message: "some message"}
+      assert {:ok, %Report{} = report} = CMS.create_report(attrs)
+      assert report.message == "some message"
+    end
+
+    test "create_report/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_report(%{})
+    end
+
+    test "update_report/2 with valid data updates the report", %{user: user, article: article} do
+      report = report_fixture(%{article_id: article.id, user_id: user.id})
+
+      assert {:ok, %Report{} = report} =
+               CMS.update_report(report, %{user_id: nil, message: "some updated message"})
+
+      assert report.message == "some updated message"
+    end
+
+    test "update_report/2 with invalid data returns error changeset", %{
+      user: user,
+      article: article
+    } do
+      report = report_fixture(%{user_id: user.id, article_id: article.id})
+      assert {:error, %Ecto.Changeset{}} = CMS.update_report(report, %{article_id: nil})
+      assert report == CMS.get_report!(report.id)
+    end
+
+    test "delete_report/1 deletes the report", %{user: user, article: article} do
+      report = report_fixture(%{user_id: user.id, article_id: article.id})
+      assert {:ok, %Report{}} = CMS.delete_report(report)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
     end
   end
 end

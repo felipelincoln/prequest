@@ -1,6 +1,7 @@
 defmodule Prequest.CMS do
   @moduledoc """
-  The `CMS` context is the interface between user calls and the `Repo`.
+  A interface that underlies the communication with the database for all the content that can be
+  managed by the users.
 
   # Use cases
   We are to create two users, one will post an article and the other will interact with this article.  
@@ -218,6 +219,7 @@ defmodule Prequest.CMS do
       ** (Ecto.NoResultsError)
 
   """
+  @doc section: :article
   @spec get_article!(integer) :: article
   def get_article!(id) do
     Repo.get!(Article, id)
@@ -270,6 +272,7 @@ defmodule Prequest.CMS do
       {:ok, %Article{}}
 
   """
+  @doc section: :article
   @spec create_article(map) :: {:ok, article} | {:error, changeset}
   def create_article(attrs) do
     %Article{}
@@ -322,6 +325,7 @@ defmodule Prequest.CMS do
       }
 
   """
+  @doc section: :article
   @spec update_article(article, map) :: {:ok, article} | {:error, changeset}
   def update_article(%Article{} = article, %{topics: _} = attrs) do
     article
@@ -363,6 +367,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :article
   @spec delete_article(article) :: {:ok, article} | {:error, changeset}
   def delete_article(%Article{} = article) do
     Repo.delete(article)
@@ -384,6 +389,7 @@ defmodule Prequest.CMS do
       nil
 
   """
+  @doc section: :topic
   @spec get_topic(String.t()) :: topic | nil
   def get_topic(name) do
     Repo.get_by(Topic, name: name)
@@ -401,7 +407,8 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_topic(%{name: String.t()}) :: {:ok, topic} | {:error, changeset}
+  @doc section: :topic
+  @spec create_topic(map) :: {:ok, topic} | {:error, changeset}
   def create_topic(attrs) do
     %Topic{}
     |> Topic.changeset(attrs)
@@ -420,6 +427,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :topic
   @spec update_topic(topic, map) :: {:ok, topic} | {:error, changeset}
   def update_topic(%Topic{} = topic, attrs) do
     topic
@@ -439,6 +447,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :topic
   @spec delete_topic(topic) :: {:ok, topic} | {:error, changeset}
   def delete_topic(%Topic{} = topic) do
     Repo.delete(topic)
@@ -462,6 +471,7 @@ defmodule Prequest.CMS do
       ** (Ecto.NoResultsError)
 
   """
+  @doc section: :report
   @spec get_report!(integer) :: report
   def get_report!(id) do
     Repo.get!(Report, id)
@@ -477,12 +487,51 @@ defmodule Prequest.CMS do
 
       iex> create_report(%{})
       {:error, %Ecto.Changeset{}}
+
   """
-  @spec create_report(%{user_id: integer, article_id: integer}) ::
-          {:ok, report} | {:error, changeset}
+  @doc section: :report
+  @spec create_report(map) :: {:ok, report} | {:error, changeset}
   def create_report(attrs) do
     %Report{}
     |> Report.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Updates a report.
+
+  ## Examples
+
+      iex> update_report(report, %{message: "updated message"})
+      {:ok, %Report{}}
+
+      iex> update_report(report, %{article_id: nil})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @doc section: :report
+  @spec update_report(report, map) :: {:ok, report} | {:error, changeset}
+  def update_report(%Report{} = report, attrs) do
+    report
+    |> Report.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a report.
+
+  ## Examples
+
+      iex> delete_report(report)
+      {:ok, %Report{}}
+
+      iex> delete_report(report)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @doc section: :report
+  @spec delete_report(report) :: {:ok, report} | {:error, changeset}
+  def delete_report(%Report{} = report) do
+    Repo.delete(report)
   end
 end
