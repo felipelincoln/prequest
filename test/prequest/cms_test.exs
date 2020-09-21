@@ -3,7 +3,7 @@ defmodule Prequest.CMSTest do
 
   alias Prequest.Accounts
   alias Prequest.CMS
-  alias Prequest.CMS.{Article, Report, Topic}
+  alias Prequest.CMS.{Article, Report, Topic, View}
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -208,6 +208,29 @@ defmodule Prequest.CMSTest do
       report = report_fixture(%{user_id: user.id, article_id: article.id})
       assert {:ok, %Report{}} = CMS.delete_report(report)
       assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
+    end
+  end
+
+  describe "views" do
+    def view_fixture(%{user_id: _, article_id: _} = attrs) do
+      {:ok, view} = CMS.create_view(attrs)
+
+      view
+    end
+
+    test "get_view/2 returns the view", %{user: user, article: article} do
+      view = view_fixture(%{user_id: user.id, article_id: article.id})
+      assert CMS.get_view(view.user_id, view.article_id) == view
+    end
+
+    test "create_view/1 with valid data creates a view", %{user: user, article: article} do
+      attrs = %{user_id: user.id, article_id: article.id, liked?: true}
+      assert {:ok, %View{} = view} = CMS.create_view(attrs)
+      assert view.liked? == true
+    end
+
+    test "create_view/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_view(%{})
     end
   end
 end

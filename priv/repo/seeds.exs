@@ -21,6 +21,7 @@ alias Prequest.CMS.{Article, Topic}
       topics: [
         %Topic{name: "phoenix"}
       ]
-    },
+    }
   ]
-} |> Repo.insert!()
+}
+|> Repo.insert!()

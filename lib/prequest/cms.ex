@@ -92,15 +92,10 @@ defmodule Prequest.CMS do
   alias Prequest.Repo
   alias Prequest.CMS.{Article, Report, Topic, View}
 
-  @typedoc "Struct from the schema `Prequest.CMS.Article`."
   @type article :: %Article{}
-  @typedoc "Struct from the schema `Prequest.CMS.Report`."
   @type report :: %Report{}
-  @typedoc "Struct from the schema `Prequest.CMS.Topic`."
   @type topic :: %Topic{}
-  @typedoc "Struct from the schema `Prequest.CMS.View`."
   @type view :: %View{}
-  @typedoc "`Ecto.Changeset` struct."
   @type changeset :: %Ecto.Changeset{}
 
   @doc """
@@ -482,7 +477,7 @@ defmodule Prequest.CMS do
 
   ## Examples
 
-      iex> create_report(%{user_id: user.id, article_id: article.id})
+      iex> create_report(%{user_id: 15, article_id: 3})
       {:ok, %Report{}}
 
       iex> create_report(%{})
@@ -533,5 +528,47 @@ defmodule Prequest.CMS do
   @spec delete_report(report) :: {:ok, report} | {:error, changeset}
   def delete_report(%Report{} = report) do
     Repo.delete(report)
+  end
+
+  #
+  # view
+  #
+
+  @doc """
+  Gets a single view.
+
+  ## Examples
+
+      iex> get_view!(user.id, article.id)
+      %View{}
+
+      iex> get_view!(0, 0)
+      nil
+
+  """
+  @doc section: :view
+  @spec get_view(integer, integer) :: view
+  def get_view(user_id, article_id) do
+    Repo.get_by(View, user_id: user_id, article_id: article_id)
+  end
+
+  @doc """
+  Creates a view.
+
+  ## Examples
+
+      iex> create_view(%{user_id: 23, article_id: 12})
+      {:ok, %View{}}
+
+      iex> create_view(%{})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @doc section: :view
+  @spec create_view(map) :: {:ok, view} | {:error, changeset}
+  def create_view(attrs) do
+    %View{}
+    |> View.changeset(attrs)
+    |> Repo.insert()
   end
 end
