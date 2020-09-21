@@ -1,11 +1,26 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Prequest.Repo.insert!(%Prequest.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias Prequest.Repo
+alias Prequest.Accounts.User
+alias Prequest.CMS.{Article, Topic}
+
+%User{
+  username: "felipelincoln",
+  articles: [
+    %Article{
+      title: "some title",
+      cover: "some cover",
+      source: "some source",
+      topics: [
+        %Topic{name: "elixir"},
+        %Topic{name: "ecto"}
+      ]
+    },
+    %Article{
+      title: "some other title",
+      cover: "some other cover",
+      source: "some other source",
+      topics: [
+        %Topic{name: "phoenix"}
+      ]
+    },
+  ]
+} |> Repo.insert!()
