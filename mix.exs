@@ -3,6 +3,9 @@ defmodule Prequest.MixProject do
 
   def project do
     [
+      name: "Prequest",
+      source_url: "https://github.com/felipelincoln/prequest",
+      homepage_url: "https://prequest.herokuapp.com/",
       app: :prequest,
       version: "0.1.0",
       elixir: "~> 1.7",
@@ -12,36 +15,10 @@ defmodule Prequest.MixProject do
       aliases: aliases(),
       preferred_cli_env: [ci: :test],
       deps: deps(),
-
-      # Docs
-      name: "Prequest",
-      source_url: "https://github.com/felipelincoln/prequest",
-      homepage_url: "https://prequest.herokuapp.com/",
-      docs: [
-        output: "docs",
-        main: "Prequest",
-        extras: ["README.md", ".github/CONTRIBUTING.md"],
-        groups_for_extras: [guides: [".github/CONTRIBUTING.md"]],
-        groups_for_modules: [
-          "accounts context": [Prequest.Accounts, Prequest.Accounts.User],
-          "cms context": [
-            Prequest.CMS,
-            Prequest.CMS.Article,
-            Prequest.CMS.Report,
-            Prequest.CMS.View,
-            Prequest.CMS.Topic
-          ],
-          channels: [PrequestWeb.UserSocket],
-          live: [PrequestWeb.PageLive],
-          views: [PrequestWeb.ErrorHelpers, PrequestWeb.ErrorView, PrequestWeb.LayoutView]
-        ]
-      ]
+      docs: docs()
     ]
   end
 
-  # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
   def application do
     [
       mod: {Prequest.Application, []},
@@ -53,9 +30,6 @@ defmodule Prequest.MixProject do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
-  # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
       {:phoenix, "~> 1.5.4"},
@@ -78,12 +52,31 @@ defmodule Prequest.MixProject do
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to install project dependencies and perform other setup tasks, run:
-  #
-  #     $ mix setup
-  #
-  # See the documentation for `Mix` for more info on aliases.
+  defp docs do
+    [
+      output: "docs",
+      main: "Prequest",
+      extras: ["README.md", ".github/CONTRIBUTING.md"],
+      groups_for_extras: [guides: [".github/CONTRIBUTING.md"]],
+      groups_for_modules: [
+        accounts: [Prequest.Accounts, Prequest.Accounts.User],
+        cms: [
+          Prequest.CMS,
+          Prequest.CMS.Article,
+          Prequest.CMS.Report,
+          Prequest.CMS.View,
+          Prequest.CMS.Topic
+        ]
+      ],
+      groups_for_functions: [
+        Article: &(&1[:section] == :article),
+        Topic: &(&1[:section] == :topic),
+        Report: &(&1[:section] == :report),
+        View: &(&1[:section] == :view)
+      ]
+    ]
+  end
+
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
