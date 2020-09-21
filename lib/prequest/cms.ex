@@ -91,10 +91,15 @@ defmodule Prequest.CMS do
   alias Prequest.Repo
   alias Prequest.CMS.{Article, Report, Topic, View}
 
+  @typedoc "Struct from the schema `Prequest.CMS.Article`."
   @type article :: %Article{}
+  @typedoc "Struct from the schema `Prequest.CMS.Report`."
   @type report :: %Report{}
+  @typedoc "Struct from the schema `Prequest.CMS.Topic`."
   @type topic :: %Topic{}
+  @typedoc "Struct from the schema `Prequest.CMS.View`."
   @type view :: %View{}
+  @typedoc "`Ecto.Changeset` struct."
   @type changeset :: %Ecto.Changeset{}
 
   @doc """
@@ -221,9 +226,8 @@ defmodule Prequest.CMS do
   @doc """
   Creates an article.
 
-  It inserts into the database a `Prequest.CMS.Article` struct with data populated through its changeset.  
   ## Examples
-  
+
       iex> create_article(%{
       ...>   title: "some title",
       ...>   source: "some github url",
@@ -255,8 +259,7 @@ defmodule Prequest.CMS do
 
   Let's use the "phoenix" topic in the former way and "elixir" in the latter.
 
-      iex> topic
-      %Topic{name: "phoenix"}
+      iex> topic = CMS.get_topic("phoenix")
       iex> create_article(%{
       ...>   title: "some title3",
       ...>   source: "some github url3",
@@ -278,9 +281,6 @@ defmodule Prequest.CMS do
   @doc """
   Updates an article.
 
-  It updates an entry in the database for the `Prequest.CMS.Article` struct validating the input data
-  through its changeset.
-
   ## Examples
 
       iex> update_article(article, %{title: "updated title"})
@@ -292,7 +292,7 @@ defmodule Prequest.CMS do
   When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
   be replaced.
 
-  > To see how the `topics` fields works take a look at `create_article/1`
+  > To see how the `topics` field works take a look at `create_article/1`
 
       iex> article |> CMS.preload!(:topics)
       %Article{
@@ -353,8 +353,6 @@ defmodule Prequest.CMS do
 
   @doc """
   Deletes an article.
-
-
 
   ## Examples
 
@@ -450,14 +448,13 @@ defmodule Prequest.CMS do
   # report
   #
 
-
   @doc """
   Gets a single report.
 
   Raises `Ecto.NoResultsError` if the Report does not exist.
 
   ## Examples
-  
+
       iex> get_report!(123)
       %Report{}
 
@@ -474,18 +471,18 @@ defmodule Prequest.CMS do
   Creates a report.
 
   ## Examples
-  
+
       iex> create_report(%{user_id: user.id, article_id: article.id})
       {:ok, %Report{}}
 
       iex> create_report(%{})
       {:error, %Ecto.Changeset{}}
   """
-  @spec create_report(%{user_id: integer, article_id: integer}) :: {:ok, report} | {:error, changeset}
+  @spec create_report(%{user_id: integer, article_id: integer}) ::
+          {:ok, report} | {:error, changeset}
   def create_report(attrs) do
     %Report{}
     |> Report.changeset(attrs)
     |> Repo.insert()
   end
-
 end
