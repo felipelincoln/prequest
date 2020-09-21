@@ -55,24 +55,16 @@ defmodule Prequest.MixProject do
   defp docs do
     [
       output: "docs",
-      main: "Prequest",
-      extras: ["README.md", ".github/CONTRIBUTING.md"],
-      groups_for_extras: [guides: [".github/CONTRIBUTING.md"]],
-      groups_for_modules: [
-        accounts: [Prequest.Accounts, Prequest.Accounts.User],
-        cms: [
-          Prequest.CMS,
-          Prequest.CMS.Article,
-          Prequest.CMS.Report,
-          Prequest.CMS.View,
-          Prequest.CMS.Topic
-        ]
-      ],
+      api_reference: false,
+      main: "contributing",
+      filter_prefix: "Prequest.",
+      extras: [".github/CONTRIBUTING.md"],
+      nest_modules_by_prefix: [Prequest, Prequest.CMS, Prequest.Accounts],
       groups_for_functions: [
-        Article: &(&1[:section] == :article),
-        Topic: &(&1[:section] == :topic),
-        Report: &(&1[:section] == :report),
-        View: &(&1[:section] == :view)
+        "Managing articles": &(&1[:section] == :article),
+        "Managing topics": &(&1[:section] == :topic),
+        "Managing reports": &(&1[:section] == :report),
+        "Managing views": &(&1[:section] == :view)
       ]
     ]
   end
