@@ -1,7 +1,6 @@
 defmodule Prequest.CMS do
   @moduledoc """
-  A interface that underlies the communication with the database for all the content that can be
-  managed by the users.
+  A interface that underlies database communication for user managed content.
 
   # Use cases
   We are to create two users, one will post an article and the other will interact with this article.  

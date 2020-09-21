@@ -5,6 +5,11 @@ defmodule Prequest.CMSTest do
   alias Prequest.CMS
   alias Prequest.CMS.{Article, Report, Topic, View}
 
+  # Testing
+  # [x] Returning values
+  # [x] Side effects
+  # [ ] Constraints
+
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
 
@@ -73,6 +78,18 @@ defmodule Prequest.CMSTest do
       end
     end
 
+    test "create_article/1 using existing source returns error changeset", %{user: user} do
+      assert {:ok, %Article{}} =
+               %{user_id: user.id}
+               |> Enum.into(@valid_attrs)
+               |> CMS.create_article()
+
+      assert {:error, %Ecto.Changeset{}} =
+               %{user_id: user.id, source: @valid_attrs.source}
+               |> Enum.into(@update_attrs)
+               |> CMS.create_article()
+    end
+
     test "update_article/2 with valid data updates the article", %{user: user} do
       assert {:ok, %Article{} = updated_article} =
                article_fixture(%{user_id: user.id})
@@ -97,14 +114,22 @@ defmodule Prequest.CMSTest do
       article = article_fixture(%{user_id: user.id})
 
       assert {:error, %Ecto.Changeset{}} = CMS.update_article(article, @invalid_attrs)
-
-      # check if article is still in sync with database.
       assert article == CMS.get_article!(article.id) |> CMS.preload!(:topics)
 
       # check if topics were not created.
       for %{name: name} <- @invalid_attrs.topics do
         assert CMS.get_topic(name) == nil
       end
+    end
+
+    test "update_article/1 using existing source returns error changeset", %{
+      user: user,
+      article: article
+    } do
+      new_article = article_fixture(%{user_id: user.id})
+
+      assert {:error, %Ecto.Changeset{}} =
+               CMS.update_article(new_article, %{source: article.source})
     end
 
     test "delete_article/1 deletes the article", %{user: user} do
@@ -117,6 +142,15 @@ defmodule Prequest.CMSTest do
         assert %Topic{articles: topic_articles} = CMS.get_topic(name) |> CMS.preload!(:articles)
         assert article not in topic_articles
       end
+    end
+
+    test "delete_article/1 releases source for a new use", %{user: user} do
+      assert {:ok, %Article{} = article} =
+               %{user_id: user.id, source: "testing source"}
+               |> article_fixture()
+               |> CMS.delete_article()
+
+      assert %Article{} = article_fixture(%{user_id: user.id, source: article.source})
     end
   end
 
