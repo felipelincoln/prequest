@@ -160,7 +160,7 @@ defmodule Prequest.CMSTest do
     test "delete_topic/1 deletes the topic" do
       topic = topic_fixture()
       assert {:ok, %Topic{}} = CMS.delete_topic(topic)
-      assert nil == CMS.get_topic(topic.name)
+      assert CMS.get_topic(topic.name) == nil
     end
   end
 
@@ -231,6 +231,29 @@ defmodule Prequest.CMSTest do
 
     test "create_view/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_view(%{})
+    end
+
+    test "update_view/2 with valid data updates the view", %{user: user, article: article} do
+      view = view_fixture(%{article_id: article.id, user_id: user.id, liked?: false})
+
+      assert {:ok, %View{} = view} = CMS.update_view(view, %{liked?: true})
+
+      assert view.liked? == true
+    end
+
+    test "update_view/2 with invalid data returns error changeset", %{
+      user: user,
+      article: article
+    } do
+      view = view_fixture(%{user_id: user.id, article_id: article.id})
+      assert {:error, %Ecto.Changeset{}} = CMS.update_view(view, %{article_id: nil})
+      assert view == CMS.get_view(user.id, article.id)
+    end
+
+    test "delete_view/1 deletes the view", %{user: user, article: article} do
+      view = view_fixture(%{user_id: user.id, article_id: article.id})
+      assert {:ok, %View{}} = CMS.delete_view(view)
+      assert CMS.get_view(user.id, article.id) == nil
     end
   end
 end

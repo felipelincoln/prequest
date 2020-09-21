@@ -571,4 +571,42 @@ defmodule Prequest.CMS do
     |> View.changeset(attrs)
     |> Repo.insert()
   end
+
+  @doc """
+  Updates a view.
+
+  ## Examples
+
+      iex> update_view(view, %{liked?: true})
+      {:ok, %View{}}
+
+      iex> update_view(view, %{article_id: nil})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @doc section: :view
+  @spec update_view(view, map) :: {:ok, view} | {:error, changeset}
+  def update_view(%View{} = view, attrs) do
+    view
+    |> View.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a view.
+
+  ## Examples
+
+      iex> delete_view(view)
+      {:ok, %View{}}
+
+      iex> delete_view(view)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  @doc section: :view
+  @spec delete_view(view) :: {:ok, view} | {:error, changeset}
+  def delete_view(%View{} = view) do
+    Repo.delete(view)
+  end
 end
