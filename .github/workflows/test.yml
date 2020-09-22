@@ -21,7 +21,7 @@ jobs:
       - name: Copy event.json to container
         run: |
           docker exec test_container mkdir -p /home/runner/work/_temp/_github_workflow/
-          docker cp event.json test_container:/home/runner/work/_temp/_github_workflow/
+          docker cp $GITHUB_EVENT_PATH test_container:/home/runner/work/_temp/_github_workflow/
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
