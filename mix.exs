@@ -50,7 +50,7 @@ defmodule Prequest.MixProject do
       {:ex_doc, "~>0.22", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.8", only: [:dev, :test]},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.13", only: :test}
     ]
   end
 
