@@ -12,8 +12,9 @@ defmodule Prequest.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      preferred_cli_env: [ci: :test, "ecto.reset.test": :test, coveralls: :test],
+      test_coverage: [tool: ExCoveralls],
       aliases: aliases(),
-      preferred_cli_env: [ci: :test, "ecto.reset.test": :test],
       deps: deps(),
       docs: docs()
     ]
@@ -48,7 +49,8 @@ defmodule Prequest.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ex_doc, "~>0.22", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.8", only: [:dev, :test]}
+      {:sobelow, "~> 0.8", only: [:dev, :test]},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 

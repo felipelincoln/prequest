@@ -1,0 +1,11 @@
+{
+  "skip_files": [
+    "lib/prequest.ex",
+    "lib/prequest/application.ex",
+    "lib/prequest/release.ex",
+    "lib/prequest/repo.ex",
+    "lib/prequest_web.ex",
+    "lib/prequest_web/",
+    "test/"
+  ]
+}
