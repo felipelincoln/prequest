@@ -9,6 +9,7 @@ defmodule Prequest.CMSTest do
   # [x] Returning values
   # [x] Side effects
   # [x] Constraints
+  # [ ] Deletion effects
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -249,6 +250,26 @@ defmodule Prequest.CMSTest do
                |> CMS.delete_topic()
 
       assert %Topic{} = topic_fixture(%{name: topic.name})
+    end
+
+    test "delete_topic/1 preserves articles", %{user: user} do
+      topic = topic_fixture()
+
+      {:ok, article} =
+        CMS.create_article(%{
+          title: "testing title",
+          cover: "testing cover",
+          source: "testing source",
+          user_id: user.id,
+          topics: [%{name: "a topic"}, topic]
+        })
+
+      assert {:ok, topic} = CMS.delete_topic(topic)
+
+      assert %Article{topics: article_topics} =
+               CMS.get_article!(article.id) |> CMS.preload!(:topics)
+
+      assert topic not in article_topics
     end
   end
 
