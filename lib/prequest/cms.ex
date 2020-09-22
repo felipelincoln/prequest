@@ -339,15 +339,14 @@ defmodule Prequest.CMS do
   defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
   defp build_topics(_), do: []
 
+  defp build_topic(%Topic{} = topic), do: topic
+
   defp build_topic(%{name: name}) do
     case Repo.get_by(Topic, name: name) do
       %Topic{} = topic -> topic
       nil -> %{name: name}
     end
   end
-
-  defp build_topic(%Topic{} = topic), do: topic
-  defp build_topic(_), do: %{}
 
   @doc """
   Deletes an article.

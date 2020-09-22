@@ -75,6 +75,26 @@ defmodule Prequest.CMSTest do
                Enum.map(attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
     end
 
+    test "create_article/1 with no topic associated creates an article", %{user: user} do
+      # no :topics key
+      assert {:ok, %Article{} = article_no_topics} =
+               %{user_id: user.id}
+               |> Enum.into(@valid_attrs)
+               |> Map.delete(:topics)
+               |> CMS.create_article()
+
+      assert article_no_topics.topics == []
+
+      # :topics as an empty list
+      assert {:ok, %Article{} = article_empty_topics} =
+               %{user_id: user.id, source: @valid_attrs.source <> "(1)"}
+               |> Enum.into(@valid_attrs)
+               |> Map.merge(%{topics: []}, fn _k, _v, v -> v end)
+               |> CMS.create_article()
+
+      assert article_empty_topics.topics == []
+    end
+
     test "create_article/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = CMS.create_article(@invalid_attrs)
 
