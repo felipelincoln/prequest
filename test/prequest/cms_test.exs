@@ -9,7 +9,7 @@ defmodule Prequest.CMSTest do
   # [x] Returning values
   # [x] Side effects
   # [x] Constraints
-  # [ ] Deletion effects
+  # [x] Deletion effects
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -314,9 +314,29 @@ defmodule Prequest.CMSTest do
     end
 
     test "delete_report/1 deletes the report", %{user: user, article: article} do
-      report = report_fixture(%{user_id: user.id, article_id: article.id})
-      assert {:ok, %Report{}} = CMS.delete_report(report)
+      assert {:ok, report} =
+               %{user_id: user.id, article_id: article.id}
+               |> report_fixture()
+               |> CMS.delete_report()
+
       assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
+    end
+
+    test "delete_report/1 preserves user and article", %{user: user, article: article} do
+      assert {:ok, report} =
+               %{user_id: user.id, article_id: article.id}
+               |> report_fixture()
+               |> CMS.delete_report()
+
+      assert %Accounts.User{reports: user_reports} =
+               Accounts.get_user!(user.id) |> CMS.preload!(:reports)
+
+      assert report not in user_reports
+
+      assert %Article{reports: article_reports} =
+               CMS.get_article!(article.id) |> CMS.preload!(:reports)
+
+      assert report not in article_reports
     end
   end
 
@@ -381,9 +401,40 @@ defmodule Prequest.CMSTest do
     end
 
     test "delete_view/1 deletes the view", %{user: user, article: article} do
-      view = view_fixture(%{user_id: user.id, article_id: article.id})
-      assert {:ok, %View{}} = CMS.delete_view(view)
+      assert {:ok, view} =
+               %{user_id: user.id, article_id: article.id}
+               |> view_fixture()
+               |> CMS.delete_view()
+
       assert CMS.get_view(user.id, article.id) == nil
+    end
+
+    test "delete_view/1 releases article/user pair for a new user", %{
+      user: user,
+      article: article
+    } do
+      assert {:ok, view} =
+               %{user_id: user.id, article_id: article.id}
+               |> view_fixture()
+               |> CMS.delete_view()
+
+      assert %View{} = view_fixture(%{user_id: user.id, article_id: article.id})
+    end
+
+    test "delete_view/1 preserves user and article", %{user: user, article: article} do
+      assert {:ok, view} =
+               %{user_id: user.id, article_id: article.id}
+               |> view_fixture()
+               |> CMS.delete_view()
+
+      assert %Accounts.User{views: user_views} =
+               Accounts.get_user!(user.id) |> CMS.preload!(:views)
+
+      assert view not in user_views
+
+      assert %Article{views: article_views} = CMS.get_article!(article.id) |> CMS.preload!(:views)
+
+      assert view not in article_views
     end
   end
 end
