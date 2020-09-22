@@ -78,7 +78,7 @@ defmodule Prequest.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "ecto.reset.test": ["ecto.reset"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      ci: ["format --check-formatted --dry-run", "credo --strict", "sobelow -v", "test"]
+      ci: ["format --check-formatted --dry-run", "credo --strict", "sobelow -v", "coveralls"]
     ]
   end
 end
