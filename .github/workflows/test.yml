@@ -18,6 +18,10 @@ jobs:
           -e GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH \
           -e GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME \
           -d web /bin/sh
+      - name: Copy event.json to container
+        run: |
+          docker exec test_container mkdir -p /home/runner/work/_temp/_github_workflow/
+          docker cp event.json test_container:/home/runner/work/_temp/_github_workflow/
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
