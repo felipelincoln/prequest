@@ -9,7 +9,16 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build docker-compose services
-        run: docker-compose run --name test_container -e MIX_ENV=test -d web /bin/sh
+        run: |
+          docker-compose run --name test_container \
+          -e MIX_ENV=test \
+          -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+          -e GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME \
+          -e GITHUB_SHA=$GITHUB_SHA \
+          -e GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH \
+          -e GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME \
+          -e GITHUB_REF=$GITHUB_REF \
+          -d web /bin/sh
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
