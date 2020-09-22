@@ -21,5 +21,5 @@ jobs:
         run: docker exec test_container mix sobelow -v
 
       - name: Run mix test
-        run: docker exec test_container GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} mix coveralls.github
+        run: docker exec -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} test_container mix coveralls.github
         
