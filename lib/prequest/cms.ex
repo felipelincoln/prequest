@@ -538,10 +538,10 @@ defmodule Prequest.CMS do
 
   ## Examples
 
-      iex> get_view!(user.id, article.id)
+      iex> get_view(user.id, article.id)
       %View{}
 
-      iex> get_view!(0, 0)
+      iex> get_view(0, 0)
       nil
 
   """

@@ -8,7 +8,7 @@ defmodule Prequest.CMSTest do
   # Testing
   # [x] Returning values
   # [x] Side effects
-  # [ ] Constraints
+  # [x] Constraints
 
   setup_all do
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
@@ -57,19 +57,21 @@ defmodule Prequest.CMSTest do
       assert CMS.get_article!(article.id) |> CMS.preload!(:topics) == article
     end
 
-    test "create_article/1 with valid data creates an article", %{user: user} do
+    test "create_article/1 with valid data creates an article", %{user: user, topic: topic} do
+      attrs = Map.merge(@valid_attrs, %{topics: [topic]}, fn _k, v1, v2 -> v1 ++ v2 end)
+
       assert {:ok, %Article{} = article} =
                %{user_id: user.id}
-               |> Enum.into(@valid_attrs)
+               |> Enum.into(attrs)
                |> CMS.create_article()
 
-      assert article.source == @valid_attrs.source
-      assert article.title == @valid_attrs.title
-      assert article.cover == @valid_attrs.cover
+      assert article.source == attrs.source
+      assert article.title == attrs.title
+      assert article.cover == attrs.cover
       assert article.user_id == user.id
 
       assert article.topics ==
-               Enum.map(@valid_attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
+               Enum.map(attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
     end
 
     test "create_article/1 with invalid data returns error changeset" do
@@ -136,8 +138,11 @@ defmodule Prequest.CMSTest do
     end
 
     test "delete_article/1 deletes the article", %{user: user} do
-      article = article_fixture(%{user_id: user.id})
-      assert {:ok, %Article{}} = CMS.delete_article(article)
+      assert {:ok, %Article{} = article} =
+               %{user_id: user.id}
+               |> article_fixture
+               |> CMS.delete_article()
+
       assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
 
       # check if replaced topics are not associated anymore.
@@ -154,6 +159,33 @@ defmodule Prequest.CMSTest do
                |> CMS.delete_article()
 
       assert %Article{} = article_fixture(%{user_id: user.id, source: article.source})
+    end
+
+    test "delete_article/1 deletes all its report and view associations", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      {:ok, report} = CMS.create_report(%{article_id: article.id})
+      {:ok, _view} = CMS.create_view(%{user_id: user.id, article_id: article.id})
+      {:ok, _article} = CMS.delete_article(article)
+
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
+      assert CMS.get_view(user.id, article.id) == nil
+    end
+
+    test "delete_article/1 preserves user and topics", %{user: user} do
+      assert {:ok, %Article{} = article} =
+               %{user_id: user.id}
+               |> article_fixture
+               |> CMS.delete_article()
+
+      for %Topic{name: name} <- article.topics do
+        assert %Topic{articles: topic_articles} = CMS.get_topic(name) |> CMS.preload!(:articles)
+        assert article not in topic_articles
+      end
+
+      assert %Accounts.User{articles: user_articles} =
+               Accounts.get_user!(user.id) |> CMS.preload!(:articles)
+
+      assert article not in user_articles
     end
   end
 
