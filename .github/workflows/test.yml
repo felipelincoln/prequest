@@ -8,18 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: build docker-compose services
-        run: docker-compose build
+      - name: Build docker-compose services
+        run: |
+          docker-compose run --name test_container -e MIX_ENV=test -d web /bin/sh
+          alias mix="docker exec test_container mix"
       
-      - name: check format
-        run: docker-compose run -T web mix format --check-formatted --dry-run
-
-      - name: check consistency
-        run: docker-compose run -T web mix credo --strict
-
-      - name: check security
-        run: docker-compose run -T web mix sobelow -v
-
-      - name: run tests
-        run: docker-compose run -T web mix test
+      - run: mix format --check-formatted --dry-run
+      - run: mix credo --strict
+      - run: mix sobelow -v
+      - run: mix test
         
