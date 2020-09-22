@@ -13,7 +13,7 @@ defmodule Prequest.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      preferred_cli_env: [ci: :test],
+      preferred_cli_env: [ci: :test, "ecto.reset.test": :test],
       deps: deps(),
       docs: docs()
     ]
@@ -74,6 +74,7 @@ defmodule Prequest.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.reset.test": ["ecto.reset"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       ci: ["format --check-formatted --dry-run", "credo --strict", "sobelow -v", "test"]
     ]
