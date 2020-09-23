@@ -195,11 +195,12 @@ defmodule Prequest.CMSTest do
       assert %Article{} = article_fixture(%{user_id: user.id, source: article.source})
     end
 
-    test "delete_article/1 deletes all its report and view associations", %{user: user} do
+    test "delete_article/1 deletes all associated reports and views", %{user: user} do
       article = article_fixture(%{user_id: user.id})
       {:ok, report} = CMS.create_report(%{article_id: article.id})
       {:ok, _view} = CMS.create_view(%{user_id: user.id, article_id: article.id})
-      {:ok, _article} = CMS.delete_article(article)
+
+      {:ok, article} = CMS.delete_article(article)
 
       assert_raise Ecto.NoResultsError, fn -> CMS.get_report!(report.id) end
       assert CMS.get_view(user.id, article.id) == nil
@@ -316,7 +317,7 @@ defmodule Prequest.CMSTest do
   end
 
   describe "reports" do
-    def report_fixture(%{user_id: _, article_id: _} = attrs) do
+    def report_fixture(%{article_id: _} = attrs) do
       {:ok, report} = CMS.create_report(attrs)
 
       report
@@ -336,9 +337,19 @@ defmodule Prequest.CMSTest do
       assert report.message == "some message"
       assert report.user == user
       assert CMS.preload!(report.article, :topics) == article
+
       # article was created, so it will always have :topics loaded,
       # it's the create_article/1 behaviour.
       # On the other hand, report.article was obtained from database.
+
+      assert {:ok, %Report{} = nouser_report} =
+               %{article_id: article.id}
+               |> CMS.create_report()
+               |> CMS.preload()
+
+      assert nouser_report.message == nil
+      assert nouser_report.user == nil
+      assert CMS.preload!(nouser_report.article, :topics) == article
     end
 
     test "create_report/1 with invalid data returns error changeset" do

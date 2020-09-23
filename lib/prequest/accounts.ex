@@ -4,22 +4,8 @@ defmodule Prequest.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Prequest.Repo
-
   alias Prequest.Accounts.User
-
-  @doc """
-  Returns the list of users.
-
-  ## Examples
-
-      iex> list_users()
-      [%User{}, ...]
-
-  """
-  def list_users do
-    Repo.all(User)
-  end
+  alias Prequest.Repo
 
   @doc """
   Gets a single user.
@@ -36,6 +22,8 @@ defmodule Prequest.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def get_user(username), do: Repo.get_by(User, username: username)
 
   @doc """
   Creates a user.
@@ -87,18 +75,5 @@ defmodule Prequest.Accounts do
   """
   def delete_user(%User{} = user) do
     Repo.delete(user)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking user changes.
-
-  ## Examples
-
-      iex> change_user(user)
-      %Ecto.Changeset{data: %User{}}
-
-  """
-  def change_user(%User{} = user, attrs \\ %{}) do
-    User.changeset(user, attrs)
   end
 end

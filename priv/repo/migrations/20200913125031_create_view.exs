@@ -4,7 +4,7 @@ defmodule Prequest.Repo.Migrations.CreateView do
   def change do
     create table(:views) do
       add :liked?, :boolean, default: false, null: false
-      add :user_id, references(:users, on_delete: :nilify_all), null: true
+      add :user_id, references(:users, on_delete: :delete_all), null: false
       add :article_id, references(:articles, on_delete: :delete_all), null: false
 
       timestamps()
