@@ -33,6 +33,9 @@ ARG MIX_ENV
 COPY lib lib
 RUN mix do compile, release
 
+# make a copy of dev deps into test deps
+RUN cp -r _build/dev/ _build/test/
+
 
 # production stage
 FROM alpine:3.11 AS production
