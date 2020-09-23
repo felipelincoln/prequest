@@ -12,9 +12,6 @@ WORKDIR /app
 # install hex and rebar
 RUN mix do local.hex --force, local.rebar --force
 
-# set build-time env variable
-ARG MIX_ENV=dev
-
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
@@ -29,22 +26,20 @@ COPY assets assets
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
+# set build-time env variable
+ARG MIX_ENV
+
 # compile and build release
 COPY lib lib
-# uncomment COPY if rel/ exists
-# COPY rel rel
 RUN mix do compile, release
 
 
 # production stage
 FROM alpine:3.11 AS production
 
-ARG MIX_ENV=dev
-
-RUN apk add --no-cache openssl ncurses-libs
-
+RUN apk add openssl ncurses-libs
 WORKDIR /app
-
+ARG MIX_ENV
 COPY --from=build /app/_build/$MIX_ENV/rel/prequest ./
 
 CMD ["bin/prequest", "start"]

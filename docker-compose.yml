@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: build
+      args:
+        - MIX_ENV=dev
     image: prequest:latest
     command: mix phx.server
     volumes:
