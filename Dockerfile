@@ -43,6 +43,6 @@ RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
 
-COPY --from=build /app/_build/prod/rel/prequest ./
+COPY --from=build /app/_build/$MIX_ENV/rel/prequest ./
 
 CMD ["bin/prequest", "start"]
