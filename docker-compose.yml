@@ -7,7 +7,9 @@ services:
       target: build
       args:
         - MIX_ENV=dev
-    image: prequest:latest
+      cache_from:
+        - felipelincoln/prequest:latest
+    image: felipelincoln/prequest:latest
     command: mix phx.server
     volumes:
       - .:/app
