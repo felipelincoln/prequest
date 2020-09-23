@@ -16,6 +16,8 @@ jobs:
           image_name: prequest
           build_extra_args: "--target build"
       
+      - run: docker images
+        
       - name: Start docker-compose services
         run: |
           docker-compose run --name test_container \
