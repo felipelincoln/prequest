@@ -13,7 +13,7 @@ WORKDIR /app
 RUN mix do local.hex --force, local.rebar --force
 
 # set build-time env variable
-ARG MIX_ENV
+ARG MIX_ENV=dev
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -39,7 +39,7 @@ RUN mix do compile, release
 # production stage
 FROM alpine:3.11 AS production
 
-ARG MIX_ENV
+ARG MIX_ENV=dev
 
 RUN apk add --no-cache openssl ncurses-libs
 
