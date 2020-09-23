@@ -39,6 +39,8 @@ RUN mix do compile, release
 # production stage
 FROM alpine:3.11 AS production
 
+ARG MIX_ENV
+
 RUN apk add --no-cache openssl ncurses-libs
 
 WORKDIR /app
