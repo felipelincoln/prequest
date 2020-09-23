@@ -39,13 +39,6 @@ defmodule Prequest.DataCase do
     :ok
   end
 
-  setup_all do
-    :ok = Sandbox.checkout(Prequest.Repo)
-    Sandbox.mode(Prequest.Repo, :auto)
-
-    :ok
-  end
-
   @doc """
   A helper that transforms changeset errors into a map of messages.
 

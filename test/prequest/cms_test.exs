@@ -1,6 +1,7 @@
 defmodule Prequest.CMSTest do
   use Prequest.DataCase, async: true
 
+  alias Ecto.Adapters.SQL.Sandbox
   alias Prequest.Accounts
   alias Prequest.CMS
   alias Prequest.CMS.{Article, Report, Topic, View}
@@ -12,6 +13,7 @@ defmodule Prequest.CMSTest do
   # [x] Deletion effects
 
   setup_all do
+    Sandbox.mode(Prequest.Repo, :auto)
     {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
 
     {:ok, article} =
@@ -21,6 +23,7 @@ defmodule Prequest.CMSTest do
     {:ok, topic} = CMS.create_topic(%{name: "prequest"})
 
     on_exit(fn ->
+      Sandbox.mode(Prequest.Repo, :auto)
       Accounts.delete_user(user)
       CMS.delete_topic(topic)
     end)
