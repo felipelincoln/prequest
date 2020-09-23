@@ -65,11 +65,16 @@ defmodule Prequest.CMSTest do
                %{user_id: user.id}
                |> Enum.into(attrs)
                |> CMS.create_article()
+               |> CMS.preload()
 
       assert article.source == attrs.source
       assert article.title == attrs.title
       assert article.cover == attrs.cover
       assert article.user_id == user.id
+
+      assert article.user == user
+      assert article.reports == []
+      assert article.views == []
 
       assert article.topics ==
                Enum.map(attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
@@ -120,11 +125,16 @@ defmodule Prequest.CMSTest do
       assert {:ok, %Article{} = updated_article} =
                article_fixture(%{user_id: user.id})
                |> CMS.update_article(@update_attrs)
+               |> CMS.preload()
 
       assert updated_article.source == @update_attrs.source
       assert updated_article.title == @update_attrs.title
       assert updated_article.cover == @update_attrs.cover
       assert updated_article.user_id == user.id
+
+      assert updated_article.user == user
+      assert updated_article.reports == []
+      assert updated_article.views == []
 
       assert updated_article.topics ==
                Enum.map(@update_attrs.topics, fn %{name: name} -> CMS.get_topic(name) end)
@@ -227,8 +237,13 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_topic/1 with valid data creates a topic" do
-      assert {:ok, %Topic{} = topic} = CMS.create_topic(@valid_attrs)
+      assert {:ok, %Topic{} = topic} =
+               @valid_attrs
+               |> CMS.create_topic()
+               |> CMS.preload()
+
       assert topic.name == @valid_attrs.name
+      assert topic.articles == []
     end
 
     test "create_topic/1 with invalid data returns error changeset" do
@@ -241,9 +256,13 @@ defmodule Prequest.CMSTest do
     end
 
     test "update_topic/2 with valid data updates the topic" do
-      topic = topic_fixture()
-      assert {:ok, %Topic{} = topic} = CMS.update_topic(topic, @update_attrs)
+      assert {:ok, %Topic{} = topic} =
+               topic_fixture()
+               |> CMS.update_topic(@update_attrs)
+               |> CMS.preload()
+
       assert topic.name == @update_attrs.name
+      assert topic.articles == []
     end
 
     test "update_topic/2 with invalid data returns error changeset" do
@@ -306,9 +325,17 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_report/1 with valid data creates a report", %{user: user, article: article} do
-      attrs = %{user_id: user.id, article_id: article.id, message: "some message"}
-      assert {:ok, %Report{} = report} = CMS.create_report(attrs)
+      assert {:ok, %Report{} = report} =
+               %{user_id: user.id, article_id: article.id, message: "some message"}
+               |> CMS.create_report()
+               |> CMS.preload()
+
       assert report.message == "some message"
+      assert report.user == user
+      assert CMS.preload!(report.article, :topics) == article
+      # article was created, so it will always have :topics loaded,
+      # it's the create_article/1 behaviour.
+      # On the other hand, report.article was obtained from database.
     end
 
     test "create_report/1 with invalid data returns error changeset" do
@@ -316,12 +343,14 @@ defmodule Prequest.CMSTest do
     end
 
     test "update_report/2 with valid data updates the report", %{user: user, article: article} do
-      report = report_fixture(%{article_id: article.id, user_id: user.id})
-
       assert {:ok, %Report{} = report} =
-               CMS.update_report(report, %{user_id: nil, message: "some updated message"})
+               report_fixture(%{article_id: article.id, user_id: user.id})
+               |> CMS.update_report(%{user_id: nil, message: "some updated message"})
+               |> CMS.preload()
 
       assert report.message == "some updated message"
+      assert report.user == nil
+      assert CMS.preload!(report.article, :topics) == article
     end
 
     test "update_report/2 with invalid data returns error changeset", %{
@@ -373,9 +402,14 @@ defmodule Prequest.CMSTest do
     end
 
     test "create_view/1 with valid data creates a view", %{user: user, article: article} do
-      attrs = %{user_id: user.id, article_id: article.id, liked?: true}
-      assert {:ok, %View{} = view} = CMS.create_view(attrs)
+      assert {:ok, %View{} = view} =
+               %{user_id: user.id, article_id: article.id, liked?: true}
+               |> CMS.create_view()
+               |> CMS.preload()
+
       assert view.liked? == true
+      assert view.user == user
+      assert CMS.preload!(view.article, :topics) == article
     end
 
     test "create_view/1 with invalid data returns error changeset" do
@@ -392,11 +426,14 @@ defmodule Prequest.CMSTest do
     end
 
     test "update_view/2 with valid data updates the view", %{user: user, article: article} do
-      view = view_fixture(%{article_id: article.id, user_id: user.id, liked?: false})
-
-      assert {:ok, %View{} = view} = CMS.update_view(view, %{liked?: true})
+      assert {:ok, %View{} = view} =
+               view_fixture(%{article_id: article.id, user_id: user.id, liked?: false})
+               |> CMS.update_view(%{liked?: true})
+               |> CMS.preload()
 
       assert view.liked? == true
+      assert view.user == user
+      assert CMS.preload!(view.article, :topics) == article
     end
 
     test "update_view/2 with invalid data returns error changeset", %{
