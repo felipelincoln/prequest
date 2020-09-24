@@ -20,8 +20,7 @@ defmodule Prequest.CMS.Article do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts
-  alias Prequest.CMS.{Article, Report, Topic, View}
+  alias Prequest.CMS.{Article, Report, Topic, User, View}
 
   schema "articles" do
     field :cover, :string
@@ -30,7 +29,7 @@ defmodule Prequest.CMS.Article do
 
     timestamps()
 
-    belongs_to :user, Accounts.User
+    belongs_to :user, User
     has_many :reports, Report
     has_many :views, View
     many_to_many :topics, Topic, join_through: "articles_topics", on_replace: :delete

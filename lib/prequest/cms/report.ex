@@ -18,15 +18,14 @@ defmodule Prequest.CMS.Report do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts
-  alias Prequest.CMS.{Article, Report}
+  alias Prequest.CMS.{Article, Report, User}
 
   schema "reports" do
     field :message, :string
 
     timestamps()
 
-    belongs_to :user, Accounts.User
+    belongs_to :user, User
     belongs_to :article, Article
   end
 

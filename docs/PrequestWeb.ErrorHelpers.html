@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Prequest.Accounts.User — Prequest v0.1.0</title>
+    <title>PrequestWeb.ErrorHelpers — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-ded92333e8.js"></script>
+    <script src="dist/sidebar_items-dd0db7a454.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Prequest.Accounts.User <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/accounts/user.ex#L1" title="View Source" class="view-source" rel="help">
+        PrequestWeb.ErrorHelpers <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/error_helpers.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,17 +72,7 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>The schema that models the user.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="0354181572-1">do</span><span class="w">
-  </span><span class="n">field</span><span class="w"> </span><span class="ss">:bio</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
-  </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
-  </span><span class="n">field</span><span class="w"> </span><span class="ss">:username</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
-
-  </span><span class="n">timestamps</span><span class="p" data-group-id="0354181572-2">(</span><span class="p" data-group-id="0354181572-2">)</span><span class="w">
-
-  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Article</span><span class="w">
-  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Report</span><span class="w">
-  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.View</span><span class="w">
-</span><span class="k" data-group-id="0354181572-1">end</span></code></pre><p>Users are the one that create content to the platform.</p>        </section>
+<p>Conveniences for translating and building error messages.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -98,9 +88,15 @@ Prequest      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#changeset/2">changeset(user, attrs)</a>
+    <a href="#error_tag/2">error_tag(form, field)</a>
   </div>
-    <div class="summary-synopsis"><p>User's changeset.</p></div>
+    <div class="summary-synopsis"><p>Generates tag for inlined form input errors.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#translate_error/1">translate_error(arg)</a>
+  </div>
+    <div class="summary-synopsis"><p>Translates an error message using gettext.</p></div>
 </div>
   </div>
         </section>
@@ -113,14 +109,14 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="changeset/2">
+<section class="detail" id="error_tag/2">
   <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
+    <a href="#error_tag/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(user, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/accounts/user.ex#L46" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">error_tag(form, field)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/error_helpers.ex#L11" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -128,11 +124,24 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>User's changeset.</p><h2 id="changeset/2-validation" class="section-heading">
-  <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Validation
-</h2>
-<ul><li>Required: <code class="inline">username</code>.  </li><li>Unique: <code class="inline">username</code>.</li></ul>  </section>
+<p>Generates tag for inlined form input errors.</p>  </section>
+</section>
+<section class="detail" id="translate_error/1">
+  <div class="detail-header">
+    <a href="#translate_error/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">translate_error(arg)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/error_helpers.ex#L23" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>Translates an error message using gettext.</p>  </section>
 </section>
           </div>
         </section>

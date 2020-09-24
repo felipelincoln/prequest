@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Prequest.CMS.Topic — Prequest v0.1.0</title>
+    <title>PrequestWeb.LayoutView — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-dd0db7a454.js"></script>
       <script src="docs_config.js"></script>
@@ -63,22 +63,14 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Prequest.CMS.Topic <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L1" title="View Source" class="view-source" rel="help">
+        PrequestWeb.LayoutView <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
       </h1>
 
 
-        <section id="moduledoc">
-<p>The schema that models the topic.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;topics&quot;</span><span class="w"> </span><span class="k" data-group-id="7227976277-1">do</span><span class="w">
-  </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
-
-  </span><span class="n">timestamps</span><span class="p" data-group-id="7227976277-2">(</span><span class="p" data-group-id="7227976277-2">)</span><span class="w">
-
-  </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="w">
-</span><span class="k" data-group-id="7227976277-1">end</span></code></pre><p>Topic is a category in which an article can be inserted.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -94,9 +86,23 @@ Prequest      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#changeset/2">changeset(topic, attrs)</a>
+    <a href="#__resource__/0">__resource__()</a>
   </div>
-    <div class="summary-synopsis"><p>Topic's changeset.</p></div>
+    <div class="summary-synopsis"><p>The resource name, as an atom, for this view</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#render/2">render(template, assigns \\ %{})</a>
+  </div>
+    <div class="summary-synopsis"><p>Renders the given template locally.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#template_not_found/2">template_not_found(template, assigns)</a>
+  </div>
+    <div class="summary-synopsis"><p>Callback invoked when no template is found.
+By default it raises but can be customized
+to render a particular template.</p></div>
 </div>
   </div>
         </section>
@@ -109,14 +115,14 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="changeset/2">
+<section class="detail" id="__resource__/0">
   <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
+    <a href="#__resource__/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(topic, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/topic.ex#L36" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">__resource__()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -124,11 +130,48 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Topic's changeset.</p><h2 id="changeset/2-validation" class="section-heading">
-  <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Validation
-</h2>
-<ul><li>Required: <code class="inline">name</code>.  </li><li>Unique: <code class="inline">name</code>.</li></ul>  </section>
+<p>The resource name, as an atom, for this view</p>  </section>
+</section>
+<section class="detail" id="render/2">
+    <span id="render/1"></span>
+  <div class="detail-header">
+    <a href="#render/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">render(template, assigns \\ %{})</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>Renders the given template locally.</p>  </section>
+</section>
+<section class="detail" id="template_not_found/2">
+  <div class="detail-header">
+    <a href="#template_not_found/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">template_not_found(template, assigns)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/views/layout_view.ex#L2" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>template_not_found(<a href="https://hexdocs.pm/phoenix/Phoenix.Template.html#t:name/0">Phoenix.Template.name</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">no_return</a>()</pre>
+      </div>
+
+<p>Callback invoked when no template is found.
+By default it raises but can be customized
+to render a particular template.</p>  </section>
 </section>
           </div>
         </section>

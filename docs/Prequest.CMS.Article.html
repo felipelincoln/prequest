@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.CMS.Article — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-ded92333e8.js"></script>
+    <script src="dist/sidebar_items-dd0db7a454.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -72,18 +72,18 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>The schema that models the article.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="4406534403-1">do</span><span class="w">
+<p>The schema that models the article.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="1316179349-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:cover</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:source</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="4406534403-2">(</span><span class="p" data-group-id="4406534403-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="1316179349-2">(</span><span class="p" data-group-id="1316179349-2">)</span><span class="w">
 
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">Accounts.User</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">View</span><span class="w">
   </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="nc">Topic</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on_replace</span><span class="p">:</span><span class="w"> </span><span class="ss">:delete</span><span class="w">
-</span><span class="k" data-group-id="4406534403-1">end</span></code></pre><p>Article is a content created by a user. </p>        </section>
+</span><span class="k" data-group-id="1316179349-1">end</span></code></pre><p>Article is a content created by a user. </p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -121,7 +121,7 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">changeset(article, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L47" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L46" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>

@@ -1,4 +1,4 @@
-defmodule Prequest.Accounts.User do
+defmodule Prequest.CMS.User do
   @moduledoc """
   The schema that models the user.
 
@@ -20,8 +20,7 @@ defmodule Prequest.Accounts.User do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts.User
-  alias Prequest.CMS
+  alias Prequest.CMS.{Article, Report, User, View}
 
   schema "users" do
     field :bio, :string
@@ -30,9 +29,9 @@ defmodule Prequest.Accounts.User do
 
     timestamps()
 
-    has_many :articles, CMS.Article
-    has_many :reports, CMS.Report
-    has_many :views, CMS.View
+    has_many :articles, Article
+    has_many :reports, Report
+    has_many :views, View
   end
 
   @doc """

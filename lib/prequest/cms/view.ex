@@ -16,15 +16,14 @@ defmodule Prequest.CMS.View do
   """
   use Ecto.Schema
   import Ecto.Changeset
-  alias Prequest.Accounts
-  alias Prequest.CMS.{Article, View}
+  alias Prequest.CMS.{Article, User, View}
 
   schema "views" do
     field :liked?, :boolean, default: false
 
     timestamps()
 
-    belongs_to :user, Accounts.User
+    belongs_to :user, User
     belongs_to :article, Article
   end
 

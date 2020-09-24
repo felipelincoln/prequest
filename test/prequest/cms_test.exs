@@ -2,9 +2,8 @@ defmodule Prequest.CMSTest do
   use Prequest.DataCase, async: true
 
   alias Ecto.Adapters.SQL.Sandbox
-  alias Prequest.Accounts
   alias Prequest.CMS
-  alias Prequest.CMS.{Article, Report, Topic, View}
+  alias Prequest.CMS.{Article, Report, Topic, User, View}
 
   # Testing
   # [x] Returning values
@@ -14,7 +13,7 @@ defmodule Prequest.CMSTest do
 
   setup_all do
     Sandbox.mode(Prequest.Repo, :auto)
-    {:ok, user} = Accounts.create_user(%{username: "felipelincoln"})
+    {:ok, user} = CMS.create_user(%{username: "felipelincoln"})
 
     {:ok, article} =
       %{title: "title", cover: "cover image", source: "github url", user_id: user.id}
@@ -24,11 +23,152 @@ defmodule Prequest.CMSTest do
 
     on_exit(fn ->
       Sandbox.mode(Prequest.Repo, :auto)
-      Accounts.delete_user(user)
+      CMS.delete_user(user)
       CMS.delete_topic(topic)
     end)
 
     %{user: user, article: article, topic: topic}
+  end
+
+  describe "users" do
+    @valid_attrs %{bio: "some bio", name: "some name", username: "some username"}
+    @update_attrs %{
+      bio: "some updated bio",
+      name: "some updated name",
+      username: "some updated username"
+    }
+    @invalid_attrs %{bio: nil, name: nil, username: nil}
+
+    def user_fixture(attrs \\ %{}) do
+      {:ok, user} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> CMS.create_user()
+
+      user
+    end
+
+    test "get_user!/1 returns the user with given id" do
+      user = user_fixture()
+      assert CMS.get_user!(user.id) == user
+    end
+
+    test "get_user/1 returns the user with given username" do
+      user = user_fixture()
+      assert CMS.get_user(user.username) == user
+    end
+
+    test "create_user/1 with valid data creates a user" do
+      assert {:ok, %User{} = user} =
+               @valid_attrs
+               |> CMS.create_user()
+               |> CMS.preload()
+
+      assert user.bio == "some bio"
+      assert user.name == "some name"
+      assert user.username == "some username"
+
+      assert user.articles == []
+      assert user.reports == []
+      assert user.views == []
+    end
+
+    test "create_user/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_user(@invalid_attrs)
+    end
+
+    test "create_user/1 using existing username returns error changeset" do
+      assert {:ok, %User{}} = CMS.create_user(@valid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               %{username: @valid_attrs.username}
+               |> Enum.into(@update_attrs)
+               |> CMS.create_user()
+    end
+
+    test "update_user/2 with valid data updates the user" do
+      assert {:ok, %User{} = updated_user} =
+               user_fixture()
+               |> CMS.update_user(@update_attrs)
+               |> CMS.preload()
+
+      assert updated_user.bio == @update_attrs.bio
+      assert updated_user.name == @update_attrs.name
+      assert updated_user.username == @update_attrs.username
+
+      assert updated_user.articles == []
+      assert updated_user.reports == []
+      assert updated_user.views == []
+    end
+
+    test "update_user/2 with invalid data returns error changeset" do
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_user(user, @invalid_attrs)
+      assert user == CMS.get_user!(user.id)
+    end
+
+    test "update_user/2 using existing username returns error changeset" do
+      user = user_fixture()
+      new_user = user_fixture(%{username: @update_attrs.username})
+
+      assert {:error, %Ecto.Changeset{}} = CMS.update_user(new_user, %{username: user.username})
+    end
+
+    test "delete_user/1 deletes the user" do
+      assert {:ok, %User{} = user} =
+               user_fixture()
+               |> CMS.delete_user()
+
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_user!(user.id) end
+    end
+
+    test "delete_user/1 releases username for a new use" do
+      assert {:ok, %User{} = user} =
+               user_fixture(%{username: "testing username"})
+               |> CMS.delete_user()
+
+      assert %User{} = user_fixture(%{username: user.username})
+    end
+
+    test "delete_user/1 deletes owned articles and views" do
+      user = user_fixture()
+
+      {:ok, article} =
+        CMS.create_article(%{
+          title: "my article",
+          cover: "my cover image",
+          source: "my github markdown url",
+          user_id: user.id
+        })
+
+      {:ok, _view} = CMS.create_view(%{user_id: user.id, article_id: article.id})
+
+      {:ok, user} = CMS.delete_user(user)
+
+      assert CMS.get_view(user.id, article.id) == nil
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_article!(article.id) end
+    end
+
+    test "delete_user/1 preserves associated view" do
+      user = user_fixture()
+      new_user = user_fixture(@update_attrs)
+
+      {:ok, article} =
+        CMS.create_article(%{
+          title: "my article",
+          cover: "my cover image",
+          source: "my github markdown url",
+          user_id: user.id
+        })
+
+      {:ok, report} = CMS.create_report(%{user_id: new_user.id, article_id: article.id})
+
+      {:ok, _new_user} = CMS.delete_user(new_user)
+
+      assert (%CMS.Report{} = report) = CMS.get_report!(report.id)
+      assert report.user_id == nil
+      assert report.article_id == article.id
+    end
   end
 
   describe "articles" do
@@ -217,8 +357,7 @@ defmodule Prequest.CMSTest do
         assert article not in topic_articles
       end
 
-      assert %Accounts.User{articles: user_articles} =
-               Accounts.get_user!(user.id) |> CMS.preload!(:articles)
+      assert %User{articles: user_articles} = CMS.get_user!(user.id) |> CMS.preload!(:articles)
 
       assert article not in user_articles
     end
@@ -391,8 +530,7 @@ defmodule Prequest.CMSTest do
                |> report_fixture()
                |> CMS.delete_report()
 
-      assert %Accounts.User{reports: user_reports} =
-               Accounts.get_user!(user.id) |> CMS.preload!(:reports)
+      assert %User{reports: user_reports} = CMS.get_user!(user.id) |> CMS.preload!(:reports)
 
       assert report not in user_reports
 
@@ -463,7 +601,7 @@ defmodule Prequest.CMSTest do
       user: user,
       article: article
     } do
-      {:ok, new_user} = Accounts.create_user(%{username: "benicio"})
+      {:ok, new_user} = CMS.create_user(%{username: "benicio"})
       _view = view_fixture(%{user_id: user.id, article_id: article.id})
       view = view_fixture(%{user_id: new_user.id, article_id: article.id})
 
@@ -498,8 +636,7 @@ defmodule Prequest.CMSTest do
                |> view_fixture()
                |> CMS.delete_view()
 
-      assert %Accounts.User{views: user_views} =
-               Accounts.get_user!(user.id) |> CMS.preload!(:views)
+      assert %User{views: user_views} = CMS.get_user!(user.id) |> CMS.preload!(:views)
 
       assert view not in user_views
 

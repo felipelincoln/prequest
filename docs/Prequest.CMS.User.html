@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Prequest.Release — Prequest v0.1.0</title>
+    <title>Prequest.CMS.User — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-ded92333e8.js"></script>
+    <script src="dist/sidebar_items-dd0db7a454.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Prequest.Release <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/release.ex#L1" title="View Source" class="view-source" rel="help">
+        Prequest.CMS.User <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/user.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,8 +72,17 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>Repo commands to run with the <code class="inline">bin/prequest</code> executable</p><p>Example:
-<code class="inline">bin/prequest eval &quot;Prequest.Release.migrate&quot;</code> to make repo migrations</p>        </section>
+<p>The schema that models the user.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k" data-group-id="1542812451-1">do</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:bio</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+  </span><span class="n">field</span><span class="w"> </span><span class="ss">:username</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+
+  </span><span class="n">timestamps</span><span class="p" data-group-id="1542812451-2">(</span><span class="p" data-group-id="1542812451-2">)</span><span class="w">
+
+  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:articles</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Article</span><span class="w">
+  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.Report</span><span class="w">
+  </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">CMS.View</span><span class="w">
+</span><span class="k" data-group-id="1542812451-1">end</span></code></pre><p>Users are the one that create content to the platform.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -89,13 +98,9 @@ Prequest      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#migrate/0">migrate()</a>
+    <a href="#changeset/2">changeset(user, attrs)</a>
   </div>
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#rollback/2">rollback(repo, version)</a>
-  </div>
+    <div class="summary-synopsis"><p>User's changeset.</p></div>
 </div>
   </div>
         </section>
@@ -108,14 +113,14 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="migrate/0">
+<section class="detail" id="changeset/2">
   <div class="detail-header">
-    <a href="#migrate/0" class="detail-link" title="Link to this function">
+    <a href="#changeset/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">migrate()</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/release.ex#L11" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">changeset(user, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/user.ex#L45" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -123,24 +128,11 @@ Functions          </h1>
 
   <section class="docstring">
 
-  </section>
-</section>
-<section class="detail" id="rollback/2">
-  <div class="detail-header">
-    <a href="#rollback/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">rollback(repo, version)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/release.ex#L19" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-
-  </section>
+<p>User's changeset.</p><h2 id="changeset/2-validation" class="section-heading">
+  <a href="#changeset/2-validation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Validation
+</h2>
+<ul><li>Required: <code class="inline">username</code>.  </li><li>Unique: <code class="inline">username</code>.</li></ul>  </section>
 </section>
           </div>
         </section>
