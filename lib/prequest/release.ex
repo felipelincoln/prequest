@@ -3,6 +3,7 @@ defmodule Prequest.Release do
 
   @app :prequest
 
+  # bin/prequest eval "Prequest.Release.migrate"
   def migrate do
     load_app()
 

@@ -130,6 +130,7 @@ defmodule Prequest.CMS do
       ** (Ecto.NoResultsError)
 
   """
+  @doc section: :user
   @spec get_user!(integer) :: user
   def get_user!(id), do: Repo.get!(User, id)
 
@@ -145,6 +146,7 @@ defmodule Prequest.CMS do
       nil
 
   """
+  @doc section: :user
   @spec get_user(String.t()) :: user
   def get_user(username), do: Repo.get_by(User, username: username)
 
@@ -164,6 +166,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :user
   @spec create_user(map) :: {:ok, user} | {:error, changeset}
   def create_user(attrs) do
     %User{}
@@ -183,6 +186,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :user
   @spec update_user(user, map) :: {:ok, user} | {:error, changeset}
   def update_user(%User{} = user, attrs) do
     user
@@ -202,6 +206,7 @@ defmodule Prequest.CMS do
       {:error, %Ecto.Changeset{}}
 
   """
+  @doc section: :user
   @spec delete_user(user) :: {:ok, user} | {:error, changeset}
   def delete_user(%User{} = user) do
     Repo.delete(user)

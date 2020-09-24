@@ -61,12 +61,12 @@ defmodule Prequest.MixProject do
       main: "contributing",
       filter_prefix: "Prequest.",
       extras: [".github/CONTRIBUTING.md"],
-      nest_modules_by_prefix: [Prequest, Prequest.CMS, Prequest.Accounts],
       groups_for_functions: [
-        "Managing articles": &(&1[:section] == :article),
-        "Managing topics": &(&1[:section] == :topic),
-        "Managing reports": &(&1[:section] == :report),
-        "Managing views": &(&1[:section] == :view)
+        "Articles": &(&1[:section] == :article),
+        "Reports": &(&1[:section] == :report),
+        "Topics": &(&1[:section] == :topic),
+        "Users": &(&1[:section] == :user),
+        "Views": &(&1[:section] == :view)
       ]
     ]
   end
