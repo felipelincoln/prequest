@@ -18,7 +18,7 @@ defmodule Prequest.CMS.CRUD do
       @behaviour CRUD
 
       def create(attrs) do
-        unquote(schema).__struct__()
+        %unquote(schema){}
         |> unquote(schema).changeset(attrs)
         |> Repo.insert()
       end
@@ -27,13 +27,13 @@ defmodule Prequest.CMS.CRUD do
         Repo.get!(unquote(schema), id)
       end
 
-      def update(data, attrs) do
+      def update(%unquote(schema){} = data, attrs) do
         data
         |> unquote(schema).changeset(attrs)
         |> Repo.update()
       end
 
-      def delete(data) do
+      def delete(%unquote(schema){} = data) do
         Repo.delete(data)
       end
 

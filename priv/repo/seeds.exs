@@ -1,6 +1,5 @@
 alias Prequest.Repo
-alias Prequest.Accounts.User
-alias Prequest.CMS.{Article, Topic}
+alias Prequest.CMS.{Article, User, Topic}
 
 # prevents from seeding the :test environment
 if Mix.env() == :dev do
