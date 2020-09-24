@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.22.2">
+    <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.CMS.Article — Prequest v0.1.0</title>
-    <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
-    <script src="dist/sidebar_items-353d96d9be.js"></script>
+    <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
+    <script src="dist/sidebar_items-8a6a4bf126.js"></script>
       <script src="docs_config.js"></script>
-    <script async src="dist/app-0103364119015b97e56c.js"></script>
+    <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
@@ -22,14 +22,14 @@
 
 <section class="sidebar">
   <form class="sidebar-search" action="search.html">
-    <button type="submit" class="search-button">
-      <span class="icon-search" aria-hidden="true"></span>
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button">
-      <span class="icon-cross" title="Cancel search"></span>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
     </button>
     <label class="search-label">
-      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
 
@@ -42,9 +42,9 @@
     <div class="sidebar-projectDetails">
       <a href="https://prequest.herokuapp.com/" class="sidebar-projectName">
 Prequest      </a>
-      <h2 class="sidebar-projectVersion">
+      <strong class="sidebar-projectVersion">
         v0.1.0
-      </h2>
+      </strong>
     </div>
   </div>
 
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        <small class="app-vsn">Prequest v0.1.0</small>
-Prequest.CMS.Article          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L1" title="View Source" class="view-source" rel="help">
+        Prequest.CMS.Article <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/article.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,18 +72,18 @@ Prequest.CMS.Article          <a href="https://github.com/felipelincoln/prequest
 
 
         <section id="moduledoc">
-<p>The schema that models the article.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="7193555794-1">do</span><span class="w">
+<p>The schema that models the article.</p><pre><code class="nohighlight makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;articles&quot;</span><span class="w"> </span><span class="k" data-group-id="2600723683-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:cover</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:source</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
 
-  </span><span class="n">timestamps</span><span class="p" data-group-id="7193555794-2">(</span><span class="p" data-group-id="7193555794-2">)</span><span class="w">
+  </span><span class="n">timestamps</span><span class="p" data-group-id="2600723683-2">(</span><span class="p" data-group-id="2600723683-2">)</span><span class="w">
 
   </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:user</span><span class="p">,</span><span class="w"> </span><span class="nc">Accounts.User</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:reports</span><span class="p">,</span><span class="w"> </span><span class="nc">Report</span><span class="w">
   </span><span class="n">has_many</span><span class="w"> </span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="nc">View</span><span class="w">
   </span><span class="n">many_to_many</span><span class="w"> </span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="nc">Topic</span><span class="p">,</span><span class="w"> </span><span class="ss">join_through</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;articles_topics&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on_replace</span><span class="p">:</span><span class="w"> </span><span class="ss">:delete</span><span class="w">
-</span><span class="k" data-group-id="7193555794-1">end</span></code></pre><p>Article is a content created by a user. </p>        </section>
+</span><span class="k" data-group-id="2600723683-1">end</span></code></pre><p>Article is a content created by a user. </p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -141,10 +141,11 @@ Functions          </h1>
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.2),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.6) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
           </span>
           <span class="line">
-            designed by
+            Designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
           </span>
         </p>
