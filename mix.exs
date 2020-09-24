@@ -62,11 +62,11 @@ defmodule Prequest.MixProject do
       filter_prefix: "Prequest.",
       extras: [".github/CONTRIBUTING.md"],
       groups_for_functions: [
-        "Articles": &(&1[:section] == :article),
-        "Reports": &(&1[:section] == :report),
-        "Topics": &(&1[:section] == :topic),
-        "Users": &(&1[:section] == :user),
-        "Views": &(&1[:section] == :view)
+        Articles: &(&1[:section] == :article),
+        Reports: &(&1[:section] == :report),
+        Topics: &(&1[:section] == :topic),
+        Users: &(&1[:section] == :user),
+        Views: &(&1[:section] == :view)
       ]
     ]
   end
