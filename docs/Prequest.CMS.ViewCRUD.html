@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Prequest.CMS.CRUD — Prequest v0.1.0</title>
+    <title>Prequest.CMS.ViewCRUD — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-6da1ea6fe6.js"></script>
       <script src="docs_config.js"></script>
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        Prequest.CMS.CRUD <small>behaviour</small> <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L1" title="View Source" class="view-source" rel="help">
+        Prequest.CMS.ViewCRUD <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,7 +72,7 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>CRUD implementation</p>        </section>
+<p>CRUD implementation for views</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -82,182 +82,134 @@ Prequest      </a>
             </a>
             Summary
           </h1>
-  <div class="summary-types summary">
+  <div class="summary-functions summary">
     <h2>
-      <a href="#types">Types</a>
+      <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#t:changeset/0">changeset()</a>
+    <a href="#create/1">create(attrs)</a>
   </div>
-</div>
-  </div>
-  <div class="summary-callbacks summary">
-    <h2>
-      <a href="#callbacks">Callbacks</a>
-    </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#c:create/1">create(map)</a>
-  </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:create/1"><code class="inline">Prequest.CMS.CRUD.create/1</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#c:delete/1">delete(struct)</a>
+    <a href="#delete/1">delete(data)</a>
+  </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:delete/1"><code class="inline">Prequest.CMS.CRUD.delete/1</code></a>.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_view/2">get_view(user_id, article_id)</a>
   </div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#c:read!/1">read!(integer)</a>
+    <a href="#read!/1">read!(id)</a>
   </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:read!/1"><code class="inline">Prequest.CMS.CRUD.read!/1</code></a>.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#c:update/2">update(struct, map)</a>
+    <a href="#update/2">update(data, attrs)</a>
   </div>
+    <div class="summary-synopsis"><p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:update/2"><code class="inline">Prequest.CMS.CRUD.update/2</code></a>.</p></div>
 </div>
   </div>
         </section>
 
-        <section id="types" class="details-list">
+        <section id="functions" class="details-list">
           <h1 class="section-heading">
-            <a class="hover-link" href="#types">
+            <a class="hover-link" href="#functions">
               <span class="icon-link" aria-hidden="true"></span>
               <span class="sr-only">Link to this section</span>
             </a>
-Types          </h1>
-          <div class="types-list">
-<section class="detail" id="t:changeset/0">
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="create/1">
   <div class="detail-header">
-    <a href="#t:changeset/0" class="detail-link" title="Link to this type">
+    <a href="#create/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this type</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset()</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L9" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">create(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L8" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>changeset() :: %Ecto.Changeset{
-  action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  constraints: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  empty_values: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  errors: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  filters: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  params: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  prepare: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  repo: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  repo_changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  repo_opts: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  required: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  valid?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  validations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
-}</pre>
-      </div>
+
+<p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:create/1"><code class="inline">Prequest.CMS.CRUD.create/1</code></a>.</p>  </section>
+</section>
+<section class="detail" id="delete/1">
+  <div class="detail-header">
+    <a href="#delete/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete(data)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L8" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:delete/1"><code class="inline">Prequest.CMS.CRUD.delete/1</code></a>.</p>  </section>
+</section>
+<section class="detail" id="get_view/2">
+  <div class="detail-header">
+    <a href="#get_view/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_view(user_id, article_id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L10" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
 
   </section>
 </section>
-          </div>
-        </section>
-        <section id="callbacks" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#callbacks">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-Callbacks          </h1>
-          <div class="callbacks-list">
-<section class="detail" id="c:create/1">
+<section class="detail" id="read!/1">
   <div class="detail-header">
-    <a href="#c:create/1" class="detail-link" title="Link to this callback">
+    <a href="#read!/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this callback</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">create(map)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L11" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">read!(id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L8" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>create(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
-      </div>
 
-  </section>
+<p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:read!/1"><code class="inline">Prequest.CMS.CRUD.read!/1</code></a>.</p>  </section>
 </section>
-<section class="detail" id="c:delete/1">
+<section class="detail" id="update/2">
   <div class="detail-header">
-    <a href="#c:delete/1" class="detail-link" title="Link to this callback">
+    <a href="#update/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this callback</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">delete(struct)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L14" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">update(data, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/view_crud.ex#L8" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>delete(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
-      </div>
 
-  </section>
-</section>
-<section class="detail" id="c:read!/1">
-  <div class="detail-header">
-    <a href="#c:read!/1" class="detail-link" title="Link to this callback">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this callback</span>
-    </a>
-    <h1 class="signature">read!(integer)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L12" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>read!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()</pre>
-      </div>
-
-  </section>
-</section>
-<section class="detail" id="c:update/2">
-  <div class="detail-header">
-    <a href="#c:update/2" class="detail-link" title="Link to this callback">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this callback</span>
-    </a>
-    <h1 class="signature">update(struct, map)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/cms/crud.ex#L13" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-  </div>
-
-  <section class="docstring">
-      <h2>Specs</h2>
-      <div class="specs">
-          <pre>update(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
-      </div>
-
-  </section>
+<p>Callback implementation for <a href="Prequest.CMS.CRUD.html#c:update/2"><code class="inline">Prequest.CMS.CRUD.update/2</code></a>.</p>  </section>
 </section>
           </div>
         </section>

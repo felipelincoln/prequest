@@ -1,5 +1,11 @@
 404.html
+Prequest.CMS.ArticleCRUD.html
 Prequest.CMS.CRUD.html
+Prequest.CMS.Helpers.html
+Prequest.CMS.ReportCRUD.html
+Prequest.CMS.TopicCRUD.html
+Prequest.CMS.UserCRUD.html
+Prequest.CMS.ViewCRUD.html
 Prequest.CMS.html
 contributing.html
 dist/app-aaa6eb1824b11a32f32d.js
@@ -8,7 +14,7 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-afd134b928.js
-dist/sidebar_items-8eea8af8e2.js
+dist/search_items-8416961e76.js
+dist/sidebar_items-6da1ea6fe6.js
 index.html
 search.html
