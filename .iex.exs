@@ -1,16 +1,15 @@
-# Contexts
-alias Prequest.Accounts
-alias Prequest.CMS
+# Public APIs
+alias Prequest.Manage
 
 # Repo
 alias Prequest.Repo
 
 # Schemas
-alias Prequest.Accounts.User
-alias Prequest.CMS.Article
-alias Prequest.CMS.Report
-alias Prequest.CMS.View
-alias Prequest.CMS.Topic
+alias Prequest.Manage.User
+alias Prequest.Manage.Article
+alias Prequest.Manage.Report
+alias Prequest.Manage.View
+alias Prequest.Manage.Topic
 
 # Ecto modules
 import Ecto.Query

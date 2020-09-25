@@ -67,7 +67,7 @@ defmodule Prequest.Manage do
 
   Let's use the "phoenix" topic in the former way and "elixir" in the latter.
 
-      iex> topic = CMS.get_topic("phoenix")
+      iex> topic = Manage.get_topic("phoenix")
       iex> create_article(%{
       ...>   title: "some title3",
       ...>   source: "some github url3",
@@ -98,7 +98,7 @@ defmodule Prequest.Manage do
 
   > To see how the `topics` field works take a look at `create_article/1`
 
-      iex> article |> CMS.preload!(:topics)
+      iex> article |> Manage.Helpers.preload!(:topics)
       %Article{
         topics: [
           %Topic{name: "elixir"},
