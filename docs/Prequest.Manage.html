@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.22.6">
+    <meta name="project" content="Prequest v0.1.0">
+    <title>Prequest.Manage — Prequest v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
+    <script src="dist/sidebar_items-79cb2c0442.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://prequest.herokuapp.com/" class="sidebar-projectName">
+Prequest      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0
+      </strong>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        Prequest.Manage <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>A public API for managing content.</p>        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:article/0">article()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:changeset/0">changeset()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:report/0">report()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:topic/0">topic()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:user/0">user()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:view/0">view()</a>
+  </div>
+</div>
+  </div>
+  <div class="summary-articles summary">
+    <h2>
+      <a href="#articles">Articles</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_article/1">create_article(attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates an article.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_article/1">delete_article(article)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes an article.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_article!/1">get_article!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single article.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_article/2">update_article(article, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates an article.</p></div>
+</div>
+  </div>
+  <div class="summary-reports summary">
+    <h2>
+      <a href="#reports">Reports</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_report/1">create_report(attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a report.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_report/1">delete_report(report)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a report.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_report!/1">get_report!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single report.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_report/2">update_report(report, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a report.</p></div>
+</div>
+  </div>
+  <div class="summary-topics summary">
+    <h2>
+      <a href="#topics">Topics</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_topic/1">create_topic(attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a topic.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_topic/1">delete_topic(topic)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a topic.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_topic/1">get_topic(name)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single topic by its name.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_topic/2">update_topic(topic, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a topic.</p></div>
+</div>
+  </div>
+  <div class="summary-users summary">
+    <h2>
+      <a href="#users">Users</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_user/1">create_user(attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a user.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_user/1">delete_user(user)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a user.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_user/1">get_user(username)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single user by its username.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_user!/1">get_user!(id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single user.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_user/2">update_user(user, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a user.</p></div>
+</div>
+  </div>
+  <div class="summary-views summary">
+    <h2>
+      <a href="#views">Views</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_view/1">create_view(attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a view.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_view/1">delete_view(view)</a>
+  </div>
+    <div class="summary-synopsis"><p>Deletes a view.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_view/2">get_view(user_id, article_id)</a>
+  </div>
+    <div class="summary-synopsis"><p>Gets a single view.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_view/2">update_view(view, attrs)</a>
+  </div>
+    <div class="summary-synopsis"><p>Updates a view.</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:article/0">
+  <div class="detail-header">
+    <a href="#t:article/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">article()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L9" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>article() :: %Prequest.Manage.Article{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  cover: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  reports: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  source: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  title: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  topics: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  views: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:changeset/0">
+  <div class="detail-header">
+    <a href="#t:changeset/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">changeset()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L10" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>changeset() :: %Ecto.Changeset{
+  action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  constraints: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  empty_values: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  errors: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  filters: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  params: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  prepare: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_opts: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  required: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  valid?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  validations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:report/0">
+  <div class="detail-header">
+    <a href="#t:report/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">report()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L11" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>report() :: %Prequest.Manage.Report{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  article: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  article_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  message: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:topic/0">
+  <div class="detail-header">
+    <a href="#t:topic/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">topic()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L12" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>topic() :: %Prequest.Manage.Topic{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  articles: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:user/0">
+  <div class="detail-header">
+    <a href="#t:user/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">user()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L13" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>user() :: %Prequest.Manage.User{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  articles: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  bio: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  reports: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  username: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  views: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+<section class="detail" id="t:view/0">
+  <div class="detail-header">
+    <a href="#t:view/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">view()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L14" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>view() :: %Prequest.Manage.View{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  article: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  article_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  liked?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  user_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+          </div>
+        </section>
+        <section id="articles" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#articles">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Articles          </h1>
+          <div class="articles-list">
+<section class="detail" id="create_article/1">
+  <div class="detail-header">
+    <a href="#create_article/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_article(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L83" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>create_article(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:article/0">article</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Creates an article.</p><h2 id="create_article/1-examples" class="section-heading">
+  <a href="#create_article/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="2659535103-1">(</span><span class="p" data-group-id="2659535103-2">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="2659535103-2">}</span><span class="p" data-group-id="2659535103-1">)</span><span class="w">
+</span><span class="p" data-group-id="2659535103-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2659535103-4">%</span><span class="nc" data-group-id="2659535103-4">Article</span><span class="p" data-group-id="2659535103-4">{</span><span class="p" data-group-id="2659535103-4">}</span><span class="p" data-group-id="2659535103-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="2659535103-5">(</span><span class="p" data-group-id="2659535103-6">%{</span><span class="p" data-group-id="2659535103-6">}</span><span class="p" data-group-id="2659535103-5">)</span><span class="w">
+</span><span class="p" data-group-id="2659535103-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2659535103-8">%</span><span class="nc" data-group-id="2659535103-8">Ecto.Changeset</span><span class="p" data-group-id="2659535103-8">{</span><span class="p" data-group-id="2659535103-8">}</span><span class="p" data-group-id="2659535103-7">}</span></code></pre><p>A <code class="inline">topics</code> key can be passed in the map input to associate topics with the article, whether it already
+exists or not.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3286801130-1">(</span><span class="p" data-group-id="3286801130-2">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title2&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url2&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url2&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3286801130-3">[</span><span class="p" data-group-id="3286801130-4">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="3286801130-4">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3286801130-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="3286801130-5">}</span><span class="p" data-group-id="3286801130-3">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="3286801130-2">}</span><span class="p" data-group-id="3286801130-1">)</span><span class="w">
+</span><span class="p" data-group-id="3286801130-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3286801130-7">%</span><span class="nc" data-group-id="3286801130-7">Article</span><span class="p" data-group-id="3286801130-7">{</span><span class="p" data-group-id="3286801130-7">}</span><span class="p" data-group-id="3286801130-6">}</span></code></pre><p>Once the topics named &quot;elixir&quot; and &quot;phoenix&quot; was created in the previous example, we can associate them again
+with a new article. We can proceed in two manners:</p><ul><li>Get its struct from database and insert it into the topics list.</li><li>Pass the same map we used to create it.</li></ul><p>Let's use the &quot;phoenix&quot; topic in the former way and &quot;elixir&quot; in the latter.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">CMS</span><span class="o">.</span><span class="n">get_topic</span><span class="p" data-group-id="1120586617-1">(</span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="1120586617-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="1120586617-2">(</span><span class="p" data-group-id="1120586617-3">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title3&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url3&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url3&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1120586617-4">[</span><span class="p" data-group-id="1120586617-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1120586617-5">}</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="p" data-group-id="1120586617-4">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1120586617-3">}</span><span class="p" data-group-id="1120586617-2">)</span><span class="w">
+</span><span class="p" data-group-id="1120586617-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1120586617-7">%</span><span class="nc" data-group-id="1120586617-7">Article</span><span class="p" data-group-id="1120586617-7">{</span><span class="p" data-group-id="1120586617-7">}</span><span class="p" data-group-id="1120586617-6">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="delete_article/1">
+  <div class="detail-header">
+    <a href="#delete_article/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_article(article)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L147" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>delete_article(<a href="#t:article/0">article</a>()) :: {:ok, <a href="#t:article/0">article</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Deletes an article.</p><h2 id="delete_article/1-examples" class="section-heading">
+  <a href="#delete_article/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="7818777357-1">(</span><span class="n">article</span><span class="p" data-group-id="7818777357-1">)</span><span class="w">
+</span><span class="p" data-group-id="7818777357-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7818777357-3">%</span><span class="nc" data-group-id="7818777357-3">Article</span><span class="p" data-group-id="7818777357-3">{</span><span class="p" data-group-id="7818777357-3">}</span><span class="p" data-group-id="7818777357-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="7818777357-4">(</span><span class="n">article</span><span class="p" data-group-id="7818777357-4">)</span><span class="w">
+</span><span class="p" data-group-id="7818777357-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7818777357-6">%</span><span class="nc" data-group-id="7818777357-6">Ecto.Changeset</span><span class="p" data-group-id="7818777357-6">{</span><span class="p" data-group-id="7818777357-6">}</span><span class="p" data-group-id="7818777357-5">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_article!/1">
+  <div class="detail-header">
+    <a href="#get_article!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_article!(id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L32" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_article!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:article/0">article</a>()</pre>
+      </div>
+
+<p>Gets a single article.</p><p>Raises <a href="https://hexdocs.pm/ecto/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the Article does not exist.</p><h2 id="get_article!/1-examples" class="section-heading">
+  <a href="#get_article!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="4060001037-1">(</span><span class="mi">123</span><span class="p" data-group-id="4060001037-1">)</span><span class="w">
+</span><span class="p" data-group-id="4060001037-2">%</span><span class="nc" data-group-id="4060001037-2">Article</span><span class="p" data-group-id="4060001037-2">{</span><span class="p" data-group-id="4060001037-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="4060001037-3">(</span><span class="mi">456</span><span class="p" data-group-id="4060001037-3">)</span><span class="w">
+</span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
+</section>
+<section class="detail" id="update_article/2">
+  <div class="detail-header">
+    <a href="#update_article/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_article(article, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L131" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>update_article(<a href="#t:article/0">article</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:article/0">article</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Updates an article.</p><h2 id="update_article/2-examples" class="section-heading">
+  <a href="#update_article/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="1499980702-1">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1499980702-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated title&quot;</span><span class="p" data-group-id="1499980702-2">}</span><span class="p" data-group-id="1499980702-1">)</span><span class="w">
+</span><span class="p" data-group-id="1499980702-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1499980702-4">%</span><span class="nc" data-group-id="1499980702-4">Article</span><span class="p" data-group-id="1499980702-4">{</span><span class="p" data-group-id="1499980702-4">}</span><span class="p" data-group-id="1499980702-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="1499980702-5">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1499980702-6">%{</span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="1499980702-6">}</span><span class="p" data-group-id="1499980702-5">)</span><span class="w">
+</span><span class="p" data-group-id="1499980702-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1499980702-8">%</span><span class="nc" data-group-id="1499980702-8">Ecto.Changeset</span><span class="p" data-group-id="1499980702-8">{</span><span class="p" data-group-id="1499980702-8">}</span><span class="p" data-group-id="1499980702-7">}</span></code></pre><p>When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
+be replaced.</p><blockquote><p>To see how the <code class="inline">topics</code> field works take a look at <a href="#create_article/1"><code class="inline">create_article/1</code></a></p></blockquote><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">article</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">CMS</span><span class="o">.</span><span class="n">preload!</span><span class="p" data-group-id="1164094178-1">(</span><span class="ss">:topics</span><span class="p" data-group-id="1164094178-1">)</span><span class="w">
+</span><span class="p" data-group-id="1164094178-2">%</span><span class="nc" data-group-id="1164094178-2">Article</span><span class="p" data-group-id="1164094178-2">{</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1164094178-3">[</span><span class="w">
+    </span><span class="p" data-group-id="1164094178-4">%</span><span class="nc" data-group-id="1164094178-4">Topic</span><span class="p" data-group-id="1164094178-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1164094178-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1164094178-5">%</span><span class="nc" data-group-id="1164094178-5">Topic</span><span class="p" data-group-id="1164094178-5">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="1164094178-5">}</span><span class="w">
+  </span><span class="p" data-group-id="1164094178-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p" data-group-id="1164094178-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="1164094178-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="p" data-group-id="1164094178-6">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">update_article</span><span class="p" data-group-id="1164094178-7">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1164094178-8">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1164094178-9">[</span><span class="p" data-group-id="1164094178-10">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="1164094178-10">}</span><span class="p" data-group-id="1164094178-9">]</span><span class="p" data-group-id="1164094178-8">}</span><span class="p" data-group-id="1164094178-7">)</span><span class="w">
+</span><span class="p" data-group-id="1164094178-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="1164094178-12">%</span><span class="nc" data-group-id="1164094178-12">Article</span><span class="p" data-group-id="1164094178-12">{</span><span class="w">
+    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1164094178-13">[</span><span class="p" data-group-id="1164094178-14">%</span><span class="nc" data-group-id="1164094178-14">Topic</span><span class="p" data-group-id="1164094178-14">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="1164094178-14">}</span><span class="p" data-group-id="1164094178-13">]</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="1164094178-12">}</span><span class="w">
+</span><span class="p" data-group-id="1164094178-11">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="1164094178-15">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1164094178-16">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">topics</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p" data-group-id="1164094178-17">[</span><span class="p" data-group-id="1164094178-18">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1164094178-18">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1164094178-19">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="1164094178-19">}</span><span class="p" data-group-id="1164094178-17">]</span><span class="p" data-group-id="1164094178-16">}</span><span class="p" data-group-id="1164094178-15">)</span><span class="w">
+</span><span class="p" data-group-id="1164094178-20">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="1164094178-21">%</span><span class="nc" data-group-id="1164094178-21">Article</span><span class="p" data-group-id="1164094178-21">{</span><span class="w">
+    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1164094178-22">[</span><span class="w">
+      </span><span class="p" data-group-id="1164094178-23">%</span><span class="nc" data-group-id="1164094178-23">Topic</span><span class="p" data-group-id="1164094178-23">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1164094178-23">}</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="1164094178-24">%</span><span class="nc" data-group-id="1164094178-24">Topic</span><span class="p" data-group-id="1164094178-24">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="1164094178-24">}</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="1164094178-25">%</span><span class="nc" data-group-id="1164094178-25">Topic</span><span class="p" data-group-id="1164094178-25">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="1164094178-25">}</span><span class="w">
+    </span><span class="p" data-group-id="1164094178-22">]</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="1164094178-21">}</span><span class="w">
+</span><span class="p" data-group-id="1164094178-20">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+        <section id="reports" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#reports">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Reports          </h1>
+          <div class="reports-list">
+<section class="detail" id="create_report/1">
+  <div class="detail-header">
+    <a href="#create_report/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_report(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L181" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>create_report(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:report/0">report</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Creates a report.</p><h2 id="create_report/1-examples" class="section-heading">
+  <a href="#create_report/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="8751159113-1">(</span><span class="p" data-group-id="8751159113-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="8751159113-2">}</span><span class="p" data-group-id="8751159113-1">)</span><span class="w">
+</span><span class="p" data-group-id="8751159113-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8751159113-4">%</span><span class="nc" data-group-id="8751159113-4">Report</span><span class="p" data-group-id="8751159113-4">{</span><span class="p" data-group-id="8751159113-4">}</span><span class="p" data-group-id="8751159113-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="8751159113-5">(</span><span class="p" data-group-id="8751159113-6">%{</span><span class="p" data-group-id="8751159113-6">}</span><span class="p" data-group-id="8751159113-5">)</span><span class="w">
+</span><span class="p" data-group-id="8751159113-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8751159113-8">%</span><span class="nc" data-group-id="8751159113-8">Ecto.Changeset</span><span class="p" data-group-id="8751159113-8">{</span><span class="p" data-group-id="8751159113-8">}</span><span class="p" data-group-id="8751159113-7">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="delete_report/1">
+  <div class="detail-header">
+    <a href="#delete_report/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_report(report)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L213" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>delete_report(<a href="#t:report/0">report</a>()) :: {:ok, <a href="#t:report/0">report</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Deletes a report.</p><h2 id="delete_report/1-examples" class="section-heading">
+  <a href="#delete_report/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="3832642106-1">(</span><span class="n">report</span><span class="p" data-group-id="3832642106-1">)</span><span class="w">
+</span><span class="p" data-group-id="3832642106-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3832642106-3">%</span><span class="nc" data-group-id="3832642106-3">Report</span><span class="p" data-group-id="3832642106-3">{</span><span class="p" data-group-id="3832642106-3">}</span><span class="p" data-group-id="3832642106-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="3832642106-4">(</span><span class="n">report</span><span class="p" data-group-id="3832642106-4">)</span><span class="w">
+</span><span class="p" data-group-id="3832642106-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3832642106-6">%</span><span class="nc" data-group-id="3832642106-6">Ecto.Changeset</span><span class="p" data-group-id="3832642106-6">{</span><span class="p" data-group-id="3832642106-6">}</span><span class="p" data-group-id="3832642106-5">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_report!/1">
+  <div class="detail-header">
+    <a href="#get_report!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_report!(id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L165" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_report!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:report/0">report</a>()</pre>
+      </div>
+
+<p>Gets a single report.</p><p>Raises <a href="https://hexdocs.pm/ecto/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the Report does not exist.</p><h2 id="get_report!/1-examples" class="section-heading">
+  <a href="#get_report!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="0170808010-1">(</span><span class="mi">123</span><span class="p" data-group-id="0170808010-1">)</span><span class="w">
+</span><span class="p" data-group-id="0170808010-2">%</span><span class="nc" data-group-id="0170808010-2">Report</span><span class="p" data-group-id="0170808010-2">{</span><span class="p" data-group-id="0170808010-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="0170808010-3">(</span><span class="mi">456</span><span class="p" data-group-id="0170808010-3">)</span><span class="w">
+</span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
+</section>
+<section class="detail" id="update_report/2">
+  <div class="detail-header">
+    <a href="#update_report/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_report(report, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L197" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>update_report(<a href="#t:report/0">report</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:report/0">report</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Updates a report.</p><h2 id="update_report/2-examples" class="section-heading">
+  <a href="#update_report/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="4966909124-1">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4966909124-2">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated message&quot;</span><span class="p" data-group-id="4966909124-2">}</span><span class="p" data-group-id="4966909124-1">)</span><span class="w">
+</span><span class="p" data-group-id="4966909124-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4966909124-4">%</span><span class="nc" data-group-id="4966909124-4">Report</span><span class="p" data-group-id="4966909124-4">{</span><span class="p" data-group-id="4966909124-4">}</span><span class="p" data-group-id="4966909124-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="4966909124-5">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4966909124-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="4966909124-6">}</span><span class="p" data-group-id="4966909124-5">)</span><span class="w">
+</span><span class="p" data-group-id="4966909124-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4966909124-8">%</span><span class="nc" data-group-id="4966909124-8">Ecto.Changeset</span><span class="p" data-group-id="4966909124-8">{</span><span class="p" data-group-id="4966909124-8">}</span><span class="p" data-group-id="4966909124-7">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+        <section id="topics" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#topics">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Topics          </h1>
+          <div class="topics-list">
+<section class="detail" id="create_topic/1">
+  <div class="detail-header">
+    <a href="#create_topic/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_topic(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L245" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>create_topic(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:topic/0">topic</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Creates a topic.</p><h2 id="create_topic/1-examples" class="section-heading">
+  <a href="#create_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="7966475974-1">(</span><span class="p" data-group-id="7966475974-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;new topic&quot;</span><span class="p" data-group-id="7966475974-2">}</span><span class="p" data-group-id="7966475974-1">)</span><span class="w">
+</span><span class="p" data-group-id="7966475974-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7966475974-4">%</span><span class="nc" data-group-id="7966475974-4">Topic</span><span class="p" data-group-id="7966475974-4">{</span><span class="p" data-group-id="7966475974-4">}</span><span class="p" data-group-id="7966475974-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="7966475974-5">(</span><span class="p" data-group-id="7966475974-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="7966475974-6">}</span><span class="p" data-group-id="7966475974-5">)</span><span class="w">
+</span><span class="p" data-group-id="7966475974-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7966475974-8">%</span><span class="nc" data-group-id="7966475974-8">Ecto.Changeset</span><span class="p" data-group-id="7966475974-8">{</span><span class="p" data-group-id="7966475974-8">}</span><span class="p" data-group-id="7966475974-7">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="delete_topic/1">
+  <div class="detail-header">
+    <a href="#delete_topic/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_topic(topic)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L277" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>delete_topic(<a href="#t:topic/0">topic</a>()) :: {:ok, <a href="#t:topic/0">topic</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Deletes a topic.</p><h2 id="delete_topic/1-examples" class="section-heading">
+  <a href="#delete_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="4162024458-1">(</span><span class="n">topic</span><span class="p" data-group-id="4162024458-1">)</span><span class="w">
+</span><span class="p" data-group-id="4162024458-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4162024458-3">%</span><span class="nc" data-group-id="4162024458-3">Topic</span><span class="p" data-group-id="4162024458-3">{</span><span class="p" data-group-id="4162024458-3">}</span><span class="p" data-group-id="4162024458-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="4162024458-4">(</span><span class="n">topic</span><span class="p" data-group-id="4162024458-4">)</span><span class="w">
+</span><span class="p" data-group-id="4162024458-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4162024458-6">%</span><span class="nc" data-group-id="4162024458-6">Ecto.Changeset</span><span class="p" data-group-id="4162024458-6">{</span><span class="p" data-group-id="4162024458-6">}</span><span class="p" data-group-id="4162024458-5">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_topic/1">
+  <div class="detail-header">
+    <a href="#get_topic/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_topic(name)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L229" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_topic(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="#t:topic/0">topic</a>() | nil</pre>
+      </div>
+
+<p>Gets a single topic by its name.</p><h2 id="get_topic/1-examples" class="section-heading">
+  <a href="#get_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="9130786627-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="9130786627-1">)</span><span class="w">
+</span><span class="p" data-group-id="9130786627-2">%</span><span class="nc" data-group-id="9130786627-2">Topic</span><span class="p" data-group-id="9130786627-2">{</span><span class="p" data-group-id="9130786627-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="9130786627-3">(</span><span class="s">&quot;&quot;</span><span class="p" data-group-id="9130786627-3">)</span><span class="w">
+</span><span class="no">nil</span></code></pre>  </section>
+</section>
+<section class="detail" id="update_topic/2">
+  <div class="detail-header">
+    <a href="#update_topic/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_topic(topic, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L261" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>update_topic(<a href="#t:topic/0">topic</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:topic/0">topic</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Updates a topic.</p><h2 id="update_topic/2-examples" class="section-heading">
+  <a href="#update_topic/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="5276472058-1">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5276472058-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated name&quot;</span><span class="p" data-group-id="5276472058-2">}</span><span class="p" data-group-id="5276472058-1">)</span><span class="w">
+</span><span class="p" data-group-id="5276472058-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5276472058-4">%</span><span class="nc" data-group-id="5276472058-4">Topic</span><span class="p" data-group-id="5276472058-4">{</span><span class="p" data-group-id="5276472058-4">}</span><span class="p" data-group-id="5276472058-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="5276472058-5">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5276472058-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="5276472058-6">}</span><span class="p" data-group-id="5276472058-5">)</span><span class="w">
+</span><span class="p" data-group-id="5276472058-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5276472058-8">%</span><span class="nc" data-group-id="5276472058-8">Ecto.Changeset</span><span class="p" data-group-id="5276472058-8">{</span><span class="p" data-group-id="5276472058-8">}</span><span class="p" data-group-id="5276472058-7">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+        <section id="users" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#users">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Users          </h1>
+          <div class="users-list">
+<section class="detail" id="create_user/1">
+  <div class="detail-header">
+    <a href="#create_user/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_user(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L331" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>create_user(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:user/0">user</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Creates a user.</p><h2 id="create_user/1-examples" class="section-heading">
+  <a href="#create_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="3256825930-1">(</span><span class="p" data-group-id="3256825930-2">%{</span><span class="w">
+  </span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Felipe de Souza Lincoln&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;this is my bio&quot;</span><span class="w">
+</span><span class="p" data-group-id="3256825930-2">}</span><span class="p" data-group-id="3256825930-1">)</span><span class="w">
+</span><span class="p" data-group-id="3256825930-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3256825930-4">%</span><span class="nc" data-group-id="3256825930-4">User</span><span class="p" data-group-id="3256825930-4">{</span><span class="p" data-group-id="3256825930-4">}</span><span class="p" data-group-id="3256825930-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="3256825930-5">(</span><span class="p" data-group-id="3256825930-6">%{</span><span class="p" data-group-id="3256825930-6">}</span><span class="p" data-group-id="3256825930-5">)</span><span class="w">
+</span><span class="p" data-group-id="3256825930-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3256825930-8">%</span><span class="nc" data-group-id="3256825930-8">Ecto.Changeset</span><span class="p" data-group-id="3256825930-8">{</span><span class="p" data-group-id="3256825930-8">}</span><span class="p" data-group-id="3256825930-7">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="delete_user/1">
+  <div class="detail-header">
+    <a href="#delete_user/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_user(user)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L363" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>delete_user(<a href="#t:user/0">user</a>()) :: {:ok, <a href="#t:user/0">user</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Deletes a user.</p><h2 id="delete_user/1-examples" class="section-heading">
+  <a href="#delete_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="5877829376-1">(</span><span class="n">user</span><span class="p" data-group-id="5877829376-1">)</span><span class="w">
+</span><span class="p" data-group-id="5877829376-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5877829376-3">%</span><span class="nc" data-group-id="5877829376-3">User</span><span class="p" data-group-id="5877829376-3">{</span><span class="p" data-group-id="5877829376-3">}</span><span class="p" data-group-id="5877829376-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="5877829376-4">(</span><span class="n">user</span><span class="p" data-group-id="5877829376-4">)</span><span class="w">
+</span><span class="p" data-group-id="5877829376-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5877829376-6">%</span><span class="nc" data-group-id="5877829376-6">Ecto.Changeset</span><span class="p" data-group-id="5877829376-6">{</span><span class="p" data-group-id="5877829376-6">}</span><span class="p" data-group-id="5877829376-5">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_user/1">
+  <div class="detail-header">
+    <a href="#get_user/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_user(username)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L311" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_user(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="#t:user/0">user</a>() | nil</pre>
+      </div>
+
+<p>Gets a single user by its username.</p><h2 id="get_user/1-examples" class="section-heading">
+  <a href="#get_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="9788107291-1">(</span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="9788107291-1">)</span><span class="w">
+</span><span class="p" data-group-id="9788107291-2">%</span><span class="nc" data-group-id="9788107291-2">User</span><span class="p" data-group-id="9788107291-2">{</span><span class="p" data-group-id="9788107291-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="9788107291-3">(</span><span class="s">&quot;nonexistinguser&quot;</span><span class="p" data-group-id="9788107291-3">)</span><span class="w">
+</span><span class="no">nil</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_user!/1">
+  <div class="detail-header">
+    <a href="#get_user!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_user!(id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L295" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_user!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:user/0">user</a>()</pre>
+      </div>
+
+<p>Gets a single user.</p><p>Raises <a href="https://hexdocs.pm/ecto/Ecto.NoResultsError.html"><code class="inline">Ecto.NoResultsError</code></a> if the User does not exist.</p><h2 id="get_user!/1-examples" class="section-heading">
+  <a href="#get_user!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="4145648566-1">(</span><span class="mi">123</span><span class="p" data-group-id="4145648566-1">)</span><span class="w">
+</span><span class="p" data-group-id="4145648566-2">%</span><span class="nc" data-group-id="4145648566-2">User</span><span class="p" data-group-id="4145648566-2">{</span><span class="p" data-group-id="4145648566-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="4145648566-3">(</span><span class="mi">456</span><span class="p" data-group-id="4145648566-3">)</span><span class="w">
+</span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
+</section>
+<section class="detail" id="update_user/2">
+  <div class="detail-header">
+    <a href="#update_user/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_user(user, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L347" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>update_user(<a href="#t:user/0">user</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:user/0">user</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Updates a user.</p><h2 id="update_user/2-examples" class="section-heading">
+  <a href="#update_user/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="3847445780-1">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3847445780-2">%{</span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated bio&quot;</span><span class="p" data-group-id="3847445780-2">}</span><span class="p" data-group-id="3847445780-1">)</span><span class="w">
+</span><span class="p" data-group-id="3847445780-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3847445780-4">%</span><span class="nc" data-group-id="3847445780-4">User</span><span class="p" data-group-id="3847445780-4">{</span><span class="p" data-group-id="3847445780-4">}</span><span class="p" data-group-id="3847445780-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="3847445780-5">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3847445780-6">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="3847445780-6">}</span><span class="p" data-group-id="3847445780-5">)</span><span class="w">
+</span><span class="p" data-group-id="3847445780-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3847445780-8">%</span><span class="nc" data-group-id="3847445780-8">Ecto.Changeset</span><span class="p" data-group-id="3847445780-8">{</span><span class="p" data-group-id="3847445780-8">}</span><span class="p" data-group-id="3847445780-7">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+        <section id="views" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#views">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Views          </h1>
+          <div class="views-list">
+<section class="detail" id="create_view/1">
+  <div class="detail-header">
+    <a href="#create_view/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create_view(attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L395" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>create_view(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:view/0">view</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Creates a view.</p><h2 id="create_view/1-examples" class="section-heading">
+  <a href="#create_view/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="7060122233-1">(</span><span class="p" data-group-id="7060122233-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="7060122233-2">}</span><span class="p" data-group-id="7060122233-1">)</span><span class="w">
+</span><span class="p" data-group-id="7060122233-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7060122233-4">%</span><span class="nc" data-group-id="7060122233-4">View</span><span class="p" data-group-id="7060122233-4">{</span><span class="p" data-group-id="7060122233-4">}</span><span class="p" data-group-id="7060122233-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="7060122233-5">(</span><span class="p" data-group-id="7060122233-6">%{</span><span class="p" data-group-id="7060122233-6">}</span><span class="p" data-group-id="7060122233-5">)</span><span class="w">
+</span><span class="p" data-group-id="7060122233-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7060122233-8">%</span><span class="nc" data-group-id="7060122233-8">Ecto.Changeset</span><span class="p" data-group-id="7060122233-8">{</span><span class="p" data-group-id="7060122233-8">}</span><span class="p" data-group-id="7060122233-7">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="delete_view/1">
+  <div class="detail-header">
+    <a href="#delete_view/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_view(view)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L427" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>delete_view(<a href="#t:view/0">view</a>()) :: {:ok, <a href="#t:view/0">view</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Deletes a view.</p><h2 id="delete_view/1-examples" class="section-heading">
+  <a href="#delete_view/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="6595994318-1">(</span><span class="n">view</span><span class="p" data-group-id="6595994318-1">)</span><span class="w">
+</span><span class="p" data-group-id="6595994318-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6595994318-3">%</span><span class="nc" data-group-id="6595994318-3">View</span><span class="p" data-group-id="6595994318-3">{</span><span class="p" data-group-id="6595994318-3">}</span><span class="p" data-group-id="6595994318-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="6595994318-4">(</span><span class="n">view</span><span class="p" data-group-id="6595994318-4">)</span><span class="w">
+</span><span class="p" data-group-id="6595994318-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6595994318-6">%</span><span class="nc" data-group-id="6595994318-6">Ecto.Changeset</span><span class="p" data-group-id="6595994318-6">{</span><span class="p" data-group-id="6595994318-6">}</span><span class="p" data-group-id="6595994318-5">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="get_view/2">
+  <div class="detail-header">
+    <a href="#get_view/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_view(user_id, article_id)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L379" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>get_view(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:view/0">view</a>() | nil</pre>
+      </div>
+
+<p>Gets a single view.</p><h2 id="get_view/2-examples" class="section-heading">
+  <a href="#get_view/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="4111624728-1">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p" data-group-id="4111624728-1">)</span><span class="w">
+</span><span class="p" data-group-id="4111624728-2">%</span><span class="nc" data-group-id="4111624728-2">View</span><span class="p" data-group-id="4111624728-2">{</span><span class="p" data-group-id="4111624728-2">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="4111624728-3">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="4111624728-3">)</span><span class="w">
+</span><span class="no">nil</span></code></pre>  </section>
+</section>
+<section class="detail" id="update_view/2">
+  <div class="detail-header">
+    <a href="#update_view/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_view(view, attrs)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L411" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>update_view(<a href="#t:view/0">view</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:view/0">view</a>()} | {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Updates a view.</p><h2 id="update_view/2-examples" class="section-heading">
+  <a href="#update_view/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="7553445060-1">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7553445060-2">%{</span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="7553445060-2">}</span><span class="p" data-group-id="7553445060-1">)</span><span class="w">
+</span><span class="p" data-group-id="7553445060-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7553445060-4">%</span><span class="nc" data-group-id="7553445060-4">View</span><span class="p" data-group-id="7553445060-4">{</span><span class="p" data-group-id="7553445060-4">}</span><span class="p" data-group-id="7553445060-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="7553445060-5">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7553445060-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="7553445060-6">}</span><span class="p" data-group-id="7553445060-5">)</span><span class="w">
+</span><span class="p" data-group-id="7553445060-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7553445060-8">%</span><span class="nc" data-group-id="7553445060-8">Ecto.Changeset</span><span class="p" data-group-id="7553445060-8">{</span><span class="p" data-group-id="7553445060-8">}</span><span class="p" data-group-id="7553445060-7">}</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.6) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>
