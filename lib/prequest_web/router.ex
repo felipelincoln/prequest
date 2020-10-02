@@ -1,4 +1,5 @@
 defmodule PrequestWeb.Router do
+  @moduledoc false
   use PrequestWeb, :router
 
   pipeline :browser do
@@ -22,7 +23,7 @@ defmodule PrequestWeb.Router do
   scope "/", PrequestWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", HomeLive
   end
 
   # Other scopes may use custom stacks.

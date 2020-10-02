@@ -1,4 +1,5 @@
 defmodule PrequestWeb.ErrorView do
+  @moduledoc false
   use PrequestWeb, :view
 
   # If you want to customize a particular status code

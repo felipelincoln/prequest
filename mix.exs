@@ -59,7 +59,6 @@ defmodule Prequest.MixProject do
       output: "docs",
       api_reference: false,
       main: "contributing",
-      filter_prefix: "Prequest.",
       extras: [".github/CONTRIBUTING.md"],
       groups_for_functions: [
         Articles: &(&1[:section] == :article),

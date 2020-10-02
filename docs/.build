@@ -1,5 +1,8 @@
 404.html
 Prequest.Manage.html
+Prequest.html
+PrequestWeb.HomeLive.html
+PrequestWeb.Router.Helpers.html
 contributing.html
 dist/app-aaa6eb1824b11a32f32d.js
 dist/elixir-9f91ebe876dc01d67920.css
@@ -7,7 +10,7 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-110a07c91d.js
-dist/sidebar_items-9157269c89.js
+dist/search_items-ae1aa35d06.js
+dist/sidebar_items-ec6b788d3a.js
 index.html
 search.html

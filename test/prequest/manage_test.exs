@@ -8,7 +8,7 @@ defmodule Prequest.ManageTest do
 
   # Testing
   # [x] Returning values
-  # [ ] Validations
+  # [x] Validations
   # [x] Constraints
   # [x] Side effects
   # [x] Deletion effects
