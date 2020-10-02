@@ -18,6 +18,7 @@ COPY config config
 RUN mix do deps.get, deps.compile
 
 # build assets
+COPY lib lib
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm ci --prefix ./assets --progress=false --no-audit --loglevel=error
 
@@ -30,7 +31,6 @@ RUN mix phx.digest
 ARG MIX_ENV
 
 # compile and build release
-COPY lib lib
 RUN mix do compile, release
 
 # make a copy of dev deps into test deps
