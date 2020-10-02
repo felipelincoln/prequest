@@ -8,8 +8,9 @@ defmodule Prequest.ManageTest do
 
   # Testing
   # [x] Returning values
-  # [x] Side effects
+  # [ ] Validations
   # [x] Constraints
+  # [x] Side effects
   # [x] Deletion effects
 
   setup_all do
@@ -17,7 +18,12 @@ defmodule Prequest.ManageTest do
     {:ok, user} = Manage.create_user(%{username: "felipelincoln"})
 
     {:ok, article} =
-      %{title: "title", cover: "cover image", source: "github url", user_id: user.id}
+      %{
+        title: "title",
+        cover: "https://prequest.com/cover.png",
+        source: "https://github.com/source.md",
+        user_id: user.id
+      }
       |> Manage.create_article()
 
     {:ok, topic} = Manage.create_topic(%{name: "prequest"})
@@ -132,59 +138,59 @@ defmodule Prequest.ManageTest do
       assert %User{} = user_fixture(%{username: user.username})
     end
 
-    test "delete_user/1 deletes owned articles and views" do
+    test "delete_user/1 deletes owned articles and views", %{article: article} do
       user = user_fixture()
 
-      {:ok, article} =
+      {:ok, new_article} =
         Manage.create_article(%{
-          title: "my article",
-          cover: "my cover image",
-          source: "my github markdown url",
+          title: article.title,
+          cover: article.cover,
+          source: article.source <> "(2)",
           user_id: user.id
         })
 
-      {:ok, _view} = Manage.create_view(%{user_id: user.id, article_id: article.id})
+      {:ok, _view} = Manage.create_view(%{user_id: user.id, article_id: new_article.id})
 
       {:ok, user} = Manage.delete_user(user)
 
-      assert Manage.get_view(user.id, article.id) == nil
-      assert_raise Ecto.NoResultsError, fn -> Manage.get_article!(article.id) end
+      assert Manage.get_view(user.id, new_article.id) == nil
+      assert_raise Ecto.NoResultsError, fn -> Manage.get_article!(new_article.id) end
     end
 
-    test "delete_user/1 preserves associated view" do
+    test "delete_user/1 preserves associated view", %{article: article} do
       user = user_fixture()
       new_user = user_fixture(@update_attrs)
 
-      {:ok, article} =
+      {:ok, new_article} =
         Manage.create_article(%{
-          title: "my article",
-          cover: "my cover image",
-          source: "my github markdown url",
+          title: article.title,
+          cover: article.cover,
+          source: article.source <> "(2)",
           user_id: user.id
         })
 
-      {:ok, report} = Manage.create_report(%{user_id: new_user.id, article_id: article.id})
+      {:ok, report} = Manage.create_report(%{user_id: new_user.id, article_id: new_article.id})
 
       {:ok, _new_user} = Manage.delete_user(new_user)
 
       assert (%Manage.Report{} = report) = Manage.get_report!(report.id)
       assert report.user_id == nil
-      assert report.article_id == article.id
+      assert report.article_id == new_article.id
     end
   end
 
   describe "articles" do
     @valid_attrs %{
-      source: "some source",
+      source: "https://github.com/somesource.md",
       title: "some title",
-      cover: "some cover",
+      cover: "https://example.com/somecover.png",
       topics: [%{name: "topic1"}, %{name: "topic2"}]
     }
 
     @update_attrs %{
-      source: "some updated source",
+      source: "https://github.com/someupdatedsource.md",
       title: "some updated title",
-      cover: "some updated cover",
+      cover: "https://example.com/someupdatedcover.png",
       topics: [%{name: "topic2"}, %{name: "topic3"}]
     }
     @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [%{name: ""}]}
@@ -330,7 +336,7 @@ defmodule Prequest.ManageTest do
 
     test "delete_article/1 releases source for a new use", %{user: user} do
       assert {:ok, %Article{} = article} =
-               %{user_id: user.id, source: "testing source"}
+               %{user_id: user.id}
                |> article_fixture()
                |> Manage.delete_article()
 
@@ -363,6 +369,11 @@ defmodule Prequest.ManageTest do
 
       assert article not in user_articles
     end
+
+    test "create_article/1 with valid cover creates the article"
+    test "create_article/1 with invalid cover returns error changeset"
+    test "create_article/1 with valid source creates the article"
+    test "create_article/1 with invalid source returns error changeset"
   end
 
   describe "topics" do
@@ -436,14 +447,14 @@ defmodule Prequest.ManageTest do
       assert %Topic{} = topic_fixture(%{name: topic.name})
     end
 
-    test "delete_topic/1 preserves articles", %{user: user} do
+    test "delete_topic/1 preserves articles", %{user: user, article: article} do
       topic = topic_fixture()
 
-      {:ok, article} =
+      {:ok, new_article} =
         Manage.create_article(%{
-          title: "testing title",
-          cover: "testing cover",
-          source: "testing source",
+          title: article.title,
+          cover: article.cover,
+          source: article.source <> "(2)",
           user_id: user.id,
           topics: [%{name: "a topic"}, topic]
         })
@@ -451,7 +462,7 @@ defmodule Prequest.ManageTest do
       assert {:ok, topic} = Manage.delete_topic(topic)
 
       assert %Article{topics: article_topics} =
-               Manage.get_article!(article.id) |> preload!(:topics)
+               Manage.get_article!(new_article.id) |> preload!(:topics)
 
       assert topic not in article_topics
     end

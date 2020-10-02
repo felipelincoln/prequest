@@ -22,7 +22,42 @@ defmodule Prequest.Manage.Article do
     article
     |> cast(attrs, [:cover, :title, :source, :user_id])
     |> validate_required([:cover, :title, :source, :user_id])
+    |> validate_url_format(:cover)
+    |> validate_url_format(:source, host: "github.com")
     |> unique_constraint(:source)
     |> assoc_constraint(:user)
+  end
+
+  defp validate_url_format(changeset, field, opts \\ []) do
+    validate_change(changeset, field, fn _field, url ->
+      case get_error_from_url(url, opts) do
+        nil -> []
+        error -> [{field, {error, [{:validation, :url_format}]}}]
+      end
+    end)
+  end
+
+  defp get_error_from_url(url, host: validation_host) do
+    get_error_from_url(url, []) ||
+      case URI.parse(url).host do
+        ^validation_host -> nil
+        _ -> "host must be #{validation_host}"
+      end
+  end
+
+  defp get_error_from_url(url, []) do
+    case URI.parse(url) do
+      %URI{scheme: nil} ->
+        "is missing a scheme (e.g. https)"
+
+      %URI{scheme: scheme} when scheme not in ["http", "https"] ->
+        "scheme is invalid. (use http or https)"
+
+      %URI{host: nil} ->
+        "is missing a host (e.g. github.com)"
+
+      _ ->
+        nil
+    end
   end
 end
