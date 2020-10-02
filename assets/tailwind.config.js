@@ -1,4 +1,8 @@
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   purge: [
     "../**/*.html.eex",
     "../**/*.html.leex",
@@ -6,7 +10,9 @@ module.exports = {
     "../**/live/**/*.ex",
     "./js/**/*.js"
   ],
-  theme: {},
+  theme: {
+    extend: {},
+  },
   variants: {},
-  plugins: []
-};
+  plugins: [],
+}
