@@ -3,7 +3,7 @@
   "description": " ",
   "license": "MIT",
   "scripts": {
-    "deploy": "webpack --mode production",
+    "deploy": "NODE_ENV=production webpack --mode production",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-import": "^12.0.1",
     "postcss-loader": "^4.0.3",
     "sass-loader": "^8.0.2",
     "tailwindcss": "^1.8.10",
