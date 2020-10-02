@@ -194,6 +194,8 @@ defmodule Prequest.ManageTest do
       topics: [%{name: "topic2"}, %{name: "topic3"}]
     }
     @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [%{name: ""}]}
+    @invalid_cover ["", "invalid", "invalid.com/", "www.invalid.com/", "scheme://invalid.com"]
+    @invalid_source @invalid_cover ++ ["http://invalid.com/", "https://invalid.com/"]
 
     def article_fixture(%{user_id: _} = attrs) do
       {:ok, article} =
@@ -270,6 +272,24 @@ defmodule Prequest.ManageTest do
                %{user_id: user.id, source: @valid_attrs.source}
                |> Enum.into(@update_attrs)
                |> Manage.create_article()
+    end
+
+    test "create_article/1 with invalid cover returns error changeset", %{user: user} do
+      for cover <- @invalid_cover do
+        assert {:error, %Ecto.Changeset{}} =
+                 %{user_id: user.id, cover: cover}
+                 |> Enum.into(@valid_attrs)
+                 |> Manage.create_article()
+      end
+    end
+
+    test "create_article/1 with invalid source returns error changeset", %{user: user} do
+      for source <- @invalid_source do
+        assert {:error, %Ecto.Changeset{}} =
+                 %{user_id: user.id, source: source}
+                 |> Enum.into(@valid_attrs)
+                 |> Manage.create_article()
+      end
     end
 
     test "update_article/2 with valid data updates the article", %{user: user} do
@@ -369,11 +389,6 @@ defmodule Prequest.ManageTest do
 
       assert article not in user_articles
     end
-
-    test "create_article/1 with valid cover creates the article"
-    test "create_article/1 with invalid cover returns error changeset"
-    test "create_article/1 with valid source creates the article"
-    test "create_article/1 with invalid source returns error changeset"
   end
 
   describe "topics" do
