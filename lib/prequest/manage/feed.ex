@@ -3,10 +3,11 @@ defmodule Prequest.Manage.Feed do
 
   defstruct articles: [], count: 0, topics: [], topics_count: 0, reports: []
 
-  import Prequest.Manage.Helpers, only: [preload!: 2]
-
   @paginate_by 2
 
+  # source must be a %Manage.User{} or a %Manage.Topic{}
+  # it must be preloaded as follows
+  # iex> Manage.Helpers.preload!(user, [articles: [:reports, :topics, :views]])
   def get(source, opts \\ []) do
     paginate_by = Keyword.get(opts, :paginate_by) || @paginate_by
     page = Keyword.get(opts, :page) || 0
@@ -16,12 +17,9 @@ defmodule Prequest.Manage.Feed do
 
     articles =
       source
-      |> preload!(:articles)
       |> Map.get(:articles)
       |> filter_by_title(filter_title)
-      |> Enum.map(fn x -> preload!(x, :topics) end)
       |> filter_by_topics(filter_topics)
-      |> Enum.map(fn x -> preload!(x, :reports) end)
       |> sort(sort_by)
 
     count = Enum.count(articles)
@@ -72,4 +70,20 @@ defmodule Prequest.Manage.Feed do
   end
 
   defp sort(articles, nil), do: articles
+  defp sort(articles, :date_desc), do: sort(articles, :date, :desc)
+  defp sort(articles, :date_asc), do: sort(articles, :date, :asc)
+  defp sort(articles, :views_desc), do: sort(articles, :views, :desc)
+  defp sort(articles, :views_asc), do: sort(articles, :views, :asc)
+
+  defp sort(articles, :date, order) do
+    articles
+    |> Enum.sort_by(&Map.get(&1, :inserted_at), {order, Date})
+  end
+
+  defp sort(articles, :views, order) do
+    articles
+    |> Enum.map(fn x -> {Enum.count(x.views), x} end)
+    |> Enum.sort_by(&elem(&1, 0), order)
+    |> Enum.map(fn {_views, article} -> article end)
+  end
 end
