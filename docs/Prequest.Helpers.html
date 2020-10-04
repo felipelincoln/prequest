@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.22.6">
+    <meta name="project" content="Prequest v0.1.0">
+    <title>Prequest.Helpers — Prequest v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
+    <script src="dist/sidebar_items-90e74ca329.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://prequest.herokuapp.com/" class="sidebar-projectName">
+Prequest      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0
+      </strong>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        Prequest.Helpers <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/helpers.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>A helper module to work with data preloading.</p>        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:changeset/0">changeset()</a>
+  </div>
+</div>
+  </div>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload/1">preload(arg)</a>
+  </div>
+    <div class="summary-synopsis"><p>Preload all fields from a schema's struct inside a pipeline.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload!/2">preload!(content, fields)</a>
+  </div>
+    <div class="summary-synopsis"><p>Preload fields from a schema's struct.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#preload_source!/1">preload_source!(source)</a>
+  </div>
+    <div class="summary-synopsis"><p>Preload the articles from a source (user or topic).</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:changeset/0">
+  <div class="detail-header">
+    <a href="#t:changeset/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">changeset()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/helpers.ex#L8" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>changeset() :: %Ecto.Changeset{
+  action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  constraints: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  empty_values: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  errors: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  filters: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  params: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  prepare: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_changes: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  repo_opts: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  required: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  valid?: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  validations: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+          </div>
+        </section>
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="preload/1">
+  <div class="detail-header">
+    <a href="#preload/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload(arg)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/helpers.ex#L131" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preload({:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()}) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()}</pre>
+          <pre>preload({:error, <a href="#t:changeset/0">changeset</a>()}) :: {:error, <a href="#t:changeset/0">changeset</a>()}</pre>
+      </div>
+
+<p>Preload all fields from a schema's struct inside a pipeline.</p><h2 id="preload/1-examples" class="section-heading">
+  <a href="#preload/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<p>It can be used for <code class="inline">create_*</code> pipelines,</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="0993271557-1">(</span><span class="p" data-group-id="0993271557-2">%{</span><span class="n">...</span><span class="p" data-group-id="0993271557-2">}</span><span class="p" data-group-id="0993271557-1">)</span><span class="w">
+</span><span class="p" data-group-id="0993271557-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="0993271557-4">%</span><span class="nc" data-group-id="0993271557-4">Article</span><span class="p" data-group-id="0993271557-4">{</span><span class="w">
+    </span><span class="c1">#=&gt; reports: #Ecto.Association.NotLoaded&lt;association :reports is not loaded&gt;</span><span class="w">
+    </span><span class="c1">#=&gt; user: #Ecto.Association.NotLoaded&lt;association :user is not loaded&gt;</span><span class="w">
+    </span><span class="c1">#=&gt; views: #Ecto.Association.NotLoaded&lt;association :views is not loaded&gt;</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="0993271557-4">}</span><span class="w">
+</span><span class="p" data-group-id="0993271557-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="0993271557-5">(</span><span class="p" data-group-id="0993271557-6">%{</span><span class="n">...</span><span class="p" data-group-id="0993271557-6">}</span><span class="p" data-group-id="0993271557-5">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="0993271557-7">(</span><span class="p" data-group-id="0993271557-7">)</span><span class="w">
+</span><span class="p" data-group-id="0993271557-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="0993271557-9">%</span><span class="nc" data-group-id="0993271557-9">Article</span><span class="p" data-group-id="0993271557-9">{</span><span class="w">
+    </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0993271557-10">[</span><span class="p" data-group-id="0993271557-11">%</span><span class="nc" data-group-id="0993271557-11">Report</span><span class="p" data-group-id="0993271557-11">{</span><span class="p" data-group-id="0993271557-11">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="0993271557-10">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0993271557-12">[</span><span class="p" data-group-id="0993271557-13">%</span><span class="nc" data-group-id="0993271557-13">Topic</span><span class="p" data-group-id="0993271557-13">{</span><span class="p" data-group-id="0993271557-13">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="0993271557-12">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0993271557-14">%</span><span class="nc" data-group-id="0993271557-14">User</span><span class="p" data-group-id="0993271557-14">{</span><span class="p" data-group-id="0993271557-14">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0993271557-15">[</span><span class="p" data-group-id="0993271557-16">%</span><span class="nc" data-group-id="0993271557-16">View</span><span class="p" data-group-id="0993271557-16">{</span><span class="p" data-group-id="0993271557-16">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="0993271557-15">]</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="0993271557-9">}</span><span class="w">
+</span><span class="p" data-group-id="0993271557-8">}</span></code></pre><p>and also <code class="inline">update_*</code> pipelines.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="4740892991-1">(</span><span class="p" data-group-id="4740892991-2">%{</span><span class="n">...</span><span class="p" data-group-id="4740892991-2">}</span><span class="p" data-group-id="4740892991-1">)</span><span class="w">
+</span><span class="p" data-group-id="4740892991-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="4740892991-4">%</span><span class="nc" data-group-id="4740892991-4">Report</span><span class="p" data-group-id="4740892991-4">{</span><span class="w">
+    </span><span class="c1">#=&gt; user: #Ecto.Association.NotLoaded&lt;association :user is not loaded&gt;</span><span class="w">
+    </span><span class="c1">#=&gt; article: #Ecto.Association.NotLoaded&lt;association :article is not loaded&gt;</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="4740892991-4">}</span><span class="w">
+</span><span class="p" data-group-id="4740892991-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="4740892991-5">(</span><span class="p" data-group-id="4740892991-6">%{</span><span class="n">...</span><span class="p" data-group-id="4740892991-6">}</span><span class="p" data-group-id="4740892991-5">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="4740892991-7">(</span><span class="p" data-group-id="4740892991-7">)</span><span class="w">
+</span><span class="p" data-group-id="4740892991-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="4740892991-9">%</span><span class="nc" data-group-id="4740892991-9">Report</span><span class="p" data-group-id="4740892991-9">{</span><span class="w">
+    </span><span class="ss">user</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4740892991-10">%</span><span class="nc" data-group-id="4740892991-10">User</span><span class="p" data-group-id="4740892991-10">{</span><span class="p" data-group-id="4740892991-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">article</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4740892991-11">%</span><span class="nc" data-group-id="4740892991-11">Article</span><span class="p" data-group-id="4740892991-11">{</span><span class="p" data-group-id="4740892991-11">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="4740892991-9">}</span><span class="w">
+</span><span class="p" data-group-id="4740892991-8">}</span></code></pre><p>If the preceding changeset contain errors it does not do anything.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="1032145352-1">(</span><span class="p" data-group-id="1032145352-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="1032145352-2">}</span><span class="p" data-group-id="1032145352-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="1032145352-3">(</span><span class="p" data-group-id="1032145352-3">)</span><span class="w">
+</span><span class="p" data-group-id="1032145352-4">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1032145352-5">%</span><span class="nc" data-group-id="1032145352-5">Ecto.Changeset</span><span class="p" data-group-id="1032145352-5">{</span><span class="p" data-group-id="1032145352-5">}</span><span class="p" data-group-id="1032145352-4">}</span></code></pre>  </section>
+</section>
+<section class="detail" id="preload!/2">
+  <div class="detail-header">
+    <a href="#preload!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload!(content, fields)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/helpers.ex#L71" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preload!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()</pre>
+      </div>
+
+<p>Preload fields from a schema's struct.</p><p>Raises <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the fields does not exist in the struct.</p><h2 id="preload!/2-examples" class="section-heading">
+  <a href="#preload!/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">user</span><span class="w">
+</span><span class="p" data-group-id="6014738063-1">%</span><span class="nc" data-group-id="6014738063-1">User</span><span class="p" data-group-id="6014738063-1">{</span><span class="p" data-group-id="6014738063-1">}</span><span class="w"> </span><span class="c1">#=&gt; articles: #Ecto.Association.NotLoaded&lt;association :articles is not loaded&gt;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6014738063-2">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="ss">:articles</span><span class="p" data-group-id="6014738063-2">)</span><span class="w">
+</span><span class="p" data-group-id="6014738063-3">%</span><span class="nc" data-group-id="6014738063-3">User</span><span class="p" data-group-id="6014738063-3">{</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6014738063-4">[</span><span class="p" data-group-id="6014738063-5">%</span><span class="nc" data-group-id="6014738063-5">Article</span><span class="p" data-group-id="6014738063-5">{</span><span class="p" data-group-id="6014738063-5">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="6014738063-4">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p" data-group-id="6014738063-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">article</span><span class="w">
+</span><span class="p" data-group-id="6014738063-6">%</span><span class="nc" data-group-id="6014738063-6">Article</span><span class="p" data-group-id="6014738063-6">{</span><span class="w">
+  </span><span class="c1">#=&gt; reports: #Ecto.Association.NotLoaded&lt;association :reports is not loaded&gt;</span><span class="w">
+  </span><span class="c1">#=&gt; views: #Ecto.Association.NotLoaded&lt;association :views is not loaded&gt;</span><span class="w">
+</span><span class="p" data-group-id="6014738063-6">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6014738063-7">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6014738063-8">[</span><span class="ss">:views</span><span class="p">,</span><span class="w"> </span><span class="ss">:reports</span><span class="p" data-group-id="6014738063-8">]</span><span class="p" data-group-id="6014738063-7">)</span><span class="w">
+</span><span class="p" data-group-id="6014738063-9">%</span><span class="nc" data-group-id="6014738063-9">Article</span><span class="p" data-group-id="6014738063-9">{</span><span class="w">
+  </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6014738063-10">[</span><span class="p" data-group-id="6014738063-11">%</span><span class="nc" data-group-id="6014738063-11">View</span><span class="p" data-group-id="6014738063-11">{</span><span class="p" data-group-id="6014738063-11">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="6014738063-10">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6014738063-12">[</span><span class="p" data-group-id="6014738063-13">%</span><span class="nc" data-group-id="6014738063-13">Report</span><span class="p" data-group-id="6014738063-13">{</span><span class="p" data-group-id="6014738063-13">}</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="6014738063-12">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p" data-group-id="6014738063-9">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload!</span><span class="p" data-group-id="6014738063-14">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="ss">:field</span><span class="p" data-group-id="6014738063-14">)</span><span class="w">
+</span><span class="gt">** (ArgumentError)</span></code></pre>  </section>
+</section>
+<section class="detail" id="preload_source!/1">
+  <div class="detail-header">
+    <a href="#preload_source!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">preload_source!(source)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/helpers.ex#L38" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>preload_source!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()</pre>
+      </div>
+
+<p>Preload the articles from a source (user or topic).</p><p>Raises <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the source does not have <code class="inline">:articles</code> association, or if the articles'
+struct does not have <code class="inline">:topics</code>, <code class="inline">:reports</code> and <code class="inline">:views</code> associations</p><h2 id="preload_source!/1-examples" class="section-heading">
+  <a href="#preload_source!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">user</span><span class="w">
+</span><span class="p" data-group-id="1473713764-1">%</span><span class="nc" data-group-id="1473713764-1">User</span><span class="p" data-group-id="1473713764-1">{</span><span class="p" data-group-id="1473713764-1">}</span><span class="w"> </span><span class="c1">#=&gt; articles: #Ecto.Association.NotLoaded&lt;association :articles is not loaded&gt;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload_source!</span><span class="p" data-group-id="1473713764-2">(</span><span class="n">user</span><span class="p" data-group-id="1473713764-2">)</span><span class="w">
+</span><span class="p" data-group-id="1473713764-3">%</span><span class="nc" data-group-id="1473713764-3">User</span><span class="p" data-group-id="1473713764-3">{</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1473713764-4">[</span><span class="w">
+    </span><span class="p" data-group-id="1473713764-5">%</span><span class="nc" data-group-id="1473713764-5">Article</span><span class="p" data-group-id="1473713764-5">{</span><span class="w">
+      </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1473713764-6">[</span><span class="n">...</span><span class="p" data-group-id="1473713764-6">]</span><span class="p">,</span><span class="w">
+      </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1473713764-7">[</span><span class="n">...</span><span class="p" data-group-id="1473713764-7">]</span><span class="p">,</span><span class="w">
+      </span><span class="ss">views</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1473713764-8">[</span><span class="n">...</span><span class="p" data-group-id="1473713764-8">]</span><span class="p">,</span><span class="w">
+      </span><span class="n">...</span><span class="w">
+    </span><span class="p" data-group-id="1473713764-5">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="1473713764-4">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span><span class="p" data-group-id="1473713764-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">preload_source!</span><span class="p" data-group-id="1473713764-9">(</span><span class="n">article</span><span class="p" data-group-id="1473713764-9">)</span><span class="w">
+</span><span class="gt">** (ArgumentError)</span></code></pre>  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.6) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>

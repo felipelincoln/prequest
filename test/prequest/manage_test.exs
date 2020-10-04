@@ -4,7 +4,7 @@ defmodule Prequest.ManageTest do
   alias Ecto.Adapters.SQL.Sandbox
   alias Prequest.Manage
   alias Prequest.Manage.{Article, Report, Topic, User, View}
-  import Prequest.Manage.Helpers
+  import Prequest.Helpers
 
   # Testing
   # [x] Returning values

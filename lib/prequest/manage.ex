@@ -98,7 +98,7 @@ defmodule Prequest.Manage do
 
   > To see how the `topics` field works take a look at `create_article/1`
 
-      iex> article |> Manage.Helpers.preload!(:topics)
+      iex> article |> Prequest.Helpers.preload!(:topics)
       %Article{
         topics: [
           %Topic{name: "elixir"},

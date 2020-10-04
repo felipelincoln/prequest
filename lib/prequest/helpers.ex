@@ -1,4 +1,4 @@
-defmodule Prequest.Manage.Helpers do
+defmodule Prequest.Helpers do
   @moduledoc """
   A helper module to work with data preloading.
   """
