@@ -1,9 +1,41 @@
 defmodule Prequest.Manage.Helpers do
-  @moduledoc false
+  @moduledoc """
+  A helper module to work with data preloading.
+  """
 
   alias Prequest.Repo
 
   @type changeset :: %Ecto.Changeset{}
+
+  @doc """
+  Preload the articles from a source (user or topic).
+
+  Raises `ArgumentError` if the source does not have `:articles` association, or if the articles'
+  struct does not have `:topics`, `:reports` and `:views` associations
+
+  ## Examples
+
+      iex> user
+      %User{} #=> articles: #Ecto.Association.NotLoaded<association :articles is not loaded>
+      iex> preload_source!(user)
+      %User{
+        articles: [
+          %Article{
+            reports: [...],
+            topics: [...],
+            views: [...],
+            ...
+          },
+          ...
+        ],
+        ...
+      }
+
+      iex> preload_source!(article)
+      ** (ArgumentError)
+  """
+  @spec preload_source!(struct) :: struct
+  def preload_source!(source), do: preload!(source, articles: [:topics, :reports, :views])
 
   @doc """
   Preload fields from a schema's struct.

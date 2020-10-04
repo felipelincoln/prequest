@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>Contributing to Prequest — Prequest v0.1.0</title>
+    <title>Prequest.Load — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-f41088d9a4.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
 <div class="main">
 
@@ -62,26 +62,20 @@ Prequest      </a>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Contributing to Prequest</h1><p>Make sure to have <a href="https://docs.docker.com/compose/">docker-compose</a> installed.  </p><h2 id="running-the-application-locally" class="section-heading">
-  <a href="#running-the-application-locally" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Running the application locally
-</h2>
-<p>Enter the development container:</p><pre><code class="shell">git clone https://github.com/felipelincoln/prequest.git
-cd prequest/
-docker-compose run --service-ports web /bin/sh</code></pre><p>Create the database, run migrations and start the server:</p><pre><code class="shell">mix ecto.setup
-mix phx.server</code></pre><p>After exiting the container (with the <code class="inline">exit</code> command) you can get back to it:</p><pre><code class="shell">docker start -a -i prequest_web_run_&lt;hash&gt;
-</code></pre><p>Alternatively, you can fast start the services:</p><pre><code class="shell">docker-compose up</code></pre><h2 id="test-pipeline" class="section-heading">
-  <a href="#test-pipeline" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Test pipeline
-</h2>
-<p>Good practice to run before making commits. It will mirror our <a href="https://github.com/felipelincoln/prequest/blob/master/.github/workflows/test.yml">GitHub action</a>.<br></br>Run the following inside the container:</p><pre><code class="shell">mix ci</code></pre><p>This will run:  </p><pre><code class="shell">mix format --check-formatted --dry-run
-mix credo --strict
-mix sobelow -v
-mix coveralls.github</code></pre><h2 id="building-documentation" class="section-heading">
-  <a href="#building-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Building documentation
-</h2>
-<p>Run whenever your changes may cause <a href="https://felipelincoln.github.io/prequest/readme.html">documentation</a> changes.<br></br>Run the following inside the container:</p><pre><code class="shell">mix docs</code></pre>      <footer class="footer">
+      <h1>
+        Prequest.Load <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/load.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+      </h1>
+
+
+        <section id="moduledoc">
+<p>A public API for loading content.</p>        </section>
+
+
+      <footer class="footer">
         <p>
           <span class="line">
             Built using
