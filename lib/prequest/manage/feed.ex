@@ -10,6 +10,7 @@ defmodule Prequest.Manage.Feed do
 
   @topics_quantity 20
   @per_page 2
+  @sort_by :date_desc
 
   def query do
     %Feed{query: from(Article, as: :articles)}
@@ -47,8 +48,8 @@ defmodule Prequest.Manage.Feed do
       topics:
         entries(
           from [articles: a, topics: t] in topics,
-            group_by: t.name,
-            select: {t.name, count(a.id)},
+            group_by: t.id,
+            select: {count(a.id), t},
             order_by: [desc: count(a.id)],
             limit: ^@topics_quantity
         )
@@ -58,18 +59,36 @@ defmodule Prequest.Manage.Feed do
   def view(%Feed{query: query, __meta__: %{articles_count: count}} = feed, opts \\ []) do
     page = Keyword.get(opts, :page, 0)
     per_page = Keyword.get(opts, :per_page, @per_page)
+    sort_by = Keyword.get(opts, :sort_by, @sort_by)
     has_next? = (page + 1) * per_page < count
 
     articles =
-      entries(
-        from [articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a
-      )
+      from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a)
+      |> sort(sort_by)
+      |> entries()
 
     feed
     |> Map.put(:articles, articles)
     |> put_metadata(%{has_next?: has_next?})
     |> put_metadata(%{page: page})
     |> put_metadata(%{per_page: per_page})
+  end
+
+  defp sort(query, :date_desc), do: from(query, order_by: [desc: :inserted_at])
+  defp sort(query, :date_asc), do: from(query, order_by: [asc: :inserted_at])
+
+  defp sort(query, :views_desc) do
+    from [articles: a] in query,
+      group_by: a.id,
+      left_join: v in assoc(a, :views),
+      order_by: [desc: count(v.id), desc: a.inserted_at]
+  end
+
+  defp sort(query, :views_asc) do
+    from [articles: a] in query,
+      group_by: a.id,
+      left_join: v in assoc(a, :views),
+      order_by: [asc: count(v.id), asc: a.inserted_at]
   end
 
   defp put_metadata(%Feed{__meta__: meta} = feed, data) when is_map(data) do
