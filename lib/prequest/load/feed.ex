@@ -9,7 +9,7 @@ defmodule Prequest.Load.Feed do
 
   @topics_quantity 20
   @per_page 2
-  @sort_by :date_desc
+  @sort_by [{:desc, :date}]
 
   def query(%{id: id} = source) when is_struct(source) do
     schema = source.__struct__
@@ -69,21 +69,15 @@ defmodule Prequest.Load.Feed do
     |> put_metadata(%{per_page: per_page})
   end
 
-  defp sort(query, :date_desc), do: from(query, order_by: [desc: :inserted_at])
-  defp sort(query, :date_asc), do: from(query, order_by: [asc: :inserted_at])
-
-  defp sort(query, :views_desc) do
-    from [articles: a] in query,
-      group_by: a.id,
-      left_join: v in assoc(a, :views),
-      order_by: [desc: count(v.id), desc: a.inserted_at]
+  defp sort(query, [{type, :date}]) do
+    from [articles: a] in query, order_by: [{^type, a.inserted_at}]
   end
 
-  defp sort(query, :views_asc) do
+  defp sort(query, [{type, :views}]) do
     from [articles: a] in query,
       group_by: a.id,
       left_join: v in assoc(a, :views),
-      order_by: [asc: count(v.id), asc: a.inserted_at]
+      order_by: [{^type, count(v.id)}, {^type, a.inserted_at}]
   end
 
   defp put_metadata(%Feed{__meta__: meta} = feed, data) when is_map(data) do
