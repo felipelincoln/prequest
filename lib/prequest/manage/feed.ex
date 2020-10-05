@@ -23,12 +23,12 @@ defmodule Prequest.Manage.Feed do
     }
   end
 
-  def query(%{id: _id} = source, topics: topics) when is_struct(source) and is_list(topics) do
+  def filter(%Feed{query: query}, :topics, values) when is_list(values) do
     %Feed{
       query:
-        from([articles: a] in query(source),
+        from([articles: a] in query,
           join: t in assoc(a, :topics),
-          where: t.name in ^topics
+          where: t.name in ^values
         )
     }
   end
