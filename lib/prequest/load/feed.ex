@@ -4,8 +4,8 @@ defmodule Prequest.Load.Feed do
   defstruct __meta__: %{}, query: nil, articles: [], reports: [], topics: []
 
   import Ecto.Query
-  alias Prequest.Repo
   alias Prequest.Load.Feed
+  alias Prequest.Repo
 
   @topics_quantity 20
   @per_page 2
