@@ -1,20 +1,15 @@
-defmodule Prequest.Manage.Feed do
+defmodule Prequest.Load.Feed do
   @moduledoc false
 
   defstruct __meta__: %{}, query: nil, articles: [], reports: [], topics: []
 
   import Ecto.Query
   alias Prequest.Repo
-  alias Prequest.Manage.Article
-  alias Prequest.Manage.Feed
+  alias Prequest.Load.Feed
 
   @topics_quantity 20
   @per_page 2
   @sort_by :date_desc
-
-  def query do
-    %Feed{query: from(Article, as: :articles)}
-  end
 
   def query(%{id: id} = source) when is_struct(source) do
     schema = source.__struct__
