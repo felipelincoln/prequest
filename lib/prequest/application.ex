@@ -8,7 +8,8 @@ defmodule Prequest.Application do
       Prequest.Repo,
       PrequestWeb.Telemetry,
       {Phoenix.PubSub, name: Prequest.PubSub},
-      PrequestWeb.Endpoint
+      PrequestWeb.Endpoint,
+      Prequest.Blog.FeedCache.Server
     ]
 
     opts = [strategy: :one_for_one, name: Prequest.Supervisor]
