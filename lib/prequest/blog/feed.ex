@@ -11,4 +11,5 @@ defmodule Prequest.Blog.Feed do
   @callback filter(feed, :topics, list) :: feed
   @callback build(feed) :: feed
   @callback view(feed, keyword) :: feed
+  @callback load(feed) :: feed
 end

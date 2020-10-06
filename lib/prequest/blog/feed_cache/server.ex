@@ -23,5 +23,4 @@ defmodule Prequest.Blog.FeedCache.Server do
     value = :ets.lookup(:feed_cache, key)
     {:reply, value, state}
   end
-
 end

@@ -7,7 +7,7 @@ defmodule Prequest.Blog.FeedLoad do
 
   @behaviour Feed
 
-  @topics_quantity 20
+  @topics_quantity 2
   @per_page 2
   @sort_by [{:desc, :date}]
 
@@ -19,36 +19,31 @@ defmodule Prequest.Blog.FeedLoad do
     }
   end
 
-  def filter(%Feed{query: query}, :topics, values) when is_list(values) do
-    %Feed{
-      query:
-        from([articles: a] in query,
-          join: t in assoc(a, :topics),
-          where: t.name in ^values
-        )
-    }
+  def filter(%Feed{query: query} = feed, :topics, values) when is_list(values) do
+    query_filter =
+      from([articles: a] in query, join: t in assoc(a, :topics), where: t.name in ^values)
+
+    feed
+    |> put(:query, query_filter)
   end
 
-  def build(%Feed{query: query}) do
+  def build(%Feed{query: query} = feed) do
     topics = from [articles: a] in query, join: t in assoc(a, :topics), as: :topics
+
+    topics_limited =
+      from [articles: a, topics: t] in topics,
+        group_by: t.id,
+        select: {count(a.id), t},
+        order_by: [desc: count(a.id)],
+        limit: ^@topics_quantity
+
     reports = from [articles: a] in query, join: r in assoc(a, :reports), select: r
 
-    %Feed{
-      __meta__: %{
-        articles_count: count_entries(query),
-        topics_count: count_entries(topics)
-      },
-      query: query,
-      reports: entries(reports),
-      topics:
-        entries(
-          from [articles: a, topics: t] in topics,
-            group_by: t.id,
-            select: {count(a.id), t},
-            order_by: [desc: count(a.id)],
-            limit: ^@topics_quantity
-        )
-    }
+    feed
+    |> put(:reports, entries(reports))
+    |> put(:topics, entries(topics_limited))
+    |> put_metadata(:articles_count, count_entries(query))
+    |> put_metadata(:topics_count, count_entries(topics))
   end
 
   def view(%Feed{query: query, __meta__: %{articles_count: count}} = feed, opts \\ []) do
@@ -57,17 +52,18 @@ defmodule Prequest.Blog.FeedLoad do
     sort_by = Keyword.get(opts, :sort_by, @sort_by)
     has_next? = (page + 1) * per_page < count
 
-    articles =
+    query_articles =
       from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a)
       |> sort(sort_by)
 
     feed
-    |> Map.put(:articles, entries(articles))
-    |> Map.put(:query, articles)
-    |> put_metadata(%{has_next?: has_next?})
-    |> put_metadata(%{page: page})
-    |> put_metadata(%{per_page: per_page})
+    |> put(:query, query_articles)
+    |> put_metadata(:has_next?, has_next?)
+    |> put_metadata(:page, page)
+    |> put_metadata(:per_page, per_page)
   end
+
+  def load(%Feed{query: query} = feed), do: %{feed | articles: entries(query)}
 
   defp sort(query, [{type, :date}]) do
     from [articles: a] in query, order_by: [{^type, a.inserted_at}]
@@ -80,7 +76,10 @@ defmodule Prequest.Blog.FeedLoad do
       order_by: [{^type, count(v.id)}, {^type, a.inserted_at}]
   end
 
-  defp put_metadata(%Feed{__meta__: meta} = feed, data) when is_map(data) do
+  defp put(%Feed{} = feed, key, value) when is_atom(key), do: Map.put(feed, key, value)
+
+  defp put_metadata(%Feed{__meta__: meta} = feed, key, value) when is_atom(key) do
+    data = Map.new([{key, value}])
     %{feed | __meta__: Map.merge(meta, data)}
   end
 
