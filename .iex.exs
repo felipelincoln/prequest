@@ -1,6 +1,6 @@
 # Public APIs
 alias Prequest.Manage
-alias Prequest.Load
+alias Prequest.Blog
 
 # Repo
 alias Prequest.Repo

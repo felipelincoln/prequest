@@ -1,11 +1,11 @@
-defmodule Prequest.Load.Feed do
+defmodule Prequest.Blog.FeedLoad do
   @moduledoc false
 
-  defstruct __meta__: %{}, query: nil, articles: [], reports: [], topics: []
-
   import Ecto.Query
-  alias Prequest.Load.Feed
+  alias Prequest.Blog.Feed
   alias Prequest.Repo
+
+  @behaviour Feed
 
   @topics_quantity 20
   @per_page 2
@@ -60,10 +60,10 @@ defmodule Prequest.Load.Feed do
     articles =
       from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a)
       |> sort(sort_by)
-      |> entries()
 
     feed
-    |> Map.put(:articles, articles)
+    |> Map.put(:articles, entries(articles))
+    |> Map.put(:query, articles)
     |> put_metadata(%{has_next?: has_next?})
     |> put_metadata(%{page: page})
     |> put_metadata(%{per_page: per_page})
