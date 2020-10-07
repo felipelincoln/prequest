@@ -1,11 +1,12 @@
-defmodule Prequest.Blog.FeedLoad do
+defmodule Prequest.Feed.Load do
   @moduledoc false
 
   import Ecto.Query
-  alias Prequest.Blog.Feed
+  alias Prequest.Feed
+  alias Prequest.Feed.Impl
   alias Prequest.Repo
 
-  @behaviour Feed
+  @behaviour Impl
 
   @topics_quantity 2
   @reports_quantity 2

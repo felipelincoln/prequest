@@ -1,4 +1,4 @@
-defmodule Prequest.Blog.FeedCache.Server do
+defmodule Prequest.Feed.Cache.Server do
   @moduledoc false
 
   use GenServer

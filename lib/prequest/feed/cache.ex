@@ -1,18 +1,20 @@
-defmodule Prequest.Blog.FeedCache do
+defmodule Prequest.Feed.Cache do
   @moduledoc false
 
-  alias Prequest.Blog.{Feed, FeedLoad}
-  alias Prequest.Blog.FeedCache.Server
+  alias Prequest.Feed
+  alias Prequest.Feed.Cache.Server
+  alias Prequest.Feed.Impl
+  alias Prequest.Feed.Load
 
-  @behaviour Feed
+  @behaviour Impl
 
   @cache_expire_seconds 5
 
-  def query(source), do: FeedLoad.query(source)
-  def filter(%Feed{} = feed, :topics, values), do: FeedLoad.filter(feed, :topics, values)
-  def build(%Feed{} = feed), do: load_or_cache(feed, &FeedLoad.build/1)
-  def view(%Feed{} = feed, opts \\ []), do: FeedLoad.view(feed, opts)
-  def load(%Feed{} = feed), do: load_or_cache(feed, &FeedLoad.load/1)
+  def query(source), do: Load.query(source)
+  def filter(%Feed{} = feed, :topics, values), do: Load.filter(feed, :topics, values)
+  def build(%Feed{} = feed), do: load_or_cache(feed, &Load.build/1)
+  def view(%Feed{} = feed, opts \\ []), do: Load.view(feed, opts)
+  def load(%Feed{} = feed), do: load_or_cache(feed, &Load.load/1)
 
   defp load_or_cache(%Feed{query: query} = feed, load_callback) do
     case ets_read(query) do

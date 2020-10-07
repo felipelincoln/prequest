@@ -1,11 +1,7 @@
-defmodule Prequest.Blog.Feed do
+defmodule Prequest.Feed.Impl do
   @moduledoc false
 
-  defstruct __meta__: %{}, query: nil, articles: [], reports: [], topics: []
-
-  alias Prequest.Blog.Feed
-
-  @type feed :: %Feed{}
+  @type feed :: %Prequest.Feed{}
 
   @callback query(struct) :: feed
   @callback filter(feed, :topics, list) :: feed
