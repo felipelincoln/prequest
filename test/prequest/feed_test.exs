@@ -8,9 +8,8 @@ defmodule Prequest.FeedTest do
   alias Prequest.Manage
 
   # Testing
-  # [ ] Returning values
-  # [ ] Side effects
-  # [ ] Deletion effects
+  # [x] Returning values
+  # [x] Caching effects
 
   setup_all do
     Sandbox.mode(Prequest.Repo, :auto)
@@ -99,6 +98,30 @@ defmodule Prequest.FeedTest do
       assert feed.query == old_feed.query
       assert [article0, article1] -- preload!(feed.articles, :topics) == []
     end
+
+    test "load/1 returns the feed matching the database", %{user: user} do
+      assert (%Feed{} = feed) = user |> Load.query() |> Load.build() |> Load.view() |> Load.load()
+      assert Enum.count(feed.articles) == 2
+      assert feed.__meta__.articles_count == 2
+      assert feed.__meta__.topics_count == 1
+
+      {:ok, _article} =
+        %{
+          title: "article for testing feed's build",
+          cover: "https://feedtest.com/cover_build.png",
+          source: "https://github.com/feedtest/source_build.md",
+          user_id: user.id,
+          topics: [%{name: "testingbuild"}]
+        }
+        |> Manage.create_article()
+
+      assert (%Feed{} = feed) =
+               user |> Load.query() |> Load.build() |> Load.view(per_page: 3) |> Load.load()
+
+      assert Enum.count(feed.articles) == 3
+      assert feed.__meta__.articles_count == 3
+      assert feed.__meta__.topics_count == 2
+    end
   end
 
   # same as load for query/1, filter/3 and view/3
@@ -129,7 +152,7 @@ defmodule Prequest.FeedTest do
 
     # critical test
     test "build/1 caches the feed", %{user: user} do
-      feed = Cache.query(user) |> Cache.build()
+      feed = Cache.query(user) |> Cache.build(0)
       assert [{_query, _datetime, cached_feed}] = :ets.lookup(:feed_cache, feed.query)
       assert feed == cached_feed
 
@@ -174,6 +197,32 @@ defmodule Prequest.FeedTest do
 
       new_feed = Cache.query(user) |> Cache.build(100) |> Cache.view() |> Cache.load()
       assert new_feed == cached_feed
+    end
+
+    test "load/1 returns the feed matching the ets cache", %{user: user} do
+      assert (%Feed{} = feed) =
+               user |> Cache.query() |> Cache.build(0) |> Cache.view() |> Cache.load(0)
+
+      assert Enum.count(feed.articles) == 2
+      assert feed.__meta__.articles_count == 2
+      assert feed.__meta__.topics_count == 1
+
+      {:ok, _article} =
+        %{
+          title: "article for testing feed's build",
+          cover: "https://feedtest.com/cover_build.png",
+          source: "https://github.com/feedtest/source_build.md",
+          user_id: user.id,
+          topics: [%{name: "testingbuild"}]
+        }
+        |> Manage.create_article()
+
+      assert (%Feed{} = feed) =
+               user |> Cache.query() |> Cache.build(100) |> Cache.view() |> Cache.load(100)
+
+      assert Enum.count(feed.articles) == 2
+      assert feed.__meta__.articles_count == 2
+      assert feed.__meta__.topics_count == 1
     end
   end
 end
