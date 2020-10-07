@@ -14,9 +14,9 @@ defmodule Prequest.Feed.Cache.Server do
     {:ok, state}
   end
 
-  def handle_cast({:insert, entry}, state) do
-    :ets.insert(:feed_cache, entry)
-    {:noreply, state}
+  def handle_call({:insert, entry}, _from, state) do
+    value = :ets.insert(:feed_cache, entry)
+    {:reply, value, state}
   end
 
   def handle_call({:read, key}, _from, state) do

@@ -8,26 +8,21 @@ defmodule Prequest.Feed.Cache do
 
   @behaviour Impl
 
-  @expire_seconds 5
+  @expire_sec 5
 
   def query(source), do: Load.query(source)
-  def filter(%Feed{} = feed, :topics, values), do: Load.filter(feed, :topics, values)
+  def filter(feed, :topics, values), do: Load.filter(feed, :topics, values)
+  def build(feed, expire_sec \\ @expire_sec), do: load_or_cache(feed, &Load.build/1, expire_sec)
+  def view(feed, opts \\ []), do: Load.view(feed, opts)
+  def load(feed, expire_sec \\ @expire_sec), do: load_or_cache(feed, &Load.load/1, expire_sec)
 
-  def build(%Feed{} = feed, expire_seconds \\ @expire_seconds),
-    do: load_or_cache(feed, &Load.build/1, expire_seconds)
-
-  def view(%Feed{} = feed, opts \\ []), do: Load.view(feed, opts)
-
-  def load(%Feed{} = feed, expire_seconds \\ @expire_seconds),
-    do: load_or_cache(feed, &Load.load/1, expire_seconds)
-
-  defp load_or_cache(%Feed{query: query} = feed, load_callback, expire_seconds) do
+  defp load_or_cache(%Feed{query: query} = feed, load_callback, expire_sec) do
     case ets_read(query) do
       [] ->
         cache(feed, load_callback)
 
       [{^query, updated_at, cached_feed}] ->
-        case has_expired?(updated_at, expire_seconds) do
+        case has_expired?(updated_at, expire_sec) do
           true -> cache(feed, load_callback)
           false -> cached_feed
         end
@@ -41,11 +36,11 @@ defmodule Prequest.Feed.Cache do
   end
 
   defp ets_read(key), do: GenServer.call(Server, {:read, key})
-  defp ets_insert(entry), do: GenServer.cast(Server, {:insert, entry})
+  defp ets_insert(entry), do: GenServer.call(Server, {:insert, entry})
 
-  defp has_expired?(datetime, expire_seconds) do
+  defp has_expired?(datetime, expire_sec) do
     datetime
-    |> DateTime.add(expire_seconds, :second)
+    |> DateTime.add(expire_sec, :second)
     |> DateTime.compare(DateTime.utc_now())
     |> case do
       :gt -> false
