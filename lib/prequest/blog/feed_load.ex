@@ -8,6 +8,7 @@ defmodule Prequest.Blog.FeedLoad do
   @behaviour Feed
 
   @topics_quantity 2
+  @reports_quantity 2
   @per_page 2
   @sort_by [{:desc, :date}]
 
@@ -37,7 +38,12 @@ defmodule Prequest.Blog.FeedLoad do
         order_by: [desc: count(a.id)],
         limit: ^@topics_quantity
 
-    reports = from [articles: a] in query, join: r in assoc(a, :reports), select: r
+    reports =
+      from [articles: a] in query,
+        join: r in assoc(a, :reports),
+        select: r,
+        order_by: [desc: r.inserted_at],
+        limit: ^@reports_quantity
 
     feed
     |> put(:reports, entries(reports))

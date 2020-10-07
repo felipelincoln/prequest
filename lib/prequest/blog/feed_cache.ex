@@ -15,7 +15,7 @@ defmodule Prequest.Blog.FeedCache do
   def load(%Feed{} = feed), do: load_or_cache(feed, &FeedLoad.load/1)
 
   defp load_or_cache(%Feed{query: query} = feed, load_callback) do
-    case read(query) do
+    case ets_read(query) do
       [] ->
         cache(feed, load_callback)
 
@@ -29,12 +29,12 @@ defmodule Prequest.Blog.FeedCache do
 
   defp cache(%Feed{query: query} = feed, callback) do
     loaded_feed = callback.(feed)
-    insert({query, DateTime.utc_now(), loaded_feed})
+    ets_insert({query, DateTime.utc_now(), loaded_feed})
     loaded_feed
   end
 
-  defp read(key), do: GenServer.call(Server, {:read, key})
-  defp insert(entry), do: GenServer.cast(Server, {:insert, entry})
+  defp ets_read(key), do: GenServer.call(Server, {:read, key})
+  defp ets_insert(entry), do: GenServer.cast(Server, {:insert, entry})
 
   defp has_expired?(datetime, expire_seconds \\ @cache_expire_seconds) do
     datetime
