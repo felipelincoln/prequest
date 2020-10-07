@@ -17,11 +17,12 @@ COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
 
-# build assets
-COPY lib lib
+# install node dependencies
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm ci --prefix ./assets --progress=false --no-audit --loglevel=error
 
+# build assets
+COPY lib lib
 COPY priv priv
 COPY assets assets
 RUN npm run --prefix ./assets deploy
