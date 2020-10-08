@@ -22,9 +22,9 @@ COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm ci --prefix ./assets --progress=false --no-audit --loglevel=error
 
 # build assets
-COPY lib lib
 COPY priv priv
 COPY assets assets
+COPY lib lib
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
