@@ -7,6 +7,7 @@ defmodule Prequest.FeedTest do
   alias Prequest.Feed.{Cache, Load}
   alias Prequest.Manage
 
+  # REDO ALL: This should be a public API test
   # Testing
   # [x] Returning values
   # [x] Caching effects
@@ -51,11 +52,20 @@ defmodule Prequest.FeedTest do
       assert %Feed{query: %Ecto.Query{}} = Load.query(topic)
     end
 
-    test "filter/3 returns the feed with an filtered ecto query", %{user: user} do
+    test "filter/3 returns the feed with a filtered ecto query", %{user: user} do
       feed = Load.query(user)
 
       assert %Feed{query: %Ecto.Query{} = query} =
                Load.query(user) |> Load.filter(:topics, ["it can be anything"])
+
+      assert feed.query != query
+    end
+
+    test "search/2 returns the feed with an ilike ecto query", %{user: user} do
+      feed = Load.query(user)
+
+      assert %Feed{query: %Ecto.Query{} = query} =
+               Load.query(user) |> Load.search("any substring")
 
       assert feed.query != query
     end
@@ -80,7 +90,7 @@ defmodule Prequest.FeedTest do
       assert feed.__meta__.per_page == 2
     end
 
-    test "view/3 sorted opt returns the feed with a sorted ecto query", %{user: user} do
+    test "view/3 with :sort_by returns the feed with a sorted ecto query", %{user: user} do
       old_feed = Load.query(user) |> Load.build()
       assert (%Feed{} = feed_desc_date) = old_feed |> Load.view(sort_by: [desc: :date])
       assert (%Feed{} = feed_asc_date) = old_feed |> Load.view(sort_by: [asc: :date])
@@ -124,7 +134,7 @@ defmodule Prequest.FeedTest do
     end
   end
 
-  # same as load for query/1, filter/3 and view/3
+  # same as load for query/1, filter/3 search/2search/2  and view/3
   describe "cache" do
     test "query/1 returns the feed with an ecto query", %{user: user, topic: topic} do
       assert %Feed{query: %Ecto.Query{}} = Cache.query(user)
@@ -136,6 +146,15 @@ defmodule Prequest.FeedTest do
 
       assert %Feed{query: %Ecto.Query{} = query} =
                Cache.query(user) |> Cache.filter(:topics, ["it can be anything"])
+
+      assert feed.query != query
+    end
+
+    test "search/2 returns the feed with an ilike ecto query", %{user: user} do
+      feed = Cache.query(user)
+
+      assert %Feed{query: %Ecto.Query{} = query} =
+               Cache.query(user) |> Cache.search("any substring")
 
       assert feed.query != query
     end
@@ -170,7 +189,7 @@ defmodule Prequest.FeedTest do
       assert feed.__meta__.per_page == 2
     end
 
-    test "view/3 sorted opt returns the feed with a sorted ecto query", %{user: user} do
+    test "view/3 with :sort_by returns the feed with a sorted ecto query", %{user: user} do
       old_feed = Cache.query(user) |> Cache.build(0)
       assert (%Feed{} = feed_desc_date) = old_feed |> Cache.view(sort_by: [desc: :date])
       assert (%Feed{} = feed_asc_date) = old_feed |> Cache.view(sort_by: [asc: :date])

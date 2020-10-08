@@ -29,6 +29,15 @@ defmodule Prequest.Feed.Load do
     |> put(:query, query_filter)
   end
 
+  def search(%Feed{query: query} = feed, substring) when is_binary(substring) do
+    substring = String.replace(substring, ~r/([%_])/, ~S"\\" <> "\\g{1}")
+
+    query_search = from([articles: a] in query, where: ilike(a.title, ^"%#{substring}%"))
+
+    feed
+    |> put(:query, query_search)
+  end
+
   def build(%Feed{query: query} = feed) do
     topics = from [articles: a] in query, join: t in assoc(a, :topics), as: :topics
 
