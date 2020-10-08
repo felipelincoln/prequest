@@ -13,7 +13,6 @@ defmodule Prequest.Feed do
   def build(source) do
     source
     |> Cache.query()
-    |> Cache.count(:ui_count)
     |> Cache.build()
   end
 
@@ -21,14 +20,12 @@ defmodule Prequest.Feed do
     source
     |> Cache.query()
     |> Cache.filter(:topics, topics)
-    |> Cache.count(:ui_count)
     |> Cache.build()
   end
 
   def search(feed, substring) do
     feed
     |> Load.search(substring)
-    |> Load.count()
   end
 
   def page(feed, page), do: page(feed, page, desc: :date)

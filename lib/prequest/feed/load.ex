@@ -13,8 +13,9 @@ defmodule Prequest.Feed.Load do
   @per_page 2
   @sort_by [{:desc, :date}]
 
-  def query(article_schema) when is_atom(article_schema),
-    do: %Feed{query: from(article_schema, as: :articles)}
+  def query(article_schema) when is_atom(article_schema) do
+    %Feed{query: from(article_schema, as: :articles)}
+  end
 
   def query(%{id: id} = source) when is_struct(source) do
     schema = source.__struct__
@@ -32,30 +33,9 @@ defmodule Prequest.Feed.Load do
     |> put(:query, query_filter)
   end
 
-  def search(%Feed{query: query} = feed, substring) when is_binary(substring) do
-    substring = String.replace(substring, ~r/([%_])/, ~S"\\" <> "\\g{1}")
-
-    query_search = from([articles: a] in query, where: ilike(a.title, ^"%#{substring}%"))
-
-    feed
-    |> put(:query, query_search)
-  end
-
-  def count(%Feed{query: query} = feed) do
-    feed
-    |> put_metadata(:articles_count, count_entries(query))
-  end
-
-  def count(%Feed{query: query} = feed, count_name) do
-    count = count_entries(query)
-
-    feed
-    |> put_metadata(count_name, count)
-    |> put_metadata(:articles_count, count)
-  end
-
   def build(%Feed{query: query} = feed) do
     topics = from [articles: a] in query, join: t in assoc(a, :topics), as: :topics
+    results = count_entries(query)
 
     topics_limited =
       from [articles: a, topics: t] in topics,
@@ -75,13 +55,25 @@ defmodule Prequest.Feed.Load do
     |> put(:reports, entries(reports))
     |> put(:topics, entries(topics_limited))
     |> put_metadata(:topics_count, count_entries(topics))
+    |> put_metadata(:articles_count, results)
+    |> put_metadata(:results, results)
   end
 
-  def view(%Feed{query: query, __meta__: %{articles_count: count}} = feed, opts \\ []) do
+  def search(%Feed{query: query} = feed, substring) when is_binary(substring) do
+    substring = String.replace(substring, ~r/([%_])/, ~S"\\" <> "\\g{1}")
+
+    query_search = from([articles: a] in query, where: ilike(a.title, ^"%#{substring}%"))
+
+    feed
+    |> put(:query, query_search)
+    |> put_metadata(:results, count_entries(query_search))
+  end
+
+  def view(%Feed{query: query, __meta__: %{results: results}} = feed, opts \\ []) do
     page = Keyword.get(opts, :page, 0)
     per_page = Keyword.get(opts, :per_page, @per_page)
     sort_by = Keyword.get(opts, :sort_by, @sort_by)
-    has_next? = (page + 1) * per_page < count
+    has_next? = (page + 1) * per_page < results
 
     query_articles =
       from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a)
