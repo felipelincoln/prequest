@@ -13,6 +13,9 @@ defmodule Prequest.Feed.Load do
   @per_page 2
   @sort_by [{:desc, :date}]
 
+  def query(article_schema) when is_atom(article_schema),
+    do: %Feed{query: from(article_schema, as: :articles)}
+
   def query(%{id: id} = source) when is_struct(source) do
     schema = source.__struct__
 
@@ -38,6 +41,19 @@ defmodule Prequest.Feed.Load do
     |> put(:query, query_search)
   end
 
+  def count(%Feed{query: query} = feed) do
+    feed
+    |> put_metadata(:articles_count, count_entries(query))
+  end
+
+  def count(%Feed{query: query} = feed, count_name) do
+    count = count_entries(query)
+
+    feed
+    |> put_metadata(count_name, count)
+    |> put_metadata(:articles_count, count)
+  end
+
   def build(%Feed{query: query} = feed) do
     topics = from [articles: a] in query, join: t in assoc(a, :topics), as: :topics
 
@@ -58,7 +74,6 @@ defmodule Prequest.Feed.Load do
     feed
     |> put(:reports, entries(reports))
     |> put(:topics, entries(topics_limited))
-    |> put_metadata(:articles_count, count_entries(query))
     |> put_metadata(:topics_count, count_entries(topics))
   end
 

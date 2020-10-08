@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.Feed — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-12f32aa2a8.js"></script>
+    <script src="dist/sidebar_items-fa71152a71.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -72,9 +72,166 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>A public API for Feed fetching.</p>        </section>
+<p>A public API for fetching feeds.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1793685790-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1793685790-2">[</span><span class="s">&quot;elixir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="1793685790-2">]</span><span class="p" data-group-id="1793685790-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">search</span><span class="p" data-group-id="1793685790-3">(</span><span class="s">&quot;substring&quot;</span><span class="p" data-group-id="1793685790-3">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1793685790-4">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1793685790-5">[</span><span class="ss">desc</span><span class="p">:</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="1793685790-5">]</span><span class="p" data-group-id="1793685790-4">)</span><span class="w">
+</span><span class="p" data-group-id="1793685790-6">%</span><span class="nc" data-group-id="1793685790-6">Feed</span><span class="p" data-group-id="1793685790-6">{</span><span class="n">...</span><span class="p" data-group-id="1793685790-6">}</span></code></pre>        </section>
 
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#build/1">build(source)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#build/2">build(source, topics)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#page/2">page(feed, page)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#page/3">page(feed, page, list)</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#page/4">page(feed, atom, page, list \\ [desc: :date])</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#search/2">search(feed, substring)</a>
+  </div>
+</div>
+  </div>
+        </section>
 
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="build/1">
+  <div class="detail-header">
+    <a href="#build/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">build(source)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L13" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="build/2">
+  <div class="detail-header">
+    <a href="#build/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">build(source, topics)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L20" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="page/2">
+  <div class="detail-header">
+    <a href="#page/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">page(feed, page)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L34" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="page/3">
+  <div class="detail-header">
+    <a href="#page/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">page(feed, page, list)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L36" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="page/4">
+  <div class="detail-header">
+    <a href="#page/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">page(feed, atom, page, list \\ [desc: :date])</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L42" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+<section class="detail" id="search/2">
+  <div class="detail-header">
+    <a href="#search/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">search(feed, substring)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L28" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+
+  </section>
+</section>
+          </div>
+        </section>
       <footer class="footer">
         <p>
           <span class="line">
