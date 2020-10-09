@@ -13,46 +13,68 @@ defmodule Prequest.Feed.Load do
   @per_page 2
   @sort_by [{:desc, :date}]
 
+  def get_metadata(%Feed{__meta__: meta}, key, default \\ nil) when is_atom(key),
+    do: Map.get(meta, key, default)
+
   def query(article_schema) when is_atom(article_schema) do
-    %Feed{query: from(article_schema, as: :articles)}
+    %Feed{query: from(a in article_schema, as: :articles, select: a)}
   end
 
   def query(%{id: id} = source) when is_struct(source) do
     schema = source.__struct__
 
     %Feed{
-      query: from(s in schema, where: s.id == ^id, join: a in assoc(s, :articles), as: :articles)
+      query:
+        from(s in schema,
+          where: s.id == ^id,
+          join: a in assoc(s, :articles),
+          as: :articles,
+          select: a
+        )
     }
   end
 
-  def filter(%Feed{query: query} = feed, :topics, values) when is_list(values) do
+  def filter(%Feed{query: query} = feed, :topics, values) when is_list(values) and values != [] do
     query_filter =
-      from([articles: a] in query, join: t in assoc(a, :topics), where: t.name in ^values)
+      from [articles: a] in query,
+        join: t in assoc(a, :topics),
+        where: t.name in ^values,
+        group_by: a.id,
+        having: count(t.id, :distinct) == ^Enum.count(values)
 
     feed
     |> put(:query, query_filter)
+    |> put_metadata(:filter, {:topics, values})
   end
 
   def build(%Feed{query: query} = feed) do
-    topics = from [articles: a] in query, join: t in assoc(a, :topics), as: :topics
-    results = count_entries(query)
+    {:topics, selected_topics} = get_metadata(feed, :filter, {:topics, []})
+
+    topics =
+      from a in subquery(query),
+        as: :articles,
+        join: t in assoc(a, :topics),
+        as: :topics,
+        where: t.name not in ^selected_topics
 
     topics_limited =
       from [articles: a, topics: t] in topics,
         group_by: t.id,
-        select: {count(a.id), t},
         order_by: [desc: count(a.id)],
-        limit: ^@topics_quantity
+        limit: ^@topics_quantity,
+        select: {count(a.id), t}
 
-    reports =
-      from [articles: a] in query,
+    reports_limited =
+      from a in subquery(query),
         join: r in assoc(a, :reports),
-        select: r,
         order_by: [desc: r.inserted_at],
-        limit: ^@reports_quantity
+        limit: ^@reports_quantity,
+        select: r
+
+    results = count_entries(query)
 
     feed
-    |> put(:reports, entries(reports))
+    |> put(:reports, entries(reports_limited))
     |> put(:topics, entries(topics_limited))
     |> put_metadata(:topics_count, count_entries(topics))
     |> put_metadata(:articles_count, results)
@@ -67,6 +89,7 @@ defmodule Prequest.Feed.Load do
     feed
     |> put(:query, query_search)
     |> put_metadata(:results, count_entries(query_search))
+    |> put_metadata(:search, substring)
   end
 
   def view(%Feed{query: query, __meta__: %{results: results}} = feed, opts \\ []) do
@@ -76,7 +99,7 @@ defmodule Prequest.Feed.Load do
     has_next? = (page + 1) * per_page < results
 
     query_articles =
-      from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page), select: a)
+      from([articles: a] in query, limit: ^per_page, offset: ^(per_page * page))
       |> sort(sort_by)
 
     feed
@@ -106,6 +129,8 @@ defmodule Prequest.Feed.Load do
     %{feed | __meta__: Map.merge(meta, data)}
   end
 
-  defp count_entries(%Ecto.Query{} = query), do: Repo.aggregate(query, :count, :id)
+  defp count_entries(%Ecto.Query{} = query),
+    do: Repo.one(from x in subquery(query), select: count(x.id))
+
   defp entries(%Ecto.Query{} = query), do: Repo.all(query)
 end

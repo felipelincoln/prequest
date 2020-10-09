@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.Feed — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-fa71152a71.js"></script>
+    <script src="dist/sidebar_items-e13ab30c17.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -72,8 +72,7 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>A public API for fetching feeds.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1793685790-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1793685790-2">[</span><span class="s">&quot;elixir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="1793685790-2">]</span><span class="p" data-group-id="1793685790-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">search</span><span class="p" data-group-id="1793685790-3">(</span><span class="s">&quot;substring&quot;</span><span class="p" data-group-id="1793685790-3">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1793685790-4">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1793685790-5">[</span><span class="ss">desc</span><span class="p">:</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="1793685790-5">]</span><span class="p" data-group-id="1793685790-4">)</span><span class="w">
-</span><span class="p" data-group-id="1793685790-6">%</span><span class="nc" data-group-id="1793685790-6">Feed</span><span class="p" data-group-id="1793685790-6">{</span><span class="n">...</span><span class="p" data-group-id="1793685790-6">}</span></code></pre>        </section>
+<p>A public API for fetching feeds.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -83,43 +82,102 @@ Prequest      </a>
             </a>
             Summary
           </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:feed/0">feed()</a>
+  </div>
+</div>
+  </div>
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#__struct__/0">%Prequest.Feed{}</a>
+  </div>
+    <div class="summary-synopsis"><p>Struct for modeling a feed.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#build/1">build(source)</a>
   </div>
+    <div class="summary-synopsis"><p>Populate a feed struct with all information but articles.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#build/2">build(source, topics)</a>
   </div>
+    <div class="summary-synopsis"><p>Same as <a href="#build/1"><code class="inline">build/1</code></a> but adding a topics filter to the ecto query.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#page/2">page(feed, page)</a>
   </div>
+    <div class="summary-synopsis"><p>Returns the feed with the articles field populated</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#page/3">page(feed, page, list)</a>
   </div>
+    <div class="summary-synopsis"><p>Same as <a href="#page/2"><code class="inline">page/2</code></a> but ordering by date or views.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#page/4">page(feed, atom, page, list \\ [desc: :date])</a>
   </div>
+    <div class="summary-synopsis"><p>Same as <a href="#page/3"><code class="inline">page/3</code></a> but with no caching on pages layer (to be used with <a href="#search/2"><code class="inline">search/2</code></a>).</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#search/2">search(feed, substring)</a>
   </div>
+    <div class="summary-synopsis"><p>Returns the feed adding a search expression to the ecto query.</p></div>
 </div>
   </div>
         </section>
 
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:feed/0">
+  <div class="detail-header">
+    <a href="#t:feed/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">feed()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L69" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>feed() :: %Prequest.Feed{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  articles: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  query: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  reports: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  topics: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
+      </div>
+
+  </section>
+</section>
+          </div>
+        </section>
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
@@ -128,6 +186,57 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
+<section class="detail" id="__struct__/0">
+  <div class="detail-header">
+    <a href="#__struct__/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">%Prequest.Feed{}</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L64" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+      <span class="note">(struct)</span>
+  </div>
+
+  <section class="docstring">
+
+<p>Struct for modeling a feed.</p><p>It contains a metadata field, which describes</p><ul><li><code class="inline">articles_count</code> : how many articles the <a href="#build/2"><code class="inline">build/2</code></a> alone was able to fetch.</li><li><code class="inline">results</code> : how many articles the <a href="#search/2"><code class="inline">search/2</code></a> got. It evaluates the same as <code class="inline">articles_count</code> if there is
+no <a href="#search/2"><code class="inline">search/2</code></a> in the pipeline.</li><li><code class="inline">filter</code> : what topics was selected from <a href="#build/2"><code class="inline">build/2</code></a>. Articles in a feed contains all the topics listed here.</li><li><code class="inline">topics_count</code> : the count of all topics for all articles (be it a distinct topic or not).</li><li><code class="inline">search</code> : the substring used in <a href="#search/2"><code class="inline">search/2</code></a>.</li><li><code class="inline">page</code> : current feed page.</li><li><code class="inline">per_page</code> : amount of articles to show each page.</li><li><code class="inline">has_next?</code> : if there is articles in the next page.</li></ul><p>and also the fields</p><ul><li><code class="inline">query</code> : an ecto query that is executed by <a href="#page/4"><code class="inline">page/4</code></a> to fetch articles from database or cache.</li><li><code class="inline">articles</code> : a list of articles.</li><li><code class="inline">reports</code> : a list of reports from all articles.</li><li><code class="inline">topics</code> : a list of tuples <code class="inline">{count, topic}</code>, being <code class="inline">count</code> the amount of articles that have this <code class="inline">topic</code>.</li></ul><p><code class="inline">topics_count</code> is the sum of <code class="inline">count</code> in all <code class="inline">{count, topic}</code>.</p><h2 id="__struct__/0-example" class="section-heading">
+  <a href="#__struct__/0-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="5406398452-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5406398452-2">[</span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="5406398452-2">]</span><span class="p" data-group-id="5406398452-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">search</span><span class="p" data-group-id="5406398452-3">(</span><span class="s">&quot;prequest&quot;</span><span class="p" data-group-id="5406398452-3">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="5406398452-4">(</span><span class="mi">0</span><span class="p" data-group-id="5406398452-4">)</span><span class="w">
+</span><span class="p" data-group-id="5406398452-5">%</span><span class="nc" data-group-id="5406398452-5">Prequest.Feed</span><span class="p" data-group-id="5406398452-5">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5406398452-6">%{</span><span class="w">
+    </span><span class="ss">articles_count</span><span class="p">:</span><span class="w"> </span><span class="mi">234</span><span class="p">,</span><span class="w">
+    </span><span class="ss">filter</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5406398452-7">{</span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5406398452-8">[</span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="5406398452-8">]</span><span class="p" data-group-id="5406398452-7">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">has_next?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
+    </span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="ss">per_page</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="ss">results</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+    </span><span class="ss">search</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prequest&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">topics_count</span><span class="p">:</span><span class="w"> </span><span class="mi">178</span><span class="w">
+  </span><span class="p" data-group-id="5406398452-6">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5406398452-9">[</span><span class="w">
+    </span><span class="p" data-group-id="5406398452-10">%</span><span class="nc" data-group-id="5406398452-10">Prequest.Manage.Article</span><span class="p" data-group-id="5406398452-10">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="5406398452-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5406398452-11">%</span><span class="nc" data-group-id="5406398452-11">Prequest.Manage.Article</span><span class="p" data-group-id="5406398452-11">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="5406398452-11">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="5406398452-9">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles,</span><span class="w">
+         </span><span class="c1"># join: t1 in assoc(a0, :topics), where: t1.name in ^[&quot;otp&quot;],</span><span class="w">
+         </span><span class="c1"># where: ilike(a0.title, ^&quot;%prequest%&quot;), group_by: [a0.id],</span><span class="w">
+         </span><span class="c1"># having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.inserted_at],</span><span class="w">
+         </span><span class="c1"># limit: ^2, offset: ^0, select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5406398452-12">[</span><span class="p" data-group-id="5406398452-12">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5406398452-13">[</span><span class="w">
+    </span><span class="p" data-group-id="5406398452-14">{</span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5406398452-15">%</span><span class="nc" data-group-id="5406398452-15">Prequest.Manage.Topic</span><span class="p" data-group-id="5406398452-15">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="5406398452-15">}</span><span class="p" data-group-id="5406398452-14">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5406398452-16">{</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5406398452-17">%</span><span class="nc" data-group-id="5406398452-17">Prequest.Manage.Topic</span><span class="p" data-group-id="5406398452-17">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="5406398452-17">}</span><span class="p" data-group-id="5406398452-16">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="5406398452-13">]</span><span class="w">
+</span><span class="p" data-group-id="5406398452-5">}</span></code></pre>  </section>
+</section>
 <section class="detail" id="build/1">
   <div class="detail-header">
     <a href="#build/1" class="detail-link" title="Link to this function">
@@ -135,15 +244,44 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">build(source)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L106" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>build(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Populate a feed struct with all information but articles.</p><h2 id="build/1-examples" class="section-heading">
+  <a href="#build/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<p>To get a feed from all the articles</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="0089264959-1">(</span><span class="nc">Article</span><span class="p" data-group-id="0089264959-1">)</span><span class="w">
+</span><span class="p" data-group-id="0089264959-2">%</span><span class="nc" data-group-id="0089264959-2">Prequest.Feed</span><span class="p" data-group-id="0089264959-2">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0089264959-3">%{</span><span class="ss">articles_count</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">results</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">topics_count</span><span class="p">:</span><span class="w"> </span><span class="mi">1567</span><span class="p" data-group-id="0089264959-3">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0089264959-4">[</span><span class="p" data-group-id="0089264959-4">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles, select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0089264959-5">[</span><span class="w">
+    </span><span class="p" data-group-id="0089264959-6">%</span><span class="nc" data-group-id="0089264959-6">Prequest.Manage.Report</span><span class="p" data-group-id="0089264959-6">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="0089264959-6">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="0089264959-7">%</span><span class="nc" data-group-id="0089264959-7">Prequest.Manage.Report</span><span class="p" data-group-id="0089264959-7">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="0089264959-7">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="0089264959-5">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0089264959-8">[</span><span class="w">
+    </span><span class="p" data-group-id="0089264959-9">{</span><span class="mi">89</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0089264959-10">%</span><span class="nc" data-group-id="0089264959-10">Prequest.Manage.Topic</span><span class="p" data-group-id="0089264959-10">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="0089264959-10">}</span><span class="p" data-group-id="0089264959-9">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="0089264959-11">{</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0089264959-12">%</span><span class="nc" data-group-id="0089264959-12">Prequest.Manage.Topic</span><span class="p" data-group-id="0089264959-12">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="0089264959-12">}</span><span class="p" data-group-id="0089264959-11">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="0089264959-8">]</span><span class="w">
+</span><span class="p" data-group-id="0089264959-2">}</span></code></pre><p>or from a specific topic / user</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Manage</span><span class="o">.</span><span class="n">get_topic</span><span class="p" data-group-id="2022592650-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="2022592650-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="2022592650-2">(</span><span class="n">topic</span><span class="p" data-group-id="2022592650-2">)</span><span class="w">
+</span><span class="p" data-group-id="2022592650-3">%</span><span class="nc" data-group-id="2022592650-3">Feed</span><span class="p" data-group-id="2022592650-3">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2022592650-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Manage</span><span class="o">.</span><span class="n">get_user</span><span class="p" data-group-id="2022592650-4">(</span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="2022592650-4">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="2022592650-5">(</span><span class="n">user</span><span class="p" data-group-id="2022592650-5">)</span><span class="w">
+</span><span class="p" data-group-id="2022592650-6">%</span><span class="nc" data-group-id="2022592650-6">Feed</span><span class="p" data-group-id="2022592650-6">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2022592650-6">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="build/2">
   <div class="detail-header">
@@ -152,15 +290,41 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">build(source, topics)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L140" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>build(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Same as <a href="#build/1"><code class="inline">build/1</code></a> but adding a topics filter to the ecto query.</p><p>The filtering will make the query match only articles that contain all the topics listed.</p><h2 id="build/2-example" class="section-heading">
+  <a href="#build/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="8073173282-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8073173282-2">[</span><span class="s">&quot;elixir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="8073173282-2">]</span><span class="p" data-group-id="8073173282-1">)</span><span class="w">
+</span><span class="p" data-group-id="8073173282-3">%</span><span class="nc" data-group-id="8073173282-3">Prequest.Feed</span><span class="p" data-group-id="8073173282-3">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8073173282-4">%{</span><span class="w">
+    </span><span class="ss">articles_count</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="ss">filter</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8073173282-5">{</span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8073173282-6">[</span><span class="s">&quot;elixir&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="8073173282-6">]</span><span class="p" data-group-id="8073173282-5">}</span><span class="p">,</span><span class="w">
+    </span><span class="ss">results</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="ss">topics_count</span><span class="p">:</span><span class="w"> </span><span class="mi">145</span><span class="w">
+  </span><span class="p" data-group-id="8073173282-4">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8073173282-7">[</span><span class="p" data-group-id="8073173282-7">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles,</span><span class="w">
+         </span><span class="c1"># join: t1 in assoc(a0, :topics), where: t1.name in ^[&quot;otp&quot;],</span><span class="w">
+         </span><span class="c1"># group_by: [a0.id], having: count(t1.id, :distinct) == ^1, select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8073173282-8">[</span><span class="p" data-group-id="8073173282-8">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8073173282-9">[</span><span class="w">
+    </span><span class="p" data-group-id="8073173282-10">{</span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8073173282-11">%</span><span class="nc" data-group-id="8073173282-11">Prequest.Manage.Topic</span><span class="p" data-group-id="8073173282-11">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="8073173282-11">}</span><span class="p" data-group-id="8073173282-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="8073173282-12">{</span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8073173282-13">%</span><span class="nc" data-group-id="8073173282-13">Prequest.Manage.Topic</span><span class="p" data-group-id="8073173282-13">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="8073173282-13">}</span><span class="p" data-group-id="8073173282-12">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="8073173282-9">]</span><span class="w">
+</span><span class="p" data-group-id="8073173282-3">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="page/2">
   <div class="detail-header">
@@ -169,15 +333,50 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">page(feed, page)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L218" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>page(<a href="#t:feed/0">feed</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Returns the feed with the articles field populated</p><h2 id="page/2-examples" class="section-heading">
+  <a href="#page/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1836011578-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1836011578-2">[</span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="1836011578-2">]</span><span class="p" data-group-id="1836011578-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1836011578-3">(</span><span class="mi">0</span><span class="p" data-group-id="1836011578-3">)</span><span class="w">
+</span><span class="p" data-group-id="1836011578-4">%</span><span class="nc" data-group-id="1836011578-4">Prequest.Feed</span><span class="p" data-group-id="1836011578-4">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1836011578-5">%{</span><span class="w">
+    </span><span class="ss">articles_count</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+    </span><span class="ss">filter</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1836011578-6">{</span><span class="ss">:topics</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1836011578-7">[</span><span class="s">&quot;otp&quot;</span><span class="p" data-group-id="1836011578-7">]</span><span class="p" data-group-id="1836011578-6">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">has_next?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
+    </span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="ss">per_page</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="ss">results</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+    </span><span class="ss">topics_count</span><span class="p">:</span><span class="w"> </span><span class="mi">189</span><span class="w">
+  </span><span class="p" data-group-id="1836011578-5">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1836011578-8">[</span><span class="w">
+    </span><span class="p" data-group-id="1836011578-9">%</span><span class="nc" data-group-id="1836011578-9">Prequest.Manage.Article</span><span class="p" data-group-id="1836011578-9">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="1836011578-9">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1836011578-10">%</span><span class="nc" data-group-id="1836011578-10">Prequest.Manage.Article</span><span class="p" data-group-id="1836011578-10">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="1836011578-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="1836011578-8">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles,</span><span class="w">
+         </span><span class="c1"># join: t1 in assoc(a0, :topics), where: t1.name in ^[&quot;otp&quot;],</span><span class="w">
+         </span><span class="c1"># where: ilike(a0.title, ^&quot;%prequest%&quot;), group_by: [a0.id],</span><span class="w">
+         </span><span class="c1"># having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.inserted_at],</span><span class="w">
+         </span><span class="c1"># limit: ^2, offset: ^0, select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1836011578-11">[</span><span class="p" data-group-id="1836011578-11">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1836011578-12">[</span><span class="w">
+    </span><span class="p" data-group-id="1836011578-13">{</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1836011578-14">%</span><span class="nc" data-group-id="1836011578-14">Prequest.Manage.Topic</span><span class="p" data-group-id="1836011578-14">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="1836011578-14">}</span><span class="p" data-group-id="1836011578-13">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1836011578-15">{</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1836011578-16">%</span><span class="nc" data-group-id="1836011578-16">Prequest.Manage.Topic</span><span class="p" data-group-id="1836011578-16">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="1836011578-16">}</span><span class="p" data-group-id="1836011578-15">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="1836011578-12">]</span><span class="w">
+</span><span class="p" data-group-id="1836011578-4">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="page/3">
   <div class="detail-header">
@@ -186,15 +385,26 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">page(feed, page, list)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L232" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>page(<a href="#t:feed/0">feed</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Same as <a href="#page/2"><code class="inline">page/2</code></a> but ordering by date or views.</p><h2 id="page/3-examples" class="section-heading">
+  <a href="#page/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1004306820-1">(</span><span class="nc">Article</span><span class="p" data-group-id="1004306820-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1004306820-2">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1004306820-3">[</span><span class="ss">desc</span><span class="p">:</span><span class="w"> </span><span class="ss">:date</span><span class="p" data-group-id="1004306820-3">]</span><span class="p" data-group-id="1004306820-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1004306820-4">(</span><span class="nc">Article</span><span class="p" data-group-id="1004306820-4">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1004306820-5">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1004306820-6">[</span><span class="ss">asc</span><span class="p">:</span><span class="w"> </span><span class="ss">:date</span><span class="p" data-group-id="1004306820-6">]</span><span class="p" data-group-id="1004306820-5">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1004306820-7">(</span><span class="nc">Article</span><span class="p" data-group-id="1004306820-7">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1004306820-8">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1004306820-9">[</span><span class="ss">desc</span><span class="p">:</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="1004306820-9">]</span><span class="p" data-group-id="1004306820-8">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="1004306820-10">(</span><span class="nc">Article</span><span class="p" data-group-id="1004306820-10">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="1004306820-11">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1004306820-12">[</span><span class="ss">asc</span><span class="p">:</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="1004306820-12">]</span><span class="p" data-group-id="1004306820-11">)</span></code></pre>  </section>
 </section>
 <section class="detail" id="page/4">
   <div class="detail-header">
@@ -203,15 +413,47 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">page(feed, atom, page, list \\ [desc: :date])</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L42" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L273" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>page(<a href="#t:feed/0">feed</a>(), :nocache, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">integer</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Same as <a href="#page/3"><code class="inline">page/3</code></a> but with no caching on pages layer (to be used with <a href="#search/2"><code class="inline">search/2</code></a>).</p><p>Since almost every search query is unique among users, it is not ideal to keep a copy of this specific feed
+into the server's RAM. The caching on the <code class="inline">build</code> stage still occurs though.</p><h2 id="page/4-examples" class="section-heading">
+  <a href="#page/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="4127066187-1">(</span><span class="nc">Article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4127066187-2">[</span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="4127066187-2">]</span><span class="p" data-group-id="4127066187-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">search</span><span class="p" data-group-id="4127066187-3">(</span><span class="s">&quot;prequest&quot;</span><span class="p" data-group-id="4127066187-3">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">page</span><span class="p" data-group-id="4127066187-4">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="ss">:nocache</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4127066187-5">[</span><span class="ss">desc</span><span class="p">:</span><span class="w"> </span><span class="ss">:views</span><span class="p" data-group-id="4127066187-5">]</span><span class="p" data-group-id="4127066187-4">)</span><span class="w">
+</span><span class="p" data-group-id="4127066187-6">%</span><span class="nc" data-group-id="4127066187-6">Prequest.Feed</span><span class="p" data-group-id="4127066187-6">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4127066187-7">%{</span><span class="w">
+    </span><span class="n">has_next?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
+    </span><span class="ss">page</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="ss">per_page</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="c1"># the remaining comes from cache</span><span class="w">
+  </span><span class="p" data-group-id="4127066187-7">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4127066187-8">[</span><span class="w">
+    </span><span class="p" data-group-id="4127066187-9">%</span><span class="nc" data-group-id="4127066187-9">Prequest.Manage.Article</span><span class="p" data-group-id="4127066187-9">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="4127066187-9">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="4127066187-10">%</span><span class="nc" data-group-id="4127066187-10">Prequest.Manage.Article</span><span class="p" data-group-id="4127066187-10">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="4127066187-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="4127066187-8">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles,</span><span class="w">
+         </span><span class="c1"># left_join: v1 in assoc(a0, :views), where: ilike(a0.title, ^&quot;%prequest%&quot;),</span><span class="w">
+         </span><span class="c1"># group_by: [a0.id], order_by: [desc: count(v1.id), desc: a0.inserted_at],</span><span class="w">
+         </span><span class="c1"># limit: ^2, offset: ^0, select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4127066187-11">[</span><span class="w">
+    </span><span class="c1"># from build stage cache.</span><span class="w">
+  </span><span class="p" data-group-id="4127066187-11">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4127066187-12">[</span><span class="w">
+    </span><span class="c1"># from build stage cache.</span><span class="w">
+  </span><span class="p" data-group-id="4127066187-12">]</span><span class="w">
+</span><span class="p" data-group-id="4127066187-6">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="search/2">
   <div class="detail-header">
@@ -220,15 +462,44 @@ Functions          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">search(feed, substring)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L28" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed.ex#L177" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
   </div>
 
   <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>search(<a href="#t:feed/0">feed</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="#t:feed/0">feed</a>()</pre>
+      </div>
 
-  </section>
+<p>Returns the feed adding a search expression to the ecto query.</p><h2 id="search/2-examples" class="section-heading">
+  <a href="#search/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">build</span><span class="p" data-group-id="2901556707-1">(</span><span class="nc">Article</span><span class="p" data-group-id="2901556707-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">search</span><span class="p" data-group-id="2901556707-2">(</span><span class="s">&quot;prequest&quot;</span><span class="p" data-group-id="2901556707-2">)</span><span class="w">
+</span><span class="p" data-group-id="2901556707-3">%</span><span class="nc" data-group-id="2901556707-3">Prequest.Feed</span><span class="p" data-group-id="2901556707-3">{</span><span class="w">
+  </span><span class="ss">__meta__</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2901556707-4">%{</span><span class="w">
+    </span><span class="ss">articles_count</span><span class="p">:</span><span class="w"> </span><span class="mi">107</span><span class="p">,</span><span class="w">
+    </span><span class="ss">results</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+    </span><span class="ss">search</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prequest&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">topics_count</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="w"> 
+  </span><span class="p" data-group-id="2901556707-4">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">articles</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2901556707-5">[</span><span class="p" data-group-id="2901556707-5">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">query</span><span class="p">:</span><span class="w"> </span><span class="c1"># Ecto.Query&lt;from a0 in Prequest.Manage.Article, as: :articles,</span><span class="w">
+         </span><span class="c1"># where: ilike(a0.title, ^&quot;%prequest%&quot;), select: a0&gt;,</span><span class="w">
+  </span><span class="ss">reports</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2901556707-6">[</span><span class="w">
+    </span><span class="p" data-group-id="2901556707-7">%</span><span class="nc" data-group-id="2901556707-7">Prequest.Manage.Report</span><span class="p" data-group-id="2901556707-7">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2901556707-7">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2901556707-8">%</span><span class="nc" data-group-id="2901556707-8">Prequest.Manage.Report</span><span class="p" data-group-id="2901556707-8">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2901556707-8">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="2901556707-6">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2901556707-9">[</span><span class="w">
+    </span><span class="p" data-group-id="2901556707-10">{</span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2901556707-11">%</span><span class="nc" data-group-id="2901556707-11">Prequest.Manage.Topic</span><span class="p" data-group-id="2901556707-11">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2901556707-11">}</span><span class="p" data-group-id="2901556707-10">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2901556707-12">{</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2901556707-13">%</span><span class="nc" data-group-id="2901556707-13">Prequest.Manage.Topic</span><span class="p" data-group-id="2901556707-13">{</span><span class="w"> </span><span class="n">...</span><span class="w"> </span><span class="p" data-group-id="2901556707-13">}</span><span class="p" data-group-id="2901556707-12">}</span><span class="p">,</span><span class="w">
+    </span><span class="n">...</span><span class="w">
+  </span><span class="p" data-group-id="2901556707-9">]</span><span class="w">
+</span><span class="p" data-group-id="2901556707-3">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
