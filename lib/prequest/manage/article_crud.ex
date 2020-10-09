@@ -28,7 +28,9 @@ defmodule Prequest.Manage.ArticleCRUD do
   end
 
   # When create/1 or update/2 has :topics, it retrieve all existing topics
-  defp build_topics(%{topics: topics} = _attrs), do: Enum.map(topics, &build_topic/1)
+  defp build_topics(%{topics: topics} = _attrs),
+    do: Enum.map(topics, &build_topic/1) |> Enum.uniq()
+
   defp build_topics(_), do: []
 
   # The :topics field can only accept a list containing %{name: name} and %Topic{}
@@ -37,7 +39,7 @@ defmodule Prequest.Manage.ArticleCRUD do
   defp build_topic(%{name: name}) do
     case Repo.get_by(Topic, name: name) do
       %Topic{} = topic -> topic
-      nil -> %{name: name}
+      nil -> Topic.changeset(%Topic{}, %{name: name})
     end
   end
 end
