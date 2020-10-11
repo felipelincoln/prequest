@@ -107,6 +107,7 @@ defmodule Prequest.Feed.Load do
     |> put_metadata(:has_next?, has_next?)
     |> put_metadata(:page, page)
     |> put_metadata(:per_page, per_page)
+    |> put_metadata(:sort_by, sort_by)
   end
 
   def load(%Feed{query: query} = feed), do: %{feed | articles: entries(query)}
