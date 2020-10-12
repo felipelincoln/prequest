@@ -393,5 +393,97 @@ defmodule Prequest.FeedTest do
                topics: [{1, ^topic}]
              } = Feed.build(topic) |> Feed.search(reverse_substring)
     end
+
+    test "page/3 returns the feed with preloaded articles", %{user1: user, topic1: topic} do
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 0,
+                 results: 1,
+                 sort_by: [desc: :date],
+                 topics_count: 1
+               },
+               articles: [%Manage.Article{}],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(user) |> Feed.page(0)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 0,
+                 results: 1,
+                 sort_by: [desc: :date],
+                 topics_count: 1
+               },
+               articles: [%Manage.Article{}],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(topic) |> Feed.page(0)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 1,
+                 results: 1,
+                 sort_by: [desc: :date],
+                 topics_count: 1
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(user) |> Feed.page(1)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 1,
+                 results: 1,
+                 sort_by: [desc: :date],
+                 topics_count: 1
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(topic) |> Feed.page(1)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 0,
+                 results: 1,
+                 sort_by: [desc: :views],
+                 topics_count: 1
+               },
+               articles: [%Manage.Article{}],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(user) |> Feed.page(0, desc: :views)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 has_next?: false,
+                 page: 0,
+                 results: 1,
+                 sort_by: [desc: :views],
+                 topics_count: 1
+               },
+               articles: [%Manage.Article{}],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } = Feed.build(topic) |> Feed.page(0, desc: :views)
+    end
   end
 end
