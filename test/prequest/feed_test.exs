@@ -1,47 +1,59 @@
 defmodule Prequest.FeedTest do
   use Prequest.DataCase, async: true
 
-  import Prequest.Helpers, only: [preload!: 2]
   alias Ecto.Adapters.SQL.Sandbox
   alias Prequest.Feed
   alias Prequest.Manage
+
+  @username "feedtest_felipelincoln"
+  @topic "feedtest_topic"
+  @a_title "feedtest title"
+  @a_cover "https://prequest.com/feedtest_cover"
+  @a_source "https://github.com/feedtest_source"
+  @n 20
+  @n2 2 * @n
+
+  defp username(k), do: @username <> to_string(k)
+  defp topic(k), do: @topic <> to_string(k)
+  defp a_title(k), do: @a_title <> to_string(k)
+  defp a_cover(k), do: @a_cover <> to_string(k)
+  defp a_source(k), do: @a_source <> to_string(k)
 
   setup_all do
     Sandbox.mode(Prequest.Repo, :auto)
 
     # feed with 0 articles
-    {:ok, user0} = Manage.create_user(%{username: "feedtest_felipelincoln0"})
-    {:ok, topic0} = Manage.create_topic(%{name: "feedtest_topic0"})
+    {:ok, user0} = Manage.create_user(%{username: username(0)})
+    {:ok, topic0} = Manage.create_topic(%{name: topic(0)})
 
     # feed with 1 article
-    {:ok, user1} = Manage.create_user(%{username: "feedtest_felipelincoln1"})
-    {:ok, topic1} = Manage.create_topic(%{name: "feedtest_topic1"})
+    {:ok, user1} = Manage.create_user(%{username: username(1)})
+    {:ok, topic1} = Manage.create_topic(%{name: topic(1)})
 
     {:ok, _article} =
       %{
-        title: "feedtest title1",
-        cover: "https://prequest.com/feedtest_cover1.png",
-        source: "https://github.com/feedtest_source1.md",
+        title: a_title(1),
+        cover: a_cover(1),
+        source: a_source(1),
         user_id: user1.id,
-        topics: [%{name: "feedtest_topic1"}]
+        topics: [topic1]
       }
       |> Manage.create_article()
 
     # feed with n articles
-    {:ok, usern} = Manage.create_user(%{username: "feedtest_felipelincolnn"})
-    {:ok, topicn} = Manage.create_topic(%{name: "feedtest_topicn"})
+    {:ok, usern} = Manage.create_user(%{username: username("n")})
+    {:ok, topicn} = Manage.create_topic(%{name: topic("n")})
 
-    for n <- 2..20 do
+    for n <- 2..(@n + 1) do
       {:ok, _article} =
         %{
-          title: "feedtest title#{n}",
-          cover: "https://prequest.com/feedtest_cover#{n}.png",
-          source: "https://github.com/feedtest_source#{n}.md",
+          title: a_title(n),
+          cover: a_cover(n),
+          source: a_source(n),
           user_id: usern.id,
           topics: [
-            %{name: "feedtest_topicn"},
-            %{name: "feedtest_topic#{n}"},
-            %{name: "feedtest_topic#{Enum.random(2..20)}"}
+            topicn,
+            %{name: topic(n)}
           ]
         }
         |> Manage.create_article()
@@ -55,8 +67,8 @@ defmodule Prequest.FeedTest do
       Manage.delete_user(usern)
       Manage.delete_topic(topicn)
 
-      for n <- 0..20 do
-        Manage.get_topic("feedtest_topic#{n}") |> Manage.delete_topic()
+      for n <- 0..(@n + 1) do
+        Manage.get_topic(topic(n)) |> Manage.delete_topic()
       end
     end)
 
@@ -331,13 +343,7 @@ defmodule Prequest.FeedTest do
     end
 
     test "search/2 returns the feed containing searched articles", %{user1: user, topic1: topic} do
-      title_substring =
-        user
-        |> preload!(:articles)
-        |> Map.get(:articles)
-        |> List.first()
-        |> Map.get(:title)
-        |> String.slice(5, 5)
+      title_substring = String.slice(@a_title, 5, 5)
 
       assert %Feed{
                __meta__: %{
@@ -365,7 +371,7 @@ defmodule Prequest.FeedTest do
                topics: [{1, ^topic}]
              } = Feed.build(topic) |> Feed.search(title_substring)
 
-      reverse_substring = title_substring |> String.reverse()
+      reverse_substring = String.reverse(title_substring)
 
       assert %Feed{
                __meta__: %{
@@ -484,6 +490,34 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: [{1, ^topic}]
              } = Feed.build(topic) |> Feed.page(0, desc: :views)
+    end
+  end
+
+  describe "feed containing n article" do
+    test "build/1 returns the feed from given source", %{usern: user, topicn: topic} do
+      assert %Feed{
+               __meta__: %{
+                 articles_count: @n,
+                 results: @n,
+                 topics_count: @n2
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{@n, ^topic} | _topics]
+             } = Feed.build(user)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: @n,
+                 results: @n,
+                 topics_count: @n2
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{@n, ^topic} | _topics]
+             } = Feed.build(topic)
     end
   end
 end

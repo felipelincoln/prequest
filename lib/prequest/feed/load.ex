@@ -13,9 +13,6 @@ defmodule Prequest.Feed.Load do
   @per_page 2
   @sort_by [{:desc, :date}]
 
-  def get_metadata(%Feed{__meta__: meta}, key, default \\ nil) when is_atom(key),
-    do: Map.get(meta, key, default)
-
   def query(article_schema) when is_atom(article_schema) do
     %Feed{query: from(a in article_schema, as: :articles, select: a)}
   end
@@ -129,6 +126,9 @@ defmodule Prequest.Feed.Load do
     data = Map.new([{key, value}])
     %{feed | __meta__: Map.merge(meta, data)}
   end
+
+  defp get_metadata(%Feed{__meta__: meta}, key, default) when is_atom(key),
+    do: Map.get(meta, key, default)
 
   defp count_entries(%Ecto.Query{} = query),
     do: Repo.one(from x in subquery(query), select: count(x.id))
