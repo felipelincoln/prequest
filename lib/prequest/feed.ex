@@ -176,7 +176,7 @@ defmodule Prequest.Feed do
   @spec search(feed, String.t()) :: feed
   def search(feed, substring) do
     feed
-    |> Load.search(substring)
+    |> Cache.search(substring)
   end
 
   @doc """
@@ -269,8 +269,8 @@ defmodule Prequest.Feed do
       }
 
   """
-  @spec page(feed, :nocache, integer, keyword) :: feed
-  def page(feed, :nocache, page, [{order, key}] \\ [desc: :date]) do
+  @spec page(feed, integer, :nocache, keyword) :: feed
+  def page(feed, page, :nocache, [{order, key}] \\ [desc: :date]) do
     feed
     |> Load.view(page: page, sort_by: [{order, key}])
     |> Load.load()

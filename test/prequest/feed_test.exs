@@ -796,4 +796,57 @@ defmodule Prequest.FeedTest do
              } = Feed.build(topic) |> Feed.page(1000)
     end
   end
+
+  describe "feed caching" do
+    test "build/2 caches the feed", %{usern: user, topicn: topic} do
+      feed = Feed.build(user, [topic.name])
+      query = feed.query
+
+      assert [{^query, datetime, ^feed}] = :ets.lookup(:feed_cache, feed.query)
+
+      # get from cache
+      cached_feed = Feed.build(user, [topic.name])
+      assert [{^query, ^datetime, ^feed}] = :ets.lookup(:feed_cache, cached_feed.query)
+    end
+
+    test "page/3 caches build and page layer", %{usern: user, topicn: topic} do
+      build = Feed.build(user, [topic.name])
+      b_query = build.query
+
+      page = build |> Feed.page(0)
+      p_query = page.query
+
+      assert [{^b_query, b_datetime, ^build}] = :ets.lookup(:feed_cache, build.query)
+      assert [{^p_query, p_datetime, ^page}] = :ets.lookup(:feed_cache, page.query)
+
+      # get from cache
+      cached_build = Feed.build(user, [topic.name])
+      cached_page = cached_build |> Feed.page(0)
+      assert [{^b_query, ^b_datetime, ^build}] = :ets.lookup(:feed_cache, cached_build.query)
+      assert [{^p_query, ^p_datetime, ^page}] = :ets.lookup(:feed_cache, cached_page.query)
+    end
+
+    test "page/4 caches only the build layer", %{usern: user} do
+      build = Feed.build(user)
+      query = build.query
+
+      page = build |> Feed.search("not used substring") |> Feed.page(0, :nocache)
+
+      assert [{^query, _datetime, ^build}] = :ets.lookup(:feed_cache, build.query)
+      assert [] = :ets.lookup(:feed_cache, page.query)
+    end
+
+    test "Cache.build/2 caches when expired", %{usern: user} do
+      build = Feed.Cache.query(user) |> Feed.Cache.build(0)
+      query = build.query
+
+      assert [{^query, datetime, ^build}] = :ets.lookup(:feed_cache, build.query)
+
+      # cache again (expire_secs=0)
+      build_2 = Feed.Cache.query(user) |> Feed.Cache.build(0)
+
+      assert [{^query, datetime_2, ^build}] = :ets.lookup(:feed_cache, build_2.query)
+      assert DateTime.compare(datetime_2, datetime) == :gt
+    end
+  end
 end
