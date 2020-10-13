@@ -798,19 +798,19 @@ defmodule Prequest.FeedTest do
   end
 
   describe "feed caching" do
-    test "build/2 caches the feed", %{usern: user, topicn: topic} do
-      feed = Feed.build(user, [topic.name])
+    test "build/2 caches the feed", %{usern: user} do
+      feed = Feed.build(user, ["__"])
       query = feed.query
 
       assert [{^query, datetime, ^feed}] = :ets.lookup(:feed_cache, feed.query)
 
       # get from cache
-      cached_feed = Feed.build(user, [topic.name])
+      cached_feed = Feed.build(user, ["__"])
       assert [{^query, ^datetime, ^feed}] = :ets.lookup(:feed_cache, cached_feed.query)
     end
 
-    test "page/3 caches build and page layer", %{usern: user, topicn: topic} do
-      build = Feed.build(user, [topic.name])
+    test "page/3 caches build and page layer", %{usern: user} do
+      build = Feed.build(user, ["__"])
       b_query = build.query
 
       page = build |> Feed.page(0)
@@ -820,7 +820,7 @@ defmodule Prequest.FeedTest do
       assert [{^p_query, p_datetime, ^page}] = :ets.lookup(:feed_cache, page.query)
 
       # get from cache
-      cached_build = Feed.build(user, [topic.name])
+      cached_build = Feed.build(user, ["__"])
       cached_page = cached_build |> Feed.page(0)
       assert [{^b_query, ^b_datetime, ^build}] = :ets.lookup(:feed_cache, cached_build.query)
       assert [{^p_query, ^p_datetime, ^page}] = :ets.lookup(:feed_cache, cached_page.query)
