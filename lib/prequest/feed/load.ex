@@ -2,6 +2,7 @@ defmodule Prequest.Feed.Load do
   @moduledoc false
 
   import Ecto.Query
+  import Prequest.Helpers
   alias Prequest.Feed
   alias Prequest.Feed.Impl
   alias Prequest.Repo
@@ -10,7 +11,7 @@ defmodule Prequest.Feed.Load do
 
   @topics_quantity 2
   @reports_quantity 2
-  @per_page 2
+  @per_page 10
   @sort_by [{:desc, :date}]
 
   def query(article_schema) when is_atom(article_schema) do
@@ -107,7 +108,7 @@ defmodule Prequest.Feed.Load do
     |> put_metadata(:sort_by, sort_by)
   end
 
-  def load(%Feed{query: query} = feed), do: %{feed | articles: entries(query)}
+  def load(%Feed{query: query} = feed), do: %{feed | articles: entries(query) |> preload!(:user)}
 
   defp sort(query, [{type, :date}]) do
     from [articles: a] in query, order_by: [{^type, a.inserted_at}]
