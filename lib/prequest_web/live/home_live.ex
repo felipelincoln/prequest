@@ -6,10 +6,12 @@ defmodule PrequestWeb.HomeLive do
   use PrequestWeb, :live_view
   alias Prequest.Feed
   alias Prequest.Manage.Article
+  alias Prequest.Manage.Topic.Color
 
   def mount(_params, _session, socket) do
     build = Feed.build(Article)
     feed = build |> Feed.page(0)
+
     socket =
       socket
       |> assign(build: build, feed: feed)
@@ -19,6 +21,12 @@ defmodule PrequestWeb.HomeLive do
   end
 
   defp ui_topics(%Feed{topics: topics, __meta__: %{topics_count: count}}) do
-    Enum.map(topics, fn {n, topic} -> {n/count*100, topic.name} end)
+    Enum.map(
+      topics,
+      fn {n, topic} ->
+        # {width, topic name, color}
+        {n / count * 100, topic.name, Color.from(topic.name)}
+      end
+    )
   end
 end

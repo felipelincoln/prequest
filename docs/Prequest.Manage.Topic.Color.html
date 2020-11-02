@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>PrequestWeb.HomeLive — Prequest v0.1.0</title>
+    <title>Prequest.Manage.Topic.Color — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-2bbc6098a4.js"></script>
       <script src="docs_config.js"></script>
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        PrequestWeb.HomeLive <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/home_live.ex#L1" title="View Source" class="view-source" rel="help">
+        Prequest.Manage.Topic.Color <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage/topic/color.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,7 +72,7 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>Homepage</p>        </section>
+<p>Color reference: <a href="https://tailwindcss.com/docs/background-color">TailwindCSS</a></p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -88,15 +88,15 @@ Prequest      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#mount/3">mount(params, session, socket)</a>
+    <a href="#from/1">from(arg1)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Obtain a tailwind's background color class for a topic.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#render/1">render(arg)</a>
+    <a href="#random/0">random()</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Generate a random class for tailwind's background color.</p></div>
 </div>
   </div>
         </section>
@@ -109,14 +109,14 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="mount/3">
+<section class="detail" id="from/1">
   <div class="detail-header">
-    <a href="#mount/3" class="detail-link" title="Link to this function">
+    <a href="#from/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">mount(params, session, socket)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/home_live.ex#L11" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">from(arg1)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage/topic/color.ex#L36" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -124,16 +124,20 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p>  </section>
+<p>Obtain a tailwind's background color class for a topic.</p><p>If the topic name is not declared as a from/1 clause, it wil generate a random class using random/0.</p><h1>Examples</h1><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">from</span><span class="p" data-group-id="2740886404-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="2740886404-1">)</span><span class="w">
+</span><span class="s">&quot;bg-purple-900&quot;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">from</span><span class="p" data-group-id="2740886404-2">(</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="2740886404-2">)</span><span class="w">
+</span><span class="s">&quot;bg-green-300&quot;</span><span class="w"> </span><span class="c1"># random</span></code></pre>  </section>
 </section>
-<section class="detail" id="render/1">
+<section class="detail" id="random/0">
   <div class="detail-header">
-    <a href="#render/1" class="detail-link" title="Link to this function">
+    <a href="#random/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render(arg)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/home_live.ex#L1" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">random()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage/topic/color.ex#L18" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -141,7 +145,8 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p>  </section>
+<p>Generate a random class for tailwind's background color.</p><h1>Examples</h1><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">random</span><span class="p" data-group-id="5643206697-1">(</span><span class="p" data-group-id="5643206697-1">)</span><span class="w">
+</span><span class="s">&quot;bg-blue-500&quot;</span></code></pre>  </section>
 </section>
           </div>
         </section>

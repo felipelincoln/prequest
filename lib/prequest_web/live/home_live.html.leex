@@ -24,16 +24,16 @@
         </p>
 
         <div class="flex">
-          <%= for {width, _topic} <- @ui_topics do %>
-            <div class="bg-purple-400 h-6" style="width:<%= width %>%"></div>
+          <%= for {width, _topic, color} <- @ui_topics do %>
+            <div class="h-6 <%= color %>" style="width:<%= width %>%"></div>
           <% end %>
           <div class="bg-gray-300 flex-grow h-6"></div>
         </div>
         <div class="flex">
           <ol>
-            <%= for {_width, topic} <- @ui_topics do %>
+            <%= for {_width, topic, color} <- @ui_topics do %>
               <li class="inline-flex">
-                <div class="w-6 h-6 bg-purple-400 rounded-full"></div>
+                <div class="w-6 h-6 rounded-full <%= color %>"></div>
                 <span><%= topic %></span>
               </li>
             <% end %>
