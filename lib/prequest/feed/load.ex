@@ -9,7 +9,7 @@ defmodule Prequest.Feed.Load do
 
   @behaviour Impl
 
-  @topics_quantity 2
+  @topics_quantity 11
   @reports_quantity 2
   @per_page 10
   @sort_by [{:desc, :date}]
