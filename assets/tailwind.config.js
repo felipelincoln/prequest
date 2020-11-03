@@ -13,6 +13,8 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    display: ['responsive', 'group-focus']
+  },
   plugins: [],
 }

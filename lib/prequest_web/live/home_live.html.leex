@@ -25,13 +25,19 @@
           <span><%= @feed.__meta__.articles_count %></span>
           <span>articles</span>
           <%= if @feed.reports == [] do %>
-            <svg class="h-5 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
+            <span class="group relative cursor-pointer" tabindex="0">
+              <svg class="h-5 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="hidden group-focus:block absolute cursor-default bg-white">Lorem ipsum dolor site amet, consectetur adipiscing elit.</span>
+            </span>
           <% else %>
-            <svg class="h-5 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
+            <span class="group relative cursor-pointer" tabindex="0">
+              <svg class="h-5 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+              <span class="hidden group-focus:block absolute cursor-default bg-white">Lorem ipsum dolor site amet, consectetur adipiscing elit.</span>
+            </span>
           <% end %>
         </p>
 
