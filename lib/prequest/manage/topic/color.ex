@@ -34,5 +34,6 @@ defmodule Prequest.Manage.Topic.Color do
 
   """
   def from("elixir"), do: "bg-purple-900"
+  def from("others"), do: "bg-gray-400"
   def from(_), do: random()
 end
