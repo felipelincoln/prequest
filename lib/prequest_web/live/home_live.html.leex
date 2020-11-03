@@ -1,4 +1,6 @@
 <% color_others = Color.from("others") %>
+<% ui_topics = ui(:topics, @feed) %>
+<% ui_reports = ui(:reports, @feed) %>
 
 <div class="container mx-auto">
   <div class="flex flex-col-reverse sm:flex-row">
@@ -26,7 +28,7 @@
             <span><%= @feed.__meta__.articles_count %></span>
             <span>articles</span>
           </p>
-          <%= if @feed.reports == [] do %>
+          <%= if ui_reports == [] do %>
             <div class="group static cursor-pointer" tabindex="0">
               <svg class="h-5 inline-block align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -39,8 +41,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
               <div class="hidden group-focus:block absolute left-0 cursor-default bg-white">
-                <%= for report <- @feed.reports do %>
-                  oio kasdok aoskodkasok dokasok odkasok dasko dasod oasodk asokd oaksod kasokod asko kdoaskd kaos
+                <%= for {msg, title, reported_at} <- ui_reports do %>
+                  <p>
+                    <span><%= msg %></span>
+                    <span><%= title %></span>
+                    <span><%= reported_at %></span>
+                  </p>
                 <% end %>
               </div>
             </div>
@@ -48,14 +54,14 @@
         </div>
 
         <div class="flex">
-          <%= for {width, _topic, color} <- @ui_topics do %>
+          <%= for {width, _topic, color} <- ui_topics do %>
             <div class="h-6 <%= color %>" style="width:<%= width %>%"></div>
           <% end %>
           <div class="flex-grow h-6 <%= color_others %>"></div>
         </div>
         <div class="flex">
           <ol>
-            <%= for {_width, topic, color} <- @ui_topics do %>
+            <%= for {_width, topic, color} <- ui_topics do %>
               <li class="inline-flex">
                 <div class="w-6 h-6 rounded-full <%= color %>"></div>
                 <span><%= topic %></span>

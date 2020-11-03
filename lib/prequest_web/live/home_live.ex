@@ -7,6 +7,7 @@ defmodule PrequestWeb.HomeLive do
   alias Prequest.Feed
   alias Prequest.Manage.Article
   alias Prequest.Manage.Topic.Color
+  import Prequest.Helpers, only: [preload!: 2]
 
   def mount(_params, _session, socket) do
     build = Feed.build(Article)
@@ -15,17 +16,29 @@ defmodule PrequestWeb.HomeLive do
     socket =
       socket
       |> assign(build: build, feed: feed)
-      |> assign(ui_topics: ui_topics(feed))
 
     {:ok, socket}
   end
 
-  defp ui_topics(%Feed{topics: topics, __meta__: %{topics_count: count}}) do
+  # all the ui functions must be applied to the Prequest.Feed core
+
+  # list of {width, topic name, color}
+  defp ui(:topics, %Feed{topics: topics, __meta__: %{topics_count: count}}) do
     Enum.map(
       topics,
       fn {n, topic} ->
-        # {width, topic name, color}
         {n / count * 100, topic.name, Color.from(topic.name)}
+      end
+    )
+  end
+
+  # list of {message, article title, inserted_at}
+  defp ui(:reports, %Feed{reports: reports}) do
+    reports
+    |> preload!(:article)
+    |> Enum.map(
+      fn %{message: message, article: article, inserted_at: inserted_at} ->
+        {message, article.title, inserted_at}
       end
     )
   end
