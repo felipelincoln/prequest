@@ -7,7 +7,7 @@ defmodule Prequest.Manage.Topic.Color do
       # lib/prequest/manage/topic/color.ex
       # Example of adding a color for the "elixir" tag.
       ...
-      def from("elixir"), do: "bg-purple-900" # new clause
+      def from("elixir"), do: "bg-purple-800" # new clause
       def from(_), do: random()
       ...
 
@@ -41,14 +41,14 @@ defmodule Prequest.Manage.Topic.Color do
   ## Examples
 
       iex> Color.from("elixir")
-      "bg-purple-900"
+      "bg-purple-800"
 
       iex> Color.from("a")
       "bg-green-300" # random
 
   """
   @spec from(String.t()) :: String.t()
-  def from("elixir"), do: "bg-purple-900"
+  def from("elixir"), do: "bg-purple-800"
   def from("others"), do: "bg-gray-400"
   def from(_), do: random()
 end
