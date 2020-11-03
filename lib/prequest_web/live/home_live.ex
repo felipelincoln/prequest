@@ -22,6 +22,11 @@ defmodule PrequestWeb.HomeLive do
 
   # all the ui functions must be applied to the Prequest.Feed core
 
+  # list of {article title, inserted_at}
+  defp ui(:articles, feed) do
+    feed.articles
+  end
+
   # list of {width, topic name, color}
   defp ui(:topics, %Feed{topics: topics, __meta__: %{topics_count: count}}) do
     Enum.map(
@@ -36,10 +41,8 @@ defmodule PrequestWeb.HomeLive do
   defp ui(:reports, %Feed{reports: reports}) do
     reports
     |> preload!(:article)
-    |> Enum.map(
-      fn %{message: message, article: article, inserted_at: inserted_at} ->
-        {message, article.title, inserted_at}
-      end
-    )
+    |> Enum.map(fn %{message: message, article: article, inserted_at: inserted_at} ->
+      {message, article.title, inserted_at}
+    end)
   end
 end
