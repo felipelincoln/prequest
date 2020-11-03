@@ -3,13 +3,17 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  purge: [
-    "../**/*.html.eex",
-    "../**/*.html.leex",
-    "../**/views/**/*.ex",
-    "../**/live/**/*.ex",
-    "./js/**/*.js"
-  ],
+  purge: {
+    content: [
+      "../lib/prequest_web/live/**/*.html.leex",
+      "../lib/prequest_web/templates/**/*.html.leex",
+      "../lib/prequest_web/templates/**/*.html.eex",
+      "../lib/prequest_web/views/**/*.ex",
+    ],
+    options: {
+      whitelistPatterns: [/^bg-/]
+    }
+  },
   theme: {
     extend: {},
   },
