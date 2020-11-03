@@ -1,5 +1,6 @@
 {
   "skip_files": [
+    "lib/prequest/manage/topic/color.ex",
     "lib/prequest.ex",
     "lib/prequest/application.ex",
     "lib/prequest/release.ex",
