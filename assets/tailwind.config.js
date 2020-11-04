@@ -18,7 +18,8 @@ module.exports = {
     extend: {},
   },
   variants: {
-    display: ['responsive', 'group-focus']
+    display: ['responsive', 'group-focus'],
+    flexGrow: ['responsive', 'last']
   },
   plugins: [],
 }

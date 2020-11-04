@@ -29,8 +29,8 @@ defmodule PrequestWeb.HomeLive do
 
   # list of {width, topic name, color}
   defp ui(:topics, %Feed{topics: topics, __meta__: %{topics_count: count}}) do
-    Enum.map(
-      topics,
+    topics ++ others_topic(topics, count)
+    |> Enum.map(
       fn {n, topic} ->
         {n / count * 100, topic.name, Color.from(topic.name)}
       end
@@ -45,4 +45,10 @@ defmodule PrequestWeb.HomeLive do
       {message, article.title, inserted_at}
     end)
   end
+
+  defp others_topic(topics, count, name \\ "others") do
+    limited_count = Enum.reduce(topics, 0, fn {n, _}, acc -> n+acc end)
+    [{count - limited_count, %{name: name}}]
+  end
+
 end

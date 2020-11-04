@@ -49,6 +49,10 @@ defmodule Prequest.Manage.Topic.Color do
   """
   @spec from(String.t()) :: String.t()
   def from("elixir"), do: "bg-purple-800"
+  def from("javascript"), do: "bg-yellow-400"
+  def from("docker"), do: "bg-blue-500"
+  def from("jenkins"), do: "bg-red-700"
+  def from("ecto"), do: "bg-green-500"
   def from("others"), do: "bg-gray-400"
   def from(_), do: random()
 end
