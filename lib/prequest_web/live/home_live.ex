@@ -18,9 +18,14 @@ defmodule PrequestWeb.HomeLive do
     {:ok, assign(socket, :feed, feed)}
   end
 
-  def handle_event("filter", %{"topic" => new_filter}, socket) do
+  def handle_event("toggle_filter", %{"topic" => new_filter}, socket) do
     current_filter = get_filter(socket.assigns.feed)
-    filter = create_filter(new_filter, current_filter)
+
+    filter =
+      case new_filter in current_filter do
+        true -> List.delete(current_filter, new_filter)
+        false -> [new_filter | current_filter]
+      end
 
     feed =
       Article
@@ -35,15 +40,6 @@ defmodule PrequestWeb.HomeLive do
     |> Map.get(:filter, {:topics, []})
     |> elem(1)
   end
-
-  defp create_filter(new, filter) do
-    case new in filter do
-      true -> List.delete(filter, new)
-      false -> [new | filter]
-    end
-  end
-
-  # all the ui functions must be applied to the Prequest.Feed core
 
   # list of {article title, inserted_at}
   defp ui(:articles, feed) do
