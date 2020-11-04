@@ -127,8 +127,8 @@ defmodule Prequest.Feed.Load do
     %{feed | __meta__: Map.merge(meta, data)}
   end
 
-  defp get_metadata(%Feed{__meta__: meta}, key, default) when is_atom(key),
-    do: Map.get(meta, key, default)
+  #  defp get_metadata(%Feed{__meta__: meta}, key, default) when is_atom(key),
+  #  do: Map.get(meta, key, default)
 
   defp count_entries(%Ecto.Query{} = query),
     do: Repo.one(from x in subquery(query), select: count(x.id))

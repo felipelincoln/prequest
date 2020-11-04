@@ -135,6 +135,11 @@ defmodule Prequest.FeedTest do
              } = Feed.build(topic, ["anything"])
     end
 
+    test "build/2 returns same feed when topics is an empty list", %{user0: user, topic0: topic} do
+      assert Feed.build(user) == Feed.build(user, [])
+      assert Feed.build(topic) == Feed.build(topic, [])
+    end
+
     test "search/2 returns the feed containing searched articles", %{user0: user, topic0: topic} do
       assert %Feed{
                __meta__: %{
@@ -292,12 +297,12 @@ defmodule Prequest.FeedTest do
                  articles_count: 1,
                  filter: {:topics, [^name]},
                  results: 1,
-                 topics_count: 0
+                 topics_count: 1
                },
                articles: [],
                query: %Ecto.Query{},
                reports: [],
-               topics: []
+               topics: [{1, ^topic}]
              } = Feed.build(user, [name])
 
       assert %Feed{
@@ -305,12 +310,12 @@ defmodule Prequest.FeedTest do
                  articles_count: 1,
                  filter: {:topics, [^name]},
                  results: 1,
-                 topics_count: 0
+                 topics_count: 1
                },
                articles: [],
                query: %Ecto.Query{},
                reports: [],
-               topics: []
+               topics: [{1, ^topic}]
              } = Feed.build(topic, [name])
 
       assert %Feed{
@@ -338,6 +343,11 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: []
              } = Feed.build(topic, ["_"])
+    end
+
+    test "build/2 returns same feed when topics is an empty list", %{user1: user, topic1: topic} do
+      assert Feed.build(user) == Feed.build(user, [])
+      assert Feed.build(topic) == Feed.build(topic, [])
     end
 
     test "search/2 returns the feed containing searched articles", %{user1: user, topic1: topic} do
@@ -539,45 +549,39 @@ defmodule Prequest.FeedTest do
                  articles_count: 20,
                  filter: {:topics, [^name]},
                  results: 20,
-                 topics_count: 20
+                 topics_count: 40
                },
                articles: [],
                query: %Ecto.Query{},
                reports: [],
-               topics: [{1, a_topic} | _topics]
+               topics: [{20, ^topic} | _topics]
              } = Feed.build(Manage.Article, [name])
 
-      assert a_topic != topic
-
       assert %Feed{
                __meta__: %{
                  articles_count: 20,
                  filter: {:topics, [^name]},
                  results: 20,
-                 topics_count: 20
+                 topics_count: 40
                },
                articles: [],
                query: %Ecto.Query{},
                reports: [],
-               topics: [{1, u_topic} | _topics]
+               topics: [{20, ^topic} | _topics]
              } = Feed.build(user, [name])
 
-      assert u_topic != topic
-
       assert %Feed{
                __meta__: %{
                  articles_count: 20,
                  filter: {:topics, [^name]},
                  results: 20,
-                 topics_count: 20
+                 topics_count: 40
                },
                articles: [],
                query: %Ecto.Query{},
                reports: [],
-               topics: [{1, t_topic} | _topics]
+               topics: [{20, ^topic} | _topics]
              } = Feed.build(topic, [name])
-
-      assert t_topic != topic
 
       assert %Feed{
                __meta__: %{
@@ -617,6 +621,11 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: []
              } = Feed.build(topic, ["_"])
+    end
+
+    test "build/2 returns same feed when topics is an empty list", %{usern: user, topicn: topic} do
+      assert Feed.build(user) == Feed.build(user, [])
+      assert Feed.build(topic) == Feed.build(topic, [])
     end
 
     test "search/2 returns the feed containing searched articles", %{usern: user, topicn: topic} do
