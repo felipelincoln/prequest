@@ -32,7 +32,9 @@ defmodule Prequest.Feed.Load do
     }
   end
 
-  def filter(%Feed{query: query} = feed, :topics, values) when is_list(values) and values != [] do
+  def filter(%Feed{query: _query} = feed, :topics, []), do: feed
+
+  def filter(%Feed{query: query} = feed, :topics, values) when is_list(values) do
     query_filter =
       from [articles: a] in query,
         join: t in assoc(a, :topics),
@@ -46,14 +48,11 @@ defmodule Prequest.Feed.Load do
   end
 
   def build(%Feed{query: query} = feed) do
-    {:topics, selected_topics} = get_metadata(feed, :filter, {:topics, []})
-
     topics =
       from a in subquery(query),
         as: :articles,
         join: t in assoc(a, :topics),
-        as: :topics,
-        where: t.name not in ^selected_topics
+        as: :topics
 
     topics_limited =
       from [articles: a, topics: t] in topics,

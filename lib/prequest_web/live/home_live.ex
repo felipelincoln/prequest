@@ -10,14 +10,37 @@ defmodule PrequestWeb.HomeLive do
   import Prequest.Helpers, only: [preload!: 2]
 
   def mount(_params, _session, socket) do
-    build = Feed.build(Article)
-    feed = build |> Feed.page(0)
+    feed =
+      Article
+      |> Feed.build()
+      |> Feed.page(0)
 
-    socket =
-      socket
-      |> assign(build: build, feed: feed)
+    {:ok, assign(socket, :feed, feed)}
+  end
 
-    {:ok, socket}
+  def handle_event("filter", %{"topic" => new_filter}, socket) do
+    current_filter = get_filter(socket.assigns.feed)
+    filter = create_filter(new_filter, current_filter)
+
+    feed =
+      Article
+      |> Feed.build(filter)
+      |> Feed.page(0)
+
+    {:noreply, assign(socket, :feed, feed)}
+  end
+
+  defp get_filter(feed) do
+    feed.__meta__
+    |> Map.get(:filter, {:topics, []})
+    |> elem(1)
+  end
+
+  defp create_filter(new, filter) do
+    case new in filter do
+      true -> List.delete(filter, new)
+      false -> [new | filter]
+    end
   end
 
   # all the ui functions must be applied to the Prequest.Feed core

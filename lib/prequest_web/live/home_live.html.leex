@@ -2,6 +2,7 @@
 <% topics = ui(:topics, @feed) %>
 <% reports = ui(:reports, @feed) %>
 <% articles = ui(:articles, @feed) %>
+<% filters = get_filter(@feed) %>
 
 <div class="container mx-auto">
   <div class="flex flex-col-reverse sm:flex-row">
@@ -63,9 +64,10 @@
         <div class="flex">
           <ol>
             <%= for {width, topic, color} <- topics, width > 0 do %>
-              <li class="inline-flex cursor-pointer text-gray-800 hover:bg-gray-300 px-2 py-1 rounded-lg">
+              <li class="inline-flex cursor-pointer text-gray-800 hover:bg-gray-300 px-2 py-1 rounded-lg" phx-click="filter" phx-value-topic="<%= topic %>">
                 <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
                 <span class="text-sm align-middle"><%= topic %></span>
+                <%= topic in filters %>
               </li>
             <% end %>
           </ol>
