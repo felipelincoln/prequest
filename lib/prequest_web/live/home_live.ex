@@ -51,6 +51,8 @@ defmodule PrequestWeb.HomeLive do
   end
 
   # list of {width, topic name, color}
+  defp ui(:topics, %Feed{topics: [], __meta__: %{topics_count: 0}}), do: []
+
   defp ui(:topics, %Feed{topics: topics, __meta__: %{topics_count: count}}) do
     (topics ++ others_topic(topics, count))
     |> Enum.map(fn {n, topic} ->
