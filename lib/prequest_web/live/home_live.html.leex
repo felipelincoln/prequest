@@ -3,6 +3,9 @@
 <% articles = ui(:articles, @feed) %>
 <% filters = get_filter(@feed) %>
 <% meta = @feed.__meta__ %>
+<% order = serialize_sort_by(meta.sort_by) %>
+
+<% IO.inspect meta %>
 
 <div class="container mx-auto">
   <div class="flex flex-col-reverse sm:flex-row">
@@ -11,10 +14,16 @@
         <h1 class="uppercase flex-grow">Recent</h1>
         <div class="flex">
           <div>Search</div>
-          <div>Latest</div>
+          <div>
+            <form phx-change="sort">
+              <select name="order">
+                <%= options_for_select(sort_by_options(), order) %>
+              </select>
+            </form>
+          </div>
         </div>
       </div>
-      <section id="content" phx-update="<%= @update %>" phx-hook="InfiniteScroll" data-page="<%= meta.page %>" data-next="<%= meta.has_next? %>">
+      <section id="content" phx-update="<%= @update %>" phx-hook="InfiniteScroll" data-page="<%= meta.page %>" data-order="<%= order %>" data-next="<%= meta.has_next? %>">
         <%= for article <- articles do %>
           <p id="<%= article.id %>" class="bg-white shadow rounded p-8 mb-8 mx-8">
             <span><%= article.title %></span><br>

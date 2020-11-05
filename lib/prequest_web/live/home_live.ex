@@ -24,15 +24,33 @@ defmodule PrequestWeb.HomeLive do
     {:ok, socket, temporary_assigns: [feed: nil]}
   end
 
-  def handle_event("load", %{"page" => page}, socket) do
+  def handle_event("load", %{"page" => page, "order" => order}, socket) do
+    sort_by = deserialize_sort_by(order)
+    next_page = String.to_integer(page) + 1
+
     feed =
       socket.assigns.build
-      |> Feed.page(String.to_integer(page) + 1)
+      |> Feed.page(next_page, sort_by)
 
     socket =
       socket
       |> assign(:feed, feed)
       |> assign(:update, "append")
+
+    {:noreply, socket}
+  end
+
+  def handle_event("sort", %{"order" => order}, socket) do
+    sort_by = deserialize_sort_by(order)
+
+    feed =
+      socket.assigns.build
+      |> Feed.page(0, sort_by)
+
+    socket =
+      socket
+      |> assign(:feed, feed)
+      |> assign(:update, "replace")
 
     {:noreply, socket}
   end
@@ -91,5 +109,32 @@ defmodule PrequestWeb.HomeLive do
     feed.__meta__
     |> Map.get(:filter, {:topics, []})
     |> elem(1)
+  end
+
+  defp sort_by_options do
+    [
+      "date desc": "desc_date",
+      "date asc": "asc_date",
+      "views desc": "desc_views",
+      "views asc": "asc_views"
+    ]
+  end
+
+  defp serialize_sort_by(keyword) do
+    case keyword do
+      [desc: :date] -> "desc_date"
+      [asc: :date] -> "asc_date"
+      [desc: :views] -> "desc_views"
+      [asc: :views] -> "asc_views"
+    end
+  end
+
+  defp deserialize_sort_by(string) do
+    case string do
+      "desc_date" -> [desc: :date]
+      "asc_date" -> [asc: :date]
+      "desc_views" -> [desc: :views]
+      "asc_views" -> [asc: :views]
+    end
   end
 end

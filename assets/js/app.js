@@ -28,13 +28,14 @@ let scrollAt = () => {
 let Hooks = {}
 Hooks.InfiniteScroll = {
   page() { return this.el.dataset.page },
+  order() { return this.el.dataset.order },
   next() { return this.el.dataset.next },
   mounted(){
     this.pending = this.page()
     window.addEventListener("scroll", e => {
       if(this.next() == "true" && this.pending == this.page() && scrollAt() > 90){
         this.pending = this.page() + 1
-        this.pushEvent("load", {page: this.page()})
+        this.pushEvent("load", {page: this.page(), order: this.order()})
       }
     })
   },
