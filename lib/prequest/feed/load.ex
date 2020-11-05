@@ -78,6 +78,8 @@ defmodule Prequest.Feed.Load do
     |> put_metadata(:results, results)
   end
 
+  def search(%Feed{query: _query} = feed, ""), do: feed
+
   def search(%Feed{query: query} = feed, substring) when is_binary(substring) do
     substring = String.replace(substring, ~r/([%_])/, ~S"\\" <> "\\g{1}")
 

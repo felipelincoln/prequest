@@ -4,26 +4,27 @@
 <% filters = get_filter(@feed) %>
 <% meta = @feed.__meta__ %>
 <% order = serialize_sort_by(meta.sort_by) %>
+<% query = Map.get(meta, :search, "") %>
 
 <% IO.inspect meta %>
 
 <div class="container mx-auto">
   <div class="flex flex-col-reverse sm:flex-row">
     <main class="sm:flex-grow bg-gray-300 sm:mr-2 md:mr-4 lg:mr-8">
+      <!-- search and sort -->
       <div class="flex">
         <h1 class="uppercase flex-grow">Recent</h1>
         <div class="flex">
-          <div>Search</div>
-          <div>
-            <form phx-change="sort">
-              <select name="order">
-                <%= options_for_select(sort_by_options(), order) %>
-              </select>
-            </form>
-          </div>
+          <form phx-change="sort">
+            <input type="text" name="query" phx-debounce="500" value="<%= query %>">
+            <select name="order">
+              <%= options_for_select(sort_by_options(), order) %>
+            </select>
+          </form>
         </div>
       </div>
-      <section id="content" phx-update="<%= @update %>" phx-hook="InfiniteScroll" data-page="<%= meta.page %>" data-order="<%= order %>" data-next="<%= meta.has_next? %>">
+      <!-- articles -->
+      <section id="content" phx-update="<%= @update %>" phx-hook="InfiniteScroll" data-page="<%= meta.page %>" data-order="<%= order %>" data-query="<%= query %>" data-next="<%= meta.has_next? %>">
         <%= for article <- articles do %>
           <p id="<%= article.id %>" class="bg-white shadow rounded p-8 mb-8 mx-8">
             <span><%= article.title %></span><br>

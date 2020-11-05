@@ -24,12 +24,13 @@ defmodule PrequestWeb.HomeLive do
     {:ok, socket, temporary_assigns: [feed: nil]}
   end
 
-  def handle_event("load", %{"page" => page, "order" => order}, socket) do
+  def handle_event("load", %{"page" => page, "order" => order, "query" => query}, socket) do
     sort_by = deserialize_sort_by(order)
     next_page = String.to_integer(page) + 1
 
     feed =
       socket.assigns.build
+      |> Feed.search(query)
       |> Feed.page(next_page, sort_by)
 
     socket =
@@ -40,11 +41,12 @@ defmodule PrequestWeb.HomeLive do
     {:noreply, socket}
   end
 
-  def handle_event("sort", %{"order" => order}, socket) do
+  def handle_event("sort", %{"order" => order, "query" => query}, socket) do
     sort_by = deserialize_sort_by(order)
 
     feed =
       socket.assigns.build
+      |> Feed.search(query)
       |> Feed.page(0, sort_by)
 
     socket =
