@@ -168,6 +168,11 @@ defmodule Prequest.FeedTest do
              } = Feed.build(topic) |> Feed.search("substring")
     end
 
+    test "search/2 returns same feed when query is an empty string", %{user0: user, topic0: topic} do
+      assert Feed.build(user) |> Feed.search("") == Feed.build(user)
+      assert Feed.build(topic) |> Feed.search("") == Feed.build(topic)
+    end
+
     test "page/3 returns the feed with preloaded articles", %{user0: user, topic0: topic} do
       assert %Feed{
                __meta__: %{
@@ -406,6 +411,11 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: [{1, ^topic}]
              } = Feed.build(topic) |> Feed.search(reverse_substring)
+    end
+
+    test "search/2 returns same feed when query is an empty string", %{user1: user, topic1: topic} do
+      assert Feed.build(user) |> Feed.search("") == Feed.build(user)
+      assert Feed.build(topic) |> Feed.search("") == Feed.build(topic)
     end
 
     test "page/3 returns the feed with preloaded articles", %{user1: user, topic1: topic} do
@@ -710,6 +720,11 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: [{20, ^topic} | _topics]
              } = Feed.build(topic) |> Feed.search(reverse_substring)
+    end
+
+    test "search/2 returns same feed when query is an empty string", %{usern: user, topicn: topic} do
+      assert Feed.build(user) |> Feed.search("") == Feed.build(user)
+      assert Feed.build(topic) |> Feed.search("") == Feed.build(topic)
     end
 
     # caution: this test depends on feed default parameters
