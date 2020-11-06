@@ -7,6 +7,7 @@ function scrollAt(){
 };
 
 const FeedScroll = {
+  id(){ return this.el.dataset.id },
   page(){ return this.el.dataset.page },
   order(){ return this.el.dataset.order },
   query(){ return this.el.dataset.query },
@@ -23,7 +24,7 @@ const FeedScroll = {
         };
 
         // Calling "load" event.
-        this.pushEvent("load", params);
+        this.pushEventTo(`#${this.id()}`, "load", params);
       }
     })
   },

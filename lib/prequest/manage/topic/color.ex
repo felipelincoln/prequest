@@ -2,16 +2,16 @@ defmodule Prequest.Manage.Topic.Color do
   @moduledoc """
   A custom color manager.
 
-  To add a new color just add a `from/1'` clause matching the topic name.
+  To add a new color just add a `color_class/1'` clause matching the topic name.
 
       # lib/prequest/manage/topic/color.ex
       # Example of adding a color for the "elixir" tag.
       ...
-      def from("elixir"), do: "bg-purple-800" # new clause
-      def from(_), do: random()
+      def color_class("elixir"), do: "bg-purple-800" # new clause
+      def color_class(_), do: random()
       ...
 
-  The new custom clause must be declared before `from(_)` clause.
+  The new custom clause must be declared before `color_class(_)` clause.
 
   Color reference: [TailwindCSS](https://tailwindcss.com/docs/background-color)
   """
@@ -36,23 +36,23 @@ defmodule Prequest.Manage.Topic.Color do
   @doc """
   Get a class for background color for the given topic.
 
-  If the topic name is not declared as a `from/1` clause, it wil generate a random class using `random/0`.
+  If the topic name is not declared as a `color_class/1` clause, it wil generate a random class using `random/0`.
 
   ## Examples
 
-      iex> Color.from("elixir")
+      iex> Color.color_class("elixir")
       "bg-purple-800"
 
-      iex> Color.from("a")
+      iex> Color.color_class("a")
       "bg-green-300" # random
 
   """
-  @spec from(String.t()) :: String.t()
-  def from("elixir"), do: "bg-purple-800"
-  def from("javascript"), do: "bg-yellow-400"
-  def from("docker"), do: "bg-blue-500"
-  def from("jenkins"), do: "bg-red-700"
-  def from("ecto"), do: "bg-green-500"
-  def from("others"), do: "bg-gray-400"
-  def from(_), do: random()
+  @spec color_class(String.t()) :: String.t()
+  def color_class("elixir"), do: "bg-purple-800"
+  def color_class("javascript"), do: "bg-yellow-400"
+  def color_class("docker"), do: "bg-blue-500"
+  def color_class("jenkins"), do: "bg-red-700"
+  def color_class("ecto"), do: "bg-green-500"
+  def color_class("others"), do: "bg-gray-400"
+  def color_class(_), do: random()
 end
