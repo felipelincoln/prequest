@@ -2,7 +2,8 @@ defmodule Prequest.Feed.Load do
   @moduledoc false
 
   import Ecto.Query
-  import Prequest.Helpers
+  import Prequest.Helpers, only: [preload!: 2]
+  import Prequest.Feed.Load.DateHelpers, only: [get_months_ago: 1]
   alias Prequest.Feed
   alias Prequest.Feed.Impl
   alias Prequest.Repo
@@ -13,6 +14,33 @@ defmodule Prequest.Feed.Load do
   @reports_quantity 10
   @per_page 10
   @sort_by [{:desc, :date}]
+
+  def source(article_schema, n) when is_atom(article_schema) and is_integer(n) do
+    [date_a | [date_b]] = get_months_ago(n)
+
+    from(a in article_schema,
+      as: :articles,
+      where: a.inserted_at >= ^date_a and a.inserted_at < ^date_b,
+      select: a
+    )
+  end
+
+  def source(%{id: id} = source, n) when is_struct(source) and is_integer(n) do
+    schema = source.__struct__
+    [date_a | [date_b]] = get_months_ago(n)
+
+    from(s in schema,
+      where: s.id == ^id,
+      join: a in assoc(s, :articles),
+      as: :articles,
+      where: a.inserted_at >= ^date_a and a.inserted_at < ^date_b,
+      select: a
+    )
+  end
+
+  def query(%Ecto.Query{} = ecto_query) do
+    %Feed{query: ecto_query}
+  end
 
   def query(article_schema) when is_atom(article_schema) do
     %Feed{query: from(a in article_schema, as: :articles, select: a)}
