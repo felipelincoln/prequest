@@ -14,7 +14,7 @@ defmodule Prequest.Feed.Load.DateHelpers do
     ]
   end
 
-  def months_ago(%Date{} = date, n) do
+  defp months_ago(%Date{} = date, n) do
     # years to withdraw
     years = div(n, 12) + ((rem(n, 12) >= date.month and 1) || 0)
     # months to withdraw
@@ -23,15 +23,15 @@ defmodule Prequest.Feed.Load.DateHelpers do
     %{date | year: date.year - years, month: date.month - months}
   end
 
-  def first_day(%Date{} = date) do
+  defp first_day(%Date{} = date) do
     %{date | day: 1}
   end
 
-  def last_day(%Date{} = date) do
+  defp last_day(%Date{} = date) do
     %{date | day: Date.days_in_month(date)}
   end
 
-  def to_naive_dt(%Date{year: year, month: month, day: day} = date, sun) do
+  defp to_naive_dt(%Date{year: year, month: month, day: day} = date, sun) do
     time =
       case sun do
         :sunrise -> [0, 0, 0]
