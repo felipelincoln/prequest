@@ -39,7 +39,9 @@ defmodule Prequest.Feed.Load.DateHelpers do
       end
 
     case apply(&NaiveDateTime.new/6, [year, month, day] ++ time) do
-      {:ok, naive_dt} -> naive_dt
+      {:ok, naive_dt} ->
+        naive_dt
+
       {:error, _reason} ->
         %{date | day: day - 1}
         |> to_naive_dt(sun)

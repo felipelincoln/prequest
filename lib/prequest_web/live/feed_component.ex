@@ -12,15 +12,19 @@ defmodule PrequestWeb.FeedComponent do
   end
 
   @impl true
-  def update(assigns, socket) do
-    source = assigns.source
-    build = Feed.build(source)
+  def update(%{id: id, source: source, range: range}, socket) do
+    build =
+      source
+      |> Feed.source(range)
+      |> Feed.build()
+
     feed = build |> Feed.page(0)
 
     socket =
       socket
-      |> assign(:id, assigns.id)
+      |> assign(:id, id)
       |> assign(:source, source)
+      |> assign(:range, range)
       |> assign(:build, build)
       |> assign(:feed, feed)
       |> assign(:update, "replace")
@@ -76,7 +80,11 @@ defmodule PrequestWeb.FeedComponent do
         false -> [new_filter | current_filter]
       end
 
-    build = Feed.build(socket.assigns.source, filter)
+    build =
+      socket.assigns.source
+      |> Feed.source(socket.assigns.range)
+      |> Feed.build(filter)
+
     feed = build |> Feed.page(0)
 
     socket =
