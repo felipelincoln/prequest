@@ -1,6 +1,12 @@
 defmodule Prequest.Feed.Load.DateHelpers do
   @moduledoc false
 
+  # defines the date the scroll should stop
+  def last_date do
+    {:ok, date} = NaiveDateTime.new(2020, 5, 1, 0, 0, 0)
+    date
+  end
+
   def get_months_ago(n) do
     [
       Date.utc_today()

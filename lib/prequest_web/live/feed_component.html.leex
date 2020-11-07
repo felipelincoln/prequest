@@ -1,4 +1,5 @@
 <% import Phoenix.HTML.Form, only: [options_for_select: 2] %>
+<% import Prequest.Feed.Load.DateHelpers, only: [last_date: 0, get_months_ago: 1] %>
 <% alias PrequestWeb.FeedComponent.UI %>
 <% topics = UI.get_topics(@feed) %>
 <% reports = UI.get_reports(@feed) %>
@@ -8,6 +9,8 @@
 <% meta = @feed.__meta__ %>
 <% order = serialize_sort_by(meta.sort_by) %>
 <% query = Map.get(meta, :search, "") %>
+
+<% [date, _] = get_months_ago(@range) %>
 
 <% IO.inspect meta %>
 
@@ -106,7 +109,8 @@
     </aside>
   </div>
   <% IO.puts @range %>
-  <%= if meta.has_next? == false and meta.articles_count > 0 do %>
+
+  <%= if meta.has_next? == false and NaiveDateTime.compare(date, last_date()) == :gt do %>
     <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: Prequest.Manage.Article, range: @range + 1 %>
   <% end %>
 </div>
