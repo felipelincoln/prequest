@@ -10,6 +10,7 @@ defmodule Prequest.Feed.Cache do
 
   @expire_sec 5
 
+  def source(source, n), do: Load.source(source, n)
   def query(source), do: Load.query(source)
   def filter(feed, :topics, values), do: Load.filter(feed, :topics, values)
   def search(feed, substring), do: Load.search(feed, substring)

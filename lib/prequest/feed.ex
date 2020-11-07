@@ -67,6 +67,16 @@ defmodule Prequest.Feed do
   alias Prequest.Feed.{Cache, Load}
 
   @type feed :: %Feed{}
+  @type ecto_query :: %Ecto.Query{}
+
+  @doc """
+  no docs yet
+  """
+  @spec source(struct | atom, integer) :: ecto_query
+  def source(source, n) do
+    source
+    |> Cache.source(n)
+  end
 
   @doc """
   Populate a feed struct with all information but articles.
@@ -102,7 +112,7 @@ defmodule Prequest.Feed do
       %Feed{ ... }
 
   """
-  @spec build(struct | atom) :: feed
+  @spec build(struct | atom | ecto_query) :: feed
   def build(source) do
     source
     |> Cache.query()
@@ -136,7 +146,7 @@ defmodule Prequest.Feed do
         ]
       }
   """
-  @spec build(struct | atom, list) :: feed
+  @spec build(struct | atom | ecto_query, list) :: feed
   def build(source, topics) when is_list(topics) do
     source
     |> Cache.query()
@@ -155,7 +165,7 @@ defmodule Prequest.Feed do
           articles_count: 107,
           results: 23,
           search: "prequest",
-          topics_count: 160 
+          topics_count: 160
         },
         articles: [],
         query: # Ecto.Query<from a0 in Prequest.Manage.Article, as: :articles,
