@@ -1,20 +1,17 @@
 <% import Phoenix.HTML.Form, only: [options_for_select: 2] %>
 <% import Prequest.Feed.Load.DateHelpers, only: [last_date: 0, get_months_ago: 1] %>
-<% alias PrequestWeb.FeedComponent.UI %>
-<% topics = UI.get_topics(@feed) %>
-<% reports = UI.get_reports(@feed) %>
-<% articles = UI.get_articles(@feed) %>
+<% import PrequestWeb.FeedComponent.UI, only: [sort_by_options: 0] %>
 
-<% filters = get_filter(@feed) %>
-<% meta = @feed.__meta__ %>
-<% order = serialize_sort_by(meta.sort_by) %>
-<% query = Map.get(meta, :search, "") %>
+<% filters = get_filter(@meta) %>
+<% order = serialize_sort_by(@meta.sort_by) %>
+<% query = Map.get(@meta, :search, "") %>
 
 <% [date, _] = get_months_ago(@range) %>
+<% last_feed? = NaiveDateTime.compare(last_date(), date) == :gt %>
 
 <% IO.puts "component #{@range} rendering using phx-updated: #{@update}" %>
 
-<div id="<%= @id %>" class='container mx-auto <%= if meta.articles_count == 0, do: "hidden"%>'>
+<div id="<%= @id %>" class='container mx-auto <%= if @meta.articles_count == 0, do: "hidden"%>'>
   <div class="flex flex-col-reverse sm:flex-row">
     <section class="sm:flex-grow bg-gray-300 sm:mr-2 md:mr-4 lg:mr-8">
       <!-- filtering -->
@@ -24,15 +21,14 @@
           <form phx-change="filter" phx-target="<%= @myself %>">
             <input type="text" name="query" phx-debounce="500" value="<%= query %>">
             <select name="order">
-              <%= options_for_select(UI.sort_by_options(), order) %>
+              <%= options_for_select(sort_by_options(), order) %>
             </select>
           </form>
         </div>
       </div>
       <!-- articles -->
-      <section id="content<%= @range %>" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= meta.page %>" data-order="<%= order %>" data-query="<%= query %>" data-next="<%= meta.has_next? %>">
-        <%= @update %>
-        <%= for article <- articles do %>
+      <section id="content<%= @range %>" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= @meta.page %>" data-order="<%= order %>" data-query="<%= query %>" data-next="<%= @meta.has_next? %>">
+        <%= for article <- @articles do %>
           <p id="<%= article.id %>" class="bg-white shadow rounded p-8 mb-8 mx-8">
             <span><%= article.title %></span><br>
             <span><%= article.user.username %></span>
@@ -40,7 +36,7 @@
           </p>
         <% end %>
       </section>
-      <%= if meta.has_next? do %>
+      <%= if @meta.has_next? do %>
         <div class="bg-white shadow rounded p-8 mb-8 mx-8">
           <p class="animate-pulse bg-gray-400 w-full h-6 mb-2"></p>
           <p class="animate-pulse bg-gray-400 w-2/3 h-6 "></p>
@@ -62,10 +58,10 @@
         <!-- reports -->
         <div class="flex relative mb-3">
           <p>
-            <strong><%= meta.articles_count %></strong>
+            <strong><%= @meta.articles_count %></strong>
             <span>articles</span>
           </p>
-          <%= if reports == [] do %>
+          <%= if @reports == [] do %>
             <div class="group static cursor-pointer" tabindex="0">
               <svg class="h-5 inline-block align-text-bottom text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -78,7 +74,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
               <div class="hidden group-focus:block absolute left-0 cursor-default bg-white">
-                <%= for {msg, title, reported_at} <- reports do %>
+                <%= for {msg, title, reported_at} <- @reports do %>
                   <p>
                     <span><%= msg %></span>
                     <span><%= title %></span>
@@ -92,17 +88,24 @@
 
         <!-- topics -->
         <div class="flex rounded-full overflow-hidden mb-2">
-          <%= for {width, _topic, color} <- topics, width > 0 do %>
+          <%= for {width, _topic, color} <- @topics, width > 0 do %>
             <div class="h-4 <%= color %> last:flex-grow" style="width:<%= width %>%"></div>
           <% end %>
         </div>
         <div class="flex">
           <ol>
-            <%= for {width, topic, color} <- topics, width > 0 do %>
-              <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
-                <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
-                <a href="#<%= @id %>" class="text-sm align-middle"><%= topic %></a>
-              </li>
+            <%= for {width, topic, color} <- @topics, width > 0 do %>
+              <%= if topic == "others" do %>
+                <li class="inline-flex cursor-default text-gray-800 px-2 py-1 rounded-lg">
+                  <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
+                  <span class="align-middle"><%= topic %></span>
+                </li>
+              <% else %>
+                <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
+                  <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
+                  <a href="#<%= @id %>" class="align-middle"><%= topic %></a>
+                </li>
+              <% end %>
             <% end %>
           </ol>
         </div>
@@ -110,7 +113,7 @@
     </aside>
   </div>
 
-  <%= if meta.has_next? == false and NaiveDateTime.compare(date, last_date()) == :gt do %>
-    <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: Prequest.Manage.Article, range: @range + 1 %>
+  <%= unless @meta.has_next? or last_feed? do %>
+    <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: @source, range: @range + 1 %>
   <% end %>
 </div>
