@@ -12,7 +12,7 @@
 
 <% [date, _] = get_months_ago(@range) %>
 
-<% IO.inspect meta %>
+<% IO.puts "component #{@range} rendering using phx-updated: #{@update}" %>
 
 <div id="<%= @id %>" class='container mx-auto <%= if meta.articles_count == 0, do: "hidden"%>'>
   <div class="flex flex-col-reverse sm:flex-row">
@@ -30,7 +30,8 @@
         </div>
       </div>
       <!-- articles -->
-      <section id="content" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= meta.page %>" data-order="<%= order %>" data-query="<%= query %>" data-next="<%= meta.has_next? %>">
+      <section id="content<%= @range %>" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= meta.page %>" data-order="<%= order %>" data-query="<%= query %>" data-next="<%= meta.has_next? %>">
+        <%= @update %>
         <%= for article <- articles do %>
           <p id="<%= article.id %>" class="bg-white shadow rounded p-8 mb-8 mx-8">
             <span><%= article.title %></span><br>
@@ -108,7 +109,6 @@
       </div>
     </aside>
   </div>
-  <% IO.puts @range %>
 
   <%= if meta.has_next? == false and NaiveDateTime.compare(date, last_date()) == :gt do %>
     <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: Prequest.Manage.Article, range: @range + 1 %>

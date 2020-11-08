@@ -8,11 +8,13 @@ defmodule PrequestWeb.FeedComponent do
 
   @impl true
   def mount(socket) do
+    IO.puts "component mounted"
     {:ok, socket, temporary_assigns: [feed: nil]}
   end
 
   @impl true
   def update(%{id: id, source: source, range: range}, socket) do
+    IO.puts "component #{range} updated"
     build =
       source
       |> Feed.source(range)
@@ -35,6 +37,7 @@ defmodule PrequestWeb.FeedComponent do
   # load articles on scroll
   @impl true
   def handle_event("load", %{"page" => page, "order" => order, "query" => query}, socket) do
+    IO.puts "component #{socket.assigns.range} handling 'load'"
     sort_by = deserialize_sort_by(order)
     next_page = String.to_integer(page) + 1
 
@@ -54,6 +57,7 @@ defmodule PrequestWeb.FeedComponent do
   # sort and search
   @impl true
   def handle_event("filter", %{"order" => order, "query" => query}, socket) do
+    IO.puts "component #{socket.assigns.range} handling 'filter'"
     sort_by = deserialize_sort_by(order)
 
     feed =
@@ -72,6 +76,7 @@ defmodule PrequestWeb.FeedComponent do
   # rebuild feed filtering by topics
   @impl true
   def handle_event("toggle_topic", %{"topic" => new_filter}, socket) do
+    IO.puts "component #{socket.assigns.range} handling 'toggle_topic'"
     current_filter = get_filter(socket.assigns.build)
 
     filter =

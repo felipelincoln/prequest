@@ -24,6 +24,7 @@ const FeedScroll = {
         };
 
         // Calling "load" event.
+        console.log(`component ${this.id()} js hook`);
         this.pushEventTo(`#${this.id()}`, "load", params);
       }
     })
