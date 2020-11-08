@@ -101,7 +101,7 @@
             <%= for {width, topic, color} <- topics, width > 0 do %>
               <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
                 <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
-                <span class="text-sm align-middle"><%= topic %></span>
+                <a href="#<%= @id %>" class="text-sm align-middle"><%= topic %></a>
               </li>
             <% end %>
           </ol>
