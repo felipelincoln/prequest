@@ -37,20 +37,15 @@ defmodule Prequest.Feed.Load.DateHelpers do
     %{date | day: Date.days_in_month(date)}
   end
 
-  defp to_naive_dt(%Date{year: year, month: month, day: day} = date, sun) do
+  defp to_naive_dt(%Date{year: year, month: month, day: day}, sun) do
     time =
       case sun do
         :sunrise -> [0, 0, 0]
         :sunset -> [23, 59, 59]
       end
 
-    case apply(&NaiveDateTime.new/6, [year, month, day] ++ time) do
-      {:ok, naive_dt} ->
-        naive_dt
+    {:ok, naive_dt} = apply(&NaiveDateTime.new/6, [year, month, day] ++ time)
 
-      {:error, _reason} ->
-        %{date | day: day - 1}
-        |> to_naive_dt(sun)
-    end
+    naive_dt
   end
 end
