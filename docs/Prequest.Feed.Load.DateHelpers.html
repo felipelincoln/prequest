@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.6">
     <meta name="project" content="Prequest v0.1.0">
-    <title>PrequestWeb.HomeLive — Prequest v0.1.0</title>
+    <title>Prequest.Feed.Load.DateHelpers — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
     <script src="dist/sidebar_items-cf0e596b44.js"></script>
       <script src="docs_config.js"></script>
@@ -63,8 +63,8 @@ Prequest      </a>
     <div id="content" class="content-inner">
 
       <h1>
-        PrequestWeb.HomeLive <small class="app-vsn">(Prequest v0.1.0)</small>
-          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/home_live.ex#L1" title="View Source" class="view-source" rel="help">
+        Prequest.Feed.Load.DateHelpers <small class="app-vsn">(Prequest v0.1.0)</small>
+          <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed/load/date_helpers.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -72,7 +72,7 @@ Prequest      </a>
 
 
         <section id="moduledoc">
-<p>Homepage</p>        </section>
+<p>Handle dates for the feed.</p>        </section>
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -88,9 +88,15 @@ Prequest      </a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#render/1">render(arg)</a>
+    <a href="#get_months_ago/1">get_months_ago(n)</a>
   </div>
-    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p></div>
+    <div class="summary-synopsis"><p>Gets the first and last day from <code class="inline">n</code> months ago.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#last_date/0">last_date()</a>
+  </div>
+    <div class="summary-synopsis"><p>Defines the last date the feed should stop loading on scroll.</p></div>
 </div>
   </div>
         </section>
@@ -103,14 +109,14 @@ Prequest      </a>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="render/1">
+<section class="detail" id="get_months_ago/1">
   <div class="detail-header">
-    <a href="#render/1" class="detail-link" title="Link to this function">
+    <a href="#get_months_ago/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">render(arg)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest_web/live/home_live.ex#L1" class="view-source" rel="help" title="View Source">
+    <h1 class="signature">get_months_ago(n)</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed/load/date_helpers.ex#L30" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -118,7 +124,39 @@ Functions          </h1>
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p>  </section>
+<p>Gets the first and last day from <code class="inline">n</code> months ago.</p><h2 id="get_months_ago/1-examples" class="section-heading">
+  <a href="#get_months_ago/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_months_ago</span><span class="p" data-group-id="4139735458-1">(</span><span class="mi">0</span><span class="p" data-group-id="4139735458-1">)</span><span class="w">
+</span><span class="p" data-group-id="4139735458-2">[</span><span class="ld">~N[2020-11-01 00:00:00]</span><span class="p">,</span><span class="w"> </span><span class="ld">~N[2020-11-30 23:59:59]</span><span class="p" data-group-id="4139735458-2">]</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_months_ago</span><span class="p" data-group-id="4139735458-3">(</span><span class="mi">1</span><span class="p" data-group-id="4139735458-3">)</span><span class="w">
+</span><span class="p" data-group-id="4139735458-4">[</span><span class="ld">~N[2020-10-01 00:00:00]</span><span class="p">,</span><span class="w"> </span><span class="ld">~N[2020-10-31 23:59:59]</span><span class="p" data-group-id="4139735458-4">]</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_months_ago</span><span class="p" data-group-id="4139735458-5">(</span><span class="mi">60</span><span class="p" data-group-id="4139735458-5">)</span><span class="w">
+</span><span class="p" data-group-id="4139735458-6">[</span><span class="ld">~N[2015-11-01 00:00:00]</span><span class="p">,</span><span class="w"> </span><span class="ld">~N[2015-11-30 23:59:59]</span><span class="p" data-group-id="4139735458-6">]</span></code></pre>  </section>
+</section>
+<section class="detail" id="last_date/0">
+  <div class="detail-header">
+    <a href="#last_date/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">last_date()</h1>
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/feed/load/date_helpers.ex#L10" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+  </div>
+
+  <section class="docstring">
+      <h2>Specs</h2>
+      <div class="specs">
+          <pre>last_date() :: <a href="https://hexdocs.pm/elixir/NaiveDateTime.html#t:t/0">NaiveDateTime.t</a>()</pre>
+      </div>
+
+<p>Defines the last date the feed should stop loading on scroll.</p>  </section>
 </section>
           </div>
         </section>

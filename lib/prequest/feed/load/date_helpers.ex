@@ -1,12 +1,32 @@
 defmodule Prequest.Feed.Load.DateHelpers do
-  @moduledoc false
+  @moduledoc """
+  Handle dates for the feed.
+  """
 
-  # defines the date the scroll should stop
+  @doc """
+  Defines the last date the feed should stop loading on scroll.
+  """
+  @spec last_date() :: NaiveDateTime.t()
   def last_date do
     {:ok, date} = NaiveDateTime.new(2020, 5, 1, 0, 0, 0)
     date
   end
 
+  @doc """
+  Gets the first and last day from `n` months ago.
+
+  ## Examples
+
+      iex> get_months_ago(0)
+      [~N[2020-11-01 00:00:00], ~N[2020-11-30 23:59:59]]
+
+      iex> get_months_ago(1)
+      [~N[2020-10-01 00:00:00], ~N[2020-10-31 23:59:59]]
+
+      iex> get_months_ago(60)
+      [~N[2015-11-01 00:00:00], ~N[2015-11-30 23:59:59]]
+
+  """
   def get_months_ago(n) do
     [
       Date.utc_today()
