@@ -10,7 +10,7 @@ defmodule PrequestWeb.FeedComponent do
   @impl true
   def mount(socket) do
     IO.puts("component mounted")
-    {:ok, socket, temporary_assigns: [articles: []]}
+    {:ok, socket, temporary_assigns: [articles: nil]}
   end
 
   @impl true
