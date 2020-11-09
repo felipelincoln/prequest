@@ -81,6 +81,11 @@ defmodule Prequest.FeedTest do
   end
 
   describe "feed containing no articles" do
+    test "source/2 returns an ecto query", %{user0: user, topic0: topic} do
+      assert %Ecto.Query{} = Feed.source(user, 0)
+      assert %Ecto.Query{} = Feed.source(topic, 0)
+    end
+
     test "build/1 returns the feed from given source", %{user0: user, topic0: topic} do
       assert %Feed{
                __meta__: %{
@@ -105,6 +110,66 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: []
              } = Feed.build(topic)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               user
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               topic
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               user
+               |> Feed.source(1)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               topic
+               |> Feed.source(1)
+               |> Feed.build()
     end
 
     test "build/2 returns the feed from given source and topics", %{user0: user, topic0: topic} do
@@ -267,6 +332,11 @@ defmodule Prequest.FeedTest do
   end
 
   describe "feed containing 1 article" do
+    test "source/2 returns an ecto query", %{user1: user, topic1: topic} do
+      assert %Ecto.Query{} = Feed.source(user, 0)
+      assert %Ecto.Query{} = Feed.source(topic, 0)
+    end
+
     test "build/1 returns the feed from given source", %{user1: user, topic1: topic} do
       assert %Feed{
                __meta__: %{
@@ -291,6 +361,66 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: [{1, ^topic}]
              } = Feed.build(topic)
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 results: 1,
+                 topics_count: 1
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } =
+               user
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 1,
+                 results: 1,
+                 topics_count: 1
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{1, ^topic}]
+             } =
+               topic
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               user
+               |> Feed.source(1)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               topic
+               |> Feed.source(1)
+               |> Feed.build()
     end
 
     test "build/2 returns the feed from given source and topics", %{
@@ -512,6 +642,12 @@ defmodule Prequest.FeedTest do
   end
 
   describe "feed containing n article" do
+    test "source/2 returns an ecto query", %{usern: user, topicn: topic} do
+      assert %Ecto.Query{} = Feed.source(user, 0)
+      assert %Ecto.Query{} = Feed.source(topic, 0)
+      assert %Ecto.Query{} = Feed.source(Manage.Article, 0)
+    end
+
     test "build/1 returns the feed from given source", %{usern: user, topicn: topic} do
       assert %Feed{
                __meta__: a_meta,
@@ -548,6 +684,96 @@ defmodule Prequest.FeedTest do
                reports: [],
                topics: [{20, ^topic} | _topics]
              } = Feed.build(topic)
+
+      assert %Feed{
+               __meta__: a2_meta,
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{20, ^topic} | _topics]
+             } =
+               Manage.Article
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert a2_meta.articles_count >= 21
+      assert a2_meta.results >= 21
+      assert a2_meta.topics_count >= 41
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 20,
+                 results: 20,
+                 topics_count: 40
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{20, ^topic} | _topics]
+             } =
+               user
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 20,
+                 results: 20,
+                 topics_count: 40
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: [{20, ^topic} | _topics]
+             } =
+               topic
+               |> Feed.source(0)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               Manage.Article
+               |> Feed.source(1)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               user
+               |> Feed.source(1)
+               |> Feed.build()
+
+      assert %Feed{
+               __meta__: %{
+                 articles_count: 0,
+                 results: 0,
+                 topics_count: 0
+               },
+               articles: [],
+               query: %Ecto.Query{},
+               reports: [],
+               topics: []
+             } =
+               topic
+               |> Feed.source(1)
+               |> Feed.build()
     end
 
     test "build/2 returns the feed from given source and topics", %{
