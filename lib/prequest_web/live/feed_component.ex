@@ -14,8 +14,9 @@ defmodule PrequestWeb.FeedComponent do
   end
 
   @impl true
-  def update(%{id: id, source: source, range: range}, socket) do
+  def update(%{id: id, source: source, range: range, query: query, latest: latest}, socket) do
     IO.puts("component #{range} updated")
+    order = if latest, do: [desc: :date], else: [desc: :views]
 
     build =
       source
@@ -24,7 +25,11 @@ defmodule PrequestWeb.FeedComponent do
 
     topics = build |> UI.get_topics()
     reports = build |> UI.get_reports()
-    feed = build |> Feed.page(0)
+    feed =
+      build
+      |> Feed.search(query)
+      |> Feed.page(0, order)
+
     articles = feed |> UI.get_articles()
     meta = feed.__meta__
 
@@ -33,6 +38,9 @@ defmodule PrequestWeb.FeedComponent do
       |> assign(:id, id)
       |> assign(:source, source)
       |> assign(:range, range)
+      |> assign(:query, query)
+      |> assign(:latest, latest)
+      |> assign(:order, order)
       |> assign(:build, build)
       |> assign(:topics, topics)
       |> assign(:reports, reports)
@@ -110,7 +118,11 @@ defmodule PrequestWeb.FeedComponent do
     topics = UI.get_topics(build)
     reports = UI.get_reports(build)
 
-    feed = build |> Feed.page(0)
+    feed =
+      build
+      |> Feed.search(socket.assigns.query)
+      |> Feed.page(0, socket.assigns.order)
+
     meta = feed.__meta__
     articles = UI.get_articles(feed)
 

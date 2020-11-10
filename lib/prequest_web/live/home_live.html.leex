@@ -1,3 +1,7 @@
-main page, component below!
-<br>
-<%= live_component @socket, PrequestWeb.FeedComponent, id: "feed0", source: Prequest.Manage.Article, range: 0 %>
+<form phx-change="search" class="bg-gray-400 p-2">
+  <input type="text" name="query" phx-debounce="500" value="<%= @query %>">
+  <input type="button" value="Latest" phx-click="toggle-latest">
+</form>
+<p>Search results for <strong><%= @query %></strong></p>
+<p>Latest? <strong><%= @latest %></strong></p>
+<%= live_component @socket, PrequestWeb.FeedComponent, id: "feed0", source: Prequest.Manage.Article, range: 0, query: @query, latest: @latest %>
