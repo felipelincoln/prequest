@@ -5,7 +5,6 @@ Prequest.Helpers.html
 Prequest.Manage.Topic.Color.html
 Prequest.Manage.html
 Prequest.html
-PrequestWeb.HomeLive.html
 PrequestWeb.Router.Helpers.html
 contributing.html
 dist/app-aaa6eb1824b11a32f32d.js
@@ -14,7 +13,7 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-e07b9364a3.js
-dist/sidebar_items-d46e091b9c.js
+dist/search_items-b627d15d60.js
+dist/sidebar_items-42b85e4245.js
 index.html
 search.html

@@ -3,11 +3,6 @@ defmodule Prequest.FeedLoadDateHelpersTest do
 
   alias Prequest.Feed.Load.DateHelpers
 
-  test "last_valid_date/0 returns the naive date 2020/05/01 00:00:00" do
-    {:ok, date} = NaiveDateTime.new(2020, 5, 1, 0, 0, 0)
-    assert DateHelpers.last_valid_date() == date
-  end
-
   test "get_months_ago/1 for n = 0 returns 1st and last day of today's month" do
     today = Date.utc_today()
     last_day = Date.days_in_month(today)

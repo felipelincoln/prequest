@@ -8,7 +8,7 @@
     <meta name="project" content="Prequest v0.1.0">
     <title>Prequest.Manage.Topic.Color — Prequest v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
-    <script src="dist/sidebar_items-d46e091b9c.js"></script>
+    <script src="dist/sidebar_items-42b85e4245.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/app-aaa6eb1824b11a32f32d.js"></script>
   </head>
@@ -75,8 +75,8 @@ Prequest      </a>
 <p>A custom color manager.</p><p>To add a new color just add a <code class="inline">color_class/1'</code> clause matching the topic name.</p><pre><code class="nohighlight makeup elixir"><span class="c1"># lib/prequest/manage/topic/color.ex</span><span class="w">
 </span><span class="c1"># Example of adding a color for the &quot;elixir&quot; tag.</span><span class="w">
 </span><span class="n">...</span><span class="w">
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">color_class</span><span class="p" data-group-id="6111580941-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="6111580941-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bg-purple-800&quot;</span><span class="w"> </span><span class="c1"># new clause</span><span class="w">
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">color_class</span><span class="p" data-group-id="6111580941-2">(</span><span class="bp">_</span><span class="p" data-group-id="6111580941-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">random</span><span class="p" data-group-id="6111580941-3">(</span><span class="p" data-group-id="6111580941-3">)</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">color_class</span><span class="p" data-group-id="4707562394-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="4707562394-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bg-purple-800&quot;</span><span class="w"> </span><span class="c1"># new clause</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">color_class</span><span class="p" data-group-id="4707562394-2">(</span><span class="bp">_</span><span class="p" data-group-id="4707562394-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">random</span><span class="p" data-group-id="4707562394-3">(</span><span class="p" data-group-id="4707562394-3">)</span><span class="w">
 </span><span class="n">...</span></code></pre><p>The new custom clause must be declared before <code class="inline">color_class(_)</code> clause.</p><p>Color reference: <a href="https://tailwindcss.com/docs/background-color">TailwindCSS</a></p>        </section>
 
         <section id="summary" class="details-list">
@@ -137,10 +137,10 @@ Functions          </h1>
   <a href="#color_class/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">color_class</span><span class="p" data-group-id="1581390058-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1581390058-1">)</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">color_class</span><span class="p" data-group-id="1810937274-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="1810937274-1">)</span><span class="w">
 </span><span class="s">&quot;bg-purple-800&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">color_class</span><span class="p" data-group-id="1581390058-2">(</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="1581390058-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">color_class</span><span class="p" data-group-id="1810937274-2">(</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="1810937274-2">)</span><span class="w">
 </span><span class="s">&quot;bg-green-300&quot;</span><span class="w"> </span><span class="c1"># random</span></code></pre>  </section>
 </section>
 <section class="detail" id="random/0">
@@ -166,7 +166,7 @@ Functions          </h1>
   <a href="#random/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">random</span><span class="p" data-group-id="6213359123-1">(</span><span class="p" data-group-id="6213359123-1">)</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Color</span><span class="o">.</span><span class="n">random</span><span class="p" data-group-id="4130579585-1">(</span><span class="p" data-group-id="4130579585-1">)</span><span class="w">
 </span><span class="s">&quot;bg-blue-500&quot;</span></code></pre>  </section>
 </section>
           </div>

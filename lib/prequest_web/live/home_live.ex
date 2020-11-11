@@ -1,7 +1,5 @@
 defmodule PrequestWeb.HomeLive do
-  @moduledoc """
-  Homepage
-  """
+  @moduledoc false
 
   use PrequestWeb, :live_view
 
