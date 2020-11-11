@@ -1,7 +1,5 @@
 defmodule PrequestWeb.FeedComponent do
-  @moduledoc """
-  The component for feed
-  """
+  @moduledoc false
 
   use Phoenix.LiveComponent
   alias Prequest.Feed
@@ -14,24 +12,14 @@ defmodule PrequestWeb.FeedComponent do
   end
 
   @impl true
-  def update(%{id: id, source: source, range: range, query: query, latest: latest}, socket) do
-    IO.puts("component #{range} updated")
-    order = if latest, do: [desc: :date], else: [desc: :views]
+  def update(params, socket) do
+    %{id: id, source: source, range: range, query: query, sort_by_latest?: sort_by_latest?} =
+      params
 
-    build =
-      source
-      |> Feed.source(range)
-      |> Feed.build()
+    sort_by = sort_key(sort_by_latest?)
 
-    topics = build |> UI.get_topics()
-    reports = build |> UI.get_reports()
-    feed =
-      build
-      |> Feed.search(query)
-      |> Feed.page(0, order)
-
-    articles = feed |> UI.get_articles()
-    meta = feed.__meta__
+    {build, topics, reports} = create_build(source, range, [])
+    {meta, articles} = create_feed(build, query, 0, sort_by)
 
     socket =
       socket
@@ -39,32 +27,24 @@ defmodule PrequestWeb.FeedComponent do
       |> assign(:source, source)
       |> assign(:range, range)
       |> assign(:query, query)
-      |> assign(:latest, latest)
-      |> assign(:order, order)
+      |> assign(:sort_by_latest?, sort_by_latest?)
+      |> assign(:sort_by, sort_by)
       |> assign(:build, build)
       |> assign(:topics, topics)
       |> assign(:reports, reports)
-      |> assign(:articles, articles)
       |> assign(:meta, meta)
+      |> assign(:articles, articles)
       |> assign(:update, "replace")
 
+    IO.puts("component #{range} updated")
     {:ok, socket}
   end
 
   # load articles on scroll
   @impl true
-  def handle_event("load", %{"page" => page, "order" => order, "query" => query}, socket) do
-    IO.puts("component #{socket.assigns.range} handling 'load'")
-    sort_by = deserialize_sort_by(order)
-    next_page = String.to_integer(page) + 1
-
-    feed =
-      socket.assigns.build
-      |> Feed.search(query)
-      |> Feed.page(next_page, sort_by)
-
-    meta = feed.__meta__
-    articles = UI.get_articles(feed)
+  def handle_event("load", %{"page" => page}, socket) do
+    %{build: build, sort_by: sort_by, query: query} = socket.assigns
+    {meta, articles} = create_feed(build, query, next_page(page), sort_by)
 
     socket =
       socket
@@ -72,59 +52,16 @@ defmodule PrequestWeb.FeedComponent do
       |> assign(:articles, articles)
       |> assign(:update, "append")
 
-    {:noreply, socket}
-  end
-
-  # sort and search
-  @impl true
-  def handle_event("filter", %{"order" => order, "query" => query}, socket) do
-    IO.puts("component #{socket.assigns.range} handling 'filter'")
-    sort_by = deserialize_sort_by(order)
-
-    feed =
-      socket.assigns.build
-      |> Feed.search(query)
-      |> Feed.page(0, sort_by)
-
-    meta = feed.__meta__
-    articles = UI.get_articles(feed)
-
-    socket =
-      socket
-      |> assign(:meta, meta)
-      |> assign(:articles, articles)
-      |> assign(:update, "replace")
-
+    IO.puts("component #{socket.assigns.range} handling 'load'")
     {:noreply, socket}
   end
 
   # rebuild feed filtering by topics
   @impl true
   def handle_event("toggle_topic", %{"topic" => new_filter}, socket) do
-    IO.puts("component #{socket.assigns.range} handling 'toggle_topic'")
-    current_filter = get_filter(socket.assigns.build.__meta__)
-
-    filter =
-      case new_filter in current_filter do
-        true -> List.delete(current_filter, new_filter)
-        false -> [new_filter | current_filter]
-      end
-
-    build =
-      socket.assigns.source
-      |> Feed.source(socket.assigns.range)
-      |> Feed.build(filter)
-
-    topics = UI.get_topics(build)
-    reports = UI.get_reports(build)
-
-    feed =
-      build
-      |> Feed.search(socket.assigns.query)
-      |> Feed.page(0, socket.assigns.order)
-
-    meta = feed.__meta__
-    articles = UI.get_articles(feed)
+    %{meta: meta, source: source, range: range, query: query, sort_by: sort_by} = socket.assigns
+    {build, topics, reports} = create_build(source, range, apply_filter(meta, new_filter))
+    {meta, articles} = create_feed(build, query, 0, sort_by)
 
     socket =
       socket
@@ -135,7 +72,35 @@ defmodule PrequestWeb.FeedComponent do
       |> assign(:articles, articles)
       |> assign(:update, "replace")
 
+    IO.puts("component #{socket.assigns.range} handling 'toggle_topic'")
     {:noreply, socket}
+  end
+
+  defp create_build(source, range, filter) do
+    build =
+      source
+      |> Feed.source(range)
+      |> Feed.build(filter)
+
+    {build, UI.get_topics(build), UI.get_reports(build)}
+  end
+
+  defp create_feed(build, query, page, sort_by) do
+    feed =
+      build
+      |> Feed.search(query)
+      |> Feed.page(page, sort_by)
+
+    {feed.__meta__, UI.get_articles(feed)}
+  end
+
+  defp apply_filter(meta, new_filter) do
+    current_filter = get_filter(meta)
+
+    case new_filter in current_filter do
+      true -> List.delete(current_filter, new_filter)
+      false -> [new_filter | current_filter]
+    end
   end
 
   defp get_filter(meta) do
@@ -144,21 +109,8 @@ defmodule PrequestWeb.FeedComponent do
     |> elem(1)
   end
 
-  defp serialize_sort_by(keyword) do
-    case keyword do
-      [desc: :date] -> "desc_date"
-      [asc: :date] -> "asc_date"
-      [desc: :views] -> "desc_views"
-      [asc: :views] -> "asc_views"
-    end
-  end
+  defp sort_key(true), do: [desc: :date]
+  defp sort_key(false), do: [desc: :views]
 
-  defp deserialize_sort_by(string) do
-    case string do
-      "desc_date" -> [desc: :date]
-      "asc_date" -> [asc: :date]
-      "desc_views" -> [desc: :views]
-      "asc_views" -> [asc: :views]
-    end
-  end
+  defp next_page(page_str), do: String.to_integer(page_str) + 1
 end

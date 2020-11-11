@@ -27,15 +27,6 @@ defmodule PrequestWeb.FeedComponent.UI do
     end)
   end
 
-  def sort_by_options do
-    [
-      "date desc": "desc_date",
-      "date asc": "asc_date",
-      "views desc": "desc_views",
-      "views asc": "asc_views"
-    ]
-  end
-
   defp others_topic(topics, count, name \\ "others") do
     limited_count = Enum.reduce(topics, 0, fn {n, _}, acc -> n + acc end)
     [{count - limited_count, %{name: name}}]

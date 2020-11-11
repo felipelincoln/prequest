@@ -6,8 +6,8 @@ defmodule Prequest.Feed.Load.DateHelpers do
   @doc """
   Defines the last date the feed should stop loading on scroll.
   """
-  @spec last_date() :: NaiveDateTime.t()
-  def last_date do
+  @spec last_valid_date() :: NaiveDateTime.t()
+  def last_valid_date do
     {:ok, date} = NaiveDateTime.new(2020, 5, 1, 0, 0, 0)
     date
   end

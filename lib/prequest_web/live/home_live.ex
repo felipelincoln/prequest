@@ -10,7 +10,7 @@ defmodule PrequestWeb.HomeLive do
     socket =
       socket
       |> assign(:query, "")
-      |> assign(:latest, false)
+      |> assign(:sort_by_latest?, false)
 
     {:ok, socket}
   end
@@ -21,7 +21,7 @@ defmodule PrequestWeb.HomeLive do
   end
 
   @impl true
-  def handle_event("toggle-latest", _params, socket) do
-    {:noreply, assign(socket, :latest, !socket.assigns.latest)}
+  def handle_event("toggle-sort", _params, socket) do
+    {:noreply, assign(socket, :sort_by_latest?, !socket.assigns.sort_by_latest?)}
   end
 end
