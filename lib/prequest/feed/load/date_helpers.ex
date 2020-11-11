@@ -4,15 +4,6 @@ defmodule Prequest.Feed.Load.DateHelpers do
   """
 
   @doc """
-  Defines the last date the feed should stop loading on scroll.
-  """
-  @spec last_valid_date() :: NaiveDateTime.t()
-  def last_valid_date do
-    {:ok, date} = NaiveDateTime.new(2020, 5, 1, 0, 0, 0)
-    date
-  end
-
-  @doc """
   Gets the first and last day from `n` months ago.
 
   ## Examples

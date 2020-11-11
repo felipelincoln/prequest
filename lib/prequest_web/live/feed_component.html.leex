@@ -1,8 +1,4 @@
-<% import Prequest.Feed.Load.DateHelpers, only: [last_valid_date: 0, get_months_ago: 1] %>
-
 <% filters = get_filter(@meta) %>
-<% [date, _] = get_months_ago(@range) %>
-<% last_feed? = NaiveDateTime.compare(last_valid_date(), date) == :gt %>
 
 <% IO.puts "component #{@range} rendering using phx-updated: #{@update}" %>
 <% IO.inspect @meta %>
@@ -41,7 +37,7 @@
       <div class="sm:sticky sm:top-0">
         <!-- reports -->
         <div class="flex items-center relative mb-3">
-          <h2 class="text-2xl text-gray-900 capitalize">Recent</h2>
+          <h2 class="text-2xl text-gray-900"><%= UI.get_feed_name(@range) %></h2>
           <%= if @reports == [] do %>
             <div class="group static cursor-pointer hidden" tabindex="0">
               <svg class="h-5 inline-block align-text-bottom text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +90,7 @@
     </aside>
   </div>
 
-  <%= unless @meta.has_next? or last_feed? do %>
+  <%= unless @meta.has_next? or UI.last_feed?(@range) do %>
     <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: @source, range: @range + 1, query: @query, sort_by_latest?: @sort_by_latest? %>
   <% end %>
 </div>
