@@ -45,6 +45,7 @@ defmodule PrequestWeb.FeedComponent.Core do
 
   defp get_articles(feed) do
     feed.articles
+    |> preload!(:reports)
   end
 
   # list of {width, topic name, color}
@@ -61,8 +62,8 @@ defmodule PrequestWeb.FeedComponent.Core do
   defp get_reports(%{reports: reports}) do
     reports
     |> preload!(:article)
-    |> Enum.map(fn %{message: message, article: article, updated_at: updated_at} ->
-      {message, article.title, updated_at}
+    |> Enum.map(fn %{message: message, article_id: article_id, updated_at: updated_at} ->
+      {message, article_id, updated_at}
     end)
   end
 

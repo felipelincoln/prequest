@@ -4,6 +4,15 @@ defmodule PrequestWeb.FeedComponent.API do
   import Prequest.Feed.Load.DateHelpers, only: [get_months_ago: 1]
   alias PrequestWeb.FeedComponent.Core
 
+  def get_issues(reports) do
+    count = Enum.count(reports)
+
+    case count do
+      1 -> "1 issue"
+      _ -> "#{count} issues"
+    end
+  end
+
   def get_filter(meta), do: Core.get_filter(meta)
 
   def last_feed?(range) do
@@ -21,7 +30,13 @@ defmodule PrequestWeb.FeedComponent.API do
     "#{month}, #{date.year}"
   end
 
-  defp get_month_name(n) do
+  def get_short_month_name(n) do
+    n
+    |> get_month_name()
+    |> String.slice(0, 3)
+  end
+
+  def get_month_name(n) do
     case n do
       1 -> "January"
       2 -> "February"
