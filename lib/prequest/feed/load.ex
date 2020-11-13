@@ -20,7 +20,7 @@ defmodule Prequest.Feed.Load do
 
     from(a in article_schema,
       as: :articles,
-      where: a.inserted_at >= ^date_a and a.inserted_at < ^date_b,
+      where: a.updated_at >= ^date_a and a.updated_at < ^date_b,
       select: a
     )
   end
@@ -33,7 +33,7 @@ defmodule Prequest.Feed.Load do
       where: s.id == ^id,
       join: a in assoc(s, :articles),
       as: :articles,
-      where: a.inserted_at >= ^date_a and a.inserted_at < ^date_b,
+      where: a.updated_at >= ^date_a and a.updated_at < ^date_b,
       select: a
     )
   end
@@ -92,7 +92,7 @@ defmodule Prequest.Feed.Load do
     reports_limited =
       from a in subquery(query),
         join: r in assoc(a, :reports),
-        order_by: [desc: r.inserted_at],
+        order_by: [desc: r.updated_at],
         limit: ^@reports_quantity,
         select: r
 
@@ -140,14 +140,14 @@ defmodule Prequest.Feed.Load do
   def load(%Feed{query: query} = feed), do: %{feed | articles: entries(query) |> preload!(:user)}
 
   defp sort(query, [{type, :date}]) do
-    from [articles: a] in query, order_by: [{^type, a.inserted_at}]
+    from [articles: a] in query, order_by: [{^type, a.updated_at}]
   end
 
   defp sort(query, [{type, :views}]) do
     from [articles: a] in query,
       group_by: a.id,
       left_join: v in assoc(a, :views),
-      order_by: [{^type, count(v.id)}, {^type, a.inserted_at}]
+      order_by: [{^type, count(v.id)}, {^type, a.updated_at}]
   end
 
   defp put(%Feed{} = feed, key, value) when is_atom(key), do: Map.put(feed, key, value)

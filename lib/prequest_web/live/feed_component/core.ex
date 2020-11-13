@@ -57,12 +57,12 @@ defmodule PrequestWeb.FeedComponent.Core do
     end)
   end
 
-  # list of {message, article title, inserted_at}
+  # list of {message, article title, updated_at}
   defp get_reports(%{reports: reports}) do
     reports
     |> preload!(:article)
-    |> Enum.map(fn %{message: message, article: article, inserted_at: inserted_at} ->
-      {message, article.title, inserted_at}
+    |> Enum.map(fn %{message: message, article: article, updated_at: updated_at} ->
+      {message, article.title, updated_at}
     end)
   end
 

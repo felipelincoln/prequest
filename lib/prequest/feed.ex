@@ -50,7 +50,7 @@ defmodule Prequest.Feed do
         query: # Ecto.Query<from a0 in Prequest.Manage.Article, as: :articles,
                # join: t1 in assoc(a0, :topics), where: t1.name in ^["otp"],
                # where: ilike(a0.title, ^"%prequest%"), group_by: [a0.id],
-               # having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.inserted_at],
+               # having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.updated_at],
                # limit: ^2, offset: ^0, select: a0>,
         reports: [],
         topics: [
@@ -213,7 +213,7 @@ defmodule Prequest.Feed do
         query: # Ecto.Query<from a0 in Prequest.Manage.Article, as: :articles,
                # join: t1 in assoc(a0, :topics), where: t1.name in ^["otp"],
                # where: ilike(a0.title, ^"%prequest%"), group_by: [a0.id],
-               # having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.inserted_at],
+               # having: count(t1.id, :distinct) == ^1, order_by: [desc: a0.updated_at],
                # limit: ^2, offset: ^0, select: a0>,
         reports: [],
         topics: [
@@ -268,7 +268,7 @@ defmodule Prequest.Feed do
         ],
         query: # Ecto.Query<from a0 in Prequest.Manage.Article, as: :articles,
                # left_join: v1 in assoc(a0, :views), where: ilike(a0.title, ^"%prequest%"),
-               # group_by: [a0.id], order_by: [desc: count(v1.id), desc: a0.inserted_at],
+               # group_by: [a0.id], order_by: [desc: count(v1.id), desc: a0.updated_at],
                # limit: ^2, offset: ^0, select: a0>,
         reports: [
           # from build stage cache.
