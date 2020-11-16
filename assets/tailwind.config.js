@@ -15,7 +15,11 @@ module.exports = {
     }
   },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': '"Lato", "Helvetica Neue", Helvetica, Arial, sans-serif'
+      }
+    },
   },
   variants: {
     display: ['responsive', 'group-focus'],
