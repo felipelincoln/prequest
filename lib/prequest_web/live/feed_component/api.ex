@@ -4,6 +4,13 @@ defmodule PrequestWeb.FeedComponent.API do
   import Prequest.Feed.Load.DateHelpers, only: [get_months_ago: 1]
   alias PrequestWeb.FeedComponent.Core
 
+  def highlight_query(text, ""), do: text
+
+  def highlight_query(text, query) do
+    regex = ~r/#{Regex.escape(query)}/i
+    Regex.replace(regex, text, "<span class='bg-yellow-300'>#{query}</span>")
+  end
+
   def get_issues(reports) do
     count = Enum.count(reports)
 
