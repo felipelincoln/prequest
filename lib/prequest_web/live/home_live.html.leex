@@ -1,4 +1,4 @@
-<form phx-change="search" class="bg-gray-400 p-2">
+<form phx-submit="search" phx-change="search" class="bg-gray-400 p-2">
   <input type="text" name="query" phx-debounce="500" value="<%= @query %>">
   <input type="button" value="Latest" phx-click="toggle-sort">
 </form>
