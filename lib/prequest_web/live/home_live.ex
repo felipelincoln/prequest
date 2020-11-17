@@ -15,7 +15,10 @@ defmodule PrequestWeb.HomeLive do
 
   @impl true
   def handle_event("search", %{"query" => query}, socket) do
-    {:noreply, assign(socket, :query, query)}
+    case String.trim(query) do
+      "" -> {:noreply, assign(socket, :query, "")}
+      text -> {:noreply, assign(socket, :query, text)}
+    end
   end
 
   @impl true

@@ -2,13 +2,24 @@ defmodule PrequestWeb.FeedComponent.API do
   @moduledoc false
 
   import Prequest.Feed.Load.DateHelpers, only: [get_months_ago: 1]
+  import Phoenix.LiveView.Helpers, only: [sigil_L: 2]
   alias PrequestWeb.FeedComponent.Core
 
-  def highlight_query(text, ""), do: text
+  def highlight_query(_socket, text, ""), do: text
 
-  def highlight_query(text, query) do
+  def highlight_query(socket, text, query) do
     regex = ~r/#{Regex.escape(query)}/i
-    Regex.replace(regex, text, "<span class='bg-yellow-300'>#{query}</span>")
+    [init_part | unmarked_parts] = Regex.split(regex, text)
+    marked_parts = Regex.scan(regex, text) |> Enum.map(fn [x] -> x end)
+    parts = List.zip([marked_parts, unmarked_parts])
+
+    assigns = %{
+      socket: socket,
+      init_part: init_part,
+      parts: parts
+    }
+
+    ~L"<%= @init_part %><%= for {marked, normal} <- parts do %><mark><%= marked %></mark><%= normal %><% end %>"
   end
 
   def get_issues(reports) do

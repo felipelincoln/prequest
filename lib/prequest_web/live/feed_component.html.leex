@@ -1,5 +1,4 @@
 <% filters = API.get_filter(@meta) %>
-<% alias Phoenix.HTML %>
 
 <% IO.puts "component #{@range} rendering using phx-updated: #{@update}" %>
 <% IO.inspect @meta %>
@@ -20,7 +19,7 @@
                   <span class="font-bold"><%= API.get_issues(article.reports) %></span>
                 <% end %>
               </p>
-              <h2 class="text-xl text-gray-900 font-bold capitalize"><%= HTML.raw API.highlight_query(article.title, @query) %></h2>
+              <h2 class="text-xl text-gray-900 font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
             </div>
             <figure class="w-40 h-32 flex-shrink-0 relative">
               <div class="w-full h-full bg-gray-400 animate-pulse absolute top-0 z-0"></div>
