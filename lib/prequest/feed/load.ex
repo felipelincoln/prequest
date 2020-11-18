@@ -111,7 +111,9 @@ defmodule Prequest.Feed.Load do
   def search(%Feed{query: query} = feed, substring) when is_binary(substring) do
     substring = String.replace(substring, ~r/([%_])/, ~S"\\" <> "\\g{1}")
 
-    query_search = from([articles: a] in query, where: ilike(a.title, ^"%#{substring}%"))
+    query_search =
+      from [articles: a] in query,
+        where: ilike(a.title, ^"%#{substring}%") or ilike(a.subtitle, ^"%#{substring}%")
 
     feed
     |> put(:query, query_search)
