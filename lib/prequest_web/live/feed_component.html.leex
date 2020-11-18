@@ -10,8 +10,8 @@
       <div id="<%= @id %>Content" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= @meta.page %>" data-next="<%= @meta.has_next? %>">
         <%= for article <- @articles do %>
           <article id="article<%= article.id %>" class="flex mb-6 sm:mb-10 md:mb-12 lg:mb-16">
-            <div class="flex-grow pr-3">
-              <p class="text-sm text-gray-700">
+            <div class="flex-grow min-w-0 pr-3">
+              <p class="text-sm text-gray-700 truncate">
                 <span><%= article.updated_at.month |> API.get_short_month_name() %> <%= article.updated_at.day %>,</span>
                 <span><%= article.user.username %></span>
                 <%= unless article.reports == [] do %>
@@ -19,6 +19,8 @@
                   <span class="font-bold"><%= API.get_issues(article.reports) %></span>
                 <% end %>
               </p>
+
+
               <h2 class="text-base sm:text-xl text-gray-900 font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-32 flex-shrink-0 relative">
