@@ -9,6 +9,7 @@ defmodule Prequest.Manage.Article do
     field :cover, :string
     field :source, :string
     field :title, :string
+    field :subtitle, :string
 
     timestamps()
 
@@ -20,8 +21,8 @@ defmodule Prequest.Manage.Article do
 
   def changeset(%Article{} = article, attrs) do
     article
-    |> cast(attrs, [:cover, :title, :source, :user_id])
-    |> validate_required([:cover, :title, :source, :user_id])
+    |> cast(attrs, [:cover, :title, :subtitle, :source, :user_id])
+    |> validate_required([:cover, :title, :subtitle, :source, :user_id])
     |> validate_url_format(:cover)
     |> validate_url_format(:source, host: "github.com")
     |> unique_constraint(:source)

@@ -38,6 +38,7 @@ defmodule Prequest.Manage do
 
       iex> create_article(%{
       ...>   title: "some title",
+      ...>   subtitle: "some subtitle",
       ...>   source: "some github url",
       ...>   cover: "some image url",
       ...>   user_id: 10
@@ -52,6 +53,7 @@ defmodule Prequest.Manage do
 
       iex> create_article(%{
       ...>   title: "some title2",
+      ...>   subtitle: "some subtitle2",
       ...>   source: "some github url2",
       ...>   cover: "some image url2",
       ...>   user_id: 10,
@@ -70,6 +72,7 @@ defmodule Prequest.Manage do
       iex> topic = Manage.get_topic("phoenix")
       iex> create_article(%{
       ...>   title: "some title3",
+      ...>   subtitle: "some subtitle3",
       ...>   source: "some github url3",
       ...>   cover: "some image url3",
       ...>   user_id: 10,

@@ -20,6 +20,7 @@ defmodule Prequest.ManageTest do
     {:ok, article} =
       %{
         title: "title",
+        subtitle: "subtitle",
         cover: "https://prequest.com/cover.png",
         source: "https://github.com/source.md",
         user_id: user.id
@@ -144,6 +145,7 @@ defmodule Prequest.ManageTest do
       {:ok, new_article} =
         Manage.create_article(%{
           title: article.title,
+          subtitle: article.subtitle,
           cover: article.cover,
           source: article.source <> "(2)",
           user_id: user.id
@@ -164,6 +166,7 @@ defmodule Prequest.ManageTest do
       {:ok, new_article} =
         Manage.create_article(%{
           title: article.title,
+          subtitle: article.subtitle,
           cover: article.cover,
           source: article.source <> "(2)",
           user_id: user.id
@@ -183,6 +186,7 @@ defmodule Prequest.ManageTest do
     @valid_attrs %{
       source: "https://github.com/somesource.md",
       title: "some title",
+      subtitle: "some subtitle",
       cover: "https://example.com/somecover.png",
       topics: [%{name: "topic1"}, %{name: "topic2"}]
     }
@@ -190,10 +194,18 @@ defmodule Prequest.ManageTest do
     @update_attrs %{
       source: "https://github.com/someupdatedsource.md",
       title: "some updated title",
+      subtitle: "some updated subtitle",
       cover: "https://example.com/someupdatedcover.png",
       topics: [%{name: "topic2"}, %{name: "topic3"}]
     }
-    @invalid_attrs %{source: nil, title: nil, cover: nil, user_id: nil, topics: [%{name: ""}]}
+    @invalid_attrs %{
+      source: nil,
+      title: nil,
+      subtitle: nil,
+      cover: nil,
+      user_id: nil,
+      topics: [%{name: ""}]
+    }
     @invalid_cover ["", "invalid", "invalid.com/", "www.invalid.com/", "scheme://invalid.com"]
     @invalid_source @invalid_cover ++ ["http://invalid.com/", "https://invalid.com/"]
 
@@ -222,6 +234,7 @@ defmodule Prequest.ManageTest do
 
       assert article.source == attrs.source
       assert article.title == attrs.title
+      assert article.subtitle == attrs.subtitle
       assert article.cover == attrs.cover
       assert article.user_id == user.id
 
@@ -300,6 +313,7 @@ defmodule Prequest.ManageTest do
 
       assert updated_article.source == @update_attrs.source
       assert updated_article.title == @update_attrs.title
+      assert updated_article.subtitle == @update_attrs.subtitle
       assert updated_article.cover == @update_attrs.cover
       assert updated_article.user_id == user.id
 
@@ -468,6 +482,7 @@ defmodule Prequest.ManageTest do
       {:ok, new_article} =
         Manage.create_article(%{
           title: article.title,
+          subtitle: article.subtitle,
           cover: article.cover,
           source: article.source <> "(2)",
           user_id: user.id,

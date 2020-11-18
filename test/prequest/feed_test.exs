@@ -8,12 +8,14 @@ defmodule Prequest.FeedTest do
   @username "feedtest_felipelincoln"
   @topic "feedtest_topic"
   @a_title "feedtest title"
+  @a_subtitle "feedtest subtitle"
   @a_cover "https://prequest.com/feedtest_cover"
   @a_source "https://github.com/feedtest_source"
 
   defp username(k), do: @username <> to_string(k)
   defp topic(k), do: @topic <> to_string(k)
   defp a_title(k), do: @a_title <> to_string(k)
+  defp a_subtitle(k), do: @a_subtitle <> to_string(k)
   defp a_cover(k), do: @a_cover <> to_string(k)
   defp a_source(k), do: @a_source <> to_string(k)
 
@@ -31,6 +33,7 @@ defmodule Prequest.FeedTest do
     {:ok, _article} =
       %{
         title: a_title(1),
+        subtitle: a_subtitle(1),
         cover: a_cover(1),
         source: a_source(1),
         user_id: user1.id,
@@ -46,6 +49,7 @@ defmodule Prequest.FeedTest do
       {:ok, _article} =
         %{
           title: a_title(n),
+          subtitle: a_subtitle(n),
           cover: a_cover(n),
           source: a_source(n),
           user_id: usern.id,

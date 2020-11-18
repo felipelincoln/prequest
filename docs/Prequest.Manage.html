@@ -301,6 +301,7 @@ Types          </h1>
   inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   reports: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   source: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  subtitle: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   title: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   topics: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
@@ -489,7 +490,7 @@ Articles          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_article(attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L83" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L86" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -505,33 +506,36 @@ Articles          </h1>
   <a href="#create_article/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3642462691-1">(</span><span class="p" data-group-id="3642462691-2">%{</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3960510296-1">(</span><span class="p" data-group-id="3960510296-2">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">subtitle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some subtitle&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="3642462691-2">}</span><span class="p" data-group-id="3642462691-1">)</span><span class="w">
-</span><span class="p" data-group-id="3642462691-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3642462691-4">%</span><span class="nc" data-group-id="3642462691-4">Article</span><span class="p" data-group-id="3642462691-4">{</span><span class="p" data-group-id="3642462691-4">}</span><span class="p" data-group-id="3642462691-3">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="3960510296-2">}</span><span class="p" data-group-id="3960510296-1">)</span><span class="w">
+</span><span class="p" data-group-id="3960510296-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3960510296-4">%</span><span class="nc" data-group-id="3960510296-4">Article</span><span class="p" data-group-id="3960510296-4">{</span><span class="p" data-group-id="3960510296-4">}</span><span class="p" data-group-id="3960510296-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3642462691-5">(</span><span class="p" data-group-id="3642462691-6">%{</span><span class="p" data-group-id="3642462691-6">}</span><span class="p" data-group-id="3642462691-5">)</span><span class="w">
-</span><span class="p" data-group-id="3642462691-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3642462691-8">%</span><span class="nc" data-group-id="3642462691-8">Ecto.Changeset</span><span class="p" data-group-id="3642462691-8">{</span><span class="p" data-group-id="3642462691-8">}</span><span class="p" data-group-id="3642462691-7">}</span></code></pre><p>A <code class="inline">topics</code> key can be passed in the map input to associate topics with the article, whether it already
-exists or not.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3997740333-1">(</span><span class="p" data-group-id="3997740333-2">%{</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="3960510296-5">(</span><span class="p" data-group-id="3960510296-6">%{</span><span class="p" data-group-id="3960510296-6">}</span><span class="p" data-group-id="3960510296-5">)</span><span class="w">
+</span><span class="p" data-group-id="3960510296-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3960510296-8">%</span><span class="nc" data-group-id="3960510296-8">Ecto.Changeset</span><span class="p" data-group-id="3960510296-8">{</span><span class="p" data-group-id="3960510296-8">}</span><span class="p" data-group-id="3960510296-7">}</span></code></pre><p>A <code class="inline">topics</code> key can be passed in the map input to associate topics with the article, whether it already
+exists or not.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="6509256543-1">(</span><span class="p" data-group-id="6509256543-2">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title2&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">subtitle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some subtitle2&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url2&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url2&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3997740333-3">[</span><span class="p" data-group-id="3997740333-4">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="3997740333-4">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3997740333-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="3997740333-5">}</span><span class="p" data-group-id="3997740333-3">]</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="3997740333-2">}</span><span class="p" data-group-id="3997740333-1">)</span><span class="w">
-</span><span class="p" data-group-id="3997740333-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3997740333-7">%</span><span class="nc" data-group-id="3997740333-7">Article</span><span class="p" data-group-id="3997740333-7">{</span><span class="p" data-group-id="3997740333-7">}</span><span class="p" data-group-id="3997740333-6">}</span></code></pre><p>Once the topics named &quot;elixir&quot; and &quot;phoenix&quot; was created in the previous example, we can associate them again
-with a new article. We can proceed in two manners:</p><ul><li>Get its struct from database and insert it into the topics list.</li><li>Pass the same map we used to create it.</li></ul><p>Let's use the &quot;phoenix&quot; topic in the former way and &quot;elixir&quot; in the latter.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Manage</span><span class="o">.</span><span class="n">get_topic</span><span class="p" data-group-id="8598673496-1">(</span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="8598673496-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="8598673496-2">(</span><span class="p" data-group-id="8598673496-3">%{</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6509256543-3">[</span><span class="p" data-group-id="6509256543-4">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="6509256543-4">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6509256543-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="6509256543-5">}</span><span class="p" data-group-id="6509256543-3">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="6509256543-2">}</span><span class="p" data-group-id="6509256543-1">)</span><span class="w">
+</span><span class="p" data-group-id="6509256543-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6509256543-7">%</span><span class="nc" data-group-id="6509256543-7">Article</span><span class="p" data-group-id="6509256543-7">{</span><span class="p" data-group-id="6509256543-7">}</span><span class="p" data-group-id="6509256543-6">}</span></code></pre><p>Once the topics named &quot;elixir&quot; and &quot;phoenix&quot; was created in the previous example, we can associate them again
+with a new article. We can proceed in two manners:</p><ul><li>Get its struct from database and insert it into the topics list.</li><li>Pass the same map we used to create it.</li></ul><p>Let's use the &quot;phoenix&quot; topic in the former way and &quot;elixir&quot; in the latter.</p><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Manage</span><span class="o">.</span><span class="n">get_topic</span><span class="p" data-group-id="9968013898-1">(</span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="9968013898-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_article</span><span class="p" data-group-id="9968013898-2">(</span><span class="p" data-group-id="9968013898-3">%{</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some title3&quot;</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">subtitle</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some subtitle3&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some github url3&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">cover</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;some image url3&quot;</span><span class="p">,</span><span class="w">
 </span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8598673496-4">[</span><span class="p" data-group-id="8598673496-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="8598673496-5">}</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="p" data-group-id="8598673496-4">]</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="8598673496-3">}</span><span class="p" data-group-id="8598673496-2">)</span><span class="w">
-</span><span class="p" data-group-id="8598673496-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8598673496-7">%</span><span class="nc" data-group-id="8598673496-7">Article</span><span class="p" data-group-id="8598673496-7">{</span><span class="p" data-group-id="8598673496-7">}</span><span class="p" data-group-id="8598673496-6">}</span></code></pre>  </section>
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9968013898-4">[</span><span class="p" data-group-id="9968013898-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="9968013898-5">}</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="p" data-group-id="9968013898-4">]</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="9968013898-3">}</span><span class="p" data-group-id="9968013898-2">)</span><span class="w">
+</span><span class="p" data-group-id="9968013898-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9968013898-7">%</span><span class="nc" data-group-id="9968013898-7">Article</span><span class="p" data-group-id="9968013898-7">{</span><span class="p" data-group-id="9968013898-7">}</span><span class="p" data-group-id="9968013898-6">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="delete_article/1">
   <div class="detail-header">
@@ -540,7 +544,7 @@ with a new article. We can proceed in two manners:</p><ul><li>Get its struct fro
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">delete_article(article)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L147" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L150" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -556,11 +560,11 @@ with a new article. We can proceed in two manners:</p><ul><li>Get its struct fro
   <a href="#delete_article/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="4094582719-1">(</span><span class="n">article</span><span class="p" data-group-id="4094582719-1">)</span><span class="w">
-</span><span class="p" data-group-id="4094582719-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4094582719-3">%</span><span class="nc" data-group-id="4094582719-3">Article</span><span class="p" data-group-id="4094582719-3">{</span><span class="p" data-group-id="4094582719-3">}</span><span class="p" data-group-id="4094582719-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="9281241845-1">(</span><span class="n">article</span><span class="p" data-group-id="9281241845-1">)</span><span class="w">
+</span><span class="p" data-group-id="9281241845-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9281241845-3">%</span><span class="nc" data-group-id="9281241845-3">Article</span><span class="p" data-group-id="9281241845-3">{</span><span class="p" data-group-id="9281241845-3">}</span><span class="p" data-group-id="9281241845-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="4094582719-4">(</span><span class="n">article</span><span class="p" data-group-id="4094582719-4">)</span><span class="w">
-</span><span class="p" data-group-id="4094582719-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4094582719-6">%</span><span class="nc" data-group-id="4094582719-6">Ecto.Changeset</span><span class="p" data-group-id="4094582719-6">{</span><span class="p" data-group-id="4094582719-6">}</span><span class="p" data-group-id="4094582719-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_article</span><span class="p" data-group-id="9281241845-4">(</span><span class="n">article</span><span class="p" data-group-id="9281241845-4">)</span><span class="w">
+</span><span class="p" data-group-id="9281241845-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9281241845-6">%</span><span class="nc" data-group-id="9281241845-6">Ecto.Changeset</span><span class="p" data-group-id="9281241845-6">{</span><span class="p" data-group-id="9281241845-6">}</span><span class="p" data-group-id="9281241845-5">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_article!/1">
   <div class="detail-header">
@@ -585,10 +589,10 @@ with a new article. We can proceed in two manners:</p><ul><li>Get its struct fro
   <a href="#get_article!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="9821725469-1">(</span><span class="mi">123</span><span class="p" data-group-id="9821725469-1">)</span><span class="w">
-</span><span class="p" data-group-id="9821725469-2">%</span><span class="nc" data-group-id="9821725469-2">Article</span><span class="p" data-group-id="9821725469-2">{</span><span class="p" data-group-id="9821725469-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="0112977467-1">(</span><span class="mi">123</span><span class="p" data-group-id="0112977467-1">)</span><span class="w">
+</span><span class="p" data-group-id="0112977467-2">%</span><span class="nc" data-group-id="0112977467-2">Article</span><span class="p" data-group-id="0112977467-2">{</span><span class="p" data-group-id="0112977467-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="9821725469-3">(</span><span class="mi">456</span><span class="p" data-group-id="9821725469-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_article!</span><span class="p" data-group-id="0112977467-3">(</span><span class="mi">456</span><span class="p" data-group-id="0112977467-3">)</span><span class="w">
 </span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
 </section>
 <section class="detail" id="update_article/2">
@@ -598,7 +602,7 @@ with a new article. We can proceed in two manners:</p><ul><li>Get its struct fro
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">update_article(article, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L134" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -614,37 +618,37 @@ with a new article. We can proceed in two manners:</p><ul><li>Get its struct fro
   <a href="#update_article/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="7255206288-1">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7255206288-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated title&quot;</span><span class="p" data-group-id="7255206288-2">}</span><span class="p" data-group-id="7255206288-1">)</span><span class="w">
-</span><span class="p" data-group-id="7255206288-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7255206288-4">%</span><span class="nc" data-group-id="7255206288-4">Article</span><span class="p" data-group-id="7255206288-4">{</span><span class="p" data-group-id="7255206288-4">}</span><span class="p" data-group-id="7255206288-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="5148257520-1">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5148257520-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated title&quot;</span><span class="p" data-group-id="5148257520-2">}</span><span class="p" data-group-id="5148257520-1">)</span><span class="w">
+</span><span class="p" data-group-id="5148257520-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5148257520-4">%</span><span class="nc" data-group-id="5148257520-4">Article</span><span class="p" data-group-id="5148257520-4">{</span><span class="p" data-group-id="5148257520-4">}</span><span class="p" data-group-id="5148257520-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="7255206288-5">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7255206288-6">%{</span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="7255206288-6">}</span><span class="p" data-group-id="7255206288-5">)</span><span class="w">
-</span><span class="p" data-group-id="7255206288-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7255206288-8">%</span><span class="nc" data-group-id="7255206288-8">Ecto.Changeset</span><span class="p" data-group-id="7255206288-8">{</span><span class="p" data-group-id="7255206288-8">}</span><span class="p" data-group-id="7255206288-7">}</span></code></pre><p>When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
-be replaced.</p><blockquote><p>To see how the <code class="inline">topics</code> field works take a look at <a href="#create_article/1"><code class="inline">create_article/1</code></a></p></blockquote><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">article</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Prequest.Helpers</span><span class="o">.</span><span class="n">preload!</span><span class="p" data-group-id="7441384014-1">(</span><span class="ss">:topics</span><span class="p" data-group-id="7441384014-1">)</span><span class="w">
-</span><span class="p" data-group-id="7441384014-2">%</span><span class="nc" data-group-id="7441384014-2">Article</span><span class="p" data-group-id="7441384014-2">{</span><span class="w">
-  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7441384014-3">[</span><span class="w">
-    </span><span class="p" data-group-id="7441384014-4">%</span><span class="nc" data-group-id="7441384014-4">Topic</span><span class="p" data-group-id="7441384014-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="7441384014-4">}</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="7441384014-5">%</span><span class="nc" data-group-id="7441384014-5">Topic</span><span class="p" data-group-id="7441384014-5">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="7441384014-5">}</span><span class="w">
-  </span><span class="p" data-group-id="7441384014-3">]</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="5148257520-5">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5148257520-6">%{</span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="5148257520-6">}</span><span class="p" data-group-id="5148257520-5">)</span><span class="w">
+</span><span class="p" data-group-id="5148257520-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5148257520-8">%</span><span class="nc" data-group-id="5148257520-8">Ecto.Changeset</span><span class="p" data-group-id="5148257520-8">{</span><span class="p" data-group-id="5148257520-8">}</span><span class="p" data-group-id="5148257520-7">}</span></code></pre><p>When updating the topics do not forget to append the new one to the existing ones. Otherwise it will
+be replaced.</p><blockquote><p>To see how the <code class="inline">topics</code> field works take a look at <a href="#create_article/1"><code class="inline">create_article/1</code></a></p></blockquote><pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">article</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Prequest.Helpers</span><span class="o">.</span><span class="n">preload!</span><span class="p" data-group-id="5260950689-1">(</span><span class="ss">:topics</span><span class="p" data-group-id="5260950689-1">)</span><span class="w">
+</span><span class="p" data-group-id="5260950689-2">%</span><span class="nc" data-group-id="5260950689-2">Article</span><span class="p" data-group-id="5260950689-2">{</span><span class="w">
+  </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5260950689-3">[</span><span class="w">
+    </span><span class="p" data-group-id="5260950689-4">%</span><span class="nc" data-group-id="5260950689-4">Topic</span><span class="p" data-group-id="5260950689-4">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="5260950689-4">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5260950689-5">%</span><span class="nc" data-group-id="5260950689-5">Topic</span><span class="p" data-group-id="5260950689-5">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="5260950689-5">}</span><span class="w">
+  </span><span class="p" data-group-id="5260950689-3">]</span><span class="p">,</span><span class="w">
   </span><span class="n">...</span><span class="w">
-</span><span class="p" data-group-id="7441384014-2">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="7441384014-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="p" data-group-id="7441384014-6">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">update_article</span><span class="p" data-group-id="7441384014-7">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7441384014-8">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7441384014-9">[</span><span class="p" data-group-id="7441384014-10">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="7441384014-10">}</span><span class="p" data-group-id="7441384014-9">]</span><span class="p" data-group-id="7441384014-8">}</span><span class="p" data-group-id="7441384014-7">)</span><span class="w">
-</span><span class="p" data-group-id="7441384014-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="7441384014-12">%</span><span class="nc" data-group-id="7441384014-12">Article</span><span class="p" data-group-id="7441384014-12">{</span><span class="w">
-    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7441384014-13">[</span><span class="p" data-group-id="7441384014-14">%</span><span class="nc" data-group-id="7441384014-14">Topic</span><span class="p" data-group-id="7441384014-14">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="7441384014-14">}</span><span class="p" data-group-id="7441384014-13">]</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="5260950689-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="5260950689-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="p" data-group-id="5260950689-6">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">update_article</span><span class="p" data-group-id="5260950689-7">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5260950689-8">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5260950689-9">[</span><span class="p" data-group-id="5260950689-10">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="5260950689-10">}</span><span class="p" data-group-id="5260950689-9">]</span><span class="p" data-group-id="5260950689-8">}</span><span class="p" data-group-id="5260950689-7">)</span><span class="w">
+</span><span class="p" data-group-id="5260950689-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="5260950689-12">%</span><span class="nc" data-group-id="5260950689-12">Article</span><span class="p" data-group-id="5260950689-12">{</span><span class="w">
+    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5260950689-13">[</span><span class="p" data-group-id="5260950689-14">%</span><span class="nc" data-group-id="5260950689-14">Topic</span><span class="p" data-group-id="5260950689-14">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="5260950689-14">}</span><span class="p" data-group-id="5260950689-13">]</span><span class="p">,</span><span class="w">
     </span><span class="n">...</span><span class="w">
-  </span><span class="p" data-group-id="7441384014-12">}</span><span class="w">
-</span><span class="p" data-group-id="7441384014-11">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="7441384014-15">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7441384014-16">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">topics</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p" data-group-id="7441384014-17">[</span><span class="p" data-group-id="7441384014-18">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="7441384014-18">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7441384014-19">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="7441384014-19">}</span><span class="p" data-group-id="7441384014-17">]</span><span class="p" data-group-id="7441384014-16">}</span><span class="p" data-group-id="7441384014-15">)</span><span class="w">
-</span><span class="p" data-group-id="7441384014-20">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="7441384014-21">%</span><span class="nc" data-group-id="7441384014-21">Article</span><span class="p" data-group-id="7441384014-21">{</span><span class="w">
-    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7441384014-22">[</span><span class="w">
-      </span><span class="p" data-group-id="7441384014-23">%</span><span class="nc" data-group-id="7441384014-23">Topic</span><span class="p" data-group-id="7441384014-23">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="7441384014-23">}</span><span class="p">,</span><span class="w">
-      </span><span class="p" data-group-id="7441384014-24">%</span><span class="nc" data-group-id="7441384014-24">Topic</span><span class="p" data-group-id="7441384014-24">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="7441384014-24">}</span><span class="p">,</span><span class="w">
-      </span><span class="p" data-group-id="7441384014-25">%</span><span class="nc" data-group-id="7441384014-25">Topic</span><span class="p" data-group-id="7441384014-25">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="7441384014-25">}</span><span class="w">
-    </span><span class="p" data-group-id="7441384014-22">]</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="5260950689-12">}</span><span class="w">
+</span><span class="p" data-group-id="5260950689-11">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_article</span><span class="p" data-group-id="5260950689-15">(</span><span class="n">article</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5260950689-16">%{</span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">topics</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="p" data-group-id="5260950689-17">[</span><span class="p" data-group-id="5260950689-18">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="5260950689-18">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5260950689-19">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="5260950689-19">}</span><span class="p" data-group-id="5260950689-17">]</span><span class="p" data-group-id="5260950689-16">}</span><span class="p" data-group-id="5260950689-15">)</span><span class="w">
+</span><span class="p" data-group-id="5260950689-20">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="5260950689-21">%</span><span class="nc" data-group-id="5260950689-21">Article</span><span class="p" data-group-id="5260950689-21">{</span><span class="w">
+    </span><span class="ss">topics</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5260950689-22">[</span><span class="w">
+      </span><span class="p" data-group-id="5260950689-23">%</span><span class="nc" data-group-id="5260950689-23">Topic</span><span class="p" data-group-id="5260950689-23">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="5260950689-23">}</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="5260950689-24">%</span><span class="nc" data-group-id="5260950689-24">Topic</span><span class="p" data-group-id="5260950689-24">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ecto&quot;</span><span class="p" data-group-id="5260950689-24">}</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="5260950689-25">%</span><span class="nc" data-group-id="5260950689-25">Topic</span><span class="p" data-group-id="5260950689-25">{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;phoenix&quot;</span><span class="p" data-group-id="5260950689-25">}</span><span class="w">
+    </span><span class="p" data-group-id="5260950689-22">]</span><span class="p">,</span><span class="w">
     </span><span class="n">...</span><span class="w">
-  </span><span class="p" data-group-id="7441384014-21">}</span><span class="w">
-</span><span class="p" data-group-id="7441384014-20">}</span></code></pre>  </section>
+  </span><span class="p" data-group-id="5260950689-21">}</span><span class="w">
+</span><span class="p" data-group-id="5260950689-20">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
@@ -663,7 +667,7 @@ Reports          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_report(attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L181" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L184" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -679,11 +683,11 @@ Reports          </h1>
   <a href="#create_report/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="3197259880-1">(</span><span class="p" data-group-id="3197259880-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="3197259880-2">}</span><span class="p" data-group-id="3197259880-1">)</span><span class="w">
-</span><span class="p" data-group-id="3197259880-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3197259880-4">%</span><span class="nc" data-group-id="3197259880-4">Report</span><span class="p" data-group-id="3197259880-4">{</span><span class="p" data-group-id="3197259880-4">}</span><span class="p" data-group-id="3197259880-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="6509753012-1">(</span><span class="p" data-group-id="6509753012-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="6509753012-2">}</span><span class="p" data-group-id="6509753012-1">)</span><span class="w">
+</span><span class="p" data-group-id="6509753012-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6509753012-4">%</span><span class="nc" data-group-id="6509753012-4">Report</span><span class="p" data-group-id="6509753012-4">{</span><span class="p" data-group-id="6509753012-4">}</span><span class="p" data-group-id="6509753012-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="3197259880-5">(</span><span class="p" data-group-id="3197259880-6">%{</span><span class="p" data-group-id="3197259880-6">}</span><span class="p" data-group-id="3197259880-5">)</span><span class="w">
-</span><span class="p" data-group-id="3197259880-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3197259880-8">%</span><span class="nc" data-group-id="3197259880-8">Ecto.Changeset</span><span class="p" data-group-id="3197259880-8">{</span><span class="p" data-group-id="3197259880-8">}</span><span class="p" data-group-id="3197259880-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_report</span><span class="p" data-group-id="6509753012-5">(</span><span class="p" data-group-id="6509753012-6">%{</span><span class="p" data-group-id="6509753012-6">}</span><span class="p" data-group-id="6509753012-5">)</span><span class="w">
+</span><span class="p" data-group-id="6509753012-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6509753012-8">%</span><span class="nc" data-group-id="6509753012-8">Ecto.Changeset</span><span class="p" data-group-id="6509753012-8">{</span><span class="p" data-group-id="6509753012-8">}</span><span class="p" data-group-id="6509753012-7">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="delete_report/1">
   <div class="detail-header">
@@ -692,7 +696,7 @@ Reports          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">delete_report(report)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L213" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L216" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -708,11 +712,11 @@ Reports          </h1>
   <a href="#delete_report/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="5046433834-1">(</span><span class="n">report</span><span class="p" data-group-id="5046433834-1">)</span><span class="w">
-</span><span class="p" data-group-id="5046433834-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5046433834-3">%</span><span class="nc" data-group-id="5046433834-3">Report</span><span class="p" data-group-id="5046433834-3">{</span><span class="p" data-group-id="5046433834-3">}</span><span class="p" data-group-id="5046433834-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="4792205514-1">(</span><span class="n">report</span><span class="p" data-group-id="4792205514-1">)</span><span class="w">
+</span><span class="p" data-group-id="4792205514-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4792205514-3">%</span><span class="nc" data-group-id="4792205514-3">Report</span><span class="p" data-group-id="4792205514-3">{</span><span class="p" data-group-id="4792205514-3">}</span><span class="p" data-group-id="4792205514-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="5046433834-4">(</span><span class="n">report</span><span class="p" data-group-id="5046433834-4">)</span><span class="w">
-</span><span class="p" data-group-id="5046433834-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5046433834-6">%</span><span class="nc" data-group-id="5046433834-6">Ecto.Changeset</span><span class="p" data-group-id="5046433834-6">{</span><span class="p" data-group-id="5046433834-6">}</span><span class="p" data-group-id="5046433834-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_report</span><span class="p" data-group-id="4792205514-4">(</span><span class="n">report</span><span class="p" data-group-id="4792205514-4">)</span><span class="w">
+</span><span class="p" data-group-id="4792205514-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4792205514-6">%</span><span class="nc" data-group-id="4792205514-6">Ecto.Changeset</span><span class="p" data-group-id="4792205514-6">{</span><span class="p" data-group-id="4792205514-6">}</span><span class="p" data-group-id="4792205514-5">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_report!/1">
   <div class="detail-header">
@@ -721,7 +725,7 @@ Reports          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_report!(id)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L165" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L168" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -737,10 +741,10 @@ Reports          </h1>
   <a href="#get_report!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="5530280389-1">(</span><span class="mi">123</span><span class="p" data-group-id="5530280389-1">)</span><span class="w">
-</span><span class="p" data-group-id="5530280389-2">%</span><span class="nc" data-group-id="5530280389-2">Report</span><span class="p" data-group-id="5530280389-2">{</span><span class="p" data-group-id="5530280389-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="2189024491-1">(</span><span class="mi">123</span><span class="p" data-group-id="2189024491-1">)</span><span class="w">
+</span><span class="p" data-group-id="2189024491-2">%</span><span class="nc" data-group-id="2189024491-2">Report</span><span class="p" data-group-id="2189024491-2">{</span><span class="p" data-group-id="2189024491-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="5530280389-3">(</span><span class="mi">456</span><span class="p" data-group-id="5530280389-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_report!</span><span class="p" data-group-id="2189024491-3">(</span><span class="mi">456</span><span class="p" data-group-id="2189024491-3">)</span><span class="w">
 </span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
 </section>
 <section class="detail" id="update_report/2">
@@ -750,7 +754,7 @@ Reports          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">update_report(report, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L197" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L200" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -766,11 +770,11 @@ Reports          </h1>
   <a href="#update_report/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="6894876444-1">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6894876444-2">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated message&quot;</span><span class="p" data-group-id="6894876444-2">}</span><span class="p" data-group-id="6894876444-1">)</span><span class="w">
-</span><span class="p" data-group-id="6894876444-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6894876444-4">%</span><span class="nc" data-group-id="6894876444-4">Report</span><span class="p" data-group-id="6894876444-4">{</span><span class="p" data-group-id="6894876444-4">}</span><span class="p" data-group-id="6894876444-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="3801748570-1">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3801748570-2">%{</span><span class="ss">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated message&quot;</span><span class="p" data-group-id="3801748570-2">}</span><span class="p" data-group-id="3801748570-1">)</span><span class="w">
+</span><span class="p" data-group-id="3801748570-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3801748570-4">%</span><span class="nc" data-group-id="3801748570-4">Report</span><span class="p" data-group-id="3801748570-4">{</span><span class="p" data-group-id="3801748570-4">}</span><span class="p" data-group-id="3801748570-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="6894876444-5">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6894876444-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="6894876444-6">}</span><span class="p" data-group-id="6894876444-5">)</span><span class="w">
-</span><span class="p" data-group-id="6894876444-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6894876444-8">%</span><span class="nc" data-group-id="6894876444-8">Ecto.Changeset</span><span class="p" data-group-id="6894876444-8">{</span><span class="p" data-group-id="6894876444-8">}</span><span class="p" data-group-id="6894876444-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_report</span><span class="p" data-group-id="3801748570-5">(</span><span class="n">report</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3801748570-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="3801748570-6">}</span><span class="p" data-group-id="3801748570-5">)</span><span class="w">
+</span><span class="p" data-group-id="3801748570-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3801748570-8">%</span><span class="nc" data-group-id="3801748570-8">Ecto.Changeset</span><span class="p" data-group-id="3801748570-8">{</span><span class="p" data-group-id="3801748570-8">}</span><span class="p" data-group-id="3801748570-7">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
@@ -789,7 +793,7 @@ Topics          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_topic(attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L245" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L248" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -805,11 +809,11 @@ Topics          </h1>
   <a href="#create_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="3876428493-1">(</span><span class="p" data-group-id="3876428493-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;new topic&quot;</span><span class="p" data-group-id="3876428493-2">}</span><span class="p" data-group-id="3876428493-1">)</span><span class="w">
-</span><span class="p" data-group-id="3876428493-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3876428493-4">%</span><span class="nc" data-group-id="3876428493-4">Topic</span><span class="p" data-group-id="3876428493-4">{</span><span class="p" data-group-id="3876428493-4">}</span><span class="p" data-group-id="3876428493-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="1052631868-1">(</span><span class="p" data-group-id="1052631868-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;new topic&quot;</span><span class="p" data-group-id="1052631868-2">}</span><span class="p" data-group-id="1052631868-1">)</span><span class="w">
+</span><span class="p" data-group-id="1052631868-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1052631868-4">%</span><span class="nc" data-group-id="1052631868-4">Topic</span><span class="p" data-group-id="1052631868-4">{</span><span class="p" data-group-id="1052631868-4">}</span><span class="p" data-group-id="1052631868-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="3876428493-5">(</span><span class="p" data-group-id="3876428493-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="3876428493-6">}</span><span class="p" data-group-id="3876428493-5">)</span><span class="w">
-</span><span class="p" data-group-id="3876428493-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3876428493-8">%</span><span class="nc" data-group-id="3876428493-8">Ecto.Changeset</span><span class="p" data-group-id="3876428493-8">{</span><span class="p" data-group-id="3876428493-8">}</span><span class="p" data-group-id="3876428493-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_topic</span><span class="p" data-group-id="1052631868-5">(</span><span class="p" data-group-id="1052631868-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="1052631868-6">}</span><span class="p" data-group-id="1052631868-5">)</span><span class="w">
+</span><span class="p" data-group-id="1052631868-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1052631868-8">%</span><span class="nc" data-group-id="1052631868-8">Ecto.Changeset</span><span class="p" data-group-id="1052631868-8">{</span><span class="p" data-group-id="1052631868-8">}</span><span class="p" data-group-id="1052631868-7">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="delete_topic/1">
   <div class="detail-header">
@@ -818,7 +822,7 @@ Topics          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">delete_topic(topic)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L277" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L280" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -834,11 +838,11 @@ Topics          </h1>
   <a href="#delete_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="3499545903-1">(</span><span class="n">topic</span><span class="p" data-group-id="3499545903-1">)</span><span class="w">
-</span><span class="p" data-group-id="3499545903-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3499545903-3">%</span><span class="nc" data-group-id="3499545903-3">Topic</span><span class="p" data-group-id="3499545903-3">{</span><span class="p" data-group-id="3499545903-3">}</span><span class="p" data-group-id="3499545903-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="9323743462-1">(</span><span class="n">topic</span><span class="p" data-group-id="9323743462-1">)</span><span class="w">
+</span><span class="p" data-group-id="9323743462-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9323743462-3">%</span><span class="nc" data-group-id="9323743462-3">Topic</span><span class="p" data-group-id="9323743462-3">{</span><span class="p" data-group-id="9323743462-3">}</span><span class="p" data-group-id="9323743462-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="3499545903-4">(</span><span class="n">topic</span><span class="p" data-group-id="3499545903-4">)</span><span class="w">
-</span><span class="p" data-group-id="3499545903-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3499545903-6">%</span><span class="nc" data-group-id="3499545903-6">Ecto.Changeset</span><span class="p" data-group-id="3499545903-6">{</span><span class="p" data-group-id="3499545903-6">}</span><span class="p" data-group-id="3499545903-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_topic</span><span class="p" data-group-id="9323743462-4">(</span><span class="n">topic</span><span class="p" data-group-id="9323743462-4">)</span><span class="w">
+</span><span class="p" data-group-id="9323743462-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9323743462-6">%</span><span class="nc" data-group-id="9323743462-6">Ecto.Changeset</span><span class="p" data-group-id="9323743462-6">{</span><span class="p" data-group-id="9323743462-6">}</span><span class="p" data-group-id="9323743462-5">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_topic/1">
   <div class="detail-header">
@@ -847,7 +851,7 @@ Topics          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_topic(name)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L229" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L232" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -863,10 +867,10 @@ Topics          </h1>
   <a href="#get_topic/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="5984756395-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="5984756395-1">)</span><span class="w">
-</span><span class="p" data-group-id="5984756395-2">%</span><span class="nc" data-group-id="5984756395-2">Topic</span><span class="p" data-group-id="5984756395-2">{</span><span class="p" data-group-id="5984756395-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="7837401852-1">(</span><span class="s">&quot;elixir&quot;</span><span class="p" data-group-id="7837401852-1">)</span><span class="w">
+</span><span class="p" data-group-id="7837401852-2">%</span><span class="nc" data-group-id="7837401852-2">Topic</span><span class="p" data-group-id="7837401852-2">{</span><span class="p" data-group-id="7837401852-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="5984756395-3">(</span><span class="s">&quot;&quot;</span><span class="p" data-group-id="5984756395-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_topic</span><span class="p" data-group-id="7837401852-3">(</span><span class="s">&quot;&quot;</span><span class="p" data-group-id="7837401852-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>  </section>
 </section>
 <section class="detail" id="update_topic/2">
@@ -876,7 +880,7 @@ Topics          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">update_topic(topic, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L261" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L264" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -892,11 +896,11 @@ Topics          </h1>
   <a href="#update_topic/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="2498279923-1">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2498279923-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated name&quot;</span><span class="p" data-group-id="2498279923-2">}</span><span class="p" data-group-id="2498279923-1">)</span><span class="w">
-</span><span class="p" data-group-id="2498279923-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2498279923-4">%</span><span class="nc" data-group-id="2498279923-4">Topic</span><span class="p" data-group-id="2498279923-4">{</span><span class="p" data-group-id="2498279923-4">}</span><span class="p" data-group-id="2498279923-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="6994595916-1">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6994595916-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated name&quot;</span><span class="p" data-group-id="6994595916-2">}</span><span class="p" data-group-id="6994595916-1">)</span><span class="w">
+</span><span class="p" data-group-id="6994595916-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6994595916-4">%</span><span class="nc" data-group-id="6994595916-4">Topic</span><span class="p" data-group-id="6994595916-4">{</span><span class="p" data-group-id="6994595916-4">}</span><span class="p" data-group-id="6994595916-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="2498279923-5">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2498279923-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="2498279923-6">}</span><span class="p" data-group-id="2498279923-5">)</span><span class="w">
-</span><span class="p" data-group-id="2498279923-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2498279923-8">%</span><span class="nc" data-group-id="2498279923-8">Ecto.Changeset</span><span class="p" data-group-id="2498279923-8">{</span><span class="p" data-group-id="2498279923-8">}</span><span class="p" data-group-id="2498279923-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_topic</span><span class="p" data-group-id="6994595916-5">(</span><span class="n">topic</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6994595916-6">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="6994595916-6">}</span><span class="p" data-group-id="6994595916-5">)</span><span class="w">
+</span><span class="p" data-group-id="6994595916-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6994595916-8">%</span><span class="nc" data-group-id="6994595916-8">Ecto.Changeset</span><span class="p" data-group-id="6994595916-8">{</span><span class="p" data-group-id="6994595916-8">}</span><span class="p" data-group-id="6994595916-7">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
@@ -915,7 +919,7 @@ Users          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_user(attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L331" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L334" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -931,15 +935,15 @@ Users          </h1>
   <a href="#create_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="2265723691-1">(</span><span class="p" data-group-id="2265723691-2">%{</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="7184710114-1">(</span><span class="p" data-group-id="7184710114-2">%{</span><span class="w">
   </span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;felipelincoln&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Felipe de Souza Lincoln&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;this is my bio&quot;</span><span class="w">
-</span><span class="p" data-group-id="2265723691-2">}</span><span class="p" data-group-id="2265723691-1">)</span><span class="w">
-</span><span class="p" data-group-id="2265723691-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2265723691-4">%</span><span class="nc" data-group-id="2265723691-4">User</span><span class="p" data-group-id="2265723691-4">{</span><span class="p" data-group-id="2265723691-4">}</span><span class="p" data-group-id="2265723691-3">}</span><span class="w">
+</span><span class="p" data-group-id="7184710114-2">}</span><span class="p" data-group-id="7184710114-1">)</span><span class="w">
+</span><span class="p" data-group-id="7184710114-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7184710114-4">%</span><span class="nc" data-group-id="7184710114-4">User</span><span class="p" data-group-id="7184710114-4">{</span><span class="p" data-group-id="7184710114-4">}</span><span class="p" data-group-id="7184710114-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="2265723691-5">(</span><span class="p" data-group-id="2265723691-6">%{</span><span class="p" data-group-id="2265723691-6">}</span><span class="p" data-group-id="2265723691-5">)</span><span class="w">
-</span><span class="p" data-group-id="2265723691-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2265723691-8">%</span><span class="nc" data-group-id="2265723691-8">Ecto.Changeset</span><span class="p" data-group-id="2265723691-8">{</span><span class="p" data-group-id="2265723691-8">}</span><span class="p" data-group-id="2265723691-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_user</span><span class="p" data-group-id="7184710114-5">(</span><span class="p" data-group-id="7184710114-6">%{</span><span class="p" data-group-id="7184710114-6">}</span><span class="p" data-group-id="7184710114-5">)</span><span class="w">
+</span><span class="p" data-group-id="7184710114-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7184710114-8">%</span><span class="nc" data-group-id="7184710114-8">Ecto.Changeset</span><span class="p" data-group-id="7184710114-8">{</span><span class="p" data-group-id="7184710114-8">}</span><span class="p" data-group-id="7184710114-7">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="delete_user/1">
   <div class="detail-header">
@@ -948,7 +952,7 @@ Users          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">delete_user(user)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L363" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L366" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -964,11 +968,11 @@ Users          </h1>
   <a href="#delete_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="3959800793-1">(</span><span class="n">user</span><span class="p" data-group-id="3959800793-1">)</span><span class="w">
-</span><span class="p" data-group-id="3959800793-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3959800793-3">%</span><span class="nc" data-group-id="3959800793-3">User</span><span class="p" data-group-id="3959800793-3">{</span><span class="p" data-group-id="3959800793-3">}</span><span class="p" data-group-id="3959800793-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="2199235198-1">(</span><span class="n">user</span><span class="p" data-group-id="2199235198-1">)</span><span class="w">
+</span><span class="p" data-group-id="2199235198-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2199235198-3">%</span><span class="nc" data-group-id="2199235198-3">User</span><span class="p" data-group-id="2199235198-3">{</span><span class="p" data-group-id="2199235198-3">}</span><span class="p" data-group-id="2199235198-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="3959800793-4">(</span><span class="n">user</span><span class="p" data-group-id="3959800793-4">)</span><span class="w">
-</span><span class="p" data-group-id="3959800793-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3959800793-6">%</span><span class="nc" data-group-id="3959800793-6">Ecto.Changeset</span><span class="p" data-group-id="3959800793-6">{</span><span class="p" data-group-id="3959800793-6">}</span><span class="p" data-group-id="3959800793-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_user</span><span class="p" data-group-id="2199235198-4">(</span><span class="n">user</span><span class="p" data-group-id="2199235198-4">)</span><span class="w">
+</span><span class="p" data-group-id="2199235198-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2199235198-6">%</span><span class="nc" data-group-id="2199235198-6">Ecto.Changeset</span><span class="p" data-group-id="2199235198-6">{</span><span class="p" data-group-id="2199235198-6">}</span><span class="p" data-group-id="2199235198-5">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_user/1">
   <div class="detail-header">
@@ -977,7 +981,7 @@ Users          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_user(username)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L311" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L314" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -993,10 +997,10 @@ Users          </h1>
   <a href="#get_user/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="7458801563-1">(</span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="7458801563-1">)</span><span class="w">
-</span><span class="p" data-group-id="7458801563-2">%</span><span class="nc" data-group-id="7458801563-2">User</span><span class="p" data-group-id="7458801563-2">{</span><span class="p" data-group-id="7458801563-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="6733169439-1">(</span><span class="s">&quot;felipelincoln&quot;</span><span class="p" data-group-id="6733169439-1">)</span><span class="w">
+</span><span class="p" data-group-id="6733169439-2">%</span><span class="nc" data-group-id="6733169439-2">User</span><span class="p" data-group-id="6733169439-2">{</span><span class="p" data-group-id="6733169439-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="7458801563-3">(</span><span class="s">&quot;nonexistinguser&quot;</span><span class="p" data-group-id="7458801563-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user</span><span class="p" data-group-id="6733169439-3">(</span><span class="s">&quot;nonexistinguser&quot;</span><span class="p" data-group-id="6733169439-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_user!/1">
@@ -1006,7 +1010,7 @@ Users          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_user!(id)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L295" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L298" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1022,10 +1026,10 @@ Users          </h1>
   <a href="#get_user!/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="5467420671-1">(</span><span class="mi">123</span><span class="p" data-group-id="5467420671-1">)</span><span class="w">
-</span><span class="p" data-group-id="5467420671-2">%</span><span class="nc" data-group-id="5467420671-2">User</span><span class="p" data-group-id="5467420671-2">{</span><span class="p" data-group-id="5467420671-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="8389872182-1">(</span><span class="mi">123</span><span class="p" data-group-id="8389872182-1">)</span><span class="w">
+</span><span class="p" data-group-id="8389872182-2">%</span><span class="nc" data-group-id="8389872182-2">User</span><span class="p" data-group-id="8389872182-2">{</span><span class="p" data-group-id="8389872182-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="5467420671-3">(</span><span class="mi">456</span><span class="p" data-group-id="5467420671-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_user!</span><span class="p" data-group-id="8389872182-3">(</span><span class="mi">456</span><span class="p" data-group-id="8389872182-3">)</span><span class="w">
 </span><span class="gt">** (Ecto.NoResultsError)</span></code></pre>  </section>
 </section>
 <section class="detail" id="update_user/2">
@@ -1035,7 +1039,7 @@ Users          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">update_user(user, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L347" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L350" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1051,11 +1055,11 @@ Users          </h1>
   <a href="#update_user/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="6773680791-1">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6773680791-2">%{</span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated bio&quot;</span><span class="p" data-group-id="6773680791-2">}</span><span class="p" data-group-id="6773680791-1">)</span><span class="w">
-</span><span class="p" data-group-id="6773680791-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6773680791-4">%</span><span class="nc" data-group-id="6773680791-4">User</span><span class="p" data-group-id="6773680791-4">{</span><span class="p" data-group-id="6773680791-4">}</span><span class="p" data-group-id="6773680791-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="7346580900-1">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7346580900-2">%{</span><span class="ss">bio</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;updated bio&quot;</span><span class="p" data-group-id="7346580900-2">}</span><span class="p" data-group-id="7346580900-1">)</span><span class="w">
+</span><span class="p" data-group-id="7346580900-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7346580900-4">%</span><span class="nc" data-group-id="7346580900-4">User</span><span class="p" data-group-id="7346580900-4">{</span><span class="p" data-group-id="7346580900-4">}</span><span class="p" data-group-id="7346580900-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="6773680791-5">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6773680791-6">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="6773680791-6">}</span><span class="p" data-group-id="6773680791-5">)</span><span class="w">
-</span><span class="p" data-group-id="6773680791-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6773680791-8">%</span><span class="nc" data-group-id="6773680791-8">Ecto.Changeset</span><span class="p" data-group-id="6773680791-8">{</span><span class="p" data-group-id="6773680791-8">}</span><span class="p" data-group-id="6773680791-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_user</span><span class="p" data-group-id="7346580900-5">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7346580900-6">%{</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="7346580900-6">}</span><span class="p" data-group-id="7346580900-5">)</span><span class="w">
+</span><span class="p" data-group-id="7346580900-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7346580900-8">%</span><span class="nc" data-group-id="7346580900-8">Ecto.Changeset</span><span class="p" data-group-id="7346580900-8">{</span><span class="p" data-group-id="7346580900-8">}</span><span class="p" data-group-id="7346580900-7">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
@@ -1074,7 +1078,7 @@ Views          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">create_view(attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L395" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L398" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1090,11 +1094,11 @@ Views          </h1>
   <a href="#create_view/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="7602615619-1">(</span><span class="p" data-group-id="7602615619-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="7602615619-2">}</span><span class="p" data-group-id="7602615619-1">)</span><span class="w">
-</span><span class="p" data-group-id="7602615619-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7602615619-4">%</span><span class="nc" data-group-id="7602615619-4">View</span><span class="p" data-group-id="7602615619-4">{</span><span class="p" data-group-id="7602615619-4">}</span><span class="p" data-group-id="7602615619-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="6834071003-1">(</span><span class="p" data-group-id="6834071003-2">%{</span><span class="ss">user_id</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p" data-group-id="6834071003-2">}</span><span class="p" data-group-id="6834071003-1">)</span><span class="w">
+</span><span class="p" data-group-id="6834071003-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6834071003-4">%</span><span class="nc" data-group-id="6834071003-4">View</span><span class="p" data-group-id="6834071003-4">{</span><span class="p" data-group-id="6834071003-4">}</span><span class="p" data-group-id="6834071003-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="7602615619-5">(</span><span class="p" data-group-id="7602615619-6">%{</span><span class="p" data-group-id="7602615619-6">}</span><span class="p" data-group-id="7602615619-5">)</span><span class="w">
-</span><span class="p" data-group-id="7602615619-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7602615619-8">%</span><span class="nc" data-group-id="7602615619-8">Ecto.Changeset</span><span class="p" data-group-id="7602615619-8">{</span><span class="p" data-group-id="7602615619-8">}</span><span class="p" data-group-id="7602615619-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">create_view</span><span class="p" data-group-id="6834071003-5">(</span><span class="p" data-group-id="6834071003-6">%{</span><span class="p" data-group-id="6834071003-6">}</span><span class="p" data-group-id="6834071003-5">)</span><span class="w">
+</span><span class="p" data-group-id="6834071003-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6834071003-8">%</span><span class="nc" data-group-id="6834071003-8">Ecto.Changeset</span><span class="p" data-group-id="6834071003-8">{</span><span class="p" data-group-id="6834071003-8">}</span><span class="p" data-group-id="6834071003-7">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="delete_view/1">
   <div class="detail-header">
@@ -1103,7 +1107,7 @@ Views          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">delete_view(view)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L427" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L430" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1119,11 +1123,11 @@ Views          </h1>
   <a href="#delete_view/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="2808004730-1">(</span><span class="n">view</span><span class="p" data-group-id="2808004730-1">)</span><span class="w">
-</span><span class="p" data-group-id="2808004730-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2808004730-3">%</span><span class="nc" data-group-id="2808004730-3">View</span><span class="p" data-group-id="2808004730-3">{</span><span class="p" data-group-id="2808004730-3">}</span><span class="p" data-group-id="2808004730-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="3500909584-1">(</span><span class="n">view</span><span class="p" data-group-id="3500909584-1">)</span><span class="w">
+</span><span class="p" data-group-id="3500909584-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3500909584-3">%</span><span class="nc" data-group-id="3500909584-3">View</span><span class="p" data-group-id="3500909584-3">{</span><span class="p" data-group-id="3500909584-3">}</span><span class="p" data-group-id="3500909584-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="2808004730-4">(</span><span class="n">view</span><span class="p" data-group-id="2808004730-4">)</span><span class="w">
-</span><span class="p" data-group-id="2808004730-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2808004730-6">%</span><span class="nc" data-group-id="2808004730-6">Ecto.Changeset</span><span class="p" data-group-id="2808004730-6">{</span><span class="p" data-group-id="2808004730-6">}</span><span class="p" data-group-id="2808004730-5">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">delete_view</span><span class="p" data-group-id="3500909584-4">(</span><span class="n">view</span><span class="p" data-group-id="3500909584-4">)</span><span class="w">
+</span><span class="p" data-group-id="3500909584-5">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3500909584-6">%</span><span class="nc" data-group-id="3500909584-6">Ecto.Changeset</span><span class="p" data-group-id="3500909584-6">{</span><span class="p" data-group-id="3500909584-6">}</span><span class="p" data-group-id="3500909584-5">}</span></code></pre>  </section>
 </section>
 <section class="detail" id="get_view/2">
   <div class="detail-header">
@@ -1132,7 +1136,7 @@ Views          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">get_view(user_id, article_id)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L379" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L382" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1148,10 +1152,10 @@ Views          </h1>
   <a href="#get_view/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="6174557385-1">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p" data-group-id="6174557385-1">)</span><span class="w">
-</span><span class="p" data-group-id="6174557385-2">%</span><span class="nc" data-group-id="6174557385-2">View</span><span class="p" data-group-id="6174557385-2">{</span><span class="p" data-group-id="6174557385-2">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="8440673724-1">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">article</span><span class="o">.</span><span class="n">id</span><span class="p" data-group-id="8440673724-1">)</span><span class="w">
+</span><span class="p" data-group-id="8440673724-2">%</span><span class="nc" data-group-id="8440673724-2">View</span><span class="p" data-group-id="8440673724-2">{</span><span class="p" data-group-id="8440673724-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="6174557385-3">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="6174557385-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">get_view</span><span class="p" data-group-id="8440673724-3">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="8440673724-3">)</span><span class="w">
 </span><span class="no">nil</span></code></pre>  </section>
 </section>
 <section class="detail" id="update_view/2">
@@ -1161,7 +1165,7 @@ Views          </h1>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature">update_view(view, attrs)</h1>
-      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L411" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/felipelincoln/prequest/blob/master/lib/prequest/manage.ex#L414" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -1177,11 +1181,11 @@ Views          </h1>
   <a href="#update_view/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="0110413291-1">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0110413291-2">%{</span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="0110413291-2">}</span><span class="p" data-group-id="0110413291-1">)</span><span class="w">
-</span><span class="p" data-group-id="0110413291-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0110413291-4">%</span><span class="nc" data-group-id="0110413291-4">View</span><span class="p" data-group-id="0110413291-4">{</span><span class="p" data-group-id="0110413291-4">}</span><span class="p" data-group-id="0110413291-3">}</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="7923192386-1">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7923192386-2">%{</span><span class="n">liked?</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="7923192386-2">}</span><span class="p" data-group-id="7923192386-1">)</span><span class="w">
+</span><span class="p" data-group-id="7923192386-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7923192386-4">%</span><span class="nc" data-group-id="7923192386-4">View</span><span class="p" data-group-id="7923192386-4">{</span><span class="p" data-group-id="7923192386-4">}</span><span class="p" data-group-id="7923192386-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="0110413291-5">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0110413291-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="0110413291-6">}</span><span class="p" data-group-id="0110413291-5">)</span><span class="w">
-</span><span class="p" data-group-id="0110413291-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0110413291-8">%</span><span class="nc" data-group-id="0110413291-8">Ecto.Changeset</span><span class="p" data-group-id="0110413291-8">{</span><span class="p" data-group-id="0110413291-8">}</span><span class="p" data-group-id="0110413291-7">}</span></code></pre>  </section>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">update_view</span><span class="p" data-group-id="7923192386-5">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7923192386-6">%{</span><span class="ss">article_id</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="7923192386-6">}</span><span class="p" data-group-id="7923192386-5">)</span><span class="w">
+</span><span class="p" data-group-id="7923192386-7">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7923192386-8">%</span><span class="nc" data-group-id="7923192386-8">Ecto.Changeset</span><span class="p" data-group-id="7923192386-8">{</span><span class="p" data-group-id="7923192386-8">}</span><span class="p" data-group-id="7923192386-7">}</span></code></pre>  </section>
 </section>
           </div>
         </section>
