@@ -11,7 +11,7 @@
         <%= for article <- @articles do %>
           <article id="article<%= article.id %>" class="flex mb-6 sm:mb-10 md:mb-12 lg:mb-16">
             <div class="flex-grow min-w-0 pr-3">
-              <p class="text-sm text-gray-700 truncate">
+              <p class="text-sm text-gray-700 leading-none truncate">
                 <span><%= article.updated_at.month |> API.get_short_month_name() %> <%= article.updated_at.day %>,</span>
                 <span><%= article.user.username %></span>
                 <%= unless article.reports == [] do %>
@@ -19,8 +19,8 @@
                   <span class="font-bold"><%= API.get_issues(article.reports) %></span>
                 <% end %>
               </p>
-              <h2 class="text-base sm:text-xl text-gray-900 font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
-              <p class="text-gray-700"><%= API.highlight_query(@socket, article.subtitle, @query) %></p>
+              <h2 class="mt-4 mb-1 line-clamp text-base sm:text-xl text-gray-900 leading-snug font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
+              <h3 class="hidden sm:line-clamp text-gray-700 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-32 flex-shrink-0 relative">
               <div class="w-full h-full bg-gray-400 animate-pulse absolute top-0 z-0"></div>
