@@ -19,12 +19,12 @@
                   <span class="font-bold"><%= API.get_issues(article.reports) %></span>
                 <% end %>
               </p>
-              <h2 class="mt-1 line-clamp text-base sm:text-xl text-gray-900 sm:leading-snug font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
-              <h3 class="hidden sm:line-clamp text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
+              <h2 class="mt-1.5 sm:mt-1 truncate-3 sm:truncate-2 text-base sm:text-xl text-gray-900 leading-tight sm:leading-snug font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
+              <h3 class="hidden sm:truncate-2 text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-28 flex-shrink-0 relative">
               <div class="w-full h-full bg-gray-400 animate-pulse absolute top-0 z-0"></div>
-              <img class="w-full h-full object-cover object-center relative z-1" src="https://picsum.photos/id/<%= article.id %>/300/330">
+              <img class="w-full h-full object-cover object-center relative z-1" src="https://picsum.photos/id/<%= 34*article.id %>/300/330">
             </figure>
           </article>
         <% end %>
