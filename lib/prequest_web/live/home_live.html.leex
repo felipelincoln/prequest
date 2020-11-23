@@ -4,8 +4,5 @@
 </form>
 <p>Search results for <strong><%= @query %></strong></p>
 <p>Latest? <strong><%= @sort_by_latest? %></strong></p>
-<br>
-<br>
-<br>
 
 <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed0", source: Prequest.Manage.Article, range: 0, query: @query, sort_by_latest?: @sort_by_latest? %>

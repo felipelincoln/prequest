@@ -5,7 +5,7 @@
 
 <div id="<%= @id %>" class='<%= if @meta.articles_count == 0, do: "hidden"%>'>
   <div class="flex flex-col-reverse md:flex-row">
-    <section class="md:w-2/3 flex-shrink-0 md:pr-12 lg:pr-16">
+    <section class="md:w-2/3 flex-shrink-0 md:mt-12 lg:mt-16 md:pr-12 lg:pr-16">
       <!-- articles -->
       <div id="<%= @id %>Content" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= @meta.page %>" data-next="<%= @meta.has_next? %>">
         <%= for article <- @articles do %>
@@ -14,17 +14,13 @@
               <p class="text-sm text-gray-500 leading-none truncate">
                 <span><%= article.updated_at.month |> API.get_short_month_name() %> <%= article.updated_at.day %>,</span>
                 <span><%= article.user.username %></span>
-                <%= unless article.reports == [] do %>
-                  <span class="font-bold px-1">·</span>
-                  <span class="font-bold"><%= API.get_issues(article.reports) %></span>
-                <% end %>
               </p>
               <h2 class="mt-1.5 sm:mt-1 truncate-3 sm:truncate-2 text-base sm:text-xl text-gray-900 leading-tight sm:leading-snug font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
               <h3 class="hidden sm:truncate-2 text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-28 flex-shrink-0 relative">
               <div class="w-full h-full bg-gray-400 animate-pulse absolute top-0 z-0"></div>
-              <img class="w-full h-full object-cover object-center relative z-1" src="https://picsum.photos/id/<%= 34*article.id %>/300/330">
+              <img class="w-full h-full object-cover object-center relative z-1" src="<%= article.cover %>">
             </figure>
           </article>
         <% end %>
@@ -41,54 +37,45 @@
         </div>
       <% end %>
     </section>
+
     <aside class="md:flex-grow">
-      <div class="md:sticky md:top-0 md:bg-gray-200 mb-12 md:mb-0 md:p-6 lg:p-8">
-        <!-- reports -->
-        <div class="relative mb-3">
-          <h2 class="text-2xl text-gray-900"><%= API.get_feed_name(@range) %></h2>
+      <div class="md:sticky md:top-0 md:pt-12 lg:pt-16">
+        <div class="bg-gray-100 md:p-6 lg:p-8">
 
-          <span><%= @meta.articles_count %> articles</span>
-          <%= unless @reports == [] do %>
-            <span class="px-1">·</span>
-            <div class="inline group static cursor-pointer" tabindex="0">
-              <span><%= API.get_issues(@reports) %></span>
-              <div class="hidden group-focus:block absolute left-0 cursor-default bg-white">
-                <%= for {msg, title, reported_at} <- @reports do %>
-                  <p>
-                    <span><%= msg %></span>
-                    <span><%= title %></span>
-                    <span><%= reported_at %></span>
-                  </p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+          <!-- topics -->
+          <div class="relative md:mb-6 lg:mb-8">
+            <p class="uppercase leading-none font-bold text-gray-900"><%= API.get_feed_name(@range) %></p>
+          </div>
 
-        </div>
-
-        <!-- topics -->
-        <div class="flex rounded-full overflow-hidden mb-2">
-          <%= for {width, _topic, color} <- @topics, width > 0 do %>
-            <div class="h-4 <%= color %> last:flex-grow" style="width:<%= width %>%"></div>
-          <% end %>
-        </div>
-        <div class="flex">
-          <ol>
-            <%= for {width, topic, color} <- @topics, width > 0 do %>
-              <%= if topic == "others" do %>
-                <li class="inline-flex cursor-default text-gray-800 px-2 py-1 rounded-lg">
-                  <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
-                  <span class="align-middle"><%= topic %></span>
-                </li>
-              <% else %>
-                <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
-                  <div class="w-4 h-4 rounded-full my-auto mr-2 <%= color %>"></div>
-                  <a href="#<%= @id %>" class="align-middle"><%= topic %></a>
-                </li>
-              <% end %>
+          <div class="flex rounded-full overflow-hidden mb-2">
+            <%= for {width, _topic, color} <- @topics, width > 0 do %>
+              <div class="h-3 <%= color %> last:flex-grow" style="width:<%= width %>%"></div>
             <% end %>
-          </ol>
+          </div>
+          <div class="flex">
+            <ol>
+              <%= for {width, topic, color} <- @topics, width > 0 do %>
+                <%= if topic == "others" do %>
+                  <li class="inline-flex cursor-default text-gray-800 px-2 py-1 rounded-lg">
+                    <div class="w-3 h-3 rounded-full my-auto mr-2 <%= color %>"></div>
+                    <span class="align-middle"><%= topic %></span>
+                  </li>
+                <% else %>
+                  <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
+                    <div class="w-3 h-3 rounded-full my-auto mr-2 <%= color %>"></div>
+                    <a href="#<%= @id %>" class="align-middle"><%= topic %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </ol>
+          </div>
         </div>
+
+          <p class="hidden md:block md:py-6 lg:py-8 leading-none text-gray-500 text-center">
+          <span class="hover:underline"><a href="https://felipelincoln.github.io/prequest" target="_blank">Documentation</a></span>
+          <span class="px-1">·</span>
+          <span class="hover:underline"><a href="https://github.com/felipelincoln/prequest" target="_blank">GitHub</a></span>
+          </p>
       </div>
     </aside>
   </div>

@@ -8,19 +8,21 @@ if Mix.env() == :dev do
     articles: [
       %Article{
         title: "contributing to prequest",
-        cover: "https://prequest.co/coolimage.png",
+        subtitle: "subcontributing to prequest",
+        cover: "https://picsum.photos/id/1001/300/300",
         source: "https://github.com/felipelincoln/prequest/",
         topics: [
-          %Topic{name: "elixir"},
+          %Topic{name: "3elixir"},
           %Topic{name: "ecto"}
         ]
       },
       %Article{
         title: "learning elixir/OTP at prequest",
-        cover: "https://prequest.co/elixirotp.png",
+        subtitle: "subcontributing to prequest",
+        cover: "https://picsum.photos/id/7001/300/300",
         source: "https://github.com/felipelincoln/blog/",
         topics: [
-          %Topic{name: "phoenix"},
+          %Topic{name: "3phoenix"},
           %Topic{name: "otp"}
         ]
       }
@@ -34,7 +36,8 @@ if Mix.env() == :dev do
       articles: [
         %Article{
           title: "so#{num}me title",
-          cover: "some cover",
+          subtitle: "subcontributing to prequest",
+          cover: "https://picsum.photos/id/#{19*num}/300/300",
           source: "some source#{num}",
           topics: [
             %Topic{name: "el#{num}ixir"},
@@ -43,7 +46,8 @@ if Mix.env() == :dev do
         },
         %Article{
           title: "some other tit#{num}le",
-          cover: "some other cover",
+          subtitle: "subcontributing to prequest",
+          cover: "https://picsum.photos/id/#{18*num}/300/300",
           source: "some #{num}other source",
           topics: [
             %Topic{name: "ph#{num}oenix"}
