@@ -1,8 +1,10 @@
-<form phx-submit="search" phx-change="search" class="bg-gray-400 p-2">
-  <input type="text" name="query" phx-debounce="500" value="<%= @query %>">
-  <input type="button" value="Latest" phx-click="toggle-sort">
-</form>
-<p>Search results for <strong><%= @query %></strong></p>
-<p>Latest? <strong><%= @sort_by_latest? %></strong></p>
+<div class="center">
+  <form phx-submit="search" phx-change="search" class="bg-gray-400 p-2">
+    <input type="text" name="query" phx-debounce="500" value="<%= @query %>">
+    <input type="button" value="Latest" phx-click="toggle-sort">
+  </form>
+  <p>Search results for <strong><%= @query %></strong></p>
+  <p>Latest? <strong><%= @sort_by_latest? %></strong></p>
+</div>
 
 <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed0", source: Prequest.Manage.Article, range: 0, query: @query, sort_by_latest?: @sort_by_latest? %>

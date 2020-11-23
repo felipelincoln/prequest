@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer utilities {
+  .center {
+    @apply max-w-screen-xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16
+  }
   @variants responsive {
     .truncate-2 {
       display: -webkit-box;
