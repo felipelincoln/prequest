@@ -3,8 +3,8 @@
 <% IO.puts "component #{@range} rendering using phx-updated: #{@update}" %>
 <% IO.inspect @meta %>
 
-<div id="<%= @id %>" class='<%= if @meta.articles_count == 0, do: "hidden"%>'>
-  <div class="flex flex-col-reverse md:flex-row">
+<div id="<%= @id %>" class='<%= if @meta.articles_count == 0, do: "hidden"%> border-t border-gray-200'>
+  <div class="flex flex-col-reverse md:flex-row max-w-screen-xl mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
     <section class="md:w-2/3 flex-shrink-0 md:mt-12 lg:mt-16 md:pr-12 lg:pr-16">
       <!-- articles -->
       <div id="<%= @id %>Content" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= @meta.page %>" data-next="<%= @meta.has_next? %>">
@@ -39,7 +39,7 @@
     </section>
 
     <aside class="md:flex-grow">
-      <div class="md:sticky md:top-0 md:pt-12 lg:pt-16">
+      <div class="md:sticky md:top-0 md:pt-12 lg:pt-16 md:mb-12 lg:mb-16">
         <div class="bg-gray-100 md:p-6 lg:p-8">
 
           <!-- topics -->
@@ -71,7 +71,7 @@
           </div>
         </div>
 
-          <p class="hidden md:block md:py-6 lg:py-8 leading-none text-gray-500 text-center">
+          <p class="hidden md:block md:pt-6 lg:pt-8 leading-none text-gray-500 text-center">
           <span class="hover:underline"><a href="https://felipelincoln.github.io/prequest" target="_blank">Documentation</a></span>
           <span class="px-1">·</span>
           <span class="hover:underline"><a href="https://github.com/felipelincoln/prequest" target="_blank">GitHub</a></span>
