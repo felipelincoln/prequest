@@ -8,7 +8,8 @@ if Mix.env() == :dev do
     articles: [
       %Article{
         title: "contributing to prequest",
-        subtitle: "this is a guide on how you can make your contribution to the open source blogging platform Prequest.",
+        subtitle:
+          "this is a guide on how you can make your contribution to the open source blogging platform Prequest.",
         cover: "https://picsum.photos/id/1001/300/300",
         source: "https://github.com/felipelincoln/prequest/",
         topics: [
@@ -35,9 +36,11 @@ if Mix.env() == :dev do
       username: "felipelincoln#{num}",
       articles: [
         %Article{
-          title: "so#{num}me title lorem ipsum dolor sit amet, consectetur adipiscing elit. This title should spam 3 lines.",
-          subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus vulputate fringilla. Morbi massa sapien.",
-          cover: "https://picsum.photos/id/#{19*num}/300/300",
+          title:
+            "so#{num}me title lorem ipsum dolor sit amet, consectetur adipiscing elit. This title should spam 3 lines.",
+          subtitle:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus vulputate fringilla. Morbi massa sapien.",
+          cover: "https://picsum.photos/id/#{19 * num}/300/300",
           source: "some source#{num}",
           topics: [
             %Topic{name: "el#{num}ixir"},
@@ -46,8 +49,9 @@ if Mix.env() == :dev do
         },
         %Article{
           title: "some other tit#{num}le",
-          subtitle: "Donec a varius neque. Nam condimentum accumsan risus, sit amet molestie velit sodales sit amet.",
-          cover: "https://picsum.photos/id/#{18*num}/300/300",
+          subtitle:
+            "Donec a varius neque. Nam condimentum accumsan risus, sit amet molestie velit sodales sit amet.",
+          cover: "https://picsum.photos/id/#{18 * num}/300/300",
           source: "some #{num}other source",
           topics: [
             %Topic{name: "ph#{num}oenix"}
