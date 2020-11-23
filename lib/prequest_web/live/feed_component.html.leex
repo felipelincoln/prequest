@@ -19,7 +19,7 @@
               <h3 class="hidden sm:truncate-2 text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-28 flex-shrink-0 relative">
-              <div class="w-full h-full bg-gray-400 animate-pulse absolute top-0 z-0"></div>
+              <div class="w-full h-full bg-gray-100 animate-pulse absolute top-0 z-0"></div>
               <img class="w-full h-full object-cover object-center relative z-1" src="<%= article.cover %>">
             </figure>
           </article>
@@ -29,25 +29,25 @@
       <%= if @meta.has_next? do %>
         <div class="flex mb-16">
           <div class="flex-grow pr-3 sm:pr-6">
-            <div class="w-32 h-5 bg-gray-400 animate-pulse mb-2"></div>
-            <div class="w-full h-5 sm:h-6 mb-2 bg-gray-400 animate-pulse"></div>
-            <div class="w-full h-5 sm:h-6 bg-gray-400 animate-pulse"></div>
+            <div class="w-32 h-5 bg-gray-100 animate-pulse mb-2"></div>
+            <div class="w-full h-5 sm:h-6 mb-2 bg-gray-100 animate-pulse"></div>
+            <div class="w-full h-5 sm:h-6 bg-gray-100 animate-pulse"></div>
           </div>
-          <div class="w-24 h-20 sm:w-40 sm:h-32 animate-pulse bg-gray-400"></div>
+          <div class="w-24 h-20 sm:w-40 sm:h-32 animate-pulse bg-gray-100"></div>
         </div>
       <% end %>
     </section>
 
     <aside class="md:flex-grow">
       <div class="md:sticky md:top-0 md:pt-12 lg:pt-16 md:mb-12 lg:mb-16">
-        <div class="bg-gray-100 md:p-6 lg:p-8">
+          <div class="bg-gray-50 md:p-6 lg:p-8">
 
           <!-- topics -->
-          <div class="relative md:mb-6 lg:mb-8">
+          <div class="md:mb-6 lg:mb-8">
             <p class="uppercase leading-none font-bold text-gray-900"><%= API.get_feed_name(@range) %></p>
           </div>
 
-          <div class="flex rounded-full overflow-hidden mb-2">
+          <div class="flex overflow-hidden mb-4">
             <%= for {width, _topic, color} <- @topics, width > 0 do %>
               <div class="h-3 <%= color %> last:flex-grow" style="width:<%= width %>%"></div>
             <% end %>
@@ -57,12 +57,12 @@
               <%= for {width, topic, color} <- @topics, width > 0 do %>
                 <%= if topic == "others" do %>
                   <li class="inline-flex cursor-default text-gray-800 px-2 py-1 rounded-lg">
-                    <div class="w-3 h-3 rounded-full my-auto mr-2 <%= color %>"></div>
+                    <div class="w-3 h-3 roundd-full my-auto mr-2 <%= color %>"></div>
                     <span class="align-middle"><%= topic %></span>
                   </li>
                 <% else %>
-                  <li class="inline-flex cursor-pointer text-gray-800 px-2 py-1 rounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-300" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
-                    <div class="w-3 h-3 rounded-full my-auto mr-2 <%= color %>"></div>
+                  <li class="inline-flex md:flex cursor-pointer text-gray-800 px-2 py-1 ounded-lg <%= if topic not in filters, do: 'hover:' %>bg-gray-200" phx-click="toggle_topic" phx-target="<%= @myself %>" phx-value-topic="<%= topic %>">
+                    <div class="w-3 h-3 roundd-full my-auto mr-2 <%= color %>"></div>
                     <a href="#<%= @id %>" class="align-middle"><%= topic %></a>
                   </li>
                 <% end %>

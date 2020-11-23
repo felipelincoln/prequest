@@ -16,7 +16,7 @@ defmodule Prequest.Manage.Topic.Color do
   Color reference: [TailwindCSS](https://tailwindcss.com/docs/background-color)
   """
 
-  @names ["gray", "red", "orange", "yellow", "green", "teal", "blue", "indigo", "purple", "pink"]
+  @names ["gray", "red", "yellow", "green", "blue", "indigo", "purple", "pink"]
   @values [300, 400, 500, 600, 700, 800, 900]
 
   @doc """
