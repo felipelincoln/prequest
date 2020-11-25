@@ -4,6 +4,8 @@ defmodule PrequestWeb.HomeLive do
   use PrequestWeb, :live_view
   alias PrequestWeb.HomeLive.Core
 
+  @flash_time 5000
+
   @impl true
   def mount(_params, _session, socket) do
     socket =
@@ -31,11 +33,18 @@ defmodule PrequestWeb.HomeLive do
   def handle_event("publish", %{"url" => url}, socket) do
     {status, msg} = Core.new_article(url)
 
+    Process.send_after(self(), :clear_flash, @flash_time)
+
     socket =
       socket
       |> clear_flash()
       |> put_flash(status, msg)
 
     {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info(:clear_flash, socket) do
+    {:noreply, clear_flash(socket)}
   end
 end
