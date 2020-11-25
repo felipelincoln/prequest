@@ -31,7 +31,7 @@ defmodule PrequestWeb.HomeLive do
 
   @impl true
   def handle_event("publish", %{"url" => url}, socket) do
-    {status, msg} = Core.new_article(url)
+    {status, msg} = Core.publish_article(url)
 
     Process.send_after(self(), :clear_flash, @flash_time)
 
