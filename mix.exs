@@ -50,7 +50,8 @@ defmodule Prequest.MixProject do
       {:ex_doc, "~>0.22", runtime: false},
       {:credo, "~> 1.4", runtime: false},
       {:sobelow, "~> 0.8"},
-      {:excoveralls, "~> 0.13"}
+      {:excoveralls, "~> 0.13"},
+      {:httpoison, "~> 1.7"}
     ]
   end
 
