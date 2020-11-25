@@ -147,7 +147,7 @@ defmodule Prequest.ManageTest do
           title: article.title,
           subtitle: article.subtitle,
           cover: article.cover,
-          source: article.source <> "(2)",
+          source: article.source <> "(2).md",
           user_id: user.id
         })
 
@@ -168,7 +168,7 @@ defmodule Prequest.ManageTest do
           title: article.title,
           subtitle: article.subtitle,
           cover: article.cover,
-          source: article.source <> "(2)",
+          source: article.source <> "(2).md",
           user_id: user.id
         })
 
@@ -258,7 +258,7 @@ defmodule Prequest.ManageTest do
 
       # :topics as an empty list
       assert {:ok, %Article{} = article_empty_topics} =
-               %{user_id: user.id, source: @valid_attrs.source <> "(1)"}
+               %{user_id: user.id, source: @valid_attrs.source <> "(1).md"}
                |> Enum.into(@valid_attrs)
                |> Map.merge(%{topics: []}, fn _k, _v, v -> v end)
                |> Manage.create_article()
@@ -484,7 +484,7 @@ defmodule Prequest.ManageTest do
           title: article.title,
           subtitle: article.subtitle,
           cover: article.cover,
-          source: article.source <> "(2)",
+          source: article.source <> "(2).md",
           user_id: user.id,
           topics: [%{name: "a topic"}, topic]
         })

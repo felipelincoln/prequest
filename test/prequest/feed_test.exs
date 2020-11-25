@@ -17,7 +17,7 @@ defmodule Prequest.FeedTest do
   defp a_title(k), do: @a_title <> to_string(k)
   defp a_subtitle(k), do: @a_subtitle <> to_string(k)
   defp a_cover(k), do: @a_cover <> to_string(k)
-  defp a_source(k), do: @a_source <> to_string(k)
+  defp a_source(k), do: @a_source <> to_string(k) <> ".md"
 
   setup_all do
     Sandbox.mode(Prequest.Repo, :auto)
