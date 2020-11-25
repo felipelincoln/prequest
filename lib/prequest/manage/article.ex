@@ -25,8 +25,22 @@ defmodule Prequest.Manage.Article do
     |> validate_required([:cover, :title, :subtitle, :source, :user_id])
     |> validate_url_format(:cover)
     |> validate_url_format(:source, host: "github.com")
+    |> validate_url_extension(:source, ".md")
     |> unique_constraint(:source)
     |> assoc_constraint(:user)
+  end
+
+  defp validate_url_extension(changeset, field, value) do
+    validate_change(changeset, field, fn _field, url ->
+      case String.ends_with?(url, value) do
+        true ->
+          []
+
+        false ->
+          error = "must be #{value} extension"
+          [{field, {error, [{:validation, :url_extension}]}}]
+      end
+    end)
   end
 
   defp validate_url_format(changeset, field, opts \\ []) do
