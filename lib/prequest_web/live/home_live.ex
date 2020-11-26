@@ -13,6 +13,7 @@ defmodule PrequestWeb.HomeLive do
       |> assign(:query, "")
       |> assign(:publish_article_url, "")
       |> assign(:sort_by_latest?, false)
+      |> assign(:feed_id, "feed0")
 
     {:ok, socket}
   end
@@ -44,6 +45,13 @@ defmodule PrequestWeb.HomeLive do
       Process.cancel_timer(socket.assigns.flash_timer_pid)
     end
 
+    feed_id =
+      if status == :error do
+        socket.assigns.feed_id
+      else
+        socket.assigns.feed_id <> "a"
+      end
+
     flash_timer_pid = Process.send_after(self(), :clear_flash, @flash_time)
 
     socket =
@@ -52,6 +60,7 @@ defmodule PrequestWeb.HomeLive do
       |> put_flash(status, msg)
       |> assign(:publish_article_url, publish_article_url)
       |> assign(:flash_timer_pid, flash_timer_pid)
+      |> assign(:feed_id, feed_id)
 
     {:noreply, socket}
   end
