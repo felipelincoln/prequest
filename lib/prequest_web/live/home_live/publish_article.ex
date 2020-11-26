@@ -1,7 +1,7 @@
 defmodule PrequestWeb.HomeLive.PublishArticle do
   @moduledoc false
 
-  defstruct error: [], url: nil, body: nil, article: nil
+  defstruct error: [], url: nil, body: nil
 
   alias Prequest.Manage
   alias Prequest.Manage.Article
@@ -11,7 +11,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     %PublishArticle{}
     |> cast_url(url)
     |> put_body()
-    |> put_article()
+    |> create_article()
   end
 
   defp cast_url(%PublishArticle{error: []} = build, url) do
@@ -50,7 +50,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   defp put_body(build), do: build
 
-  defp put_article(%PublishArticle{error: [], url: url, body: body} = build) do
+  defp create_article(%PublishArticle{error: [], url: url, body: body} = build) do
     title_regex = ~r/\n#\s(.+?[^\\])\n/
     subtitle_regex = ~r/\n(\w.+?[^\\])\n/
     cover_regex = ~r/\!\[.*?\]\((.*?)\)/
@@ -61,22 +61,39 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
       |> Regex.run(url)
       |> get_or_create_user()
 
-    [_, title] = Regex.run(title_regex, "\n" <> body)
-    [_, subtitle] = Regex.run(subtitle_regex, "\n" <> body)
-    [_, cover] = Regex.run(cover_regex, "\n" <> body)
+    title = extract_info(title_regex, "\n" <> body)
+    subtitle = extract_info(subtitle_regex, "\n" <> body)
+    cover = extract_info(cover_regex, "\n" <> body)
 
-    Manage.create_article(%{
+    params = %{
       user_id: user.id,
       title: title,
       subtitle: subtitle,
       cover: cover,
       source: url
-    })
+    }
 
-    build
+    error =
+      case Manage.create_article(params) do
+        {:ok, _article} ->
+          []
+
+        {:error, changeset} ->
+          [{field, {msg, _opts}} | _] = changeset.errors
+          [{field, msg}]
+      end
+
+    %{build | error: error}
   end
 
-  defp put_article(build), do: build
+  defp create_article(build), do: build
+
+  defp extract_info(regex, text) do
+    case Regex.run(regex, text) do
+      nil -> ""
+      [_match, group] -> group
+    end
+  end
 
   defp get_or_create_user([_, username]) do
     case Manage.get_user(username) do
