@@ -11,6 +11,7 @@ defmodule PrequestWeb.HomeLive do
     socket =
       socket
       |> assign(:query, "")
+      |> assign(:publish_article_url, "")
       |> assign(:sort_by_latest?, false)
 
     {:ok, socket}
@@ -33,12 +34,24 @@ defmodule PrequestWeb.HomeLive do
   def handle_event("publish", %{"url" => url}, socket) do
     {status, msg} = Core.publish_article(url)
 
-    Process.send_after(self(), :clear_flash, @flash_time)
+    publish_article_url =
+      case status do
+        :info -> ""
+        :error -> url
+      end
+
+    if :flash_timer_pid in Map.keys(socket.assigns) do
+      Process.cancel_timer(socket.assigns.flash_timer_pid)
+    end
+
+    flash_timer_pid = Process.send_after(self(), :clear_flash, @flash_time)
 
     socket =
       socket
       |> clear_flash()
       |> put_flash(status, msg)
+      |> assign(:publish_article_url, publish_article_url)
+      |> assign(:flash_timer_pid, flash_timer_pid)
 
     {:noreply, socket}
   end

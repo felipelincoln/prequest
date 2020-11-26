@@ -4,15 +4,9 @@ defmodule PrequestWeb.HomeLive.Core do
   alias PrequestWeb.HomeLive.PublishArticle
 
   def publish_article(url) do
-    case HTTPoison.get(url) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        {:info, "Success"}
-
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        {:error, "Not found"}
-
-      {:error, %HTTPoison.Error{reason: reason}} ->
-        {:error, reason}
+    case PublishArticle.build(url) do
+      %{error: []} -> {:info, "Success"}
+      %{error: [{_field, msg}]} -> {:error, msg}
     end
   end
 end

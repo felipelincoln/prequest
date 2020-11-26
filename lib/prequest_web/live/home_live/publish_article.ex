@@ -6,10 +6,11 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   alias Prequest.Manage.Article
   alias PrequestWeb.HomeLive.PublishArticle
 
-  def build(%PublishArticle{} = publish_article, url) do
-    publish_article
+  def build(url) do
+    %PublishArticle{}
     |> cast_url(url)
     |> put_body()
+    |> put_article()
   end
 
   defp cast_url(%PublishArticle{error: []} = build, url) do
@@ -47,4 +48,10 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   end
 
   defp put_body(build), do: build
+
+  defp put_article(%PublishArticle{error: [], body: body} = build) do
+    build
+  end
+
+  defp put_article(build), do: build
 end
