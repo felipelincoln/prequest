@@ -35,16 +35,19 @@ defmodule PrequestWeb.HomeLive do
   def handle_event("publish", %{"url" => url}, socket) do
     {status, msg} = Core.publish_article(url)
 
+    # reset url in the sucessful case
     publish_article_url =
       case status do
         :info -> ""
         :error -> url
       end
 
+    # flush send_after
     if :flash_timer_pid in Map.keys(socket.assigns) do
       Process.cancel_timer(socket.assigns.flash_timer_pid)
     end
 
+    # update id to reload component
     feed_id =
       if status == :error do
         socket.assigns.feed_id
@@ -52,6 +55,7 @@ defmodule PrequestWeb.HomeLive do
         socket.assigns.feed_id <> "a"
       end
 
+    # remove flash after a timer
     flash_timer_pid = Process.send_after(self(), :clear_flash, @flash_time)
 
     socket =

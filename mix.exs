@@ -5,7 +5,7 @@ defmodule Prequest.MixProject do
     [
       name: "Prequest",
       source_url: "https://github.com/felipelincoln/prequest",
-      homepage_url: "https://prequest.herokuapp.com/",
+      homepage_url: "https://www.prequest.co/",
       app: :prequest,
       version: "0.1.0",
       elixir: "~> 1.7",
