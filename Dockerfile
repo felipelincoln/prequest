@@ -17,6 +17,10 @@ COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
 
+# copy builds to avoid recompiling
+RUN cp -r _build/dev/ _build/test/
+RUN cp -r _build/dev/ _build/prod/
+
 # install node dependencies
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm ci --prefix ./assets --progress=false --no-audit --loglevel=error
@@ -33,9 +37,6 @@ ARG MIX_ENV
 
 # compile and build release
 RUN mix do compile, release
-
-# make a copy of dev deps into test deps
-RUN cp -r _build/dev/ _build/test/
 
 
 # production stage
