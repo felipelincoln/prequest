@@ -10,6 +10,7 @@ services:
       cache_from:
         - felipelincoln/prequest:latest
     image: felipelincoln/prequest:latest
+    container_name: prequest_web
     command: mix phx.server
     volumes:
       - .:/app
