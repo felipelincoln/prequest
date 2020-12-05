@@ -8,6 +8,9 @@
     <section class="md:w-2/3 flex-shrink-0 md:mt-12 lg:mt-16 md:pr-12 lg:pr-16">
       <!-- articles -->
       <div id="<%= @id %>Content" phx-update="<%= @update %>" phx-hook="FeedScroll" data-id="<%= @id %>" data-page="<%= @meta.page %>" data-next="<%= @meta.has_next? %>">
+        <%= if @articles == [] do %>
+          <p>No articles to show.</p>
+        <% end %>
         <%= for article <- @articles do %>
           <article id="article<%= article.id %>" class="flex mb-6 sm:mb-10 md:mb-12 lg:mb-16">
             <div class="flex-grow min-w-0 pr-3">
