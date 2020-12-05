@@ -32,6 +32,22 @@ defmodule Prequest.Manage do
   def get_article!(id), do: ArticleCRUD.read!(id)
 
   @doc """
+  Gets a single article by its source.
+
+  ## Examples
+
+      iex> get_article_by_source("https://github.com/felipelincoln/blog/blob/master/easy_compose.md")
+      %Article{}
+
+      iex> get_article_by_source("")
+      nil
+
+  """
+  @doc section: :article
+  @spec get_article_by_source(String.t()) :: article | nil
+  def get_article_by_source(url), do: ArticleCRUD.read(url)
+
+  @doc """
   Creates an article.
 
   ## Examples

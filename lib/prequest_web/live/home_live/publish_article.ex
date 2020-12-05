@@ -78,6 +78,14 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
         {:ok, _article} ->
           []
 
+        # if article already exist, it refreshes
+        {:error, %{errors: [source: _msg]}} ->
+          url
+          |> Manage.get_article_by_source()
+          |> Manage.update_article(%{title: title, subtitle: subtitle, cover: cover})
+
+          [source: "Article refreshed!"]
+
         {:error, changeset} ->
           [{field, {msg, _opts}} | _] = changeset.errors
           [{field, msg}]

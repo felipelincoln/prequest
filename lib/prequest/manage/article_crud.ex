@@ -13,6 +13,10 @@ defmodule Prequest.Manage.ArticleCRUD do
     |> Repo.insert()
   end
 
+  def read(url) do
+    Repo.get_by(Article, source: url)
+  end
+
   def update(%Article{} = article, %{topics: _} = attrs) do
     article
     |> Repo.preload(:topics)

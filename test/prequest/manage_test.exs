@@ -223,6 +223,12 @@ defmodule Prequest.ManageTest do
       assert Manage.get_article!(article.id) |> preload!(:topics) == article
     end
 
+    test "get_article_by_source/1 returns the article with given source or nil", %{user: user} do
+      article = article_fixture(%{user_id: user.id})
+      assert Manage.get_article_by_source(article.source) |> preload!(:topics) == article
+      assert Manage.get_article_by_source("") == nil
+    end
+
     test "create_article/1 with valid data creates an article", %{user: user, topic: topic} do
       attrs = Map.merge(@valid_attrs, %{topics: [topic]}, fn _k, v1, v2 -> v1 ++ v2 end)
 
