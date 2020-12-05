@@ -65,12 +65,19 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     subtitle = extract_info(subtitle_regex, "\n" <> body)
     cover = extract_info(cover_regex, "\n" <> body)
 
+    topics_regex = ~r/#([^\s]+)/
+
+    topics =
+      extract_all(topics_regex, title <> subtitle)
+      |> Enum.map(fn topic -> %{name: String.downcase(topic)} end)
+
     params = %{
       user_id: user.id,
       title: title,
       subtitle: subtitle,
       cover: cover,
-      source: url
+      source: url,
+      topics: topics
     }
 
     error =
@@ -82,7 +89,12 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
         {:error, %{errors: [source: _msg]}} ->
           url
           |> Manage.get_article_by_source()
-          |> Manage.update_article(%{title: title, subtitle: subtitle, cover: cover})
+          |> Manage.update_article(%{
+            title: title,
+            subtitle: subtitle,
+            cover: cover,
+            topics: topics
+          })
 
           [source: "Article refreshed!"]
 
@@ -95,6 +107,11 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   end
 
   defp create_article(build), do: build
+
+  defp extract_all(regex, text) do
+    Regex.scan(regex, text)
+    |> Enum.map(fn [_match, group] -> group end)
+  end
 
   defp extract_info(regex, text) do
     case Regex.run(regex, text) do
