@@ -7,7 +7,9 @@ module.exports = {
       "../lib/prequest_web/views/**/*.ex",
     ],
     options: {
-      whitelistPatterns: [/^bg-/]
+      safelist: {
+        standard: [/^bg-/]
+      }
     }
   },
   theme: {
