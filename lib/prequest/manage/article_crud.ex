@@ -32,8 +32,12 @@ defmodule Prequest.Manage.ArticleCRUD do
   end
 
   # When create/1 or update/2 has :topics, it retrieve all existing topics
-  defp build_topics(%{topics: topics} = _attrs),
-    do: Enum.map(topics, &build_topic/1) |> Enum.uniq()
+  defp build_topics(%{topics: topics}) do
+    topics
+    |> Enum.map(&build_topic/1)
+    |> Enum.uniq()
+    |> Enum.take(5)
+  end
 
   defp build_topics(_), do: []
 
