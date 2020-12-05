@@ -65,10 +65,10 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     subtitle = extract_info(subtitle_regex, "\n" <> body)
     cover = extract_info(cover_regex, "\n" <> body)
 
-    topics_regex = ~r/#([^\s]+)/
+    topics_regex = ~r/#([^\s\\]+)/
 
     topics =
-      extract_all(topics_regex, title <> subtitle)
+      extract_all(topics_regex, title <> "\n" <> subtitle)
       |> Enum.map(fn topic -> %{name: String.downcase(topic)} end)
 
     params = %{
