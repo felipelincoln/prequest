@@ -22,7 +22,7 @@ defmodule Prequest.Manage.Article do
   def changeset(%Article{} = article, attrs) do
     article
     |> cast(attrs, [:cover, :title, :subtitle, :source, :user_id])
-    |> validate_required([:cover, :title, :subtitle, :source, :user_id])
+    |> validate_required([:title, :subtitle, :source, :user_id])
     |> validate_length(:title, min: 2)
     |> validate_url_format(:cover)
     |> validate_url_format(:source, host: "github.com")

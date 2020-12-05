@@ -293,15 +293,6 @@ defmodule Prequest.ManageTest do
                |> Manage.create_article()
     end
 
-    test "create_article/1 with invalid cover returns error changeset", %{user: user} do
-      for cover <- @invalid_cover do
-        assert {:error, %Ecto.Changeset{}} =
-                 %{user_id: user.id, cover: cover}
-                 |> Enum.into(@valid_attrs)
-                 |> Manage.create_article()
-      end
-    end
-
     test "create_article/1 with invalid source returns error changeset", %{user: user} do
       for source <- @invalid_source do
         assert {:error, %Ecto.Changeset{}} =

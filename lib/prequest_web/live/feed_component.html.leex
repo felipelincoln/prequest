@@ -22,8 +22,10 @@
               <h3 class="hidden sm:truncate-2 text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-28 flex-shrink-0 relative">
-              <div class="w-full h-full bg-gray-100 animate-pulse absolute top-0 z-0"></div>
-              <img class="w-full h-full object-cover object-center relative z-1" src="<%= article.cover %>">
+              <%= if article.cover do %>
+                <div class="w-full h-full bg-gray-100 animate-pulse absolute top-0 z-0"></div>
+                <img class="w-full h-full object-cover object-center relative z-1" src="<%= article.cover %>">
+              <% end %>
             </figure>
           </article>
         <% end %>
