@@ -23,7 +23,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
     case error do
       nil -> %{build | url: url}
-      error -> %{build | url: url, error: [source: error]}
+      error -> %{build | url: url, error: [validation: error]}
     end
   end
 
@@ -41,10 +41,10 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
         %{build | body: body}
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
-        %{build | error: [url: "not found"]}
+        %{build | error: [validation: "not found"]}
 
       _ ->
-        %{build | error: [url: "invalid request"]}
+        %{build | error: [validation: "invalid request"]}
     end
   end
 
@@ -53,7 +53,10 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   defp create_article(%PublishArticle{error: [], url: url, body: body} = build) do
     title_regex = ~r/\n#\s([^\n\r]+?)\n/
     subtitle_regex = ~r/\n([\w\d][^\n\r]+?)\n/
-    cover_regex = ~r/\!\[.*?\]\((.*?)\)/
+
+    cover_regex =
+      ~r/\!\[[^\(\)]*?\]\((https?:\/\/(?!github\.com\.+?badge\.svg|img\.shields|coveralls|codecov)[^\s\(\)]+)(?:\s.*)?\)/
+
     username_regex = ~r/github\.com\/(\w+)\//
 
     user =
@@ -85,7 +88,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
         {:ok, _article} ->
           []
 
-        # if article already exist, it refreshes
+        # if article already exist, it updates
         {:error, %{errors: [source: _msg]}} ->
           url
           |> Manage.get_article_by_source()
@@ -99,8 +102,8 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
           [ok: "article updated"]
 
         {:error, changeset} ->
-          [{field, {msg, _opts}} | _] = changeset.errors
-          [{field, msg}]
+          [{_field, {msg, _opts}} | _] = changeset.errors
+          [validation: msg]
       end
 
     %{build | error: error}

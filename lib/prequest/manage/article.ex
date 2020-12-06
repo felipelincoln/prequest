@@ -22,8 +22,11 @@ defmodule Prequest.Manage.Article do
   def changeset(%Article{} = article, attrs) do
     article
     |> cast(attrs, [:cover, :title, :subtitle, :source, :user_id])
-    |> validate_required([:title, :subtitle, :source, :user_id])
-    |> validate_length(:title, min: 2)
+    |> validate_required(:title, message: "this article has no title")
+    |> validate_required(:subtitle, message: "this article has no subtitle")
+    |> validate_required(:source, message: "insert a url from a markdown file on GitHub")
+    |> validate_required(:user_id)
+    |> validate_length(:title, min: 2, message: "the title of this article is too short. min: 2")
     |> validate_url_format(:cover)
     |> validate_url_format(:source, host: "github.com")
     |> validate_url_extension(:source, ".md")

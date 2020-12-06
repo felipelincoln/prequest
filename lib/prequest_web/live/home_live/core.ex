@@ -11,8 +11,8 @@ defmodule PrequestWeb.HomeLive.Core do
       %{error: [ok: msg]} ->
         {:info, msg}
 
-      %{error: [{field, msg}]} ->
-        {:error, "#{to_string(field)} #{msg}"}
+      %{error: [validation: msg]} ->
+        {:error, msg}
     end
   end
 end
