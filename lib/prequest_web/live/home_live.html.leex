@@ -1,19 +1,14 @@
 <div class="center">
-  <br>    
-  <br>    
-  <br>    
 
-  <form phx-submit="publish" class="flex" autocomplete="off">
-    <input class="border border-r-0 border-gray-400 p-2 flex-grow" type="text" name="url", value="<%= @publish_article_url %>" placeholder="Article url">
-    <input type="submit" value="Publish" class="p-2 bg-yellow-300 text-yellow-900 font-bold border border-yellow-500">
-  </form>
+  <div class="my-32">
+    <form phx-submit="publish" class="flex" autocomplete="off">
+      <input class="border border-r-0 border-gray-400 p-2 flex-grow" type="text" name="url", value="<%= @publish_article_url %>" placeholder="Article url">
+      <input type="submit" value="Publish" class="p-2 bg-yellow-300 text-yellow-900 font-bold border border-yellow-500">
+    </form>
+    <p class="float-left text-green-800" role="alert"><%= live_flash(@flash, :info) %></p>
+    <p class="float-left text-red-800" role="alert"><%= live_flash(@flash, :error) %></p>
+  </div>
 
-
-
-
-  <br>    
-  <br>    
-  <br>    
   <div class="md:w-2/3 md:pr-12 lg:pr-16">
     <form phx-submit="search" phx-change="search" class="flex" autocomplete="off">
       <a href="javascript:document.getElementById('searchInput').focus()">
