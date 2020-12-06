@@ -51,8 +51,8 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   defp put_body(build), do: build
 
   defp create_article(%PublishArticle{error: [], url: url, body: body} = build) do
-    title_regex = ~r/\n#\s(.+?[^\\])\n/
-    subtitle_regex = ~r/\n(\w.+?[^\\])\n/
+    title_regex = ~r/\n#\s([^\n\r]+?)\n/
+    subtitle_regex = ~r/\n([\w\d][^\n\r]+?)\n/
     cover_regex = ~r/\!\[.*?\]\((.*?)\)/
     username_regex = ~r/github\.com\/(\w+)\//
 
@@ -62,14 +62,20 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
       |> get_or_create_user()
 
     title = extract_info(title_regex, "\n" <> body)
-    subtitle = extract_info(subtitle_regex, "\n" <> body)
-    cover = extract_info(cover_regex, "\n" <> body)
+    subtitle = extract_info(subtitle_regex, body)
+    cover = extract_info(cover_regex, body)
 
-    topics_regex = ~r/#([^\s\\]+)/
+    topics_regex = ~r/#([^\s\n\r]+)/
+
+    IO.puts "-----------------------------"
+    IO.inspect "\n" <> body
+    IO.inspect title
+    IO.inspect subtitle
+    IO.puts "-----------------------------"
 
     topics =
       extract_all(topics_regex, title <> "\n" <> subtitle)
-      |> Enum.map(fn topic -> %{name: String.downcase(topic)} end)
+      |> Enum.map(fn topic -> %{name: topic} end)
 
     params = %{
       user_id: user.id,
@@ -96,7 +102,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
             topics: topics
           })
 
-          [source: "Article refreshed!"]
+          [ok: "article updated"]
 
         {:error, changeset} ->
           [{field, {msg, _opts}} | _] = changeset.errors
@@ -110,14 +116,20 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   defp extract_all(regex, text) do
     Regex.scan(regex, text)
-    |> Enum.map(fn [_match, group] -> group end)
+    |> Enum.map(fn [_match, group] -> String.downcase(group) end)
   end
 
   defp extract_info(regex, text) do
     case Regex.run(regex, text) do
       nil -> ""
-      [_match, group] -> group
+      [_match, group] -> clean_string(group)
     end
+  end
+
+  defp clean_string(str) do
+    str
+    |> String.replace("  ", "")
+    |> String.trim()
   end
 
   defp get_or_create_user([_, username]) do

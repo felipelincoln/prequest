@@ -8,11 +8,11 @@ defmodule PrequestWeb.HomeLive.Core do
       %{error: []} ->
         {:info, "Success"}
 
-      %{error: [source: "Article refreshed!"]} ->
-        {:info, "Article refreshed!"}
+      %{error: [ok: msg]} ->
+        {:info, msg}
 
-      %{error: [{_field, msg}]} ->
-        {:error, msg}
+      %{error: [{field, msg}]} ->
+        {:error, "#{to_string(field)} #{msg}"}
     end
   end
 end
