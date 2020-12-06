@@ -7,14 +7,26 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   alias Prequest.Manage.Article
   alias PrequestWeb.HomeLive.PublishArticle
 
-  def build(url) do
-    %PublishArticle{}
-    |> cast_url(url)
-    |> put_body()
-    |> create_article()
-  end
+  @title_regex %{
+    suggested: ~r/\n#\s([^\n]+?)\n/,
+    guess_from: %{
+      html: ~r/<h\d[^>]*>([^<]*)<\/h\d>/,
+      md: ~r/#\s([^\n]+?)\n/
+    }
+  }
+  @cover_regex %{
+    suggested: ~r/\!\[cover\]\((https?:\/\/[^\s\n\(\)]+).*\)/,
+    guess_from: %{
+      html: ~r/<img.*?src="(.+?)".*?>/,
+      md:
+        ~r/\!\[[^\(\)]*?\]\((https?:\/\/(?!github\.com\.+?badge\.svg|img\.shields|coveralls|codecov)[^\s\n\(\)]+).*\)/
+    }
+  }
+  @subtitle_regex ~r/\n([\w\d][^\n]+?)[\n|\n]/
+  @username_regex ~r/github\.com\/(\w+)\//
+  @topics_regex ~r/#([^\s\n]+)/
 
-  defp cast_url(%PublishArticle{error: []} = build, url) do
+  def cast_url(%PublishArticle{error: []} = build, url) do
     {error, _meta} =
       %Article{}
       |> Article.changeset(%{source: url})
@@ -27,18 +39,18 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     end
   end
 
-  defp cast_url(build, _url), do: build
+  def cast_url(build, _url), do: build
 
-  defp put_body(%PublishArticle{error: [], url: url} = build) do
+  def put_body(%PublishArticle{error: [], url: url} = build) do
     response =
       url
-      |> String.replace("/blob", "")
+      |> String.replace("/blob", "", global: false)
       |> String.replace("github.com", "raw.githubusercontent.com")
       |> HTTPoison.get()
 
     case response do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        %{build | body: body}
+        %{build | body: "\n" <> body}
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         %{build | error: [validation: "not found"]}
@@ -48,31 +60,35 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     end
   end
 
-  defp put_body(build), do: build
+  def put_body(build), do: build
 
-  defp create_article(%PublishArticle{error: [], url: url, body: body} = build) do
-    title_regex = ~r/\n#\s([^\n\r]+?)\n/
-    subtitle_regex = ~r/\n([\w\d][^\n\r]+?)\n/
-
-    cover_regex =
-      ~r/\!\[[^\(\)]*?\]\((https?:\/\/(?!github\.com\.+?badge\.svg|img\.shields|coveralls|codecov)[^\s\(\)]+)(?:\s.*)?\)/
-
-    username_regex = ~r/github\.com\/(\w+)\//
-
+  def create_article(%PublishArticle{error: [], url: url, body: body} = build) do
     user =
-      username_regex
+      @username_regex
       |> Regex.run(url)
       |> get_or_create_user()
 
-    title = extract_info(title_regex, "\n" <> body)
-    subtitle = extract_info(subtitle_regex, body)
-    cover = extract_info(cover_regex, body)
+    title =
+      extract_info(@title_regex.suggested, body) ||
+        extract_info(@title_regex.guess_from.html, body) ||
+        extract_info(@title_regex.guess_from.md, body) || ""
 
-    topics_regex = ~r/#([^\s\n\r]+)/
+    subtitle = extract_info(@subtitle_regex, body) || ""
+
+    IO.puts "------------------"
+    IO.inspect body
+    IO.puts "------------------"
+
+    cover =
+      extract_info(@cover_regex.suggested, body) ||
+        extract_info(@cover_regex.guess_from.html, body) ||
+        extract_info(@cover_regex.guess_from.md, body)
 
     topics =
-      extract_all(topics_regex, title <> "\n" <> subtitle)
-      |> Enum.map(fn topic -> %{name: topic} end)
+      @topics_regex
+      |> Regex.scan(title <> "\n" <> subtitle)
+      |> Enum.map(fn [_match, group] -> %{name: String.downcase(group)} end)
+
 
     params = %{
       user_id: user.id,
@@ -109,24 +125,15 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     %{build | error: error}
   end
 
-  defp create_article(build), do: build
-
-  defp extract_all(regex, text) do
-    Regex.scan(regex, text)
-    |> Enum.map(fn [_match, group] -> String.downcase(group) end)
-  end
+  def create_article(build), do: build
 
   defp extract_info(regex, text) do
-    case Regex.run(regex, text) do
-      nil -> ""
-      [_match, group] -> clean_string(group)
+    with [_match, group] <- Regex.run(regex, text) do
+      group
+      |> String.replace("  ", "")
+      |> String.replace("\r", "")
+      |> String.trim()
     end
-  end
-
-  defp clean_string(str) do
-    str
-    |> String.replace("  ", "")
-    |> String.trim()
   end
 
   defp get_or_create_user([_, username]) do
