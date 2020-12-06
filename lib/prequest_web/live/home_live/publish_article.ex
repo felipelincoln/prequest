@@ -67,12 +67,6 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
     topics_regex = ~r/#([^\s\n\r]+)/
 
-    IO.puts "-----------------------------"
-    IO.inspect "\n" <> body
-    IO.inspect title
-    IO.inspect subtitle
-    IO.puts "-----------------------------"
-
     topics =
       extract_all(topics_regex, title <> "\n" <> subtitle)
       |> Enum.map(fn topic -> %{name: topic} end)
