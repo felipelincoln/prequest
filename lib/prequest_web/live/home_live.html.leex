@@ -1,12 +1,15 @@
-<div class="center">
-
-  <div class="my-32">
-    <form phx-submit="publish" class="flex" autocomplete="off">
-      <input class="border border-r-0 border-gray-400 p-2 flex-grow" type="text" name="url", value="<%= @publish_article_url %>" placeholder="Article url">
-      <input type="submit" value="Publish" class="p-2 bg-yellow-300 text-yellow-900 font-bold border border-yellow-500">
+<div class="bg-yellow-100">
+<div class="center pt-5">
+  <img class="sm:mx-auto h-12 sm:h-16 md:h-24 lg:h-32" src="<%= Routes.static_path(@socket, "/images/logo.svg") %>" alt="Phoenix Framework Logo"/>
+  <div class="mt-6 sm:mt-8 md:mt-12 lg:mt-16 mb-12 sm:mb-16 md:mb-24 lg:mb-32">
+    <form phx-submit="publish" class="flex sm:w-3/4 md:w-2/3 sm:mx-auto" autocomplete="off">
+      <input class="md:text-xl border-b border-gray-300 min-w-0 p-2 md:p-4 mr-2 md:mr-4 flex-grow text-gray-500" type="text" name="url", value="<%= @publish_article_url %>" placeholder="Place a .md url from github here! ;)">
+      <input type="submit" value="Publish" class="md:text-xl py-2 md:py-4 px-4 md:px-8 bg-yellow-300 font-bold cursor-pointer">
     </form>
-    <p class="float-left text-green-800" role="alert"><%= live_flash(@flash, :info) %></p>
-    <p class="float-left text-red-800" role="alert"><%= live_flash(@flash, :error) %></p>
+    <div class="h-6 sm:w-3/4 md:w-2/3 sm:mx-auto mt-2 sm:mt-4 pl-2 sm:pl-4">
+      <p class="text-green-700" role="alert"><%= live_flash(@flash, :info) %></p>
+      <p class="text-red-700" role="alert"><%= live_flash(@flash, :error) %></p>
+    </div>
   </div>
 
   <div class="md:w-2/3 md:pr-12 lg:pr-16">
@@ -14,10 +17,11 @@
       <a href="javascript:document.getElementById('searchInput').focus()">
         <svg class="h-6 w-6 ml-0 m-2 text-gray-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
       </a>
-      <input id="searchInput" class="flex-grow p-2 min-w-0 bg-white text-gray-800 focus:outline-none focus:bg-gray-100" type="text" name="query" phx-debounce="500" value="<%= @query %>" placeholder="Search articles">
+      <input id="searchInput" class="flex-grow p-2 min-w-0 bg-transparent text-gray-800 focus:bg-white" type="text" name="query" phx-debounce="500" value="<%= @query %>">
       <a href="#" class='hidden text-gray-800 hover:bg-gray-200 p-2 cursor-pointer bg-white <%= if @sort_by_latest?, do: "bg-gray-200" %>' phx-click="toggle-sort">Latest</a>
     </form>
   </div>
+</div>
 </div>
 
 <%= live_component @socket, PrequestWeb.FeedComponent, id: @feed_id, source: Prequest.Manage.Article, range: 0, query: @query, sort_by_latest?: @sort_by_latest? %>
