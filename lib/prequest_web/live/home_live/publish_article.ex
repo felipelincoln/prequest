@@ -109,7 +109,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   def create_article(build), do: build
 
-  defp extract_info(%{} = regex_map, text) do
+  defp extract_info(%{suggested: _, guess_from: _} = regex_map, text) do
     extract_info(regex_map.suggested, text) ||
       extract_info(regex_map.guess_from.html, text) ||
       extract_info(regex_map.guess_from.md, text) || ""
