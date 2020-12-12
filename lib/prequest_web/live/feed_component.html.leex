@@ -15,16 +15,20 @@
           <article id="article<%= article.id %>" class="flex mb-6 sm:mb-10 md:mb-12 lg:mb-16">
             <div class="flex-grow min-w-0 pr-3">
               <p class="text-sm text-gray-500 leading-none truncate">
-                <span><%= article.updated_at.month |> API.get_short_month_name() %> <%= article.updated_at.day %>,</span>
-                <span><%= article.user.username %></span>
+                <a href="<%= article.source %>" target="_blank"><span><%= article.updated_at.month |> API.get_short_month_name() %> <%= article.updated_at.day %>,</span></a>
+                <a href="https://github.com/<%= article.user.username %>" target="_blank"><span><%= article.user.username %></span></a>
               </p>
-              <h2 class="mt-1 sm:mt-1 lg:mb-1.5 truncate-3 sm:truncate-2 lg:truncate-3 text-base sm:text-xl lg:text-2xl text-gray-900 leading-tight sm:leading-snug font-bold"><%= API.highlight_query(@socket, article.title, @query) %></h2>
+              <h2 class="mt-1 sm:mt-1 lg:mb-1.5 truncate-3 sm:truncate-2 lg:truncate-3 text-base sm:text-xl lg:text-2xl text-gray-900 leading-tight sm:leading-snug font-bold">
+                <a href="<%= article.source %>" target="_blank"><%= API.highlight_query(@socket, article.title, @query) %></a>
+              </h2>
               <h3 class="hidden sm:truncate-2 text-gray-500 leading-tight"><%= API.highlight_query(@socket, article.subtitle, @query) %></h3>
             </div>
             <figure class="w-24 h-20 sm:w-40 sm:h-28 lg:w-52 lg:h-40 flex-shrink-0 relative">
               <%= if article.cover do %>
+                <a href="<%= article.source %>" target="_blank">
                 <div class="w-full h-full bg-gray-100 animate-pulse absolute top-0 z-0"></div>
                 <img class="w-full h-full object-cover object-center relative z-1" src="<%= article.cover %>">
+                </a>
               <% end %>
             </figure>
           </article>
