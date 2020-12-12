@@ -5,7 +5,6 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   alias Prequest.Manage
   alias Prequest.Manage.Article
-  alias PrequestWeb.HomeLive.PublishArticle
 
   @title_regex %{
     suggested: ~r/\n#\s([^\n]+?)\n/,
@@ -26,7 +25,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
   @username_regex ~r/github\.com\/(\w+)\//
   @topics_regex ~r/#([^\s\n]+)/
 
-  def cast_url(%PublishArticle{error: []} = build, url) do
+  def cast_url(%__MODULE__{error: []} = build, url) do
     {error, _meta} =
       %Article{}
       |> Article.changeset(%{source: url})
@@ -41,7 +40,7 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   def cast_url(build, _url), do: build
 
-  def put_body(%PublishArticle{error: [], url: url} = build) do
+  def put_body(%__MODULE__{error: [], url: url} = build) do
     response =
       url
       |> String.replace("/blob", "", global: false)
@@ -62,33 +61,16 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   def put_body(build), do: build
 
-  def create_article(%PublishArticle{error: [], url: url, body: body} = build) do
-    user =
-      @username_regex
-      |> Regex.run(url)
-      |> get_or_create_user()
-
-    title =
-      extract_info(@title_regex.suggested, body) ||
-        extract_info(@title_regex.guess_from.html, body) ||
-        extract_info(@title_regex.guess_from.md, body) || ""
-
-    subtitle = extract_info(@subtitle_regex, body) || ""
-
-    IO.puts "------------------"
-    IO.inspect body
-    IO.puts "------------------"
-
-    cover =
-      extract_info(@cover_regex.suggested, body) ||
-        extract_info(@cover_regex.guess_from.html, body) ||
-        extract_info(@cover_regex.guess_from.md, body)
+  def create_article(%__MODULE__{error: [], url: url, body: body} = build) do
+    user = get_or_create_user(url)
+    title = extract_info(@title_regex, body)
+    subtitle = extract_info(@subtitle_regex, body)
+    cover = extract_info(@cover_regex, body)
 
     topics =
       @topics_regex
       |> Regex.scan(title <> "\n" <> subtitle)
       |> Enum.map(fn [_match, group] -> %{name: String.downcase(group)} end)
-
 
     params = %{
       user_id: user.id,
@@ -127,6 +109,12 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
 
   def create_article(build), do: build
 
+  defp extract_info(%{} = regex_map, text) do
+    extract_info(regex_map.suggested, text) ||
+      extract_info(regex_map.guess_from.html, text) ||
+      extract_info(regex_map.guess_from.md, text) || ""
+  end
+
   defp extract_info(regex, text) do
     with [_match, group] <- Regex.run(regex, text) do
       group
@@ -136,7 +124,9 @@ defmodule PrequestWeb.HomeLive.PublishArticle do
     end
   end
 
-  defp get_or_create_user([_, username]) do
+  defp get_or_create_user(url) do
+    [_match, username] = Regex.run(@username_regex, url)
+
     case Manage.get_user(username) do
       nil ->
         {:ok, user} = Manage.create_user(%{username: username})
