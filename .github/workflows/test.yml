@@ -23,7 +23,7 @@ jobs:
           docker-compose run --name test_container \
           -e MIX_ENV=test \
           -e CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} \
-          -d web /bin/sh
+          -d web bash
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
@@ -37,5 +37,4 @@ jobs:
       - name: Run mix test
         run: |
           docker exec test_container mix coveralls.json
-          docker exec test_container curl -s https://codecov.io/bash -o upload.sh
-          docker exec test_container bash upload.sh
+          docker exec test_container "bash <(curl -s https://codecov.io/bash)"
