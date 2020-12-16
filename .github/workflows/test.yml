@@ -23,7 +23,7 @@ jobs:
           docker-compose run --name test_container \
           -e MIX_ENV=test \
           -e CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} \
-          -d web bash
+          -d web /bin/sh
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
