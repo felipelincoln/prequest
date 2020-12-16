@@ -37,4 +37,4 @@ jobs:
       - name: Run mix test
         run: |
           docker exec test_container mix coveralls.json
-          docker exec test_container "bash <(curl -s https://codecov.io/bash)"
+          docker exec -i test_container bash <(curl -s https://codecov.io/bash)
