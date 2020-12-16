@@ -1,7 +1,7 @@
 FROM elixir:1.10.4-alpine AS build
 
 # install build dependencies
-RUN apk add build-base npm git python
+RUN apk add build-base npm git bash python
 
 # install dev dependencies
 RUN apk add inotify-tools

@@ -22,16 +22,8 @@ jobs:
         run: |
           docker-compose run --name test_container \
           -e MIX_ENV=test \
-          -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
-          -e GITHUB_SHA=$GITHUB_SHA \
-          -e GITHUB_REF=$GITHUB_REF \
-          -e GITHUB_EVENT_PATH=/home/runner/work/_temp/_github_workflow/event.json \
-          -e GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME \
+          -e CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }} \
           -d web /bin/sh
-      - name: Copy github's event.json to container
-        run: |
-          docker exec test_container mkdir -p /home/runner/work/_temp/_github_workflow/
-          docker cp $GITHUB_EVENT_PATH test_container:/home/runner/work/_temp/_github_workflow/
       
       - name: Run mix format
         run: docker exec test_container mix format --check-formatted --dry-run
@@ -43,4 +35,6 @@ jobs:
         run: docker exec test_container mix sobelow -v
 
       - name: Run mix test
-        run: docker exec test_container mix coveralls.github
+        run: |
+          docker exec test_container mix coveralls.json
+          docker exec test_container bash <(curl -s https://codecov.io/bash)

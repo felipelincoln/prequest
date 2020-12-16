@@ -44,7 +44,7 @@ This will run:
 mix format --check-formatted --dry-run
 mix credo --strict
 mix sobelow -v
-mix coveralls.github
+mix coveralls
 ```
 
 ## Building documentation
