@@ -202,11 +202,10 @@ defmodule Prequest.ManageTest do
       source: nil,
       title: nil,
       subtitle: nil,
-      cover: nil,
       user_id: nil,
       topics: [%{name: ""}]
     }
-    @invalid_cover ["", "invalid", "invalid.com/", "www.invalid.com/", "scheme://invalid.com"]
+    @invalid_cover ["invalid", "invalid.com/", "www.invalid.com/", "scheme://invalid.com"]
     @invalid_source @invalid_cover ++ ["http://invalid.com/", "https://invalid.com/"]
 
     def article_fixture(%{user_id: _} = attrs) do
@@ -300,6 +299,15 @@ defmodule Prequest.ManageTest do
                  |> Enum.into(@valid_attrs)
                  |> Manage.create_article()
       end
+    end
+
+    test "create_article/1 with invalid cover creates an article", %{user: user} do
+      [cover | _] = @invalid_cover
+
+      assert {:ok, %Article{}} =
+               %{user_id: user.id, cover: cover}
+               |> Enum.into(@valid_attrs)
+               |> Manage.create_article()
     end
 
     test "update_article/2 with valid data updates the article", %{user: user} do

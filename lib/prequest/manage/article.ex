@@ -30,8 +30,22 @@ defmodule Prequest.Manage.Article do
     |> validate_url_format(:cover)
     |> validate_url_format(:source, host: "github.com")
     |> validate_url_extension(:source, ".md")
+    |> discard_invalid(:cover)
     |> unique_constraint(:source)
     |> assoc_constraint(:user)
+  end
+
+  defp discard_invalid(changeset, field) do
+    if field in Keyword.keys(changeset.errors) do
+      attrs =
+        changeset
+        |> delete_change(field)
+        |> Map.get(:changes)
+
+      changeset(%Article{}, attrs)
+    else
+      changeset
+    end
   end
 
   defp validate_url_extension(changeset, field, value) do
