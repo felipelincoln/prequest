@@ -24,6 +24,7 @@ defmodule PrequestWeb.Router do
     pipe_through :browser
 
     live "/", HomeLive
+    live "/:username/:article_id/", ArticleLive
   end
 
   # Other scopes may use custom stacks.
