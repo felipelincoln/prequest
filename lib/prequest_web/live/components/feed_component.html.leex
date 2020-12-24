@@ -90,6 +90,6 @@
   </div>
 
   <%= unless @meta.has_next? or API.last_feed?(@range) do %>
-    <%= live_component @socket, PrequestWeb.FeedComponent, id: "feed#{@range + 1}", source: @source, range: @range + 1, query: @query, sort_by_latest?: @sort_by_latest? %>
+    <%= live_component @socket, PrequestWeb.Components.FeedComponent, id: "feed#{@range + 1}", source: @source, range: @range + 1, query: @query, sort_by_latest?: @sort_by_latest? %>
   <% end %>
 </div>

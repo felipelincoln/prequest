@@ -24,4 +24,4 @@
 </div>
 </div>
 
-<%= live_component @socket, PrequestWeb.FeedComponent, id: @feed_id, source: Prequest.Manage.Article, range: 0, query: @query, sort_by_latest?: @sort_by_latest? %>
+<%= live_component @socket, PrequestWeb.Components.FeedComponent, id: @feed_id, source: Prequest.Manage.Article, range: 0, query: @query, sort_by_latest?: @sort_by_latest? %>

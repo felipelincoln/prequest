@@ -1,4 +1,4 @@
-defmodule PrequestWeb.FeedComponent.Core do
+defmodule PrequestWeb.Components.FeedComponent.Core do
   @moduledoc false
 
   import Prequest.Manage.Topic.Color, only: [color_class: 1]

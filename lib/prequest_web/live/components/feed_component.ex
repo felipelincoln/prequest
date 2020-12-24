@@ -1,9 +1,9 @@
-defmodule PrequestWeb.FeedComponent do
+defmodule PrequestWeb.Components.FeedComponent do
   @moduledoc false
 
   use Phoenix.LiveComponent
-  alias PrequestWeb.FeedComponent.API
-  alias PrequestWeb.FeedComponent.Core
+  alias PrequestWeb.Components.FeedComponent.API
+  alias PrequestWeb.Components.FeedComponent.Core
 
   @impl true
   def mount(socket) do

@@ -1,9 +1,9 @@
-defmodule PrequestWeb.FeedComponent.API do
+defmodule PrequestWeb.Components.FeedComponent.API do
   @moduledoc false
 
   import Prequest.Feed.Load.DateHelpers, only: [get_months_ago: 1]
   import Phoenix.LiveView.Helpers, only: [sigil_L: 2]
-  alias PrequestWeb.FeedComponent.Core
+  alias PrequestWeb.Components.FeedComponent.Core
 
   def highlight_query(_socket, text, ""), do: text
 
