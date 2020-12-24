@@ -6,7 +6,9 @@ defmodule PrequestWeb.ArticleLive do
 
   @impl true
   def mount(params, _session, socket) do
-    %{"article_id" => article_id, "username" => username} = params
+    socket =
+      socket
+      |> assign(:content, Core.get_content(params))
 
     {:ok, socket}
   end
